@@ -66,4 +66,4 @@ haichuang:
         # 输出包名
         outputPackage: pro.haichuang.framework.service
         # 父包模块名
-        parentModelName: main
+        parentModelName: 项目代号
