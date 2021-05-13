@@ -1,0 +1,97 @@
+package ${package.Controller};
+
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
+import io.swagger.annotations.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
+import pro.haichuang.framework.base.validate.Group;
+import org.springframework.web.bind.annotation.*;
+import pro.haichuang.framework.redis.config.annotation.RepeatRequestValid;
+
+#if(${restControllerStyle})
+import org.springframework.web.bind.annotation.RestController;
+#else
+import org.springframework.stereotype.Controller;
+#end
+#if(${superControllerClassPackage})
+import ${superControllerClassPackage};
+#end
+import ${package.Service}.${table.serviceName};
+import ${package.Entity}.${entity};
+
+#set($ignoreEnd="(PO$)|(AO$)|(DO$)|(DTO$)")
+#set($serviceEnd="Service")
+#set($entityUpperCaseParseName=${table.entityPath.substring(0, 1).toUpperCase()}+${table.entityPath.substring(1, ${table.entityPath.length()}).replaceFirst($ignoreEnd, "")})
+#set($entityParseName=${table.entityPath.substring(0, 1).toLowerCase()}+${table.entityPath.substring(1, ${table.entityPath.length()}).replaceFirst($ignoreEnd, "")})
+#set($serviceFullName=$entityParseName+$serviceEnd)
+
+/**
+ * $!{table.comment} Controller
+ *
+ * @author ${author}
+ * @version ${cfg.version}
+ */
+@Api(tags = "[CMS] $!{table.comment}")
+#if(${restControllerStyle})
+@RestController
+#else
+@Controller
+#end
+##@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
+@RequestMapping("/cms/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${entityParseName}#end")
+#if(${kotlin})
+class ${table.controllerName}#if(${superControllerClass}) : ${superControllerClass}()#end
+
+#else
+#if(${superControllerClass})
+public class ${table.controllerName} extends ${superControllerClass} {
+#else
+public class ${table.controllerName} {
+#end
+
+    @Autowired
+    private ${table.serviceName} $serviceFullName;
+
+    @ApiOperation("单条数据")
+    @ApiOperationSupport(order = 1)
+    @GetMapping("/{id}")
+    public SingleVO<${entity}> get(@PathVariable("id") Long id) {
+        return ResultVO.okOfSingle(${serviceFullName}.getByIdAndIgnore(id));
+    }
+
+    @ApiOperation("分页数据")
+    @ApiOperationSupport(order = 2)
+    @GetMapping("/listPage")
+    public PageVO<${entity}> listPage(@ModelAttribute PageQuery pageQuery){
+        return ResultVO.okOfPage(${serviceFullName}.listPageAndIgnore(pageQuery));
+    }
+
+    @ApiOperation("新增单条数据")
+    @ApiOperationSupport(order = 3)
+    @PostMapping
+    @ApiResponse(code = 500, message = "[A0500: 新增单条数据异常]")
+    @RepeatRequestValid
+    public BaseVO save(@RequestBody @Validated(Group.Insert.class) ${entity} $entityParseName){
+        return ResultVO.ok(${serviceFullName}.saveAndIgnore($entityParseName));
+    }
+
+    @ApiOperation("更新单条数据")
+    @ApiOperationSupport(order = 4)
+    @PutMapping
+    @ApiResponse(code = 500, message = "[A0500: 更新单条数据异常]")
+    @RepeatRequestValid
+    public BaseVO update(@RequestBody @Validated(Group.Update.class) ${entity} $entityParseName){
+        return ResultVO.ok(${serviceFullName}.updateByIdAndIgnore($entityParseName));
+    }
+
+    @ApiOperation("批量删除数据")
+    @ApiOperationSupport(order = 5)
+    @DeleteMapping
+    @ApiResponse(code = 500, message = "[A0500: 批量删除数据异常]")
+    @RepeatRequestValid
+    public BaseVO remove(@RequestBody List<Long> ids){
+        return ResultVO.ok(${serviceFullName}.removeByIdAndIgnore(ids));
+    }
+}
+
+#end

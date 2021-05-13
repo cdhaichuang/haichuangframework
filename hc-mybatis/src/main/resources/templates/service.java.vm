@@ -1,0 +1,21 @@
+package ${package.Service};
+
+import ${package.Entity}.${entity};
+
+#set($ignoreEnd="(PO$)|(AO$)|(DO$)|(DTO$)")
+#set($entityUpperCaseParseName=${table.entityPath.substring(0, 1).toUpperCase()}+${table.entityPath.substring(1, ${table.entityPath.length()}).replaceFirst($ignoreEnd, "")})
+#set($entityParseName=${table.entityPath.substring(0, 1).toLowerCase()}+${table.entityPath.substring(1, ${table.entityPath.length()}).replaceFirst($ignoreEnd, "")})
+
+/**
+ * $!{table.comment} Service
+ *
+ * @author ${author}
+ * @version ${cfg.version}
+ */
+#if(${kotlin})
+interface ${table.serviceName} : ${superServiceClass}<${entity}>
+#else
+public interface ${table.serviceName} extends BaseService<${entity}> {
+
+}
+#end

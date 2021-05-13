@@ -1,0 +1,27 @@
+package ${package.ServiceImpl};
+
+import ${package.Entity}.${entity};
+import ${package.Mapper}.${table.mapperName};
+import ${package.Service}.${table.serviceName};
+import org.springframework.stereotype.Service;
+
+#set($ignoreEnd="(PO$)|(AO$)|(DO$)|(DTO$)")
+#set($entityUpperCaseParseName=${table.entityPath.substring(0, 1).toUpperCase()}+${table.entityPath.substring(1, ${table.entityPath.length()}).replaceFirst($ignoreEnd, "")})
+#set($entityParseName=${table.entityPath.substring(0, 1).toLowerCase()}+${table.entityPath.substring(1, ${table.entityPath.length()}).replaceFirst($ignoreEnd, "")})
+
+/**
+ * $!{table.comment} ServiceImpl
+ *
+ * @author ${author}
+ * @version ${cfg.version}
+ */
+@Service
+#if(${kotlin})
+open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperName}, ${entity}>(), ${table.serviceName} {
+
+}
+#else
+public class ${table.serviceImplName} extends BaseServiceImpl<${table.mapperName}, ${entity}> implements ${table.serviceName} {
+
+}
+#end

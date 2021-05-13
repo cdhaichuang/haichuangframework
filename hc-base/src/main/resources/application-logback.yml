@@ -1,0 +1,3 @@
+# ========================= Logging Setting =========================
+logging:
+  config: classpath:config/logback-spring.xml

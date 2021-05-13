@@ -1,0 +1,84 @@
+package pro.haichuang.framework.base.response.vo;
+
+import io.swagger.annotations.ApiModelProperty;
+import pro.haichuang.framework.base.enums.BaseEnum;
+import springfox.documentation.annotations.ApiIgnore;
+
+import java.io.Serializable;
+
+/**
+ * VO基类
+ *
+ * @author JiYinchuan
+ * @version 1.0
+ */
+@ApiIgnore
+public class BaseVO implements Serializable {
+    private static final long serialVersionUID = 4031780604297964211L;
+
+    public static final String ERROR_CODE = "errorCode";
+    public static final String ERROR_MESSAGE = "errorMessage";
+    public static final String USER_TIP = "userTip";
+
+    /**
+     * 错误码
+     */
+    @ApiModelProperty("错误码")
+    private String errorCode;
+
+    /**
+     * 错误信息
+     */
+    @ApiModelProperty("错误信息")
+    private String errorMessage;
+
+    /**
+     * 用户提示信息
+     */
+    @ApiModelProperty("用户提示信息")
+    private String userTip;
+
+    public BaseVO(BaseEnum baseEnum) {
+        this.errorCode = baseEnum.value();
+        this.errorMessage = baseEnum.getReasonPhrase();
+    }
+
+    public BaseVO(BaseEnum baseEnum, String userTip) {
+        this.errorCode = baseEnum.value();
+        this.errorMessage = baseEnum.getReasonPhrase();
+        this.userTip = userTip;
+    }
+
+    public String getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
+    public String getUserTip() {
+        return userTip;
+    }
+
+    public void setUserTip(String userTip) {
+        this.userTip = userTip;
+    }
+
+    @Override
+    public String toString() {
+        return "BaseVO{" +
+                "errorCode='" + errorCode + '\'' +
+                ", errorMessage='" + errorMessage + '\'' +
+                ", userTip='" + userTip + '\'' +
+                '}';
+    }
+}

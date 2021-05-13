@@ -1,0 +1,78 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      db-type: mysql
+      driver-class-name: com.mysql.cj.jdbc.Driver
+#      # 初始化时池中建立的物理连接个数
+#      initial-size: 5
+#      # 连接池中最小空闲连接数，当连接数少于此值时，连接池会创建连接来补充到该值的数量
+#      min-idle: 5
+#      # 最大的可活跃的连接池数量
+#      max-active: 200
+      # 获取连接时最大等待时间，单位毫秒，超过连接就会失效。配置了maxWait之后，缺省启用公平锁，并发效率会有所下降，如果需要可以通过配置useUnfairLock属性为true使用非公平锁
+      max-wait: 60000
+      # 每timeBetweenEvictionRunsMillis毫秒检查一次连接池中空闲的连接，把空闲时间超过minEvictableIdleTimeMillis毫秒的连接断开
+      time-between-eviction-runs-millis: 60000
+      # 指定一个空闲连接最少空闲多久后可被清除，单位毫秒
+      min-evictable-idle-time-millis: 300000
+      max-evictable-idle-time-millis: 900000
+      # 增强timeBetweenEvictionRunsMillis的周期性连接检查，minIdle内的空闲连接，每次检查强制验证连接有效性
+      keep-alive: true
+      # 物理最大连接数
+      phy-max-use-count: 100000
+      # 用来检测连接是否有效的sql，要求是一个查询语句
+      validation-query: SELECT 1
+      # SQL 查询验证超时时间（秒），小于或等于 0 的数值表示禁用
+      validation-query-timeout: 30000
+      # 建议配置为true，不影响性能，并且保证安全性。 申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis， 执行validationQuery检测连接是否有效
+      test-while-idle: true
+      # 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。设置为false
+      test-on-borrow: false
+      # 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能,设置为false
+      test-on-return: false
+      # 是否缓存preparedStatement，也就是PSCache
+      pool-prepared-statements: false
+      # 池中能够缓冲的preparedStatements语句数量
+      max-pool-prepared-statement-per-connection-size: 200
+      # 配置监控服务器
+      stat-view-servlet:
+        url-pattern: '/druid/*'
+#        # 添加IP白名单
+#        allow:
+#        # 添加IP黑名单，当白名单和黑名单重复时，黑名单优先级更高
+#        deny:
+#        # 添加控制台管理用户
+#        login-username: haichuang
+#        login-password: haichuang
+        # 是否能够重置数据
+        reset-enable: false
+      # 配置服务过滤器
+      web-stat-filter:
+        profile-enable: true
+#        # 添加过滤规则, 默认配置
+#        url-pattern: '/*'
+#        # 忽略过滤格式, 默认配置
+#        exclusions: '*.js, *.gif, *.jpg, *.png, *.css, *.ico, /druid/*'
+        principal-session-name: HaiChuang
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，wall用于防火墙
+      filters: stat, wall, slf4j
+      # 慢sql记录
+      filter:
+        stat:
+          merge-sql: true
+          slow-sql-millis: 10000
+          log-slow-sql: true
+      # 配置spring监控
+      aop-patterns: 'pro.haichuang.*.service.*, pro.haichuang.*.mapper.*'
+      # 合并多个DruidDataSource的监控数据
+      use-global-data-source-stat: true
+
+# ========================= MybatisPlus Setting =========================
+mybatis-plus:
+  type-aliases-package: pro.haichuang.**.domain
+  type-aliases-super-type: pro.haichuang.framework.mybatis.domain.BaseDO
+  mapper-locations: classpath*:/pro/haichuang/**/mapper/**/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    default-enum-type-handler: com.baomidou.mybatisplus.extension.handlers.MybatisEnumTypeHandler
