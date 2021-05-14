@@ -30,7 +30,7 @@ public class MybatisProperties {
      */
     public static class Config {
         /**
-         * 是否启用
+         * 是否启用自动配置
          */
         private Boolean enable;
 

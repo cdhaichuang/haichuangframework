@@ -1,0 +1,40 @@
+# ========================= Spring Setting =========================
+spring:
+  datasource:
+    druid:
+      url: jdbc:mysql://127.0.0.1:3306/data_demo?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowMultiQueries=true
+      username: root
+      password: 123456
+      initial-size: 5
+      min-idle: 5
+      max-active: 200
+      stat-view-servlet:
+        enabled: true
+        # 添加IP白名单, 不进行配置默认只允许本机
+        allow:
+        # 添加IP黑名单，当白名单和黑名单重复时，黑名单优先级更高
+        deny:
+        # 添加控制台管理用户
+        login-username:
+        login-password:
+      web-stat-filter:
+        enabled: true
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 1
+    password:
+    lettuce:
+      pool:
+        min-idle: 10
+        max-idle: 30
+        max-active: 50
+        max-wait: 10000
+    timeout: 3m
+
+# ========================= HaiChuang Setting =========================
+haichuang:
+  mybatis:
+    generate:
+      # 是否启用代码生成器配置
+      enable: false
