@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import pro.haichuang.framework.base.exception.ThirdPartyException;
+import pro.haichuang.framework.base.util.common.UUIDUtils;
 
 import java.util.List;
 
@@ -44,6 +45,7 @@ public class AliYunSmsUtils {
      */
     public static boolean send(@NonNull String regionId, @NonNull String accessKeyId, @NonNull String accessKeySecret,
                                @NonNull String signName, @NonNull String templateCode, @NonNull String phoneNumbers, @NonNull JSONObject templateParam) {
+        String uuid = UUIDUtils.Local.get();
         SendSmsRequest request = new SendSmsRequest();
         request.setPhoneNumbers(phoneNumbers);
         request.setSignName(signName);
@@ -52,12 +54,12 @@ public class AliYunSmsUtils {
         try {
             SendSmsResponse response = getClient(regionId, accessKeyId, accessKeySecret).getAcsResponse(request);
             if (!response.getCode().equals(HttpStatus.OK.name())) {
-                logger.error("[{}] 发送验证码异常 [errorCode: {}, errorMessage: {}]", LOG_TAG, response.getCode(), response.getMessage());
+                logger.error("[{}] 发送验证码异常 [uuid: {}, errorCode: {}, errorMessage: {}]", LOG_TAG, uuid, response.getCode(), response.getMessage());
                 throw new ThirdPartyException(response.getCode(), response.getMessage());
             }
             return true;
         } catch (ClientException e) {
-            logger.error("[{}] 发送验证码异常 [errorCode: {}, errorMessage: {}]", LOG_TAG, e.getErrCode(), e.getErrMsg());
+            logger.error("[{}] 发送验证码异常 [uuid: {}, errorCode: {}, errorMessage: {}]", LOG_TAG, uuid, e.getErrCode(), e.getErrMsg());
             throw new ThirdPartyException(e.getErrCode(), e.getErrMsg());
         }
     }
@@ -76,6 +78,7 @@ public class AliYunSmsUtils {
      */
     public static boolean sendBatch(@NonNull String regionId, @NonNull String accessKeyId, @NonNull String accessKeySecret,
                                     @NonNull List<String> signNames, @NonNull String templateCode, @NonNull List<String> phones, @NonNull JSONArray templateParam) {
+        String uuid = UUIDUtils.Local.get();
         SendBatchSmsRequest request = new SendBatchSmsRequest();
         request.setPhoneNumberJson(JSONObject.toJSONString(phones));
         request.setSignNameJson(JSONObject.toJSONString(signNames));
@@ -84,12 +87,12 @@ public class AliYunSmsUtils {
         try {
             SendBatchSmsResponse response = getClient(regionId, accessKeyId, accessKeySecret).getAcsResponse(request);
             if (!response.getCode().equals(HttpStatus.OK.name())) {
-                logger.error("[{}] 批量发送验证码异常 [errorCode: {}, errorMessage: {}]", LOG_TAG, response.getCode(), response.getMessage());
+                logger.error("[{}] 批量发送验证码异常 [uuid: {}, errorCode: {}, errorMessage: {}]", LOG_TAG, uuid, response.getCode(), response.getMessage());
                 throw new ThirdPartyException(response.getCode(), response.getMessage());
             }
             return true;
         } catch (ClientException e) {
-            logger.error("[{}] 批量发送验证码异常 [errorCode: {}, errorMessage: {}]", LOG_TAG, e.getErrCode(), e.getErrMsg());
+            logger.error("[{}] 批量发送验证码异常 [uuid: {}, errorCode: {}, errorMessage: {}]", LOG_TAG, uuid, e.getErrCode(), e.getErrMsg());
             throw new ThirdPartyException(e.getErrCode(), e.getErrMsg());
         }
     }
