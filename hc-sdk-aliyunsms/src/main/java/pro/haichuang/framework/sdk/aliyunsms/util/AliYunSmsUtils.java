@@ -1,4 +1,4 @@
-package pro.haichuang.framework.sdk.aliyunsms;
+package pro.haichuang.framework.sdk.aliyunsms.util;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -10,7 +10,8 @@ import com.aliyuncs.dysmsapi.model.v20170525.SendSmsRequest;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.profile.DefaultProfile;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import pro.haichuang.framework.base.exception.ThirdPartyException;
@@ -23,10 +24,10 @@ import java.util.List;
  * @author JiYinchuan
  * @version 1.0
  */
-@Slf4j
 @SuppressWarnings("SpellCheckingInspection")
 public class AliYunSmsUtils {
 
+    private static final Logger logger = LoggerFactory.getLogger(AliYunSmsUtils.class);
     private static final String LOG_TAG = "AliYunSms工具类";
 
     /**
@@ -41,7 +42,8 @@ public class AliYunSmsUtils {
      * @param templateParam   短信模板变量替换JSON串, 友情提示: 如果JSON中需要带换行符, 请参照标准的JSON协议
      * @return 执行结果
      */
-    public static boolean send(@NonNull String regionId, @NonNull String accessKeyId, @NonNull String accessKeySecret, @NonNull String signName, @NonNull String templateCode, @NonNull String phoneNumbers, @NonNull JSONObject templateParam) {
+    public static boolean send(@NonNull String regionId, @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                               @NonNull String signName, @NonNull String templateCode, @NonNull String phoneNumbers, @NonNull JSONObject templateParam) {
         SendSmsRequest request = new SendSmsRequest();
         request.setPhoneNumbers(phoneNumbers);
         request.setSignName(signName);
@@ -50,12 +52,12 @@ public class AliYunSmsUtils {
         try {
             SendSmsResponse response = getClient(regionId, accessKeyId, accessKeySecret).getAcsResponse(request);
             if (!response.getCode().equals(HttpStatus.OK.name())) {
-                log.error("[{}] 发送验证码异常 [errorCode: {}, errorMessage: {}]", LOG_TAG, response.getCode(), response.getMessage());
+                logger.error("[{}] 发送验证码异常 [errorCode: {}, errorMessage: {}]", LOG_TAG, response.getCode(), response.getMessage());
                 throw new ThirdPartyException(response.getCode(), response.getMessage());
             }
             return true;
         } catch (ClientException e) {
-            log.error("[{}] 发送验证码异常 [errorCode: {}, errorMessage: {}]", LOG_TAG, e.getErrCode(), e.getErrMsg());
+            logger.error("[{}] 发送验证码异常 [errorCode: {}, errorMessage: {}]", LOG_TAG, e.getErrCode(), e.getErrMsg());
             throw new ThirdPartyException(e.getErrCode(), e.getErrMsg());
         }
     }
@@ -72,7 +74,8 @@ public class AliYunSmsUtils {
      * @param templateParam   短信模板变量替换JSON串, 友情提示: 如果JSON中需要带换行符, 请参照标准的JSON协议
      * @return 执行结果
      */
-    public static boolean sendBatch(@NonNull String regionId, @NonNull String accessKeyId, @NonNull String accessKeySecret, @NonNull List<String> signNames, @NonNull String templateCode, @NonNull List<String> phones, @NonNull JSONArray templateParam) {
+    public static boolean sendBatch(@NonNull String regionId, @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                    @NonNull List<String> signNames, @NonNull String templateCode, @NonNull List<String> phones, @NonNull JSONArray templateParam) {
         SendBatchSmsRequest request = new SendBatchSmsRequest();
         request.setPhoneNumberJson(JSONObject.toJSONString(phones));
         request.setSignNameJson(JSONObject.toJSONString(signNames));
@@ -81,12 +84,12 @@ public class AliYunSmsUtils {
         try {
             SendBatchSmsResponse response = getClient(regionId, accessKeyId, accessKeySecret).getAcsResponse(request);
             if (!response.getCode().equals(HttpStatus.OK.name())) {
-                log.error("[{}] 批量发送验证码异常 [errorCode: {}, errorMessage: {}]", LOG_TAG, response.getCode(), response.getMessage());
+                logger.error("[{}] 批量发送验证码异常 [errorCode: {}, errorMessage: {}]", LOG_TAG, response.getCode(), response.getMessage());
                 throw new ThirdPartyException(response.getCode(), response.getMessage());
             }
             return true;
         } catch (ClientException e) {
-            log.error("[{}] 批量发送验证码异常 [errorCode: {}, errorMessage: {}]", LOG_TAG, e.getErrCode(), e.getErrMsg());
+            logger.error("[{}] 批量发送验证码异常 [errorCode: {}, errorMessage: {}]", LOG_TAG, e.getErrCode(), e.getErrMsg());
             throw new ThirdPartyException(e.getErrCode(), e.getErrMsg());
         }
     }
