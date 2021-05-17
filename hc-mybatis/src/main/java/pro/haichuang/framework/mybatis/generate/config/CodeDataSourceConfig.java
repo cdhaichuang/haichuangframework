@@ -1,4 +1,4 @@
-package pro.haichuang.framework.mybatis.generate.properties.info;
+package pro.haichuang.framework.mybatis.generate.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @ConfigurationProperties(prefix = "haichuang.mybatis.generate.datasource-config")
-public class DataSourceConfigProperties {
+public class CodeDataSourceConfig {
 
     /**
      * 驱动名
@@ -41,7 +41,7 @@ public class DataSourceConfigProperties {
     /**
      * 包含表
      */
-    private String include;
+    private String[] include;
 
     public String getDriver() {
         return driver;
@@ -83,11 +83,11 @@ public class DataSourceConfigProperties {
         this.tablePrefix = tablePrefix;
     }
 
-    public String getInclude() {
+    public String[] getInclude() {
         return include;
     }
 
-    public void setInclude(String include) {
+    public void setInclude(String... include) {
         this.include = include;
     }
 }

@@ -4,9 +4,16 @@ import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import pro.haichuang.framework.base.validate.Group;
 import org.springframework.web.bind.annotation.*;
 import pro.haichuang.framework.redis.config.annotation.RepeatRequestValid;
+import pro.haichuang.framework.base.validate.Group;
+import pro.haichuang.framework.base.query.PageQuery;
+import pro.haichuang.framework.base.response.ResultVO;
+import pro.haichuang.framework.base.response.vo.BaseVO;
+import pro.haichuang.framework.base.response.vo.PageVO;
+import pro.haichuang.framework.base.response.vo.SingleVO;
+
+import java.util.List;
 
 #if(${restControllerStyle})
 import org.springframework.web.bind.annotation.RestController;

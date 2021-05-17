@@ -31,10 +31,3 @@ spring:
         max-active: 50
         max-wait: 10000
     timeout: 3m
-
-# ========================= HaiChuang Setting =========================
-haichuang:
-  mybatis:
-    generate:
-      # 是否启用代码生成器配置
-      enable: false

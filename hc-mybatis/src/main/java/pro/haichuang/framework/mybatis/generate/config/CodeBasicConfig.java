@@ -1,6 +1,5 @@
-package pro.haichuang.framework.mybatis.generate.properties.info;
+package pro.haichuang.framework.mybatis.generate.config;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,8 +9,7 @@ import org.springframework.stereotype.Component;
  * @version 1.0
  */
 @Component
-@ConfigurationProperties(prefix = "haichuang.mybatis.generate.basic-config")
-public class BasicConfigProperties {
+public class CodeBasicConfig {
 
     /**
      * 作者
@@ -31,7 +29,7 @@ public class BasicConfigProperties {
     /**
      * 是否开启Swagger注解支持
      */
-    private Boolean enableSwagger = false;
+    private Boolean enableSwagger = true;
 
     public String getAuthor() {
         return author;

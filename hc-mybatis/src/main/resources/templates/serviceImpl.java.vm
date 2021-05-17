@@ -3,6 +3,9 @@ package ${package.ServiceImpl};
 import ${package.Entity}.${entity};
 import ${package.Mapper}.${table.mapperName};
 import ${package.Service}.${table.serviceName};
+#if(${superServiceImplClassPackage})
+import ${superServiceImplClassPackage};
+#end
 import org.springframework.stereotype.Service;
 
 #set($ignoreEnd="(PO$)|(AO$)|(DO$)|(DTO$)")
@@ -21,7 +24,7 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
 
 }
 #else
-public class ${table.serviceImplName} extends BaseServiceImpl<${table.mapperName}, ${entity}> implements ${table.serviceName} {
+public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements ${table.serviceName} {
 
 }
 #end

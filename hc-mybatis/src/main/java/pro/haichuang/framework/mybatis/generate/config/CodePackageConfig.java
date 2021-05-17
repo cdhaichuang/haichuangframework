@@ -1,27 +1,25 @@
-package pro.haichuang.framework.mybatis.generate.properties.info;
+package pro.haichuang.framework.mybatis.generate.config;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
- * MyBatisPlus包配置文件
+ * MyBatisPlus包配置
  *
  * @author JiYinchuan
  * @version 1.0
  */
 @Component
-@ConfigurationProperties(prefix = "haichuang.mybatis.generate.package-config")
-public class PackageConfigProperties {
+public class CodePackageConfig {
 
     /**
      * 输出包名
      */
-    private String outputPackage = "pro.haichuang";
+    private String outputPackage = "pro.haichuang.framework.service";
 
     /**
      * 父包模块名
      */
-    private String parentModelName = "generate";
+    private String parentModelName;
 
     /**
      * 实体类包名

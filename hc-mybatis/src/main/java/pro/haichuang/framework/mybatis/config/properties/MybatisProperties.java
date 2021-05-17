@@ -1,9 +1,7 @@
 package pro.haichuang.framework.mybatis.config.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.stereotype.Component;
-import pro.haichuang.framework.mybatis.generate.properties.GenerateConfigProperties;
 
 /**
  * Mybatis参数配置
@@ -16,46 +14,15 @@ import pro.haichuang.framework.mybatis.generate.properties.GenerateConfigPropert
 public class MybatisProperties {
 
     /**
-     * Mybatis配置
+     * 是否启用自动配置
      */
-    private Config config;
+    private Boolean enable;
 
-    /**
-     * Mybatis代码生成器配置
-     */
-    @NestedConfigurationProperty
-    private GenerateConfigProperties generate = new GenerateConfigProperties();
-    /**
-     * Mybatis配置
-     */
-    public static class Config {
-        /**
-         * 是否启用自动配置
-         */
-        private Boolean enable;
-
-        public Boolean getEnable() {
-            return enable;
-        }
-
-        public void setEnable(Boolean enable) {
-            this.enable = enable;
-        }
+    public Boolean getEnable() {
+        return enable;
     }
 
-    public Config getConfig() {
-        return config;
-    }
-
-    public void setConfig(Config config) {
-        this.config = config;
-    }
-
-    public GenerateConfigProperties getGenerate() {
-        return generate;
-    }
-
-    public void setGenerate(GenerateConfigProperties generate) {
-        this.generate = generate;
+    public void setEnable(Boolean enable) {
+        this.enable = enable;
     }
 }

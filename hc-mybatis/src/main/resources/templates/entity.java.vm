@@ -16,6 +16,9 @@ import lombok.experimental.Accessors;
 #end
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+#if(${superEntityClass})
+import pro.haichuang.framework.mybatis.domain.BaseDO;
+#end
 
 /**
  * $!{table.comment} Domain

@@ -9,16 +9,16 @@ import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.querys.MySqlQuery;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Service;
 import pro.haichuang.framework.mybatis.base.BaseService;
-import pro.haichuang.framework.mybatis.config.properties.MybatisProperties;
 import pro.haichuang.framework.mybatis.domain.BaseDO;
+import pro.haichuang.framework.mybatis.generate.config.CodeBasicConfig;
+import pro.haichuang.framework.mybatis.generate.config.CodeDataSourceConfig;
+import pro.haichuang.framework.mybatis.generate.config.CodePackageConfig;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,33 +28,40 @@ import java.util.Map;
  * @author JiYinchuan
  * @version 1.0
  */
-@Component
-public class MybatisGenerateCode {
+@Service
+public class MybatisGenerateCodeService {
 
-    @Autowired
-    private MybatisProperties mybatisProperties;
-
-    public void generate() {
-        if (mybatisProperties.getGenerate().getDatasourceConfig().getUrl() == null || mybatisProperties.getGenerate().getDatasourceConfig().getUrl().length() == 0) {
-            throw new RuntimeException("[代码生成器] 数据库URL未配置");
+    /**
+     * 代码生成
+     *
+     * @param codeBasicConfig      基本配置
+     * @param codeDataSourceConfig 数据源配置
+     * @param codePackageConfig    包配置
+     */
+    public void generate(@NonNull CodeBasicConfig codeBasicConfig, @NonNull CodeDataSourceConfig codeDataSourceConfig, @NonNull CodePackageConfig codePackageConfig) {
+        if (codeDataSourceConfig.getUrl() == null || codeDataSourceConfig.getUrl().length() == 0) {
+            throw new RuntimeException("[代码生成器-数据源配置] 数据库URL未配置");
         }
-        if (mybatisProperties.getGenerate().getDatasourceConfig().getUsername() == null || mybatisProperties.getGenerate().getDatasourceConfig().getUsername().length() == 0) {
-            throw new RuntimeException("[代码生成器] 数据库帐号未配置");
+        if (codeDataSourceConfig.getUsername() == null || codeDataSourceConfig.getUsername().length() == 0) {
+            throw new RuntimeException("[代码生成器-数据源配置] 数据库帐号未配置");
         }
-        if (mybatisProperties.getGenerate().getDatasourceConfig().getPassword() == null || mybatisProperties.getGenerate().getDatasourceConfig().getPassword().length() == 0) {
-            throw new RuntimeException("[代码生成器] 数据库密码未配置");
+        if (codeDataSourceConfig.getPassword() == null || codeDataSourceConfig.getPassword().length() == 0) {
+            throw new RuntimeException("[代码生成器-数据源配置] 数据库密码未配置");
+        }
+        if (codePackageConfig.getParentModelName() == null || codePackageConfig.getParentModelName().length() == 0) {
+            throw new RuntimeException("[代码生成器-包配置] 父包模块名未配置");
         }
         AutoGenerator ag = new AutoGenerator();
-        ag.setGlobalConfig(this.initGlobalConfig());
-        ag.setDataSource(this.initDataSourceConfig());
-        ag.setStrategy(this.initStrategyConfig());
-        ag.setPackageInfo(this.initPackageConfig());
+        ag.setGlobalConfig(this.initGlobalConfig(codeBasicConfig, codePackageConfig));
+        ag.setDataSource(this.initDataSourceConfig(codeDataSourceConfig));
+        ag.setStrategy(this.initStrategyConfig(codeDataSourceConfig));
+        ag.setPackageInfo(this.initPackageConfig(codePackageConfig));
 
         InjectionConfig cfg = new InjectionConfig() {
             @Override
             public void initMap() {
                 Map<String, Object> map = new HashMap<>(2);
-                map.put("version", mybatisProperties.getGenerate().getBasicConfig().getVersion());
+                map.put("version", codeBasicConfig.getVersion());
                 map.put("dateTime", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
                 setMap(map);
             }
@@ -70,7 +77,7 @@ public class MybatisGenerateCode {
         templateConfig.setXml(null);
         templateConfig.setController(null);
 
-        if (mybatisProperties.getGenerate().getBasicConfig().getOutputType() == -1) {
+        if (codeBasicConfig.getOutputType() == -1) {
             ag.setTemplate(templateConfig.setEntity("/templates/entity.java")).execute();
             return;
         }
@@ -79,18 +86,25 @@ public class MybatisGenerateCode {
         templateConfig.setMapper("/templates/mapper.java");
         templateConfig.setXml("/templates/mapper.xml");
         templateConfig.setController("/templates/controller.java");
-        if (mybatisProperties.getGenerate().getBasicConfig().getOutputType() == 0) {
+        if (codeBasicConfig.getOutputType() == 0) {
             templateConfig.setEntity("/templates/entity.java");
         }
 
         ag.setTemplate(templateConfig).execute();
     }
 
-    private GlobalConfig initGlobalConfig() {
+    /**
+     * 初始化全局配置
+     *
+     * @param codeBasicConfig   基本配置
+     * @param codePackageConfig 包配置
+     * @return 全局配置
+     */
+    private GlobalConfig initGlobalConfig(@NonNull CodeBasicConfig codeBasicConfig, @NonNull CodePackageConfig codePackageConfig) {
         GlobalConfig gc = new GlobalConfig();
 
         // 生成文件的输出目录【默认 D 盘根目录】
-        gc.setOutputDir(mybatisProperties.getGenerate().getPackageConfig().getOutputDir());
+        gc.setOutputDir(codePackageConfig.getOutputDir());
         // 是否覆盖已有文件
         gc.setFileOverride(true);
         // 是否打开输出目录
@@ -98,11 +112,11 @@ public class MybatisGenerateCode {
         // 是否在xml中添加二级缓存配置
         gc.setEnableCache(false);
         // 开发人员
-        gc.setAuthor(mybatisProperties.getGenerate().getBasicConfig().getAuthor());
+        gc.setAuthor(codeBasicConfig.getAuthor());
         // 开启 Kotlin 模式
         gc.setKotlin(false);
         // 开启 swagger2 模式
-        gc.setSwagger2(mybatisProperties.getGenerate().getBasicConfig().getEnableSwagger());
+        gc.setSwagger2(codeBasicConfig.getEnableSwagger());
         // 开启 ActiveRecord 模式
         gc.setActiveRecord(false);
         // 开启 BaseResultMap
@@ -124,7 +138,13 @@ public class MybatisGenerateCode {
         return gc;
     }
 
-    private DataSourceConfig initDataSourceConfig() {
+    /**
+     * 初始化数据源配置
+     *
+     * @param codeDataSourceConfig 数据源配置
+     * @return 数据源配置
+     */
+    private DataSourceConfig initDataSourceConfig(@NonNull CodeDataSourceConfig codeDataSourceConfig) {
         DataSourceConfig dsc = new DataSourceConfig();
 
         // 数据库信息查询 （根据DbType自动生成）
@@ -136,20 +156,25 @@ public class MybatisGenerateCode {
         // 类型转换 （根据DbType自动生成）
         dsc.setTypeConvert(new MySqlTypeConvert());
         // 驱动连接的URL
-        dsc.setUrl(mybatisProperties.getGenerate().getDatasourceConfig().getUrl());
+        dsc.setUrl(codeDataSourceConfig.getUrl());
         // 驱动名称
-        dsc.setDriverName(mybatisProperties.getGenerate().getDatasourceConfig().getDriver());
+        dsc.setDriverName(codeDataSourceConfig.getDriver());
         // 数据库连接用户名
-        dsc.setUsername(mybatisProperties.getGenerate().getDatasourceConfig().getUsername());
+        dsc.setUsername(codeDataSourceConfig.getUsername());
         // 数据库连接密码
-        dsc.setPassword(mybatisProperties.getGenerate().getDatasourceConfig().getPassword());
+        dsc.setPassword(codeDataSourceConfig.getPassword());
 
         return dsc;
     }
 
-    private StrategyConfig initStrategyConfig() {
+    /**
+     * 初始化策略配置
+     *
+     * @param codeDataSourceConfig 数据源配置
+     * @return 策略配置
+     */
+    private StrategyConfig initStrategyConfig(@NonNull CodeDataSourceConfig codeDataSourceConfig) {
         StrategyConfig sc = new StrategyConfig();
-        String[] includeTables = StringUtils.isNotBlank(mybatisProperties.getGenerate().getDatasourceConfig().getInclude()) ? Arrays.stream(mybatisProperties.getGenerate().getDatasourceConfig().getInclude().split(",")).map(String::trim).toArray(String[]::new) : null;
 
         // 是否大写命名
         sc.setCapitalMode(false);
@@ -162,8 +187,8 @@ public class MybatisGenerateCode {
         // 数据库表字段映射到实体的命名策略 （未指定按照 naming 执行）
         sc.setColumnNaming(NamingStrategy.underline_to_camel);
         // 表前缀
-        if (mybatisProperties.getGenerate().getDatasourceConfig().getTablePrefix() != null && mybatisProperties.getGenerate().getDatasourceConfig().getTablePrefix().length() != 0) {
-            sc.setTablePrefix(mybatisProperties.getGenerate().getDatasourceConfig().getTablePrefix());
+        if (codeDataSourceConfig.getTablePrefix() != null && codeDataSourceConfig.getTablePrefix().length() != 0) {
+            sc.setTablePrefix(codeDataSourceConfig.getTablePrefix());
         }
         // 字段前缀
         sc.setFieldPrefix("");
@@ -173,15 +198,15 @@ public class MybatisGenerateCode {
         sc.setSuperEntityColumns(BaseDO.ID, BaseService.toUnderlineCase(BaseDO.CREATE_TIME), BaseService.toUnderlineCase(BaseDO.MODIFY_TIME));
         // 自定义继承的Mapper类全称，带包名 （默认）
         sc.setSuperMapperClass("com.baomidou.mybatisplus.core.mapper.BaseMapper");
-        // 自定义继承的Service类全称，带包名 （默认）
-        sc.setSuperServiceClass("com.baomidou.mybatisplus.extension.service.IService");
-        // 自定义继承的ServiceImpl类全称，带包名 （默认）
-        sc.setSuperServiceImplClass("com.baomidou.mybatisplus.extension.service.impl.ServiceImpl");
-        // 自定义继承的Controller类全称，带包名 （默认）
+        // 自定义继承的Service类全称，带包名 （默认=com.baomidou.mybatisplus.extension.service.IService）
+        sc.setSuperServiceClass("pro.haichuang.framework.mybatis.base.BaseService");
+        // 自定义继承的ServiceImpl类全称，带包名 （默认=com.baomidou.mybatisplus.extension.service.impl.ServiceImpl）
+        sc.setSuperServiceImplClass("pro.haichuang.framework.mybatis.base.BaseServiceImpl");
+        // 自定义继承的Controller类全称，带包名 （默认=null）
         // sc.setSuperControllerClass(null);
         // 需要包含的表名（与exclude二选一配置，likeTable|notLikeTable可以模糊匹配）
-        if (includeTables != null && includeTables.length != 0) {
-            sc.setInclude(includeTables);
+        if (codeDataSourceConfig.getInclude() != null && codeDataSourceConfig.getInclude().length != 0) {
+            sc.setInclude(codeDataSourceConfig.getInclude());
         }
         // 实体是否生成 serialVersionUID
         sc.setEntitySerialVersionUID(true);
@@ -213,25 +238,31 @@ public class MybatisGenerateCode {
         return sc;
     }
 
-    private PackageConfig initPackageConfig() {
+    /**
+     * 初始化包配置
+     *
+     * @param codePackageConfig 包配置
+     * @return 包配置
+     */
+    private PackageConfig initPackageConfig(@NonNull CodePackageConfig codePackageConfig) {
         PackageConfig pc = new PackageConfig();
 
         // 父包名。如果为空，将下面子包名必须写全部， 否则就只需写子包名
-        pc.setParent(mybatisProperties.getGenerate().getPackageConfig().getOutputPackage());
+        pc.setParent(codePackageConfig.getOutputPackage());
         // 父包模块名
-        pc.setModuleName(mybatisProperties.getGenerate().getPackageConfig().getParentModelName());
+        pc.setModuleName(codePackageConfig.getParentModelName());
         // Entity包名
-        pc.setEntity(mybatisProperties.getGenerate().getPackageConfig().getEntityPackageName());
+        pc.setEntity(codePackageConfig.getEntityPackageName());
         // Service包名
-        pc.setService(mybatisProperties.getGenerate().getPackageConfig().getServicePackageName());
+        pc.setService(codePackageConfig.getServicePackageName());
         // Service Impl包名
-        pc.setServiceImpl(mybatisProperties.getGenerate().getPackageConfig().getServiceImplPackageName());
+        pc.setServiceImpl(codePackageConfig.getServiceImplPackageName());
         // Mapper包名
-        pc.setMapper(mybatisProperties.getGenerate().getPackageConfig().getMapperPackageName());
+        pc.setMapper(codePackageConfig.getMapperPackageName());
         // Mapper XML包名
-        pc.setXml(mybatisProperties.getGenerate().getPackageConfig().getMapperXmlPackageName());
+        pc.setXml(codePackageConfig.getMapperXmlPackageName());
         // Controller包名
-        pc.setController(mybatisProperties.getGenerate().getPackageConfig().getControllerPackageName());
+        pc.setController(codePackageConfig.getControllerPackageName());
         // 路径配置信息
         pc.setPathInfo(null);
 

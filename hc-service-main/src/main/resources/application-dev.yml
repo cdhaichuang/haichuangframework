@@ -2,7 +2,7 @@
 spring:
   datasource:
     druid:
-      url: jdbc:mysql://127.0.0.1:3306/data_demo?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowMultiQueries=true
+      url: jdbc:mysql://127.0.0.1:3306/data_ggfb155_kf?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowMultiQueries=true
       username: root
       password: 123456
       initial-size: 5
@@ -31,26 +31,3 @@ spring:
         max-active: 50
         max-wait: 10000
     timeout: 3m
-
-# ========================= HaiChuang Setting =========================
-haichuang:
-  mybatis:
-    generate:
-      # 数据源配置
-      datasource-config:
-        # 驱动连接的URL
-        url: jdbc:mysql://127.0.0.1:3306/data_demo?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowMutiQueries=true
-        # 数据库连接用户名
-        username: root
-        # 数据库连接密码
-        password: 123456
-        # 表前缀
-        table-prefix:
-        # 包含的表 (逗号隔开, 为空时默认包含所有表)
-        include:
-      # 包配置
-      package-config:
-        # 输出包名
-        outputPackage: pro.haichuang.framework.service
-        # 父包模块名
-        parentModelName: ${haichuang.code-name}

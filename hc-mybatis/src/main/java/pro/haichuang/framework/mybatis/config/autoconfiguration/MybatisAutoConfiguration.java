@@ -5,11 +5,12 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Profile;
 import pro.haichuang.framework.mybatis.config.MybatisPlusConfig;
 import pro.haichuang.framework.mybatis.config.PageHelperConfig;
 import pro.haichuang.framework.mybatis.config.druid.advert.DruidAdvertConfig;
 import pro.haichuang.framework.mybatis.config.properties.MybatisProperties;
-import pro.haichuang.framework.mybatis.generate.MybatisGenerateCode;
+import pro.haichuang.framework.mybatis.generate.MybatisGenerateCodeService;
 
 /**
  * CommonAutoConfiguration
@@ -20,7 +21,7 @@ import pro.haichuang.framework.mybatis.generate.MybatisGenerateCode;
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(MybatisProperties.class)
 @ConditionalOnProperty(
-        prefix = "haichuang.mybatis.config",
+        prefix = "haichuang.mybatis",
         name = "enable",
         havingValue = "true",
         matchIfMissing = true
@@ -33,8 +34,8 @@ import pro.haichuang.framework.mybatis.generate.MybatisGenerateCode;
 public class MybatisAutoConfiguration {
 
     @Bean
-    @ConditionalOnProperty(prefix = "haichuang.mybatis.generate", name = "enable", havingValue = "true", matchIfMissing = true)
-    public MybatisGenerateCode mybatisGenerateCode() {
-        return new MybatisGenerateCode();
+    @Profile("!prod")
+    public MybatisGenerateCodeService mybatisGenerateCode() {
+        return new MybatisGenerateCodeService();
     }
 }
