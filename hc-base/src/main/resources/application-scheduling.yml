@@ -1,0 +1,10 @@
+# ========================= Scheduling Setting =========================
+spring:
+  task:
+    scheduling:
+      pool:
+        size: 100
+      thread-name-prefix: 'Scheduling-Thread-%d'
+      shutdown:
+        await-termination: true
+        await-termination-period: 60s

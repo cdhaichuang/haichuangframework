@@ -12,6 +12,7 @@ spring:
       - logback
       - jackson
       - mybatis
+      - scheduling
     active: dev
   application:
     name: hc-service-main-10001
