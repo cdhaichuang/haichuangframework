@@ -65,8 +65,7 @@ public class BaseControllerAdvice {
                                      @NonNull HttpServletRequest request) {
         String uuid = UUIDUtils.Local.get();
         log.warn("[{}] ------------------------- 自定义异常信息 ------------------------- [Begin - {}]", LOG_TAG, uuid);
-        log.warn("[{}] 自定义异常信息 [uuid: {}, requestUri: {}, requestMethod: {}, errorCode: {}, errorMessage: {}]",
-                LOG_TAG, uuid, request.getRequestURI(), request.getMethod(), e.getErrorCode(), e.getErrorMessage(), e);
+        printStackTraceFormat(request.getRequestURI(), request.getMethod(), e, e.getCause(), uuid, "自定义异常信息", null);
         log.warn("[{}] ------------------------- 自定义异常信息 ------------------------- [ End - {} ]", LOG_TAG, uuid);
         return ResultVO.other(e.getBaseEnum(), e.getUserTip());
     }
@@ -87,7 +86,6 @@ public class BaseControllerAdvice {
         log.error("[{}] ------------------------- 堆栈异常信息 ------------------------- [Begin - {}]", LOG_TAG, uuid);
         log.error("[{}] 堆栈异常信息 [uuid: {}, requestUri: {}, requestMethod: {}, errorMessage: {}]",
                 LOG_TAG, uuid, request.getRequestURI(), request.getMethod(), e.getLocalizedMessage(), e);
-        e.printStackTrace();
         log.error("[{}] ------------------------- 堆栈异常信息 ------------------------- [ End - {}]", LOG_TAG, uuid);
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         return ResultVO.other(RequestServerAbnormalEnum.SERVICE_ABNORMAL, BASE_ERROR_MESSAGE);
@@ -133,7 +131,6 @@ public class BaseControllerAdvice {
         log.error("[{}] ------------------------- 系统异常信息 ------------------------- [Begin - {}]", LOG_TAG, uuid);
         log.error("[{}] 系统异常信息 [uuid: {}, requestUri: {}, requestMethod: {}, errorMessage: {}]",
                 LOG_TAG, uuid, request.getRequestURI(), request.getMethod(), e.getLocalizedMessage(), e);
-        e.printStackTrace();
         log.error("[{}] ------------------------- 系统异常信息 ------------------------- [ End - {}]", LOG_TAG, uuid);
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         return ResultVO.other(RequestServerAbnormalEnum.SERVICE_ABNORMAL, BASE_ERROR_MESSAGE);

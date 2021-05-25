@@ -231,9 +231,21 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @return 是否存在 [true: 存在, false: 不存在]
      * @throws RequestParamException ID为空
      */
-    default boolean isExistsByIdAndValidate(Long id) {
+    default boolean isExistsByIdAndValidate(Long id) throws RequestParamException {
+        return this.isExistsByIdAndValidate(id, null);
+    }
+
+    /**
+     * 验证ID获取是否存在
+     *
+     * @param id           ID
+     * @param errorUserTip 错误提示信息
+     * @return 是否存在 [true: 存在, false: 不存在]
+     * @throws RequestParamException ID为空
+     */
+    default boolean isExistsByIdAndValidate(Long id, String errorUserTip) throws RequestParamException {
         if (id == null) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY);
+            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
         }
         return this.countByIdAndValidate(id) != 0;
     }
@@ -245,9 +257,21 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @return 是否存在 [true: 存在, false: 不存在]
      * @throws RequestParamException ID为空
      */
-    default boolean isExistsByIdAndValidate(Collection<Long> ids) {
+    default boolean isExistsByIdAndValidate(Collection<Long> ids) throws RequestParamException {
+        return this.isExistsByIdAndValidate(ids, null);
+    }
+
+    /**
+     * 批量验证ID获取是否存在
+     *
+     * @param ids          IDs
+     * @param errorUserTip 错误提示信息
+     * @return 是否存在 [true: 存在, false: 不存在]
+     * @throws RequestParamException ID为空
+     */
+    default boolean isExistsByIdAndValidate(Collection<Long> ids, String errorUserTip) throws RequestParamException {
         if (ids == null || ids.isEmpty()) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY);
+            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
         }
         return this.countByIdAndValidate(ids) != 0;
     }
@@ -259,9 +283,21 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @return 数量
      * @throws RequestParamException ID为空
      */
-    default int countByIdAndValidate(Long id) {
+    default int countByIdAndValidate(Long id) throws RequestParamException {
+        return this.countByIdAndValidate(id, null);
+    }
+
+    /**
+     * 验证ID获取数量
+     *
+     * @param id           ID
+     * @param errorUserTip 错误提示信息
+     * @return 数量
+     * @throws RequestParamException ID为空
+     */
+    default int countByIdAndValidate(Long id, String errorUserTip) throws RequestParamException {
         if (id == null) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY);
+            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
         }
         return this.count(new QueryWrapper<T>().select(BaseDO.ID).eq(BaseDO.ID, id));
     }
@@ -273,9 +309,21 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @return 数量
      * @throws RequestParamException ID为空
      */
-    default int countByIdAndValidate(Collection<Long> ids) {
+    default int countByIdAndValidate(Collection<Long> ids) throws RequestParamException {
+        return this.countByIdAndValidate(ids, null);
+    }
+
+    /**
+     * 批量验证ID获取数量
+     *
+     * @param ids          IDs
+     * @param errorUserTip 错误提示信息
+     * @return 数量
+     * @throws RequestParamException ID为空
+     */
+    default int countByIdAndValidate(Collection<Long> ids, String errorUserTip) throws RequestParamException {
         if (ids == null || ids.isEmpty()) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY);
+            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
         }
         return this.count(new QueryWrapper<T>().select(BaseDO.ID).in(BaseDO.ID, ids));
     }
@@ -288,12 +336,24 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @throws RequestParamException ID为空|ID错误
      */
     default T getByIdAndValidate(Long id) throws RequestParamException {
+        return this.getByIdAndValidate(id, null);
+    }
+
+    /**
+     * 验证ID并获取DO
+     *
+     * @param id           ID
+     * @param errorUserTip 错误提示信息
+     * @return DO
+     * @throws RequestParamException ID为空|ID错误
+     */
+    default T getByIdAndValidate(Long id, String errorUserTip) throws RequestParamException {
         if (id == null) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY);
+            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
         }
         T entity = this.getById(id);
         if (entity == null) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_ERROR);
+            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_ERROR, errorUserTip);
         }
         return entity;
     }
@@ -306,12 +366,24 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @throws RequestParamException ID为空|ID错误
      */
     default List<T> listByIdAndValidate(Collection<Long> ids) throws RequestParamException {
+        return this.listByIdAndValidate(ids, null);
+    }
+
+    /**
+     * 验证IDs并获取DOs
+     *
+     * @param ids          IDs
+     * @param errorUserTip 错误提示信息
+     * @return DOs
+     * @throws RequestParamException ID为空|ID错误
+     */
+    default List<T> listByIdAndValidate(Collection<Long> ids, String errorUserTip) throws RequestParamException {
         if (ids == null || ids.isEmpty()) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY);
+            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
         }
         List<T> entity = this.listByIds(ids);
         if (entity == null || entity.isEmpty()) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_ERROR);
+            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_ERROR, errorUserTip);
         }
         return entity;
     }
@@ -323,11 +395,24 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param pageQuery PageQuery
      * @return PageDTO
      */
-    default PageDTO<T> listPageAndValidate(PageQuery pageQuery) {
+    default PageDTO<T> listPageAndValidate(PageQuery pageQuery) throws RequestParamException {
+        return this.listPageAndValidate(pageQuery, null);
+    }
+
+    /**
+     * 验证PageQuery并获取PageDTO
+     * 默认根据 {@link BaseDO#MODIFY_TIME} 进行排序
+     *
+     * @param pageQuery    PageQuery
+     * @param errorUserTip 错误提示信息
+     * @return PageDTO
+     */
+    default PageDTO<T> listPageAndValidate(PageQuery pageQuery, String errorUserTip) throws RequestParamException {
         if (pageQuery == null) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY);
+            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
         }
-        return new PageDTO<T>(pageQuery).setContent(this.page(new Page<T>(pageQuery.getPageNo(), pageQuery.getPageSize()).addOrder(OrderItem.desc(BaseService.toUnderlineCase(BaseDO.MODIFY_TIME)))).getRecords());
+        return new PageDTO<T>(pageQuery).setContent(this.page(new Page<T>(pageQuery.getPageNo(), pageQuery.getPageSize())
+                .addOrder(OrderItem.desc(BaseService.toUnderlineCase(BaseDO.MODIFY_TIME)))).getRecords());
     }
 
     /**
@@ -338,8 +423,20 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @throws RequestParamException 参数为空|参数错误
      */
     default boolean saveAndValidate(T entity) throws RequestParamException {
+        return this.saveAndValidate(entity, null);
+    }
+
+    /**
+     * 验证实体类ID并保存
+     *
+     * @param entity       实体类
+     * @param errorUserTip 错误提示信息
+     * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
+     * @throws RequestParamException 参数为空|参数错误
+     */
+    default boolean saveAndValidate(T entity, String errorUserTip) throws RequestParamException {
         if (entity == null) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY);
+            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
         }
         return this.save(BaseService.clearEntityDefaultParameterAndGet(entity, true, true, true));
     }
@@ -352,7 +449,19 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @throws RequestParamException 参数为空|参数错误
      */
     default boolean saveAndValidate(Collection<T> entities) throws RequestParamException {
-        return this.saveAndValidate(entities, 1000);
+        return this.saveAndValidate(entities, 1000, null);
+    }
+
+    /**
+     * 批量验证实体类ID并保存
+     *
+     * @param entities     实体对象集合
+     * @param errorUserTip 错误提示信息
+     * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
+     * @throws RequestParamException 参数为空|参数错误
+     */
+    default boolean saveAndValidate(Collection<T> entities, String errorUserTip) throws RequestParamException {
+        return this.saveAndValidate(entities, 1000, errorUserTip);
     }
 
     /**
@@ -364,8 +473,21 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @throws RequestParamException 参数为空|参数错误
      */
     default boolean saveAndValidate(Collection<T> entities, int batchSize) throws RequestParamException {
+        return this.saveAndValidate(entities, batchSize, null);
+    }
+
+    /**
+     * 批量验证实体类ID并保存
+     *
+     * @param entities     实体对象集合
+     * @param batchSize    插入批次数量
+     * @param errorUserTip 错误提示信息
+     * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
+     * @throws RequestParamException 参数为空|参数错误
+     */
+    default boolean saveAndValidate(Collection<T> entities, int batchSize, String errorUserTip) throws RequestParamException {
         if (entities == null || entities.isEmpty()) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY);
+            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
         }
         return this.saveBatch(BaseService.clearEntityDefaultParameterAndGet(entities, true, true, true), batchSize);
     }
@@ -386,6 +508,26 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
         if (this.countByIdAndValidate((Long) getIdMethod.invoke(entity)) == 0) {
             throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_ERROR);
         }
+        return this.updateByIdAndValidate(entity, null);
+    }
+
+    /**
+     * 批量验证实体类ID并更新
+     *
+     * @param entity       实体类
+     * @param errorUserTip 错误提示信息
+     * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
+     * @throws RequestParamException 参数为空|参数错误
+     */
+    @SneakyThrows
+    default boolean updateByIdAndValidate(T entity, String errorUserTip) throws RequestParamException {
+        if (entity == null) {
+            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
+        }
+        Method getIdMethod = BaseService.validateIdExistsAndGetIdMethod(entity);
+        if (this.countByIdAndValidate((Long) getIdMethod.invoke(entity)) == 0) {
+            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_ERROR, errorUserTip);
+        }
         return this.updateById(clearEntityDefaultParameterAndGet(entity));
     }
 
@@ -397,7 +539,19 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @throws RequestParamException 参数为空|参数错误
      */
     default boolean updateByIdAndValidate(Collection<T> entities) throws RequestParamException {
-        return updateByIdAndValidate(entities, 1000);
+        return this.updateByIdAndValidate(entities, 1000);
+    }
+
+    /**
+     * 批量验证实体类ID并更新
+     *
+     * @param entities     实体对象集合
+     * @param errorUserTip 错误提示信息
+     * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
+     * @throws RequestParamException 参数为空|参数错误
+     */
+    default boolean updateByIdAndValidate(Collection<T> entities, String errorUserTip) throws RequestParamException {
+        return this.updateByIdAndValidate(entities, 1000, errorUserTip);
     }
 
     /**
@@ -410,15 +564,29 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      */
     @SneakyThrows
     default boolean updateByIdAndValidate(Collection<T> entities, int batchSize) throws RequestParamException {
+        return this.updateByIdAndValidate(entities, batchSize, null);
+    }
+
+    /**
+     * 批量验证实体类ID并更新
+     *
+     * @param entities     实体对象集合
+     * @param batchSize    插入批次数量
+     * @param errorUserTip 错误提示信息
+     * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
+     * @throws RequestParamException 参数为空|参数错误
+     */
+    @SneakyThrows
+    default boolean updateByIdAndValidate(Collection<T> entities, int batchSize, String errorUserTip) throws RequestParamException {
         if (CollectionUtils.isEmpty(entities)) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY);
+            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
         }
         List<Long> ids = new ArrayList<>();
         for (T entity : entities) {
             ids.add((Long) BaseService.validateIdExistsAndGetIdMethod(entity).invoke(entity));
         }
         if (this.countByIdAndValidate(ids) != entities.size()) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_ERROR);
+            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_ERROR, errorUserTip);
         }
         return this.updateBatchById(clearEntityDefaultParameterAndGet(entities), batchSize);
     }
@@ -429,9 +597,20 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param id ID
      * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
      */
-    default boolean removeByIdAndValidate(Long id) {
+    default boolean removeByIdAndValidate(Long id) throws RequestParamException {
+        return this.removeByIdAndValidate(id, null);
+    }
+
+    /**
+     * 验证实体类ID并删除
+     *
+     * @param id           ID
+     * @param errorUserTip 错误提示信息
+     * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
+     */
+    default boolean removeByIdAndValidate(Long id, String errorUserTip) throws RequestParamException {
         if (this.countByIdAndValidate(id) == 0) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_ERROR);
+            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_ERROR, errorUserTip);
         }
         return this.removeById(id);
     }
@@ -442,9 +621,20 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param ids ID集合
      * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
      */
-    default boolean removeByIdAndValidate(Collection<Long> ids) {
+    default boolean removeByIdAndValidate(Collection<Long> ids) throws RequestParamException {
+        return this.removeByIdAndValidate(ids, null);
+    }
+
+    /**
+     * 批量验证实体类ID并删除
+     *
+     * @param ids          ID集合
+     * @param errorUserTip 错误提示信息
+     * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
+     */
+    default boolean removeByIdAndValidate(Collection<Long> ids, String errorUserTip) throws RequestParamException {
         if (this.countByIdAndValidate(ids) != ids.size()) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_ERROR);
+            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_ERROR, errorUserTip);
         }
         return this.removeByIds(ids);
     }
