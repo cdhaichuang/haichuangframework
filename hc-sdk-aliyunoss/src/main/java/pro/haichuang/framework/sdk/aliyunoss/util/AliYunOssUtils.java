@@ -82,6 +82,7 @@ public class AliYunOssUtils {
      * @param uploadPath       上传相对路径
      * @param childrenPath     上传子路径
      * @return 上传后的路径
+     * @throws FileNotFoundException 文件不存在异常
      */
     @NonNull
     public static String upload(@NonNull String absoluteFilePath, @NonNull String endPoint,
@@ -243,7 +244,7 @@ public class AliYunOssUtils {
      * @param accessKeyId     AccessKeyId
      * @param accessKeySecret AccessKeySecret
      * @param bucketName      BucketName
-     * @return 删除结果 {@param quiet}
+     * @return 删除结果, 参考 {@code quiet} 字段
      */
     public static List<String> deleteObjects(@NonNull List<String> ossFilePaths, boolean quiet, @NonNull String endPoint,
                                              @NonNull String accessKeyId, @NonNull String accessKeySecret, @NonNull String bucketName) {
