@@ -2,10 +2,3 @@
 server:
   servlet:
     context-path: /api
-
-# ========================= Spring Setting =========================
-spring:
-  servlet:
-    multipart:
-      max-file-size: 100GB
-      max-request-size: 100GB

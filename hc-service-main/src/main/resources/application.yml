@@ -1,7 +1,6 @@
 # ========================= Tomcat Setting =========================
 server:
-  port: 10001
-#  port: ${server.port}
+  port: ${hc.server.port}
 
 # ========================= Spring Setting =========================
 spring:
@@ -15,5 +14,22 @@ spring:
       - scheduling
     active: dev
   application:
-    name: hc-service-main-10001
-#    name: hc-service-${haichuang.code-name}-${server.port}
+    name: hc-service-${hc.code-name}-${hc.server.port}
+  servlet:
+    multipart:
+      max-file-size: 100GB
+      max-request-size: 100GB
+
+# ========================= Knife4j Setting (可选配置) =========================
+#knife4j:
+#  setting:
+#    # Host地址/端口
+#    enableHost: false
+#    enableHostText:
+#    # 是否开启分组
+#    enableGroup: true
+#  basic:
+#    # 是否打开BasicHttp验证
+#    enable: false
+#    username:
+#    password:

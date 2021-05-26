@@ -21,18 +21,19 @@ public class Init {
         try {
             assert args.length > 0;
             String codeName = args[0];
-            String port = args[0];
+            String port = args[1];
             if (codeName != null && !codeName.isEmpty()) {
                 File serviceModelDirFile = new File("hc-service-main");
                 if (serviceModelDirFile.exists()) {
                     if (serviceModelDirFile.isDirectory()) {
                         try {
                             File mainDirFile = getChildDir(serviceModelDirFile, "src.main");
-                            File resourcesDirFile = getChildDir(mainDirFile, "resources");
                             File javaDirFile = getChildDir(mainDirFile, "java");
                             File projectDirFile = getChildDir(javaDirFile, PROJECT_DIR_NAME);
+                            File resourcesDirFile = getChildDir(mainDirFile, "resources");
 
                             renameFilePackage(projectDirFile, codeName);
+                            renameFileResourceInfo(resourcesDirFile, codeName, port);
                         } catch (Exception e) {
 
                         }
@@ -97,7 +98,7 @@ public class Init {
                 StringBuffer buffer = new StringBuffer();
                 for (String line = reader.readLine(); line != null; line = reader.readLine()) {
                     if (line.contains(PROJECT_DIR_NAME)) {
-                        // line = line.replaceAll(PROJECT_DIR_NAME, REPLACE_PROJECT_DIR_NAME.concat(codeName));
+                        line = line.replaceAll(PROJECT_DIR_NAME, REPLACE_PROJECT_DIR_NAME.concat(codeName));
                     }
                     buffer.append(line.contains(LINE_SEPARATOR));
                 }
@@ -129,10 +130,10 @@ public class Init {
             ) {
                 StringBuffer buffer = new StringBuffer();
                 for (String line = reader.readLine(); line != null; line = reader.readLine()) {
-                    if (line.contains("${server.port}")) {
-                        line = line.replaceAll("\\$\\{server.port}", String.valueOf(port));
-                    } else if (line.contains("${haichuang.code-name}")) {
-                        line = line.replaceAll("\\$\\{haichuang.code-name}", codeName);
+                    if (line.contains("${hc.server.port}")) {
+                        line = line.replaceAll("\\$\\{hc.server.port}", String.valueOf(port));
+                    } else if (line.contains("${hc.code-name}")) {
+                        line = line.replaceAll("\\$\\{hc.code-name}", codeName);
                     }
                     buffer.append(line.contains(LINE_SEPARATOR));
                 }

@@ -46,6 +46,7 @@ public class AsyncConfig implements AsyncConfigurer {
         taskExecutor.setAwaitTerminationSeconds(60);
         // 设置线程优先级, 默认为 [Thread.NORM_PRIORITY]
         taskExecutor.setThreadPriority(Thread.NORM_PRIORITY);
+        taskExecutor.initialize();
         return taskExecutor;
     }
 }
