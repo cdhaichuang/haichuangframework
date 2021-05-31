@@ -7,6 +7,7 @@
         <module>hc-base</module>
         <module>hc-mybatis</module>
         <module>hc-redis</module>
+        <module>hc-sdk-aliyunoss</module>
         <module>hc-sdk-aliyunsms</module>
         <module>hc-sdk-wxmp</module>
         <module>hc-service-main</module>

@@ -1,4 +1,4 @@
-package pro.haichuang.framework.mybatis.base;
+package pro.haichuang.framework.mybatis.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;

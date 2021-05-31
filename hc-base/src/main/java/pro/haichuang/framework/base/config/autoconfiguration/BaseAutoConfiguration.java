@@ -11,7 +11,7 @@ import pro.haichuang.framework.base.config.mvc.WebMvcConfig;
 import pro.haichuang.framework.base.config.properties.BaseConfigProperties;
 
 /**
- * 配置自动配置
+ * 核心自动配置
  *
  * @author JiYinchuan
  * @version 1.0

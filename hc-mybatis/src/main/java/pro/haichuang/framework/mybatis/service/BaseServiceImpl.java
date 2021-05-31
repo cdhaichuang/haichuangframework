@@ -1,4 +1,4 @@
-package pro.haichuang.framework.mybatis.base;
+package pro.haichuang.framework.mybatis.service;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

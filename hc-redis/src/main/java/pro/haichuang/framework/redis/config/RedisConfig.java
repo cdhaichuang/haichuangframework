@@ -10,6 +10,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -25,6 +26,7 @@ import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import pro.haichuang.framework.redis.service.RedisService;
+import pro.haichuang.framework.redis.service.DefaultRedisServiceImpl;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -77,8 +79,9 @@ public class RedisConfig extends CachingConfigurerSupport {
     }
 
     @Bean
+    @ConditionalOnMissingBean(RedisService.class)
     public RedisService redisService() {
-        return new RedisService(redisTemplate(connectionFactory));
+        return new DefaultRedisServiceImpl(redisTemplate(connectionFactory));
     }
 
     /**

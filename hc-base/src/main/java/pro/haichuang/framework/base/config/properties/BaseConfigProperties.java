@@ -3,7 +3,7 @@ package pro.haichuang.framework.base.config.properties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * 配置参数配置
+ * 核心配置文件
  *
  * @author JiYinchuan
  * @version 1.0

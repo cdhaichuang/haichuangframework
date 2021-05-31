@@ -13,7 +13,7 @@ import pro.haichuang.framework.mybatis.config.properties.MybatisProperties;
 import pro.haichuang.framework.mybatis.generate.MybatisGenerateCodeService;
 
 /**
- * CommonAutoConfiguration
+ * Mybatis自动配置
  *
  * @author JiYinchuan
  * @version 1.0

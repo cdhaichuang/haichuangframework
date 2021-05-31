@@ -11,7 +11,7 @@ import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
-import pro.haichuang.framework.mybatis.base.BaseService;
+import pro.haichuang.framework.mybatis.service.BaseService;
 import pro.haichuang.framework.mybatis.domain.BaseDO;
 import pro.haichuang.framework.mybatis.generate.config.CodeBasicConfig;
 import pro.haichuang.framework.mybatis.generate.config.CodeDataSourceConfig;
@@ -199,9 +199,9 @@ public class MybatisGenerateCodeService {
         // 自定义继承的Mapper类全称，带包名 （默认）
         sc.setSuperMapperClass("com.baomidou.mybatisplus.core.mapper.BaseMapper");
         // 自定义继承的Service类全称，带包名 （默认=com.baomidou.mybatisplus.extension.service.IService）
-        sc.setSuperServiceClass("pro.haichuang.framework.mybatis.base.BaseService");
+        sc.setSuperServiceClass("pro.haichuang.framework.mybatis.service.BaseService");
         // 自定义继承的ServiceImpl类全称，带包名 （默认=com.baomidou.mybatisplus.extension.service.impl.ServiceImpl）
-        sc.setSuperServiceImplClass("pro.haichuang.framework.mybatis.base.BaseServiceImpl");
+        sc.setSuperServiceImplClass("pro.haichuang.framework.mybatis.service.BaseServiceImpl");
         // 自定义继承的Controller类全称，带包名 （默认=null）
         // sc.setSuperControllerClass(null);
         // 需要包含的表名（与exclude二选一配置，likeTable|notLikeTable可以模糊匹配）
