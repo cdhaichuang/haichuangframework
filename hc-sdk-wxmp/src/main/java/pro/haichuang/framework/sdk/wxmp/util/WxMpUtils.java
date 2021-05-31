@@ -1,4 +1,4 @@
-package pro.haichuang.sdk.wxmp.util;
+package pro.haichuang.framework.sdk.wxmp.util;
 
 import cn.hutool.http.HttpGlobalConfig;
 import cn.hutool.http.HttpUtil;
@@ -11,8 +11,8 @@ import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import pro.haichuang.framework.base.enums.base.SexEnum;
 import pro.haichuang.framework.base.exception.ThirdPartyException;
-import pro.haichuang.sdk.wxmp.dto.UserInfoDTO;
-import pro.haichuang.sdk.wxmp.dto.WebAccessTokenDTO;
+import pro.haichuang.framework.sdk.wxmp.dto.WxMpUserInfoDTO;
+import pro.haichuang.framework.sdk.wxmp.dto.WxMpWebAccessTokenDTO;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -26,7 +26,7 @@ import java.util.Map;
  */
 @Slf4j
 @SuppressWarnings("SpellCheckingInspection")
-public class MpUtils {
+public class WxMpUtils {
 
     private static final String LOG_TAG = "MP工具类";
 
@@ -105,7 +105,7 @@ public class MpUtils {
      * @return 网页AccessTokenDTO
      */
     @NonNull
-    public static WebAccessTokenDTO getWebAccessToken(@NonNull String appId, @NonNull String appSecret, @NonNull String code) {
+    public static WxMpWebAccessTokenDTO getWebAccessToken(@NonNull String appId, @NonNull String appSecret, @NonNull String code) {
         return getWebAccessToken(appId, appSecret, code, HttpGlobalConfig.getTimeout());
     }
 
@@ -119,7 +119,7 @@ public class MpUtils {
      * @return 网页AccessTokenDTO
      */
     @NonNull
-    public static WebAccessTokenDTO getWebAccessToken(@NonNull String appId, @NonNull String appSecret, @NonNull String code, @NonNull int timout) {
+    public static WxMpWebAccessTokenDTO getWebAccessToken(@NonNull String appId, @NonNull String appSecret, @NonNull String code, @NonNull int timout) {
         String baseUrl = "https://api.weixin.qq.com/sns/oauth2/access_token";
         Map<String, Object> params = new HashMap<>(4);
         params.put("appid", appId);
@@ -132,7 +132,7 @@ public class MpUtils {
             throw new ThirdPartyException(resultJson.getString(ERROR_CODE_NAME), resultJson.getString(ERROR_MESSAGE_NAME));
         }
         log.info("[{}] 成功获取网页AccessToken [response: {}]", LOG_TAG, resultJson.toJSONString());
-        return new WebAccessTokenDTO()
+        return new WxMpWebAccessTokenDTO()
                 .setAccessToken(resultJson.getString("access_token"))
                 .setRefreshToken(resultJson.getString("refresh_token"))
                 .setOpenId(resultJson.getString("openid"));
@@ -146,7 +146,7 @@ public class MpUtils {
      * @return 网页AccessTokenDTO
      */
     @NonNull
-    public static WebAccessTokenDTO refreshWebAccessToken(@NonNull String appId, @NonNull String refreshToken) {
+    public static WxMpWebAccessTokenDTO refreshWebAccessToken(@NonNull String appId, @NonNull String refreshToken) {
         return refreshWebAccessToken(appId, refreshToken, HttpGlobalConfig.getTimeout());
     }
 
@@ -159,7 +159,7 @@ public class MpUtils {
      * @return 网页AccessTokenDTO
      */
     @NonNull
-    public static WebAccessTokenDTO refreshWebAccessToken(@NonNull String appId, @NonNull String refreshToken, @NonNull int timout) {
+    public static WxMpWebAccessTokenDTO refreshWebAccessToken(@NonNull String appId, @NonNull String refreshToken, @NonNull int timout) {
         String baseUrl = "https://api.weixin.qq.com/sns/oauth2/refresh_token";
         Map<String, Object> params = new HashMap<>(3);
         params.put("appid", appId);
@@ -171,7 +171,7 @@ public class MpUtils {
             throw new ThirdPartyException(resultJson.getString(ERROR_CODE_NAME), resultJson.getString(ERROR_MESSAGE_NAME));
         }
         log.info("[{}] 成功刷新网页AccessToken [response: {}]", LOG_TAG, resultJson.toJSONString());
-        return new WebAccessTokenDTO()
+        return new WxMpWebAccessTokenDTO()
                 .setAccessToken(resultJson.getString("access_token"))
                 .setRefreshToken(resultJson.getString("refresh_token"))
                 .setOpenId(resultJson.getString("openid"));
@@ -218,7 +218,7 @@ public class MpUtils {
      * @return 用户信息
      */
     @Nullable
-    public static UserInfoDTO getUserInfo(@NonNull String accessToken, @NonNull String openId) {
+    public static WxMpUserInfoDTO getUserInfo(@NonNull String accessToken, @NonNull String openId) {
         String baseUrl = "https://api.weixin.qq.com/cgi-bin/user/info";
         Map<String, Object> params = new HashMap<>(3);
         params.put("access_token", accessToken);
@@ -234,7 +234,7 @@ public class MpUtils {
             log.info("[{}] 获取用户信息失败-该用户未关注此公众号 [openId: {}, response: {}]", LOG_TAG, openId, resultJson.toJSONString());
             return null;
         }
-        return new UserInfoDTO()
+        return new WxMpUserInfoDTO()
                 .setSubscribe(resultJson.getInteger("subscribe"))
                 .setOpenId(resultJson.getString("openid"))
                 .setNickname(resultJson.getString("nickname"))
@@ -249,7 +249,7 @@ public class MpUtils {
                 .setRemark(resultJson.getString("remark"))
                 .setGroupId(resultJson.getInteger("groupid"))
                 .setTagIdList(resultJson.getJSONArray("tagid_list").toJavaList(Integer.class))
-                .setSubscribeScene(UserInfoDTO.SubscribeSceneEnum.resolve(resultJson.getString("subscribe_scene")))
+                .setSubscribeScene(WxMpUserInfoDTO.SubscribeSceneEnum.resolve(resultJson.getString("subscribe_scene")))
                 .setQrScene(resultJson.getInteger("qr_scene"))
                 .setQrSceneStr(resultJson.getString("qr_scene_str"));
     }

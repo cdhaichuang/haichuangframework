@@ -1,4 +1,4 @@
-package pro.haichuang.sdk.wxmp.dto;
+package pro.haichuang.framework.sdk.wxmp.dto;
 
 import java.io.Serializable;
 
@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author JiYinchuan
  * @version 1.0
  */
-public class WebAccessTokenDTO implements Serializable {
+public class WxMpWebAccessTokenDTO implements Serializable {
     private static final long serialVersionUID = 8551944490780144452L;
 
     /**
@@ -30,7 +30,7 @@ public class WebAccessTokenDTO implements Serializable {
         return accessToken;
     }
 
-    public WebAccessTokenDTO setAccessToken(String accessToken) {
+    public WxMpWebAccessTokenDTO setAccessToken(String accessToken) {
         this.accessToken = accessToken;
         return this;
     }
@@ -39,7 +39,7 @@ public class WebAccessTokenDTO implements Serializable {
         return refreshToken;
     }
 
-    public WebAccessTokenDTO setRefreshToken(String refreshToken) {
+    public WxMpWebAccessTokenDTO setRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
         return this;
     }
@@ -48,7 +48,7 @@ public class WebAccessTokenDTO implements Serializable {
         return openId;
     }
 
-    public WebAccessTokenDTO setOpenId(String openId) {
+    public WxMpWebAccessTokenDTO setOpenId(String openId) {
         this.openId = openId;
         return this;
     }

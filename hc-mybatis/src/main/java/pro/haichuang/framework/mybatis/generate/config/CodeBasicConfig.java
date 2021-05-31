@@ -22,9 +22,9 @@ public class CodeBasicConfig {
     private String version = "1.0";
 
     /**
-     * 实体包输出配置 [-1: 只输出实体包(公共模块), 0: 输出所有包(聚合模块), 1: 输出除实体以外的包(分离模块)]
+     * 输出包类型
      */
-    private Integer outputType = 0;
+    private OutputType outputType = OutputType.ALL;
 
     /**
      * 是否开启Swagger注解支持
@@ -47,11 +47,11 @@ public class CodeBasicConfig {
         this.version = version;
     }
 
-    public Integer getOutputType() {
+    public OutputType getOutputType() {
         return outputType;
     }
 
-    public void setOutputType(Integer outputType) {
+    public void setOutputType(OutputType outputType) {
         this.outputType = outputType;
     }
 
@@ -61,5 +61,27 @@ public class CodeBasicConfig {
 
     public void setEnableSwagger(Boolean enableSwagger) {
         this.enableSwagger = enableSwagger;
+    }
+
+    /**
+     * 输出包类型
+     */
+    public static enum OutputType {
+
+        /**
+         * 输出所有包
+         */
+        ALL,
+
+        /**
+         * 仅输出实体包
+         */
+        ONLY_DOMAIN,
+
+        /**
+         * 输出除实体外所有包
+         */
+        ALL_EXCLUDE_DOMAIN;
+
     }
 }

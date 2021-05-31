@@ -14,28 +14,115 @@ import pro.haichuang.framework.mybatis.generate.config.CodePackageConfig;
  * @author JiYinchuan
  * @version 1.0
  */
-
-@SpringBootTest(classes = ServiceApplication.class)
+@SpringBootTest(classes = ServiceApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CodeGenerateTest {
 
     @Autowired
     private MybatisGenerateCodeService mybatisGenerateCodeService;
 
+    /**
+     * 简单配置生成
+     */
     @Test
-    void generate() {
+    void simpleSettingGenerate() {
         CodeBasicConfig codeBasicConfig = new CodeBasicConfig();
+        // 作者
+        // 默认为 [JiYinchuan]
+        codeBasicConfig.setAuthor("JiYinchuan");
 
         CodeDataSourceConfig codeDataSourceConfig = new CodeDataSourceConfig();
+        // 驱动连接的URL, 须指定
+        // 例如 [jdbc:mysql://127.0.0.1:3306/data_demo?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowMutiQueries=true]
         codeDataSourceConfig.setUrl("jdbc:mysql://127.0.0.1:3306/data_demo?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowMutiQueries=true");
+        // 数据库连接用户名, 须指定
+        // 例如 [root]
         codeDataSourceConfig.setUsername("root");
+        // 数据库连接密码, 须指定
+        // 例如 [123456]
         codeDataSourceConfig.setPassword("123456");
+        // 统一表前缀, 可为空
+        // 例如 [hc_]
         codeDataSourceConfig.setTablePrefix(null);
-        // codeDataSourceConfig.setInclude();
+        // 输出包含表, 可为空, 为空时则输出所有表
+        codeDataSourceConfig.setInclude();
 
         CodePackageConfig codePackageConfig = new CodePackageConfig();
-        // 设置项目代号
-        codePackageConfig.setParentModelName("main");
+        // 父包模块名, 须指定
+        // 此处填写项目代号缩写(项目代号首字母全小写+数字)
+        codePackageConfig.setParentModelName("xmdh01");
 
+        // 开始生成
+        mybatisGenerateCodeService.generate(codeBasicConfig, codeDataSourceConfig, codePackageConfig);
+    }
+
+    /**
+     * 完整配置生成
+     */
+    @Test
+    void fullSettingGenerate() {
+        CodeBasicConfig codeBasicConfig = new CodeBasicConfig();
+        // 作者
+        // 默认为 [JiYinchuan]
+        codeBasicConfig.setAuthor("JiYinchuan");
+        // 版本号
+        // 默认为 [1.0]
+        codeBasicConfig.setVersion("1.0");
+        // 输出包类型
+        // 默认为 [CodeBasicConfig.OutputType.ALL]
+        codeBasicConfig.setOutputType(CodeBasicConfig.OutputType.ALL);
+        // 是否开启Swagger注解支持
+        // 默认为 [true]
+        codeBasicConfig.setEnableSwagger(true);
+
+        CodeDataSourceConfig codeDataSourceConfig = new CodeDataSourceConfig();
+        // 驱动名
+        // 默认为 [com.mysql.cj.jdbc.Driver]
+        codeDataSourceConfig.setDriver("com.mysql.cj.jdbc.Driver");
+        // 驱动连接的URL, 须指定
+        // 例如 [jdbc:mysql://127.0.0.1:3306/data_demo?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowMutiQueries=true]
+        codeDataSourceConfig.setUrl("jdbc:mysql://127.0.0.1:3306/data_demo?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowMutiQueries=true");
+        // 数据库连接用户名, 须指定
+        // 例如 [root]
+        codeDataSourceConfig.setUsername("root");
+        // 数据库连接密码, 须指定
+        // 例如 [123456]
+        codeDataSourceConfig.setPassword("123456");
+        // 统一表前缀, 可为空
+        // 例如 [hc_]
+        codeDataSourceConfig.setTablePrefix("hc_");
+        // 输出包含表, 可为空, 为空时则输出所有表
+        codeDataSourceConfig.setInclude();
+
+        CodePackageConfig codePackageConfig = new CodePackageConfig();
+        // 输出包名
+        // 默认为 [pro.haichuang.framework.service]
+        codePackageConfig.setOutputPackage("pro.haichuang.framework.service");
+        // 父包模块名, 须指定
+        // 此处填写项目代号缩写(项目代号首字母全小写+数字)
+        codePackageConfig.setParentModelName("xmdh01");
+        // 实体类包名
+        // 默认为 [pojo.domain]
+        codePackageConfig.setEntityPackageName("pojo.domain");
+        // 数据访问层包名
+        // 默认为 [mapper]
+        codePackageConfig.setMapperPackageName("mapper");
+        // 数据访问层XML包名, 生成后请手动移动到 [resource] 对应目录下
+        // 默认为 [mapper.xml]
+        codePackageConfig.setMapperXmlPackageName("mapper.xml");
+        // 业务逻辑层包名
+        // 默认为 [service]
+        codePackageConfig.setServicePackageName("service");
+        // 业务逻辑实现层包名
+        // 默认为 [service.impl]
+        codePackageConfig.setServiceImplPackageName("service.impl");
+        // 界面层包名
+        // 默认为 [controller]
+        codePackageConfig.setControllerPackageName("controller");
+        // 输出根目录绝对路径
+        // 默认为 [当前项目目录/src/main/java]
+        codePackageConfig.setOutputDir(System.getProperty("user.dir").concat("/src/main/java/"));
+
+        // 开始生成
         mybatisGenerateCodeService.generate(codeBasicConfig, codeDataSourceConfig, codePackageConfig);
     }
 }

@@ -21,7 +21,7 @@ import pro.haichuang.framework.redis.config.properties.RedisProperties;
 @AutoConfigureBefore(org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration.class)
 @EnableConfigurationProperties(RedisProperties.class)
 @ConditionalOnProperty(
-        prefix = "haichuang.redis.config",
+        prefix = "haichuang.redis",
         name = "enable",
         havingValue = "true",
         matchIfMissing = true

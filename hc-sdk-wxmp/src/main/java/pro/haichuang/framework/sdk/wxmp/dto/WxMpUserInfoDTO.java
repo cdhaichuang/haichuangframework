@@ -1,4 +1,4 @@
-package pro.haichuang.sdk.wxmp.dto;
+package pro.haichuang.framework.sdk.wxmp.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import pro.haichuang.framework.base.enums.BaseEnum;
@@ -31,7 +31,7 @@ import java.util.List;
  * @author JiYinchuan
  * @version 1.0
  */
-public class UserInfoDTO {
+public class WxMpUserInfoDTO {
 
     /**
      * 用户是否订阅该公众号标识，值为0时，代表此用户没有关注该公众号，拉取不到其余信息
@@ -214,7 +214,7 @@ public class UserInfoDTO {
         return subscribe;
     }
 
-    public UserInfoDTO setSubscribe(Integer subscribe) {
+    public WxMpUserInfoDTO setSubscribe(Integer subscribe) {
         this.subscribe = subscribe;
         return this;
     }
@@ -223,7 +223,7 @@ public class UserInfoDTO {
         return openId;
     }
 
-    public UserInfoDTO setOpenId(String openId) {
+    public WxMpUserInfoDTO setOpenId(String openId) {
         this.openId = openId;
         return this;
     }
@@ -232,7 +232,7 @@ public class UserInfoDTO {
         return nickname;
     }
 
-    public UserInfoDTO setNickname(String nickname) {
+    public WxMpUserInfoDTO setNickname(String nickname) {
         this.nickname = nickname;
         return this;
     }
@@ -241,7 +241,7 @@ public class UserInfoDTO {
         return sex;
     }
 
-    public UserInfoDTO setSex(SexEnum sex) {
+    public WxMpUserInfoDTO setSex(SexEnum sex) {
         this.sex = sex;
         return this;
     }
@@ -250,7 +250,7 @@ public class UserInfoDTO {
         return city;
     }
 
-    public UserInfoDTO setCity(String city) {
+    public WxMpUserInfoDTO setCity(String city) {
         this.city = city;
         return this;
     }
@@ -259,7 +259,7 @@ public class UserInfoDTO {
         return country;
     }
 
-    public UserInfoDTO setCountry(String country) {
+    public WxMpUserInfoDTO setCountry(String country) {
         this.country = country;
         return this;
     }
@@ -268,7 +268,7 @@ public class UserInfoDTO {
         return province;
     }
 
-    public UserInfoDTO setProvince(String province) {
+    public WxMpUserInfoDTO setProvince(String province) {
         this.province = province;
         return this;
     }
@@ -277,7 +277,7 @@ public class UserInfoDTO {
         return language;
     }
 
-    public UserInfoDTO setLanguage(String language) {
+    public WxMpUserInfoDTO setLanguage(String language) {
         this.language = language;
         return this;
     }
@@ -286,7 +286,7 @@ public class UserInfoDTO {
         return headImageUrl;
     }
 
-    public UserInfoDTO setHeadImageUrl(String headImageUrl) {
+    public WxMpUserInfoDTO setHeadImageUrl(String headImageUrl) {
         this.headImageUrl = headImageUrl;
         return this;
     }
@@ -295,7 +295,7 @@ public class UserInfoDTO {
         return subscribeTime;
     }
 
-    public UserInfoDTO setSubscribeTime(Long subscribeTime) {
+    public WxMpUserInfoDTO setSubscribeTime(Long subscribeTime) {
         this.subscribeTime = subscribeTime;
         return this;
     }
@@ -304,7 +304,7 @@ public class UserInfoDTO {
         return unionId;
     }
 
-    public UserInfoDTO setUnionId(String unionId) {
+    public WxMpUserInfoDTO setUnionId(String unionId) {
         this.unionId = unionId;
         return this;
     }
@@ -313,7 +313,7 @@ public class UserInfoDTO {
         return remark;
     }
 
-    public UserInfoDTO setRemark(String remark) {
+    public WxMpUserInfoDTO setRemark(String remark) {
         this.remark = remark;
         return this;
     }
@@ -322,7 +322,7 @@ public class UserInfoDTO {
         return groupId;
     }
 
-    public UserInfoDTO setGroupId(Integer groupId) {
+    public WxMpUserInfoDTO setGroupId(Integer groupId) {
         this.groupId = groupId;
         return this;
     }
@@ -331,7 +331,7 @@ public class UserInfoDTO {
         return tagIdList;
     }
 
-    public UserInfoDTO setTagIdList(List<Integer> tagIdList) {
+    public WxMpUserInfoDTO setTagIdList(List<Integer> tagIdList) {
         this.tagIdList = tagIdList;
         return this;
     }
@@ -340,7 +340,7 @@ public class UserInfoDTO {
         return subscribeScene;
     }
 
-    public UserInfoDTO setSubscribeScene(SubscribeSceneEnum subscribeScene) {
+    public WxMpUserInfoDTO setSubscribeScene(SubscribeSceneEnum subscribeScene) {
         this.subscribeScene = subscribeScene;
         return this;
     }
@@ -349,7 +349,7 @@ public class UserInfoDTO {
         return qrScene;
     }
 
-    public UserInfoDTO setQrScene(Integer qrScene) {
+    public WxMpUserInfoDTO setQrScene(Integer qrScene) {
         this.qrScene = qrScene;
         return this;
     }
@@ -358,7 +358,7 @@ public class UserInfoDTO {
         return qrSceneStr;
     }
 
-    public UserInfoDTO setQrSceneStr(String qrSceneStr) {
+    public WxMpUserInfoDTO setQrSceneStr(String qrSceneStr) {
         this.qrSceneStr = qrSceneStr;
         return this;
     }

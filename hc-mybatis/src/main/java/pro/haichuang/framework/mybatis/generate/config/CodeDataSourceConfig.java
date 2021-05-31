@@ -1,6 +1,5 @@
 package pro.haichuang.framework.mybatis.generate.config;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Component;
  * @version 1.0
  */
 @Component
-@ConfigurationProperties(prefix = "haichuang.mybatis.generate.datasource-config")
 public class CodeDataSourceConfig {
 
     /**
@@ -34,12 +32,12 @@ public class CodeDataSourceConfig {
     private String password;
 
     /**
-     * 表前缀
+     * 统一表前缀
      */
     private String tablePrefix;
 
     /**
-     * 包含表
+     * 输出包含表
      */
     private String[] include;
 

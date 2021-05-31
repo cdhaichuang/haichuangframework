@@ -77,7 +77,7 @@ public class MybatisGenerateCodeService {
         templateConfig.setXml(null);
         templateConfig.setController(null);
 
-        if (codeBasicConfig.getOutputType() == -1) {
+        if (codeBasicConfig.getOutputType() == CodeBasicConfig.OutputType.ONLY_DOMAIN) {
             ag.setTemplate(templateConfig.setEntity("/templates/entity.java")).execute();
             return;
         }
@@ -86,7 +86,7 @@ public class MybatisGenerateCodeService {
         templateConfig.setMapper("/templates/mapper.java");
         templateConfig.setXml("/templates/mapper.xml");
         templateConfig.setController("/templates/controller.java");
-        if (codeBasicConfig.getOutputType() == 0) {
+        if (codeBasicConfig.getOutputType() == CodeBasicConfig.OutputType.ALL_EXCLUDE_DOMAIN) {
             templateConfig.setEntity("/templates/entity.java");
         }
 
