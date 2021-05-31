@@ -17,6 +17,42 @@ import pro.haichuang.framework.mybatis.generate.config.CodePackageConfig;
 @SpringBootTest(classes = ServiceApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CodeGenerateTest {
 
+    /**
+     * 项目Code
+     * 项目代号缩写(项目代号首字母全小写+数字)
+     */
+    private static final String PROJECT_CODE = "${hc.code-name}";
+
+    /**
+     * 作者
+     */
+    private static final String AUTHOR = "JiYinchuan";
+
+    /**
+     * 驱动连接的URL
+     */
+    private static final String DATASOURCE_URL = "jdbc:mysql://127.0.0.1:3306/data_demo?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowMutiQueries=true";
+
+    /**
+     * 数据库连接用户名
+     */
+    private static final String DATASOURCE_USERNAME = "root";
+
+    /**
+     * 数据库连接密码
+     */
+    private static final String DATASOURCE_PASSWORD = "123456";
+
+    /**
+     * 统一表前缀
+     */
+    private static final String DATASOURCE_TABLE_PREFIX = null;
+
+    /**
+     * 输出包含表
+     */
+    private static final String[] DATASOURCE_TABLE_INCLUDE = {};
+
     @Autowired
     private MybatisGenerateCodeService mybatisGenerateCodeService;
 
@@ -27,29 +63,23 @@ public class CodeGenerateTest {
     void simpleSettingGenerate() {
         CodeBasicConfig codeBasicConfig = new CodeBasicConfig();
         // 作者
-        // 默认为 [JiYinchuan]
-        codeBasicConfig.setAuthor("JiYinchuan");
+        codeBasicConfig.setAuthor(AUTHOR);
 
         CodeDataSourceConfig codeDataSourceConfig = new CodeDataSourceConfig();
         // 驱动连接的URL, 须指定
-        // 例如 [jdbc:mysql://127.0.0.1:3306/data_demo?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowMutiQueries=true]
-        codeDataSourceConfig.setUrl("jdbc:mysql://127.0.0.1:3306/data_demo?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowMutiQueries=true");
+        codeDataSourceConfig.setUrl(DATASOURCE_URL);
         // 数据库连接用户名, 须指定
-        // 例如 [root]
-        codeDataSourceConfig.setUsername("root");
+        codeDataSourceConfig.setUsername(DATASOURCE_USERNAME);
         // 数据库连接密码, 须指定
-        // 例如 [123456]
-        codeDataSourceConfig.setPassword("123456");
+        codeDataSourceConfig.setPassword(DATASOURCE_PASSWORD);
         // 统一表前缀, 可为空
-        // 例如 [hc_]
-        codeDataSourceConfig.setTablePrefix(null);
+        codeDataSourceConfig.setTablePrefix(DATASOURCE_TABLE_PREFIX);
         // 输出包含表, 可为空, 为空时则输出所有表
-        codeDataSourceConfig.setInclude();
+        codeDataSourceConfig.setInclude(DATASOURCE_TABLE_INCLUDE);
 
         CodePackageConfig codePackageConfig = new CodePackageConfig();
         // 父包模块名, 须指定
-        // 此处填写项目代号缩写(项目代号首字母全小写+数字)
-        codePackageConfig.setParentModelName("xmdh01");
+        codePackageConfig.setParentModelName(PROJECT_CODE);
 
         // 开始生成
         mybatisGenerateCodeService.generate(codeBasicConfig, codeDataSourceConfig, codePackageConfig);
@@ -62,8 +92,7 @@ public class CodeGenerateTest {
     void fullSettingGenerate() {
         CodeBasicConfig codeBasicConfig = new CodeBasicConfig();
         // 作者
-        // 默认为 [JiYinchuan]
-        codeBasicConfig.setAuthor("JiYinchuan");
+        codeBasicConfig.setAuthor(AUTHOR);
         // 版本号
         // 默认为 [1.0]
         codeBasicConfig.setVersion("1.0");
@@ -79,27 +108,22 @@ public class CodeGenerateTest {
         // 默认为 [com.mysql.cj.jdbc.Driver]
         codeDataSourceConfig.setDriver("com.mysql.cj.jdbc.Driver");
         // 驱动连接的URL, 须指定
-        // 例如 [jdbc:mysql://127.0.0.1:3306/data_demo?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowMutiQueries=true]
-        codeDataSourceConfig.setUrl("jdbc:mysql://127.0.0.1:3306/data_demo?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowMutiQueries=true");
+        codeDataSourceConfig.setUrl(DATASOURCE_URL);
         // 数据库连接用户名, 须指定
-        // 例如 [root]
-        codeDataSourceConfig.setUsername("root");
+        codeDataSourceConfig.setUsername(DATASOURCE_USERNAME);
         // 数据库连接密码, 须指定
-        // 例如 [123456]
-        codeDataSourceConfig.setPassword("123456");
+        codeDataSourceConfig.setPassword(DATASOURCE_PASSWORD);
         // 统一表前缀, 可为空
-        // 例如 [hc_]
-        codeDataSourceConfig.setTablePrefix("hc_");
+        codeDataSourceConfig.setTablePrefix(DATASOURCE_TABLE_PREFIX);
         // 输出包含表, 可为空, 为空时则输出所有表
-        codeDataSourceConfig.setInclude();
+        codeDataSourceConfig.setInclude(DATASOURCE_TABLE_INCLUDE);
 
         CodePackageConfig codePackageConfig = new CodePackageConfig();
         // 输出包名
         // 默认为 [pro.haichuang.framework.service]
         codePackageConfig.setOutputPackage("pro.haichuang.framework.service");
         // 父包模块名, 须指定
-        // 此处填写项目代号缩写(项目代号首字母全小写+数字)
-        codePackageConfig.setParentModelName("xmdh01");
+        codePackageConfig.setParentModelName(PROJECT_CODE);
         // 实体类包名
         // 默认为 [pojo.domain]
         codePackageConfig.setEntityPackageName("pojo.domain");
