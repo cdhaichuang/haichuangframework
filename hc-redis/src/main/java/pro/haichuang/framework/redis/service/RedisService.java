@@ -18,17 +18,17 @@ public interface RedisService {
     /**
      * 指定缓存失效时间
      *
-     * @param key  键
-     * @param time 时间(秒)
+     * @param key        键
+     * @param expireTime 过期时间(秒)
      * @return 返回操作结果
      */
-    boolean expire(String key, long time);
+    boolean expire(String key, long expireTime);
 
     /**
      * 根据key 获取过期时间
      *
      * @param key 键 不能为null
-     * @return 时间(秒) 返回0代表为永久有效
+     * @return 过期时间(秒) 返回0代表为永久有效
      */
     long getExpire(String key);
 
@@ -51,6 +51,7 @@ public interface RedisService {
 
     /**
      * 普通缓存获取
+     *
      * @param key 键
      * @param <V> 值类型
      * @return 值
@@ -69,12 +70,12 @@ public interface RedisService {
     /**
      * 普通缓存放入并设置时间
      *
-     * @param key   键
-     * @param value 值
-     * @param time  时间(秒) time要大于0 如果time小于等于0 将设置无限期
+     * @param key        键
+     * @param value      值
+     * @param expireTime 过期时间(秒) time要大于0 如果time小于等于0 将设置无限期
      * @return true成功 false 失败
      */
-    boolean set(String key, Object value, long time);
+    boolean set(String key, Object value, long expireTime);
 
     /**
      * 递增
@@ -101,7 +102,7 @@ public interface RedisService {
      *
      * @param key  键 不能为null
      * @param item 项 不能为null
-     * @param <V> 值类型
+     * @param <V>  值类型
      * @return 值
      */
     <V> V hget(String key, String item);
@@ -126,12 +127,12 @@ public interface RedisService {
     /**
      * HashSet 并设置时间
      *
-     * @param key  键
-     * @param map  对应多个键值
-     * @param time 时间(秒)
+     * @param key        键
+     * @param map        对应多个键值
+     * @param expireTime 过期时间(秒)
      * @return true成功 false失败
      */
-    boolean hmset(String key, Map<String, Object> map, long time);
+    boolean hmset(String key, Map<String, Object> map, long expireTime);
 
     /**
      * 向一张hash表中放入数据,如果不存在将创建
@@ -146,13 +147,13 @@ public interface RedisService {
     /**
      * 向一张hash表中放入数据,如果不存在将创建
      *
-     * @param key   键
-     * @param item  项
-     * @param value 值
-     * @param time  时间(秒) 注意:如果已存在的hash表有时间,这里将会替换原有的时间
+     * @param key        键
+     * @param item       项
+     * @param value      值
+     * @param expireTime 过期时间(秒) 注意:如果已存在的hash表有时间,这里将会替换原有的时间
      * @return true 成功 false失败
      */
-    boolean hset(String key, String item, Object value, long time);
+    boolean hset(String key, String item, Object value, long expireTime);
 
     /**
      * 删除hash表中的值
@@ -224,11 +225,11 @@ public interface RedisService {
      * 将set数据放入缓存
      *
      * @param key    键
-     * @param time   时间(秒)
+     * @param expireTime   过期时间(秒)
      * @param values 值 可以是多个
      * @return 成功个数
      */
-    long sSetAndTime(String key, long time, Object... values);
+    long sSetAndTime(String key, long expireTime, Object... values);
 
     /**
      * 获取set缓存的长度
@@ -255,7 +256,7 @@ public interface RedisService {
      * @param key   键
      * @param start 开始
      * @param end   结束 0 到 -1代表所有值
-     * @param <V> 值类型
+     * @param <V>   值类型
      * @return 返回 {@code "List<V>"}
      */
     <V> List<V> lGet(String key, long start, long end);
@@ -273,7 +274,7 @@ public interface RedisService {
      *
      * @param key   键
      * @param index 索引 {@code "index >= 0"}时， 0 表头，1 第二个元素，依次类推；{@code "index < 0"} 时，-1，表尾，-2倒数第二个元素，依次类推
-     * @param <V> 值类型
+     * @param <V>   值类型
      * @return 返回Object值
      */
     <V> V lGetIndex(String key, long index);
@@ -292,10 +293,10 @@ public interface RedisService {
      *
      * @param key   键
      * @param value 值
-     * @param time  时间(秒)
+     * @param expireTime  过期时间(秒)
      * @return 返回操作结果
      */
-    boolean lSet(String key, Object value, long time);
+    boolean lSet(String key, Object value, long expireTime);
 
     /**
      * 将list放入缓存
@@ -311,10 +312,10 @@ public interface RedisService {
      *
      * @param key   键
      * @param value 值
-     * @param time  时间(秒)
+     * @param expireTime  过期时间(秒)
      * @return 返回 操作结果
      */
-    boolean lSet(String key, List<Object> value, long time);
+    boolean lSet(String key, List<Object> value, long expireTime);
 
     /**
      * 根据索引修改list中的某条数据

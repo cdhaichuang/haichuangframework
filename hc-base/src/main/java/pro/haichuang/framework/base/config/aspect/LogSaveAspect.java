@@ -3,7 +3,6 @@ package pro.haichuang.framework.base.config.aspect;
 import cn.hutool.core.thread.ThreadFactoryBuilder;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -17,8 +16,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import pro.haichuang.framework.base.config.annotation.LogSave;
 import pro.haichuang.framework.base.config.interceptor.AbstractLogSave;
 import pro.haichuang.framework.base.util.common.IpUtils;
-import pro.haichuang.framework.base.util.jwt.SecurityUtils;
 import pro.haichuang.framework.base.util.common.UUIDUtils;
+import pro.haichuang.framework.base.util.jwt.SecurityUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
@@ -35,7 +34,6 @@ import java.util.concurrent.TimeUnit;
  */
 @Aspect
 @Order(3)
-@Slf4j
 @ConditionalOnBean(AbstractLogSave.class)
 public class LogSaveAspect {
 

@@ -2,17 +2,18 @@ package pro.haichuang.framework.redis.interceptor;
 
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.ApiOperation;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import pro.haichuang.framework.base.enums.abnormal.RequestServerAbnormalEnum;
 import pro.haichuang.framework.base.response.ResultVO;
-import pro.haichuang.framework.base.util.common.ResponseUtils;
 import pro.haichuang.framework.base.util.common.IpUtils;
+import pro.haichuang.framework.base.util.common.ResponseUtils;
 import pro.haichuang.framework.redis.config.annotation.RepeatRequestValid;
 import pro.haichuang.framework.redis.service.RedisService;
 
@@ -27,8 +28,9 @@ import java.util.Map;
  * @author JiYinchuan
  * @version 1.0
  */
-@Slf4j
 public class RepeatRequestInterceptor implements HandlerInterceptor {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(RepeatRequestInterceptor.class);
 
     @Autowired
     private RedisService redisService;
@@ -51,7 +53,7 @@ public class RepeatRequestInterceptor implements HandlerInterceptor {
                 if (StringUtils.equals(repeatValue, parameterMapString)) {
                     ApiOperation apiOperationAnnotation = method.getAnnotation(ApiOperation.class);
                     String apiMessage = ObjectUtils.isNotEmpty(apiOperationAnnotation) ? apiOperationAnnotation.value() : null;
-                    log.info("[重复请求拦截器] 拦截请求 [apiMessage: {}, requestUri: {}, clientIp: {}, params: {}]",
+                    LOGGER.info("[重复请求拦截器] 拦截请求 [apiMessage: {}, requestUri: {}, clientIp: {}, params: {}]",
                             apiMessage,
                             request.getRequestURI(),
                             IpUtils.getIpAddr(request),

@@ -27,11 +27,11 @@ public class DefaultRedisServiceImpl implements RedisService {
     // ============================= Common ============================
 
     @Override
-    public boolean expire(String key, long time) {
+    public boolean expire(String key, long expireTime) {
         boolean result = false;
         try {
-            if (time > 0) {
-                redisTemplate.expire(key, time, TimeUnit.SECONDS);
+            if (expireTime > 0) {
+                redisTemplate.expire(key, expireTime, TimeUnit.SECONDS);
             }
             result = true;
         } catch (Exception e) {
@@ -90,11 +90,11 @@ public class DefaultRedisServiceImpl implements RedisService {
     }
 
     @Override
-    public boolean set(String key, Object value, long time) {
+    public boolean set(String key, Object value, long expireTime) {
         boolean result = false;
         try {
-            if (time > 0) {
-                redisTemplate.opsForValue().set(key, value, time, TimeUnit.SECONDS);
+            if (expireTime > 0) {
+                redisTemplate.opsForValue().set(key, value, expireTime, TimeUnit.SECONDS);
             } else {
                 set(key, value);
             }
@@ -152,12 +152,12 @@ public class DefaultRedisServiceImpl implements RedisService {
     }
 
     @Override
-    public boolean hmset(String key, Map<String, Object> map, long time) {
+    public boolean hmset(String key, Map<String, Object> map, long expireTime) {
         boolean result = false;
         try {
             redisTemplate.opsForHash().putAll(key, map);
-            if (time > 0) {
-                expire(key, time);
+            if (expireTime > 0) {
+                expire(key, expireTime);
             }
             result = true;
         } catch (Exception e) {
@@ -181,12 +181,12 @@ public class DefaultRedisServiceImpl implements RedisService {
     }
 
     @Override
-    public boolean hset(String key, String item, Object value, long time) {
+    public boolean hset(String key, String item, Object value, long expireTime) {
         boolean result = false;
         try {
             redisTemplate.opsForHash().put(key, item, value);
-            if (time > 0) {
-                expire(key, time);
+            if (expireTime > 0) {
+                expire(key, expireTime);
             }
             result = true;
         } catch (Exception e) {
@@ -255,12 +255,12 @@ public class DefaultRedisServiceImpl implements RedisService {
     }
 
     @Override
-    public long sSetAndTime(String key, long time, Object... values) {
+    public long sSetAndTime(String key, long expireTime, Object... values) {
         Long count = null;
         try {
             count = redisTemplate.opsForSet().add(key, values);
-            if (time > 0) {
-                expire(key, time);
+            if (expireTime > 0) {
+                expire(key, expireTime);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -345,12 +345,12 @@ public class DefaultRedisServiceImpl implements RedisService {
     }
 
     @Override
-    public boolean lSet(String key, Object value, long time) {
+    public boolean lSet(String key, Object value, long expireTime) {
         boolean result = false;
         try {
             redisTemplate.opsForList().rightPush(key, value);
-            if (time > 0) {
-                expire(key, time);
+            if (expireTime > 0) {
+                expire(key, expireTime);
             }
             result = true;
         } catch (Exception e) {
@@ -374,12 +374,12 @@ public class DefaultRedisServiceImpl implements RedisService {
     }
 
     @Override
-    public boolean lSet(String key, List<Object> value, long time) {
+    public boolean lSet(String key, List<Object> value, long expireTime) {
         boolean result = false;
         try {
             redisTemplate.opsForList().rightPushAll(key, value);
-            if (time > 0) {
-                expire(key, time);
+            if (expireTime > 0) {
+                expire(key, expireTime);
             }
             result = true;
         } catch (Exception e) {
