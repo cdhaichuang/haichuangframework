@@ -2,9 +2,30 @@
 spring:
   task:
     scheduling:
-      pool:
-        size: 100
       thread-name-prefix: 'Scheduling-Thread-%d'
+      pool:
+        # 线程池最大线程数, 默认为 [1]
+        size: 100
       shutdown:
+        # 进程结束时是否等待计划任务完成
         await-termination: true
+        # 进程结束时等待计划任务完成时间
+        await-termination-period: 60s
+    execution:
+      thread-name-prefix: 'Task-Thread-%d'
+      pool:
+        # 核心线程数, 默认为 [8]
+        core-size: 8
+        # 线程池最大线程数, 默认为 [Integer.MAX_VALUE]
+        max-size: 100
+        # 线程队列最大线程数, 默认为 [Integer.MAX_VALUE]
+        queue-capacity: 50
+        # 线程池中线程最大空闲时间, 默认为 [60]
+        keep-alive: 60s
+        # 核心线程是否允许超时, 默认为 [true]
+        allow-core-thread-timeout: true
+      shutdown:
+        # 进程结束时是否等待计划任务完成
+        await-termination: true
+        # 进程结束时等待计划任务完成时间
         await-termination-period: 60s

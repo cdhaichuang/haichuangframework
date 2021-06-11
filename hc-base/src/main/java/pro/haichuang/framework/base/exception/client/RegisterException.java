@@ -1,7 +1,8 @@
-package pro.haichuang.framework.base.exception;
+package pro.haichuang.framework.base.exception.client;
 
 
-import pro.haichuang.framework.base.enums.abnormal.RegisterAbnormalEnum;
+import pro.haichuang.framework.base.enums.abnormal.client.RegisterAbnormalEnum;
+import pro.haichuang.framework.base.exception.ApplicationException;
 
 /**
  * 用户注册自定义异常

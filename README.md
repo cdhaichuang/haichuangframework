@@ -455,11 +455,11 @@ public static MyEnum resolve(String value) {
 > 包路径：`pro.haichuang.framework.base.exception`
 
 - 全局自定义异常基类：`pro.haichuang.framework.base.exception.ApplicationException`
-- 请求参数自定义异常：`pro.haichuang.framework.base.exception.RequestParamException`
-- 请求服务自定义异常：`pro.haichuang.framework.base.exception.RequestServerException`
-- 用户登录自定义异常：`pro.haichuang.framework.base.exception.LoginException`
-- 用户注册自定义异常：`pro.haichuang.framework.base.exception.RegisterException`
-- 访问权限自定义异常：`pro.haichuang.framework.base.exception.AuthorityException`
+- 请求参数自定义异常：`pro.haichuang.framework.base.exception.client.RequestParamException`
+- 请求服务自定义异常：`pro.haichuang.framework.base.exception.client.RequestServerException`
+- 用户登录自定义异常：`pro.haichuang.framework.base.exception.client.LoginException`
+- 用户注册自定义异常：`pro.haichuang.framework.base.exception.client.RegisterException`
+- 访问权限自定义异常：`pro.haichuang.framework.base.exception.client.AuthorityException`
 - 枚举非法论证异常：`pro.haichuang.framework.base.exception.EnumIllegalArgumentException`
 - 第三方自定义异常：`pro.haichuang.framework.base.exception.ThirdPartyException`
 - 堆栈自定义异常：`pro.haichuang.framework.base.exception.StackTraceException`

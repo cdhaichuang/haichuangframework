@@ -1,7 +1,7 @@
 package pro.haichuang.framework.base.response;
 
 import pro.haichuang.framework.base.enums.BaseEnum;
-import pro.haichuang.framework.base.enums.abnormal.SuccessEnum;
+import pro.haichuang.framework.base.enums.abnormal.client.SuccessEnum;
 import pro.haichuang.framework.base.page.PageDTO;
 import pro.haichuang.framework.base.response.vo.BaseVO;
 import pro.haichuang.framework.base.response.vo.MultiVO;

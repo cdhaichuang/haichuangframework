@@ -1,7 +1,8 @@
-package pro.haichuang.framework.base.exception;
+package pro.haichuang.framework.base.exception.client;
 
 
-import pro.haichuang.framework.base.enums.abnormal.AuthorityAbnormalEnum;
+import pro.haichuang.framework.base.enums.abnormal.client.AuthorityAbnormalEnum;
+import pro.haichuang.framework.base.exception.ApplicationException;
 
 /**
  * 访问权限自定义异常

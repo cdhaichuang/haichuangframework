@@ -78,7 +78,7 @@ public class ${table.controllerName} {
     @PostMapping
     @ApiResponse(code = 500, message = "[A0500: 新增单条数据异常]")
     @RepeatRequestValid
-    public BaseVO save(@RequestBody @Validated(Group.Insert.class) ${entity} $entityParseName){
+    public BaseVO add(@RequestBody @Validated(Group.Insert.class) ${entity} $entityParseName){
         return ResultVO.ok(${serviceFullName}.saveAndIgnore($entityParseName));
     }
 
@@ -87,7 +87,7 @@ public class ${table.controllerName} {
     @PutMapping
     @ApiResponse(code = 500, message = "[A0500: 更新单条数据异常]")
     @RepeatRequestValid
-    public BaseVO update(@RequestBody @Validated(Group.Update.class) ${entity} $entityParseName){
+    public BaseVO edit(@RequestBody @Validated(Group.Update.class) ${entity} $entityParseName){
         return ResultVO.ok(${serviceFullName}.updateByIdAndIgnore($entityParseName));
     }
 
@@ -96,7 +96,7 @@ public class ${table.controllerName} {
     @DeleteMapping
     @ApiResponse(code = 500, message = "[A0500: 批量删除数据异常]")
     @RepeatRequestValid
-    public BaseVO remove(@RequestBody List<Long> ids){
+    public BaseVO del(@RequestBody List<Long> ids){
         return ResultVO.ok(${serviceFullName}.removeByIdAndIgnore(ids));
     }
 }

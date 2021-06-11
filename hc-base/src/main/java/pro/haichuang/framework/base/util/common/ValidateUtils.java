@@ -1,8 +1,9 @@
 package pro.haichuang.framework.base.util.common;
 
 import pro.haichuang.framework.base.enums.BaseEnum;
-import pro.haichuang.framework.base.enums.abnormal.*;
+import pro.haichuang.framework.base.enums.abnormal.client.*;
 import pro.haichuang.framework.base.exception.*;
+import pro.haichuang.framework.base.exception.client.*;
 
 /**
  * 验证工具类

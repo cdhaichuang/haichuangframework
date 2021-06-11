@@ -66,7 +66,7 @@ public class CodeBasicConfig {
     /**
      * 输出包类型
      */
-    public static enum OutputType {
+    public enum OutputType {
 
         /**
          * 输出所有包

@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
-import pro.haichuang.framework.base.enums.abnormal.RequestServerAbnormalEnum;
+import pro.haichuang.framework.base.enums.abnormal.client.RequestServerAbnormalEnum;
 import pro.haichuang.framework.base.response.ResultVO;
 import pro.haichuang.framework.base.util.common.IpUtils;
 import pro.haichuang.framework.base.util.common.ResponseUtils;

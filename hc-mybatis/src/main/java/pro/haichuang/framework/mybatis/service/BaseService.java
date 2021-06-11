@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import lombok.SneakyThrows;
 import org.springframework.util.CollectionUtils;
-import pro.haichuang.framework.base.enums.abnormal.RequestParamAbnormalEnum;
-import pro.haichuang.framework.base.exception.RequestParamException;
+import pro.haichuang.framework.base.enums.abnormal.client.RequestParamAbnormalEnum;
+import pro.haichuang.framework.base.exception.client.RequestParamException;
 import pro.haichuang.framework.mybatis.domain.BaseDO;
 import pro.haichuang.framework.base.page.PageDTO;
 import pro.haichuang.framework.base.query.PageQuery;
@@ -54,7 +54,6 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
         }
         return this.countByIdAndValidate(ids) != 0;
     }
-
 
     /**
      * 忽略ID获取数量

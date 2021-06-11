@@ -1,8 +1,8 @@
 package pro.haichuang.framework.base.util.jwt;
 
 import org.springframework.util.Assert;
-import pro.haichuang.framework.base.enums.abnormal.AuthorityAbnormalEnum;
-import pro.haichuang.framework.base.exception.AuthorityException;
+import pro.haichuang.framework.base.enums.abnormal.client.AuthorityAbnormalEnum;
+import pro.haichuang.framework.base.exception.client.AuthorityException;
 
 /**
  * Security工具类

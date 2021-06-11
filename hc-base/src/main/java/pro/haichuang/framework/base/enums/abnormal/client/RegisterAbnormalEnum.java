@@ -1,6 +1,5 @@
-package pro.haichuang.framework.base.enums.abnormal;
+package pro.haichuang.framework.base.enums.abnormal.client;
 
-import com.alibaba.fastjson.annotation.JSONCreator;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import pro.haichuang.framework.base.enums.BaseEnum;
 

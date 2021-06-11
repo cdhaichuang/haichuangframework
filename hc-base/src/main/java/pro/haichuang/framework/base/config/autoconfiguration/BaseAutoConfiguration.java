@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import pro.haichuang.framework.base.config.async.AsyncConfig;
 import pro.haichuang.framework.base.config.mvc.JacksonConfig;
 import pro.haichuang.framework.base.config.mvc.WebMvcConfig;
 import pro.haichuang.framework.base.config.properties.BaseConfigProperties;
@@ -19,14 +18,13 @@ import pro.haichuang.framework.base.config.properties.BaseConfigProperties;
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(BaseConfigProperties.class)
 @ConditionalOnProperty(
-        prefix = "haichuang.config",
+        prefix = "haichuang",
         name = "enable",
         havingValue = "true",
         matchIfMissing = true
 )
 @Import({
         WebMvcConfig.class,
-        AsyncConfig.class,
         JacksonConfig.class,
         FastJsonConfig.class
 })

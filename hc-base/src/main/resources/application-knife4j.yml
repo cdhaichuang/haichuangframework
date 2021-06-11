@@ -2,11 +2,6 @@
 knife4j:
   enable: true
   setting:
-#    # Host地址/端口
-#    enableHost: false
-#    enableHostText:
-#    # 是否开启分组
-#    enableGroup: true
     # 重命名SwaggerModel名称
     swaggerModelName: Model列表
     # 是否在每个Debug调试栏后显示刷新变量按钮,默认不显示
@@ -17,8 +12,3 @@ knife4j:
     enableFooter: false
     enableFooterCustom: true
     footerCustomContent: "Powered by <a href='https://www.haichuang.pro'>嗨创软服</a> @2014-2021 HaiChuang Inc."
-#  basic:
-#    # 是否打开BasicHttp验证
-#    enable: false
-#    username:
-#    password:

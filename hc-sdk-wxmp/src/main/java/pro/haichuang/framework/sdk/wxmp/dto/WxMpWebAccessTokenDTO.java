@@ -1,6 +1,7 @@
 package pro.haichuang.framework.sdk.wxmp.dto;
 
 import java.io.Serializable;
+import java.time.Duration;
 
 /**
  * WebAccessTokenDTO
@@ -9,38 +10,52 @@ import java.io.Serializable;
  * @version 1.0
  */
 public class WxMpWebAccessTokenDTO implements Serializable {
-    private static final long serialVersionUID = 8551944490780144452L;
+    private static final long serialVersionUID = -9121624711237083374L;
 
     /**
-     * AccessToken
+     * WebAccessToken
      */
-    private String accessToken;
+    private String webAccessToken;
 
     /**
-     * RefreshToken
+     * WebAccessToken过期时间
      */
-    private String refreshToken;
+    private Duration webAccessTokenExpireTime;
+
+    /**
+     * WebRefreshToken
+     */
+    private String webRefreshToken;
 
     /**
      * OpenId
      */
     private String openId;
 
-    public String getAccessToken() {
-        return accessToken;
+    public String getWebAccessToken() {
+        return webAccessToken;
     }
 
-    public WxMpWebAccessTokenDTO setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
+    public WxMpWebAccessTokenDTO setWebAccessToken(String webAccessToken) {
+        this.webAccessToken = webAccessToken;
         return this;
     }
 
-    public String getRefreshToken() {
-        return refreshToken;
+    public Duration getWebAccessTokenExpireTime() {
+        return webAccessTokenExpireTime;
     }
 
-    public WxMpWebAccessTokenDTO setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
+    public WxMpWebAccessTokenDTO setWebAccessTokenExpireTime(Duration webAccessTokenExpireTime) {
+        this.webAccessTokenExpireTime = webAccessTokenExpireTime;
+        return this;
+    }
+
+    public String getWebRefreshToken() {
+        return webRefreshToken;
+    }
+
+    public WxMpWebAccessTokenDTO setWebRefreshToken(String webRefreshToken) {
+        this.webRefreshToken = webRefreshToken;
         return this;
     }
 
@@ -55,9 +70,10 @@ public class WxMpWebAccessTokenDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "WebAccessTokenDTO{" +
-                "accessToken='" + accessToken + '\'' +
-                ", refreshToken='" + refreshToken + '\'' +
+        return "WxMpWebAccessTokenDTO{" +
+                "webAccessToken='" + webAccessToken + '\'' +
+                ", webAccessTokenExpireTime=" + webAccessTokenExpireTime +
+                ", webRefreshToken='" + webRefreshToken + '\'' +
                 ", openId='" + openId + '\'' +
                 '}';
     }

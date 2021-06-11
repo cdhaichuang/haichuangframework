@@ -12,8 +12,8 @@ import org.springframework.core.annotation.Order;
 import pro.haichuang.framework.base.config.annotation.security.PrePermission;
 import pro.haichuang.framework.base.config.annotation.security.PreRole;
 import pro.haichuang.framework.base.config.interceptor.AbstractSecurityValidate;
-import pro.haichuang.framework.base.enums.abnormal.AuthorityAbnormalEnum;
-import pro.haichuang.framework.base.exception.AuthorityException;
+import pro.haichuang.framework.base.enums.abnormal.client.AuthorityAbnormalEnum;
+import pro.haichuang.framework.base.exception.client.AuthorityException;
 
 import java.lang.reflect.Method;
 

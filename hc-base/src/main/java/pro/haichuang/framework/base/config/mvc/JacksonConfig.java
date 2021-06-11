@@ -32,13 +32,19 @@ public class JacksonConfig {
         return jacksonObjectMapperBuilder -> {
             jacksonObjectMapperBuilder.serializerByType(Long.class, new ToStringSerializer());
 
-            jacksonObjectMapperBuilder.serializerByType(LocalTime.class, new LocalTimeSerializer(DateTimeFormatter.ofPattern(DatePattern.NORM_TIME_PATTERN)));
-            jacksonObjectMapperBuilder.serializerByType(LocalDate.class, new LocalDateSerializer(DatePattern.NORM_DATE_FORMATTER));
-            jacksonObjectMapperBuilder.serializerByType(LocalDateTime.class, new LocalDateTimeSerializer(DatePattern.NORM_DATETIME_FORMATTER));
+            jacksonObjectMapperBuilder.serializerByType(LocalTime.class,
+                    new LocalTimeSerializer(DateTimeFormatter.ofPattern(DatePattern.NORM_TIME_PATTERN)));
+            jacksonObjectMapperBuilder.serializerByType(LocalDate.class,
+                    new LocalDateSerializer(DatePattern.NORM_DATE_FORMATTER));
+            jacksonObjectMapperBuilder.serializerByType(LocalDateTime.class,
+                    new LocalDateTimeSerializer(DatePattern.NORM_DATETIME_FORMATTER));
 
-            jacksonObjectMapperBuilder.deserializerByType(LocalTime.class, new LocalTimeDeserializer(DateTimeFormatter.ofPattern(DatePattern.NORM_TIME_PATTERN)));
-            jacksonObjectMapperBuilder.deserializerByType(LocalDate.class, new LocalDateDeserializer(DatePattern.NORM_DATE_FORMATTER));
-            jacksonObjectMapperBuilder.deserializerByType(LocalDateTime.class, new LocalDateTimeDeserializer(DatePattern.NORM_DATETIME_FORMATTER));
+            jacksonObjectMapperBuilder.deserializerByType(LocalTime.class,
+                    new LocalTimeDeserializer(DateTimeFormatter.ofPattern(DatePattern.NORM_TIME_PATTERN)));
+            jacksonObjectMapperBuilder.deserializerByType(LocalDate.class,
+                    new LocalDateDeserializer(DatePattern.NORM_DATE_FORMATTER));
+            jacksonObjectMapperBuilder.deserializerByType(LocalDateTime.class,
+                    new LocalDateTimeDeserializer(DatePattern.NORM_DATETIME_FORMATTER));
         };
     }
 

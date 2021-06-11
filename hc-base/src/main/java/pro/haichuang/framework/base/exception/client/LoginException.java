@@ -1,7 +1,8 @@
-package pro.haichuang.framework.base.exception;
+package pro.haichuang.framework.base.exception.client;
 
 
 import pro.haichuang.framework.base.enums.BaseEnum;
+import pro.haichuang.framework.base.exception.ApplicationException;
 
 /**
  * 用户登录自定义异常

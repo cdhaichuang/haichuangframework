@@ -39,12 +39,15 @@ public class AliYunSmsUtils {
      * @param accessKeySecret AccessKeySecret
      * @param signName        短信签名
      * @param templateCode    短信模板ID, 发送国际/港澳台消息时, 请使用国际/港澳台短信模版
-     * @param phoneNumbers    短信接收号码, 支持以逗号分隔的形式进行批量调用, 批量上限为1000个手机号码, 批量调用相对于单条调用及时性稍有延迟, 验证码类型的短信推荐使用单条调用的方式; 发送国际/港澳台消息时, 接收号码格式为: 国际区号+号码, 如"85200000000"。
+     * @param phoneNumbers    短信接收号码, 支持以逗号分隔的形式进行批量调用
+     *                        批量上限为1000个手机号码, 批量调用相对于单条调用及时性稍有延迟, 验证码类型的短信推荐使用单条调用的方式
+     *                        发送国际/港澳台消息时, 接收号码格式为: 国际区号+号码, 如"85200000000"。
      * @param templateParam   短信模板变量替换JSON串, 友情提示: 如果JSON中需要带换行符, 请参照标准的JSON协议
      * @return 执行结果
      */
     public static boolean send(@NonNull String regionId, @NonNull String accessKeyId, @NonNull String accessKeySecret,
-                               @NonNull String signName, @NonNull String templateCode, @NonNull String phoneNumbers, @NonNull JSONObject templateParam) {
+                               @NonNull String signName, @NonNull String templateCode,
+                               @NonNull String phoneNumbers, @NonNull JSONObject templateParam) {
         String uuid = UUIDUtils.Local.get();
         SendSmsRequest request = new SendSmsRequest();
         request.setPhoneNumbers(phoneNumbers);
@@ -54,12 +57,14 @@ public class AliYunSmsUtils {
         try {
             SendSmsResponse response = getClient(regionId, accessKeyId, accessKeySecret).getAcsResponse(request);
             if (!response.getCode().equals(HttpStatus.OK.name())) {
-                logger.error("[{}] 发送验证码异常 [uuid: {}, errorCode: {}, errorMessage: {}]", LOG_TAG, uuid, response.getCode(), response.getMessage());
+                logger.error("[{}] 发送验证码异常 [uuid: {}, errorCode: {}, errorMessage: {}]", LOG_TAG, uuid,
+                        response.getCode(), response.getMessage());
                 throw new ThirdPartyException(response.getCode(), response.getMessage());
             }
             return true;
         } catch (ClientException e) {
-            logger.error("[{}] 发送验证码异常 [uuid: {}, errorCode: {}, errorMessage: {}]", LOG_TAG, uuid, e.getErrCode(), e.getErrMsg());
+            logger.error("[{}] 发送验证码异常 [uuid: {}, errorCode: {}, errorMessage: {}]", LOG_TAG, uuid,
+                    e.getErrCode(), e.getErrMsg());
             throw new ThirdPartyException(e.getErrCode(), e.getErrMsg());
         }
     }
@@ -72,12 +77,14 @@ public class AliYunSmsUtils {
      * @param accessKeySecret AccessKeySecret
      * @param signNames       短信签名, JSON格式
      * @param templateCode    短信模板ID
-     * @param phones          短信接收号码, JSON格式, 批量上限为100个手机号码, 批量调用相对于单条调用及时性稍有延迟, 验证码类型的短信推荐使用单条调用的方式
+     * @param phones          短信接收号码, JSON格式, 批量上限为100个手机号码
+     *                        批量调用相对于单条调用及时性稍有延迟, 验证码类型的短信推荐使用单条调用的方式
      * @param templateParam   短信模板变量替换JSON串, 友情提示: 如果JSON中需要带换行符, 请参照标准的JSON协议
      * @return 执行结果
      */
     public static boolean sendBatch(@NonNull String regionId, @NonNull String accessKeyId, @NonNull String accessKeySecret,
-                                    @NonNull List<String> signNames, @NonNull String templateCode, @NonNull List<String> phones, @NonNull JSONArray templateParam) {
+                                    @NonNull List<String> signNames, @NonNull String templateCode,
+                                    @NonNull List<String> phones, @NonNull JSONArray templateParam) {
         String uuid = UUIDUtils.Local.get();
         SendBatchSmsRequest request = new SendBatchSmsRequest();
         request.setPhoneNumberJson(JSONObject.toJSONString(phones));
@@ -87,12 +94,14 @@ public class AliYunSmsUtils {
         try {
             SendBatchSmsResponse response = getClient(regionId, accessKeyId, accessKeySecret).getAcsResponse(request);
             if (!response.getCode().equals(HttpStatus.OK.name())) {
-                logger.error("[{}] 批量发送验证码异常 [uuid: {}, errorCode: {}, errorMessage: {}]", LOG_TAG, uuid, response.getCode(), response.getMessage());
+                logger.error("[{}] 批量发送验证码异常 [uuid: {}, errorCode: {}, errorMessage: {}]", LOG_TAG, uuid,
+                        response.getCode(), response.getMessage());
                 throw new ThirdPartyException(response.getCode(), response.getMessage());
             }
             return true;
         } catch (ClientException e) {
-            logger.error("[{}] 批量发送验证码异常 [uuid: {}, errorCode: {}, errorMessage: {}]", LOG_TAG, uuid, e.getErrCode(), e.getErrMsg());
+            logger.error("[{}] 批量发送验证码异常 [uuid: {}, errorCode: {}, errorMessage: {}]", LOG_TAG, uuid,
+                    e.getErrCode(), e.getErrMsg());
             throw new ThirdPartyException(e.getErrCode(), e.getErrMsg());
         }
     }

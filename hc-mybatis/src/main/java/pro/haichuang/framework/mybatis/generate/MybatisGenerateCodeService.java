@@ -86,7 +86,7 @@ public class MybatisGenerateCodeService {
         templateConfig.setMapper("/templates/mapper.java");
         templateConfig.setXml("/templates/mapper.xml");
         templateConfig.setController("/templates/controller.java");
-        if (codeBasicConfig.getOutputType() == CodeBasicConfig.OutputType.ALL_EXCLUDE_DOMAIN) {
+        if (codeBasicConfig.getOutputType() != CodeBasicConfig.OutputType.ALL_EXCLUDE_DOMAIN) {
             templateConfig.setEntity("/templates/entity.java");
         }
 
@@ -100,6 +100,7 @@ public class MybatisGenerateCodeService {
      * @param codePackageConfig 包配置
      * @return 全局配置
      */
+    @NonNull
     private GlobalConfig initGlobalConfig(@NonNull CodeBasicConfig codeBasicConfig, @NonNull CodePackageConfig codePackageConfig) {
         GlobalConfig gc = new GlobalConfig();
 
@@ -120,7 +121,7 @@ public class MybatisGenerateCodeService {
         // 开启 ActiveRecord 模式
         gc.setActiveRecord(false);
         // 开启 BaseResultMap
-        gc.setBaseResultMap(true);
+        gc.setBaseResultMap(false);
         // 时间类型对应策略
         gc.setDateType(DateType.TIME_PACK);
         // 开启 baseColumnList
@@ -144,6 +145,7 @@ public class MybatisGenerateCodeService {
      * @param codeDataSourceConfig 数据源配置
      * @return 数据源配置
      */
+    @NonNull
     private DataSourceConfig initDataSourceConfig(@NonNull CodeDataSourceConfig codeDataSourceConfig) {
         DataSourceConfig dsc = new DataSourceConfig();
 
@@ -173,6 +175,7 @@ public class MybatisGenerateCodeService {
      * @param codeDataSourceConfig 数据源配置
      * @return 策略配置
      */
+    @NonNull
     private StrategyConfig initStrategyConfig(@NonNull CodeDataSourceConfig codeDataSourceConfig) {
         StrategyConfig sc = new StrategyConfig();
 
@@ -244,6 +247,7 @@ public class MybatisGenerateCodeService {
      * @param codePackageConfig 包配置
      * @return 包配置
      */
+    @NonNull
     private PackageConfig initPackageConfig(@NonNull CodePackageConfig codePackageConfig) {
         PackageConfig pc = new PackageConfig();
 

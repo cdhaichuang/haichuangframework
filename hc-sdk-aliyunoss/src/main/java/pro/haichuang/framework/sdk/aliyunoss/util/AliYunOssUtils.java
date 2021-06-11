@@ -46,8 +46,8 @@ public class AliYunOssUtils {
      * @param accessKeyId     AccessKeyId
      * @param accessKeySecret AccessKeySecret
      * @param bucketName      BucketName
-     * @param uploadPath      上传相对路径
-     * @param childrenPath    上传子路径
+     * @param uploadPath      上传相对路径|文件类型
+     * @param childrenPath    上传子路径|业务模块名
      * @return 上传后的路径
      * @throws IOException 获取文件流异常
      */
@@ -79,8 +79,8 @@ public class AliYunOssUtils {
      * @param accessKeyId      AccessKeyId
      * @param accessKeySecret  AccessKeySecret
      * @param bucketName       BucketName
-     * @param uploadPath       上传相对路径
-     * @param childrenPath     上传子路径
+     * @param uploadPath       上传相对路径|文件类型
+     * @param childrenPath     上传子路径|业务模块名
      * @return 上传后的路径
      * @throws FileNotFoundException 文件不存在异常
      */
@@ -119,8 +119,8 @@ public class AliYunOssUtils {
      * @param accessKeyId     AccessKeyId
      * @param accessKeySecret AccessKeySecret
      * @param bucketName      BucketName
-     * @param uploadPath      上传相对路径
-     * @param childrenPath    上传子路径
+     * @param uploadPath      上传相对路径|文件类型
+     * @param childrenPath    上传子路径|业务模块名
      * @return 上传后的路径集合
      * @throws IOException 获取文件流异常
      */
@@ -128,24 +128,11 @@ public class AliYunOssUtils {
     public static List<String> upload(@NonNull List<MultipartFile> files, @NonNull String endPoint,
                                       @NonNull String accessKeyId, @NonNull String accessKeySecret,
                                       @NonNull String bucketName, @NonNull String uploadPath, @NonNull String childrenPath) throws IOException {
-        String uuid = UUIDUtils.Local.get();
-        OSS ossClient = null;
-        try {
-            ossClient = new OSSClientBuilder().build(endPoint, accessKeyId, accessKeySecret);
-            List<String> resultFilePaths = new ArrayList<>();
-            for (MultipartFile file : files) {
-                String fileRelativeName = concatFilename(file, uploadPath, childrenPath);
-                ossClient.putObject(bucketName, fileRelativeName, file.getInputStream());
-                String resultFilePath = formatFilename(FilenameUtils.concat("/", fileRelativeName), false);
-                logger.info("[{}] 简单上传 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG, uuid, bucketName, resultFilePath);
-                resultFilePaths.add(resultFilePath);
-            }
-            return resultFilePaths;
-        } finally {
-            if (ossClient != null) {
-                ossClient.shutdown();
-            }
+        List<String> resultFilePaths = new ArrayList<>();
+        for (MultipartFile file : files) {
+            resultFilePaths.add(upload(file, endPoint, accessKeyId, accessKeySecret, bucketName, uploadPath, childrenPath));
         }
+        return resultFilePaths;
     }
 
     /**
@@ -228,11 +215,11 @@ public class AliYunOssUtils {
      * @param accessKeySecret AccessKeySecret
      * @param bucketName      BucketName
      * @return 删除结果
-     * @see pro.haichuang.framework.sdk.aliyunoss.util.AliYunOssUtils#deleteObjects(List, boolean, String, String, String, String)
+     * @see pro.haichuang.framework.sdk.aliyunoss.util.AliYunOssUtils#deleteObject(List, boolean, String, String, String, String)
      */
-    public static List<String> deleteObjects(@NonNull List<String> ossFilePaths, @NonNull String endPoint,
-                                             @NonNull String accessKeyId, @NonNull String accessKeySecret, @NonNull String bucketName) {
-        return deleteObjects(ossFilePaths, false, endPoint, accessKeyId, accessKeySecret, bucketName);
+    public static List<String> deleteObject(@NonNull List<String> ossFilePaths, @NonNull String endPoint,
+                                            @NonNull String accessKeyId, @NonNull String accessKeySecret, @NonNull String bucketName) {
+        return deleteObject(ossFilePaths, false, endPoint, accessKeyId, accessKeySecret, bucketName);
     }
 
     /**
@@ -246,8 +233,8 @@ public class AliYunOssUtils {
      * @param bucketName      BucketName
      * @return 删除结果, 参考 {@code quiet} 字段
      */
-    public static List<String> deleteObjects(@NonNull List<String> ossFilePaths, boolean quiet, @NonNull String endPoint,
-                                             @NonNull String accessKeyId, @NonNull String accessKeySecret, @NonNull String bucketName) {
+    public static List<String> deleteObject(@NonNull List<String> ossFilePaths, boolean quiet, @NonNull String endPoint,
+                                            @NonNull String accessKeyId, @NonNull String accessKeySecret, @NonNull String bucketName) {
         String uuid = UUIDUtils.Local.get();
         OSS ossClient = null;
         try {
@@ -275,8 +262,10 @@ public class AliYunOssUtils {
      */
     @NonNull
     private static String concatFilename(@NonNull MultipartFile file, @NonNull String uploadPath, @NonNull String childrenPath) {
-        String fileOldOriginalName = file.getOriginalFilename();
-        String fileNewName = UUIDUtils.random() + (StringUtils.isNotBlank(fileOldOriginalName) ? ".".concat(FilenameUtils.getExtension(fileOldOriginalName)) : "");
+        String fileOriginalExtensionName = FilenameUtils.getExtension(file.getOriginalFilename());
+        String fileNewName = fileOriginalExtensionName != null && !fileOriginalExtensionName.isEmpty()
+                ? UUIDUtils.random().concat(".") + fileOriginalExtensionName
+                : UUIDUtils.random();
         return formatFilename(FilenameUtils.concat(FilenameUtils.concat(uploadPath, childrenPath), fileNewName), true);
     }
 
@@ -290,8 +279,10 @@ public class AliYunOssUtils {
      */
     @NonNull
     private static String concatFilename(@NonNull String filePath, @NonNull String uploadPath, @NonNull String childrenPath) {
-        String fileName = FilenameUtils.getName(filePath);
-        String fileNewName = UUIDUtils.random() + (StringUtils.isNotBlank(fileName) ? ".".concat(FilenameUtils.getExtension(fileName)) : "");
+        String fileExtensionName = FilenameUtils.getExtension(filePath);
+        String fileNewName = !fileExtensionName.isEmpty()
+                ? UUIDUtils.random().concat(".").concat(fileExtensionName)
+                : UUIDUtils.random();
         return formatFilename(FilenameUtils.concat(FilenameUtils.concat(uploadPath, childrenPath), fileNewName), true);
     }
 
