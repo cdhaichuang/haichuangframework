@@ -11,7 +11,7 @@ public class WxMpKeyPrefix {
     /**
      * BaseAccessToken
      */
-    public static final String BASE_ACCESS_TOKEN = "FRAMEWORK:WXMP:BASE_ACCESS_TOKEN:";
+    public static final String BASE_ACCESS_TOKEN = "FRAMEWORK:WXMP:BASE_ACCESS_TOKEN";
 
     /**
      * WebAccessToken
@@ -26,6 +26,6 @@ public class WxMpKeyPrefix {
     /**
      * JsApiTicket
      */
-    public static final String JS_API_TICKET = "FRAMEWORK:WXMP:JS_API_TICKET:";
+    public static final String JS_API_TICKET = "FRAMEWORK:WXMP:JS_API_TICKET";
 
 }

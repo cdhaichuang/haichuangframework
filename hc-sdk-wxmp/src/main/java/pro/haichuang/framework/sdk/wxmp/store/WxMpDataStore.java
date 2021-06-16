@@ -1,4 +1,4 @@
-package pro.haichuang.framework.sdk.wxmp.config.store;
+package pro.haichuang.framework.sdk.wxmp.store;
 
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
@@ -6,7 +6,7 @@ import org.springframework.lang.Nullable;
 import java.time.Duration;
 
 /**
- * 微信公众号存储
+ * 微信公众号数据存储
  *
  * @author JiYinchuan
  * @version 1.0
@@ -87,8 +87,7 @@ public interface WxMpDataStore {
 
     /**
      * 打印所有数据
-     * TODO 仅限测试使用
+     * 仅限测试使用
      */
-    void printAllData();
-
+    default void printAllData() {}
 }

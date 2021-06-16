@@ -39,7 +39,6 @@ public interface AliYunOssService {
      * 删除文件
      *
      * @param ossFilePath OSS文件路径
-     * @return 上传后文件路径
      */
     void deleteObject(@NonNull String ossFilePath);
 

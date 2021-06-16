@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
  */
 public class AliYunOssUtils {
 
-    private static final Logger logger = LoggerFactory.getLogger(AliYunOssUtils.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AliYunOssUtils.class);
     private static final String LOG_TAG = "AliYunOss工具类";
 
     /**
@@ -62,7 +62,7 @@ public class AliYunOssUtils {
             String fileRelativeName = concatFilename(file, uploadPath, childrenPath);
             ossClient.putObject(bucketName, fileRelativeName, file.getInputStream());
             String resultFilePath = formatFilename(FilenameUtils.concat("/", fileRelativeName), false);
-            logger.info("[{}] 简单上传 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG, uuid, bucketName, resultFilePath);
+            LOGGER.info("[{}] 简单上传 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG, uuid, bucketName, resultFilePath);
             return resultFilePath;
         } finally {
             if (ossClient != null) {
@@ -102,7 +102,7 @@ public class AliYunOssUtils {
             String fileRelativeName = concatFilename(absoluteFilePath, uploadPath, childrenPath);
             ossClient.putObject(bucketName, fileRelativeName, new File(absoluteFilePath));
             String resultFilePath = formatFilename(FilenameUtils.concat("/", fileRelativeName), false);
-            logger.info("[{}] 简单上传 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG, uuid, bucketName, resultFilePath);
+            LOGGER.info("[{}] 简单上传 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG, uuid, bucketName, resultFilePath);
             return resultFilePath;
         } finally {
             if (ossClient != null) {
@@ -198,7 +198,7 @@ public class AliYunOssUtils {
         try {
             ossClient = new OSSClientBuilder().build(endPoint, accessKeyId, accessKeySecret);
             ossClient.deleteObject(bucketName, formatFilename(ossFilePath, true));
-            logger.info("[{}] 删除文件 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG, uuid, bucketName, ossFilePath);
+            LOGGER.info("[{}] 删除文件 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG, uuid, bucketName, ossFilePath);
         } finally {
             if (ossClient != null) {
                 ossClient.shutdown();
@@ -243,7 +243,7 @@ public class AliYunOssUtils {
             DeleteObjectsRequest deleteObjectsRequest = new DeleteObjectsRequest(bucketName).withKeys(ossFilePaths);
             deleteObjectsRequest.setQuiet(quiet);
             DeleteObjectsResult deleteObjectsResult = ossClient.deleteObjects(deleteObjectsRequest);
-            logger.info("[{}] 删除文件 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG, uuid, bucketName, ossFilePaths);
+            LOGGER.info("[{}] 删除文件 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG, uuid, bucketName, ossFilePaths);
             return deleteObjectsResult.getDeletedObjects();
         } finally {
             if (ossClient != null) {

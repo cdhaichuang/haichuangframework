@@ -7,13 +7,12 @@ import pro.haichuang.framework.base.enums.abnormal.client.RequestParamAbnormalEn
 import pro.haichuang.framework.base.response.ResultVO;
 import pro.haichuang.framework.base.util.common.ResponseUtils;
 import pro.haichuang.framework.base.util.common.ValidateUtils;
-import pro.haichuang.framework.redis.service.RedisService;
 import pro.haichuang.framework.sdk.wxmp.config.properties.WxMpProperties;
-import pro.haichuang.framework.sdk.wxmp.config.store.WxMpDataStore;
 import pro.haichuang.framework.sdk.wxmp.constant.WxMpKeyPrefix;
 import pro.haichuang.framework.sdk.wxmp.dto.WxMpBaseAccessTokenDTO;
 import pro.haichuang.framework.sdk.wxmp.dto.WxMpJsApiTicketDTO;
 import pro.haichuang.framework.sdk.wxmp.dto.WxMpWebAccessTokenDTO;
+import pro.haichuang.framework.sdk.wxmp.store.WxMpDataStore;
 import pro.haichuang.framework.sdk.wxmp.util.WxMpUtils;
 
 import javax.servlet.http.HttpServletResponse;
@@ -30,14 +29,12 @@ public class DefaultWxMpServiceImpl implements WxMpService {
     /**
      * WebRefreshToken默认过期时间
      */
-    private static final long WEB_REFRESH_TOKEN_EXPIRE_SECOND = Duration.ofDays(30).getSeconds();
+    private static final Duration WEB_REFRESH_TOKEN_EXPIRE = Duration.ofDays(30);
 
     @Autowired
     private WxMpProperties wxMpProperties;
     @Autowired
     private WxMpDataStore wxMpDataStore;
-    @Autowired
-    private RedisService redisService;
 
     @SneakyThrows
     @Override
@@ -56,14 +53,12 @@ public class DefaultWxMpServiceImpl implements WxMpService {
     @Override
     public String getBaseAccessToken() {
         validateProperties();
-        String baseAccessToken = redisService.get(WxMpKeyPrefix.BASE_ACCESS_TOKEN);
+        String baseAccessToken = wxMpDataStore.getBaseAccessToken(WxMpKeyPrefix.BASE_ACCESS_TOKEN);
         // 当缓存中 [WxMpBaseAccessTokenDTO] 为空时则向微信发起请求获取 [WxMpBaseAccessTokenDTO] 并存入缓存中
         if (baseAccessToken == null || baseAccessToken.isEmpty()) {
             WxMpBaseAccessTokenDTO wxMpBaseAccessTokenDTO = WxMpUtils.getBaseAccessToken(wxMpProperties.getAppId(), wxMpProperties.getAppSecret());
             baseAccessToken = wxMpBaseAccessTokenDTO.getAccessToken();
             wxMpDataStore.setBaseAccessToken(WxMpKeyPrefix.BASE_ACCESS_TOKEN, wxMpBaseAccessTokenDTO.getAccessToken(), wxMpBaseAccessTokenDTO.getAccessTokenExpireTime());
-            // redisService.set(WxMpRedisKeyPrefix.BASE_ACCESS_TOKEN, wxMpBaseAccessTokenDTO.getAccessToken(),
-            //         wxMpBaseAccessTokenDTO.getAccessTokenExpireTime().getSeconds());
         }
         return baseAccessToken;
     }
@@ -72,10 +67,8 @@ public class DefaultWxMpServiceImpl implements WxMpService {
     public WxMpWebAccessTokenDTO getWebAccessTokenByOpenId(String openId) {
         validateProperties();
         WxMpWebAccessTokenDTO result = null;
-
-
-        String webAccessToken = redisService.get(WxMpKeyPrefix.WEB_ACCESS_TOKEN.concat(openId));
-        String webRefreshAccessToken = redisService.get(WxMpKeyPrefix.WEB_REFRESH_ACCESS_TOKEN.concat(openId));
+        String webAccessToken = wxMpDataStore.getWebAccessToken(WxMpKeyPrefix.WEB_ACCESS_TOKEN.concat(openId));
+        String webRefreshAccessToken = wxMpDataStore.getWebRefreshAccessToken(WxMpKeyPrefix.WEB_REFRESH_ACCESS_TOKEN.concat(openId));
         // 当 [WebAccessToken] 不为空时则设置结果为缓存中的数据
         if (webAccessToken != null && !webAccessToken.isEmpty()) {
             result = new WxMpWebAccessTokenDTO();
@@ -84,10 +77,10 @@ public class DefaultWxMpServiceImpl implements WxMpService {
         // 当 [WebRefreshAccessToken] 存在时则刷新 [WebAccessToken] 与 [WebRefreshAccessToken]
         if (webRefreshAccessToken != null && !webRefreshAccessToken.isEmpty()) {
             result = WxMpUtils.refreshWebAccessToken(wxMpProperties.getAppId(), webRefreshAccessToken);
-            redisService.set(WxMpKeyPrefix.WEB_ACCESS_TOKEN.concat(openId),
-                    result.getWebAccessToken(), result.getWebAccessTokenExpireTime().getSeconds());
-            redisService.set(WxMpKeyPrefix.WEB_REFRESH_ACCESS_TOKEN.concat(openId),
-                    result.getWebRefreshToken(), WEB_REFRESH_TOKEN_EXPIRE_SECOND);
+            wxMpDataStore.setWebAccessToken(WxMpKeyPrefix.WEB_ACCESS_TOKEN.concat(openId),
+                    result.getWebAccessToken(), result.getWebAccessTokenExpireTime());
+            wxMpDataStore.setWebRefreshAccessToken(WxMpKeyPrefix.WEB_REFRESH_ACCESS_TOKEN.concat(openId),
+                    result.getWebRefreshToken(), WEB_REFRESH_TOKEN_EXPIRE);
         }
         return result;
     }
@@ -97,23 +90,24 @@ public class DefaultWxMpServiceImpl implements WxMpService {
         validateProperties();
         WxMpWebAccessTokenDTO wxMpWebAccessTokenDTO = WxMpUtils.getWebAccessToken(wxMpProperties.getAppId(),
                 wxMpProperties.getAppSecret(), code);
-        redisService.set(WxMpKeyPrefix.WEB_ACCESS_TOKEN.concat(wxMpWebAccessTokenDTO.getOpenId()),
-                wxMpWebAccessTokenDTO.getWebAccessToken(), wxMpWebAccessTokenDTO.getWebAccessTokenExpireTime().getSeconds());
-        redisService.set(WxMpKeyPrefix.WEB_REFRESH_ACCESS_TOKEN.concat(wxMpWebAccessTokenDTO.getOpenId()),
-                wxMpWebAccessTokenDTO.getWebRefreshToken(), WEB_REFRESH_TOKEN_EXPIRE_SECOND);
+        wxMpDataStore.setWebAccessToken(WxMpKeyPrefix.WEB_ACCESS_TOKEN.concat(wxMpWebAccessTokenDTO.getOpenId()),
+                wxMpWebAccessTokenDTO.getWebAccessToken(), wxMpWebAccessTokenDTO.getWebAccessTokenExpireTime());
+        wxMpDataStore.setWebRefreshAccessToken(WxMpKeyPrefix.WEB_REFRESH_ACCESS_TOKEN.concat(wxMpWebAccessTokenDTO.getOpenId()),
+                wxMpWebAccessTokenDTO.getWebRefreshToken(), WEB_REFRESH_TOKEN_EXPIRE);
         return wxMpWebAccessTokenDTO;
     }
 
     @Override
     public String getJsApiTicket() {
         validateProperties();
-        WxMpJsApiTicketDTO wxMpJsApiTicketDTO = redisService.get(WxMpKeyPrefix.JS_API_TICKET);
-        if (wxMpJsApiTicketDTO == null) {
-            wxMpJsApiTicketDTO = WxMpUtils.getJsApiTicket(getBaseAccessToken());
-            redisService.set(WxMpKeyPrefix.JS_API_TICKET, wxMpJsApiTicketDTO.getTicket(),
-                    wxMpJsApiTicketDTO.getEffectiveTime().getSeconds());
+        String wxMpJsApiTicket = wxMpDataStore.getJsApiTicket(WxMpKeyPrefix.JS_API_TICKET);
+        if (wxMpJsApiTicket == null || !wxMpJsApiTicket.isEmpty()) {
+            WxMpJsApiTicketDTO wxMpJsApiTicketDTO = WxMpUtils.getJsApiTicket(getBaseAccessToken());
+            wxMpJsApiTicket = wxMpJsApiTicketDTO.getTicket();
+            wxMpDataStore.setJsApiTicket(WxMpKeyPrefix.JS_API_TICKET, wxMpJsApiTicket,
+                    wxMpJsApiTicketDTO.getEffectiveTime());
         }
-        return wxMpJsApiTicketDTO.getTicket();
+        return wxMpJsApiTicket;
     }
 
     /**

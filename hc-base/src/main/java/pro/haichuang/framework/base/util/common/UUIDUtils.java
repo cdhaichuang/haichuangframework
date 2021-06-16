@@ -38,7 +38,7 @@ public class UUIDUtils {
      */
     public static class Local {
 
-        private static final Logger logger = LoggerFactory.getLogger(Local.class);
+        private static final Logger LOGGER = LoggerFactory.getLogger(Local.class);
         private static final String LOG_TAG = "UUID.Local";
         private static final ThreadLocal<String> LOCAL = new ThreadLocal<>();
 

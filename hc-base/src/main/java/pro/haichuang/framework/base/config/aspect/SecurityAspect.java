@@ -1,6 +1,5 @@
 package pro.haichuang.framework.base.config.aspect;
 
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -25,7 +24,6 @@ import java.lang.reflect.Method;
  */
 @Aspect
 @Order(2)
-@Slf4j
 @ConditionalOnBean(AbstractSecurityValidate.class)
 public class SecurityAspect {
 

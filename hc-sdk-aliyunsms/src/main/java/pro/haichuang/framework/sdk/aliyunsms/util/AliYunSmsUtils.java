@@ -28,7 +28,7 @@ import java.util.List;
 @SuppressWarnings("SpellCheckingInspection")
 public class AliYunSmsUtils {
 
-    private static final Logger logger = LoggerFactory.getLogger(AliYunSmsUtils.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AliYunSmsUtils.class);
     private static final String LOG_TAG = "AliYunSms工具类";
 
     /**
@@ -57,13 +57,13 @@ public class AliYunSmsUtils {
         try {
             SendSmsResponse response = getClient(regionId, accessKeyId, accessKeySecret).getAcsResponse(request);
             if (!response.getCode().equals(HttpStatus.OK.name())) {
-                logger.error("[{}] 发送验证码异常 [uuid: {}, errorCode: {}, errorMessage: {}]", LOG_TAG, uuid,
+                LOGGER.error("[{}] 发送验证码异常 [uuid: {}, errorCode: {}, errorMessage: {}]", LOG_TAG, uuid,
                         response.getCode(), response.getMessage());
                 throw new ThirdPartyException(response.getCode(), response.getMessage());
             }
             return true;
         } catch (ClientException e) {
-            logger.error("[{}] 发送验证码异常 [uuid: {}, errorCode: {}, errorMessage: {}]", LOG_TAG, uuid,
+            LOGGER.error("[{}] 发送验证码异常 [uuid: {}, errorCode: {}, errorMessage: {}]", LOG_TAG, uuid,
                     e.getErrCode(), e.getErrMsg());
             throw new ThirdPartyException(e.getErrCode(), e.getErrMsg());
         }
@@ -94,13 +94,13 @@ public class AliYunSmsUtils {
         try {
             SendBatchSmsResponse response = getClient(regionId, accessKeyId, accessKeySecret).getAcsResponse(request);
             if (!response.getCode().equals(HttpStatus.OK.name())) {
-                logger.error("[{}] 批量发送验证码异常 [uuid: {}, errorCode: {}, errorMessage: {}]", LOG_TAG, uuid,
+                LOGGER.error("[{}] 批量发送验证码异常 [uuid: {}, errorCode: {}, errorMessage: {}]", LOG_TAG, uuid,
                         response.getCode(), response.getMessage());
                 throw new ThirdPartyException(response.getCode(), response.getMessage());
             }
             return true;
         } catch (ClientException e) {
-            logger.error("[{}] 批量发送验证码异常 [uuid: {}, errorCode: {}, errorMessage: {}]", LOG_TAG, uuid,
+            LOGGER.error("[{}] 批量发送验证码异常 [uuid: {}, errorCode: {}, errorMessage: {}]", LOG_TAG, uuid,
                     e.getErrCode(), e.getErrMsg());
             throw new ThirdPartyException(e.getErrCode(), e.getErrMsg());
         }

@@ -1,12 +1,11 @@
-package pro.haichuang.framework.sdk.wxmp.config.store;
+package pro.haichuang.framework.sdk.wxmp.store;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Import;
 import pro.haichuang.framework.base.enums.abnormal.client.RequestServerAbnormalEnum;
-import pro.haichuang.framework.base.exception.client.RequestServerException;
 import pro.haichuang.framework.base.exception.StackTraceException;
+import pro.haichuang.framework.base.exception.client.RequestServerException;
 
 import java.time.Duration;
 import java.util.Map;
@@ -23,9 +22,6 @@ import java.util.concurrent.TimeUnit;
  * @author JiYinchuan
  * @version 1.0
  */
-@Import({
-        DefaultWxMpDataStore.DelayQueueManager.class
-})
 public class DefaultWxMpDataStore implements WxMpDataStore {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultWxMpDataStore.class);
@@ -43,6 +39,7 @@ public class DefaultWxMpDataStore implements WxMpDataStore {
     public void setBaseAccessToken(String key, String baseAccessToken, Duration expireTime) {
         validateDelayError();
         BASE_ACCESS_TOKEN_MAP.put(key, baseAccessToken);
+        DELAY_QUEUE.removeIf(delayBase -> delayBase.key.equals(key));
         DELAY_QUEUE.put(new DelayBase(DelayDataType.BASE_ACCESS_TOKEN, key, expireTime));
     }
 
@@ -56,6 +53,7 @@ public class DefaultWxMpDataStore implements WxMpDataStore {
     public void setWebAccessToken(String key, String webAccessToken, Duration expireTime) {
         validateDelayError();
         WEB_ACCESS_TOKEN_MAP.put(key, webAccessToken);
+        DELAY_QUEUE.removeIf(delayBase -> delayBase.key.equals(key));
         DELAY_QUEUE.put(new DelayBase(DelayDataType.WEB_ACCESS_TOKEN, key, expireTime));
     }
 
@@ -69,6 +67,7 @@ public class DefaultWxMpDataStore implements WxMpDataStore {
     public void setWebRefreshAccessToken(String key, String webRefreshAccessToken, Duration expireTime) {
         validateDelayError();
         WEB_REFRESH_ACCESS_TOKEN_MAP.put(key, webRefreshAccessToken);
+        DELAY_QUEUE.removeIf(delayBase -> delayBase.key.equals(key));
         DELAY_QUEUE.put(new DelayBase(DelayDataType.WEB_REFRESH_ACCESS_TOKEN, key, expireTime));
     }
 
@@ -82,6 +81,7 @@ public class DefaultWxMpDataStore implements WxMpDataStore {
     public void setJsApiTicket(String key, String jsApiTicket, Duration expireTime) {
         validateDelayError();
         JS_API_TICKET_MAP.put(key, jsApiTicket);
+        DELAY_QUEUE.removeIf(delayBase -> delayBase.key.equals(key));
         DELAY_QUEUE.put(new DelayBase(DelayDataType.JS_API_TICKET, key, expireTime));
     }
 
@@ -91,6 +91,9 @@ public class DefaultWxMpDataStore implements WxMpDataStore {
         return JS_API_TICKET_MAP.get(key);
     }
 
+    /**
+     * 日志打印所有数据
+     */
     @Override
     public void printAllData() {
         validateDelayError();
@@ -247,6 +250,6 @@ public class DefaultWxMpDataStore implements WxMpDataStore {
         /**
          * JsApiTicket
          */
-        JS_API_TICKET;
+        JS_API_TICKET
     }
 }

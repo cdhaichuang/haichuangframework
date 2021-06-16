@@ -3,9 +3,10 @@ package pro.haichuang.framework.sdk.wxmp.util;
 import cn.hutool.http.HttpGlobalConfig;
 import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson.JSONObject;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.ObjectUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import pro.haichuang.framework.base.enums.base.SexEnum;
@@ -27,10 +28,10 @@ import java.util.Map;
  * @author JiYinchuan
  * @version 1.0
  */
-@Slf4j
 @SuppressWarnings("SpellCheckingInspection")
 public class WxMpUtils {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(WxMpUtils.class);
     private static final String LOG_TAG = "MP工具类";
 
     /**
@@ -93,10 +94,10 @@ public class WxMpUtils {
         params.put("secret", appSecret);
         JSONObject resultJson = JSONObject.parseObject(HttpUtil.get(baseUrl, params, timout));
         if (validateFailResult(resultJson)) {
-            log.error("[{}] 获取基础AccessToken异常 [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
+            LOGGER.error("[{}] 获取基础AccessToken异常 [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
             throw new ThirdPartyException(resultJson.getString(ERROR_CODE_NAME), resultJson.getString(ERROR_MESSAGE_NAME));
         }
-        log.info("[{}] 成功获取基础AccessToken [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
+        LOGGER.info("[{}] 成功获取基础AccessToken [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
         return new WxMpBaseAccessTokenDTO()
                 .setAccessToken(resultJson.getString("access_token"))
                 .setAccessTokenExpireTime(Duration.ofSeconds(resultJson.getLongValue("expires_in")));
@@ -135,10 +136,10 @@ public class WxMpUtils {
         params.put("grant_type", "authorization_code");
         JSONObject resultJson = JSONObject.parseObject(HttpUtil.get(baseUrl, params, timout));
         if (validateFailResult(resultJson)) {
-            log.error("[{}] 获取网页AccessToken异常 [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
+            LOGGER.error("[{}] 获取网页AccessToken异常 [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
             throw new ThirdPartyException(resultJson.getString(ERROR_CODE_NAME), resultJson.getString(ERROR_MESSAGE_NAME));
         }
-        log.info("[{}] 成功获取网页AccessToken [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
+        LOGGER.info("[{}] 成功获取网页AccessToken [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
         return new WxMpWebAccessTokenDTO()
                 .setWebAccessToken(resultJson.getString("access_token"))
                 .setWebAccessTokenExpireTime(Duration.ofSeconds(resultJson.getLongValue("expires_in")))
@@ -176,10 +177,10 @@ public class WxMpUtils {
         params.put("refresh_token", refreshToken);
         JSONObject resultJson = JSONObject.parseObject(HttpUtil.get(baseUrl, params, timout));
         if (validateFailResult(resultJson)) {
-            log.error("[{}] 刷新网页AccessToken异常 [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
+            LOGGER.error("[{}] 刷新网页AccessToken异常 [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
             throw new ThirdPartyException(resultJson.getString(ERROR_CODE_NAME), resultJson.getString(ERROR_MESSAGE_NAME));
         }
-        log.info("[{}] 成功刷新网页AccessToken [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
+        LOGGER.info("[{}] 成功刷新网页AccessToken [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
         return new WxMpWebAccessTokenDTO()
                 .setWebAccessToken(resultJson.getString("access_token"))
                 .setWebRefreshToken(resultJson.getString("refresh_token"))
@@ -213,10 +214,10 @@ public class WxMpUtils {
         params.put("type", "jsapi");
         JSONObject resultJson = JSONObject.parseObject(HttpUtil.get(baseUrl, params, timout));
         if (validateFailResult(resultJson)) {
-            log.error("[{}] 获取jsApi_ticket异常 [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
+            LOGGER.error("[{}] 获取jsApi_ticket异常 [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
             throw new ThirdPartyException(resultJson.getString(ERROR_CODE_NAME), resultJson.getString(ERROR_MESSAGE_NAME));
         }
-        log.info("[{}] 成功获取jsApi_ticket [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
+        LOGGER.info("[{}] 成功获取jsApi_ticket [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
         return new WxMpJsApiTicketDTO()
                 .setTicket(resultJson.getString("ticket"))
                 .setEffectiveTime(Duration.ofSeconds(resultJson.getLongValue("expires_in")));
@@ -239,12 +240,12 @@ public class WxMpUtils {
         params.put("lang", "zh_CN");
         JSONObject resultJson = JSONObject.parseObject(HttpUtil.get(baseUrl, params));
         if (validateFailResult(resultJson)) {
-            log.error("[{}] 获取用户信息异常 [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
+            LOGGER.error("[{}] 获取用户信息异常 [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
             throw new ThirdPartyException(resultJson.getString(ERROR_CODE_NAME), resultJson.getString(ERROR_MESSAGE_NAME));
         }
-        log.info("[{}] 成功获取获取用户信息 [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
+        LOGGER.info("[{}] 成功获取获取用户信息 [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
         if (resultJson.getIntValue("subscribe") == 0) {
-            log.warn("[{}] 获取用户信息失败-该用户未关注此公众号 [uuid: {}, openId: {}, response: {}]", LOG_TAG, uuid, openId, resultJson.toJSONString());
+            LOGGER.warn("[{}] 获取用户信息失败-该用户未关注此公众号 [uuid: {}, openId: {}, response: {}]", LOG_TAG, uuid, openId, resultJson.toJSONString());
             return null;
         }
         return new WxMpUserInfoDTO()

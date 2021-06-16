@@ -1,3 +1,4 @@
 # Auto Configure
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-pro.haichuang.framework.sdk.wxmp.config.autoconfiguration.WxMpAutoConfiguration
+pro.haichuang.framework.sdk.wxmp.config.autoconfiguration.WxMpAutoConfiguration,\
+pro.haichuang.framework.sdk.wxmp.config.autoconfiguration.WxMpStoreAutoConfiguration

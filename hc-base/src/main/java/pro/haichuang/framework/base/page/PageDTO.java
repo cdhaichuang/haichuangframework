@@ -11,13 +11,13 @@ import java.util.Collection;
 import java.util.Collections;
 
 /**
- * 简单分页
+ * 分页DTO
  *
  * @author JiYinchuan
  * @version 1.0
  */
 public class PageDTO<T> implements Pageable, Serializable {
-    private static final long serialVersionUID = 3260491108765254817L;
+    private static final long serialVersionUID = -110663046876892030L;
 
     /**
      * 页码

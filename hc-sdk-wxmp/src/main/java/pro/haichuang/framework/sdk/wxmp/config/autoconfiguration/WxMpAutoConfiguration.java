@@ -6,8 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import pro.haichuang.framework.sdk.wxmp.config.properties.WxMpProperties;
-import pro.haichuang.framework.sdk.wxmp.config.store.DefaultWxMpDataStore;
-import pro.haichuang.framework.sdk.wxmp.config.store.WxMpDataStore;
 import pro.haichuang.framework.sdk.wxmp.controller.SdkWxMpController;
 import pro.haichuang.framework.sdk.wxmp.service.DefaultWxMpServiceImpl;
 import pro.haichuang.framework.sdk.wxmp.service.WxMpService;
@@ -18,7 +16,7 @@ import pro.haichuang.framework.sdk.wxmp.service.WxMpService;
  * @author JiYinchuan
  * @version 1.0
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(WxMpProperties.class)
 @Import({
         SdkWxMpController.class
@@ -29,11 +27,5 @@ public class WxMpAutoConfiguration {
     @ConditionalOnMissingBean(WxMpService.class)
     public WxMpService wxMpService() {
         return new DefaultWxMpServiceImpl();
-    }
-
-    @Bean
-    @ConditionalOnMissingBean(WxMpDataStore.class)
-    public WxMpDataStore wxMpDataStore() {
-        return new DefaultWxMpDataStore();
     }
 }
