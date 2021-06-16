@@ -21,7 +21,7 @@ public class Init {
      */
     private static final String LINE_SEPARATOR = System.getProperty("line.separator");
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         if (args.length != 2) {
             throw new RuntimeException("参数配置错误, 正确运行为 [java Init 项目Code 运行端口]");
         }
@@ -41,6 +41,7 @@ public class Init {
                     throw new RuntimeException("项目运行端口配置错误");
                 }
             }
+            codeName = codeName.toLowerCase();
             // 新项目包名
             String newProjectPackageName = String.join(".", Arrays.copyOf(PROJECT_ORIGIN_PACKAGE_NAME.split("\\."), PROJECT_ORIGIN_PACKAGE_NAME.split("\\.").length - 1)).concat(".").concat(codeName);
             // 服务模块对象
@@ -179,7 +180,7 @@ public class Init {
                         renameFileResourceInfo(childrenFile, codeName, port);
                     }
                 }
-            } else if (file.isFile() && file.getName().contains("application")) {
+            } else if (file.isFile() && file.getName().startsWith("application")) {
                 try (
                         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8))
                 ) {
