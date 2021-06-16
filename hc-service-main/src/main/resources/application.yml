@@ -19,17 +19,3 @@ spring:
     multipart:
       max-file-size: 100GB
       max-request-size: 100GB
-
-# ========================= Knife4j Setting (可选配置) =========================
-#knife4j:
-#  setting:
-#    # Host地址/端口
-#    enableHost: false
-#    enableHostText:
-#    # 是否开启分组
-#    enableGroup: true
-#  basic:
-#    # 是否打开BasicHttp验证
-#    enable: false
-#    username:
-#    password:

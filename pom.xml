@@ -22,7 +22,7 @@
 
     <groupId>pro.haichuang.framework</groupId>
     <artifactId>haichuangframework</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-RELEASE</version>
     <name>haichuangframework</name>
     <description>This is HaiChuang's self-developed simple framework</description>
 
