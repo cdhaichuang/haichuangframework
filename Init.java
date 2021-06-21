@@ -17,6 +17,11 @@ public class Init {
     private static final String PROJECT_ORIGIN_PACKAGE_NAME = "pro.haichuang.framework.service.main";
 
     /**
+     * 项目服务模块名称
+     */
+    private static final String PROJECT_SERVICE_MODEL_NAME = "hc-service-main";
+
+    /**
      * 系统换行符
      */
     private static final String LINE_SEPARATOR = System.getProperty("line.separator");
@@ -41,16 +46,17 @@ public class Init {
                     throw new RuntimeException("项目运行端口配置错误");
                 }
             }
+            String originCodeName = codeName;
             codeName = codeName.toLowerCase();
             // 新项目包名
             String newProjectPackageName = String.join(".", Arrays.copyOf(PROJECT_ORIGIN_PACKAGE_NAME.split("\\."), PROJECT_ORIGIN_PACKAGE_NAME.split("\\.").length - 1)).concat(".").concat(codeName);
             // 服务模块对象
-            File serviceModelDirFile = new File("hc-service-main");
+            File serviceModelDirFile = new File(PROJECT_SERVICE_MODEL_NAME);
             if (!serviceModelDirFile.exists()) {
-                throw new RuntimeException("[hc-service-main] 模块不存在");
+                throw new RuntimeException(String.format("[%s] 模块不存在", PROJECT_SERVICE_MODEL_NAME));
             }
             if (!serviceModelDirFile.isDirectory()) {
-                throw new RuntimeException("[hc-service-main] 必须为目录");
+                throw new RuntimeException(String.format("[%s] 必须为目录", PROJECT_SERVICE_MODEL_NAME));
             }
             try {
                 // 服务模块 [src/main] 目录
@@ -70,6 +76,15 @@ public class Init {
                 // 服务模块资源路径
                 File resourcesDirFile = getChildDir(mainDirFile, "resources");
 
+                // 服务模块 [pom.xml] 文件
+                File pomFile = new File(PROJECT_SERVICE_MODEL_NAME, "pom.xml");
+                if (!pomFile.exists()) {
+                    throw new RuntimeException("[pom.xml] 不存在");
+                }
+                if (!pomFile.isFile()) {
+                    throw new RuntimeException("[pom.xml] 必须为文件");
+                }
+
                 // 重命名项目核心文件信息
                 renameFileInfo(projectDirFile, codeName, newProjectPackageName);
                 // 重命名项目测试文件信息
@@ -84,6 +99,8 @@ public class Init {
                 }
                 // 重命名资源文件信息
                 renameFileResourceInfo(resourcesDirFile, codeName, port);
+                // 更改 [pom.xml] 文件 [Jar] 名称
+                renameFilePomInfo(pomFile, originCodeName);
             } catch (Exception e) {
                 System.out.println("运行异常, 请联系管理员");
             }
@@ -205,6 +222,37 @@ public class Init {
             }
         } catch (Exception e) {
             throw new RuntimeException("递归更改配置文件信息失败, 请联系管理员");
+        }
+    }
+
+    /**
+     * 更改 {@code pom.xml} 文件信息
+     *
+     * @param pomFile     {@code pom.xml}文件
+     * @param originCodeName 项目原始Code
+     */
+    private static void renameFilePomInfo(File pomFile, String originCodeName) {
+        try {
+            try (
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(pomFile), StandardCharsets.UTF_8))
+            ) {
+                StringBuffer buffer = new StringBuffer();
+                for (String line = reader.readLine(); line != null; line = reader.readLine()) {
+                    if (line.contains("${jar-file-name}")) {
+                        line = line.replaceAll("\\$\\{jar-file-name}", originCodeName);
+                    }
+                    buffer.append(line.concat(LINE_SEPARATOR));
+                }
+                try (
+                        PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(pomFile), StandardCharsets.UTF_8), true)
+                ) {
+                    writer.print(buffer);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(String.format("递归更改 [%s] 文件信息失败, 请联系管理员", "pom.xml"));
         }
     }
 }
