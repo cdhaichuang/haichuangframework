@@ -2,6 +2,7 @@ package pro.haichuang.framework.sdk.aliyunsms.service;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import pro.haichuang.framework.base.enums.abnormal.client.RequestParamAbnormalEnum;
 import pro.haichuang.framework.base.util.common.ValidateUtils;
 import pro.haichuang.framework.sdk.aliyunsms.config.properties.AliYunSmsProperties;
@@ -19,22 +20,23 @@ public class DefaultAliYunSmsServiceImpl implements AliYunSmsService {
     private AliYunSmsProperties aliYunSmsProperties;
 
     @Override
-    public boolean send(String signName, String templateCode, String phoneNumbers, JSONObject templateParam) {
+    public boolean send(@Nullable String signName, @Nullable String templateCode,
+                        String phoneNumbers, JSONObject templateParam) {
         validateProperties(false, false);
         ValidateUtils.validate(signName == null || signName.isEmpty(),
                 RequestParamAbnormalEnum.PARAMETER_EMPTY, "[短信签名] 不能为空");
         ValidateUtils.validate(templateCode == null || templateCode.isEmpty(),
                 RequestParamAbnormalEnum.PARAMETER_EMPTY, "[短信模板ID] 不能为空");
-        return AliYunSmsUtils.send(aliYunSmsProperties.getRegionId(), aliYunSmsProperties.getAccessKeyId(),
+        return AliYunSmsUtils.send(aliYunSmsProperties.getAccessKeyId(),
                 aliYunSmsProperties.getAccessKeySecret(), signName, templateCode, phoneNumbers, templateParam);
     }
 
     @Override
-    public boolean send(String templateCode, String phoneNumbers, JSONObject templateParam) {
+    public boolean send(@Nullable String templateCode, String phoneNumbers, JSONObject templateParam) {
         validateProperties(true, false);
         ValidateUtils.validate(templateCode == null || templateCode.isEmpty(),
                 RequestParamAbnormalEnum.PARAMETER_EMPTY, "[短信模板ID] 不能为空");
-        return AliYunSmsUtils.send(aliYunSmsProperties.getRegionId(), aliYunSmsProperties.getAccessKeyId(),
+        return AliYunSmsUtils.send(aliYunSmsProperties.getAccessKeyId(),
                 aliYunSmsProperties.getAccessKeySecret(), aliYunSmsProperties.getSignName(),
                 templateCode, phoneNumbers, templateParam);
     }
@@ -42,7 +44,7 @@ public class DefaultAliYunSmsServiceImpl implements AliYunSmsService {
     @Override
     public boolean send(String phoneNumbers, JSONObject templateParam) {
         validateProperties(true, true);
-        return AliYunSmsUtils.send(aliYunSmsProperties.getRegionId(), aliYunSmsProperties.getAccessKeyId(),
+        return AliYunSmsUtils.send(aliYunSmsProperties.getAccessKeyId(),
                 aliYunSmsProperties.getAccessKeySecret(), aliYunSmsProperties.getSignName(),
                 aliYunSmsProperties.getTemplateCode(), phoneNumbers, templateParam);
     }

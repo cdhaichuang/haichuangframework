@@ -5,17 +5,10 @@ import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import pro.haichuang.framework.redis.config.annotation.RepeatRequestValid;
+import pro.haichuang.framework.redis.annotation.RepeatRequestValid;
 import pro.haichuang.framework.base.validate.Group;
-import pro.haichuang.framework.base.query.PageQuery;
-import pro.haichuang.framework.base.response.ResultVO;
-import pro.haichuang.framework.base.response.vo.BaseVO;
-import pro.haichuang.framework.base.response.vo.PageVO;
-import pro.haichuang.framework.base.response.vo.SingleVO;
 
-import java.util.List;
-
-#if(${restControllerStyle})
+    #if(${restControllerStyle})
 import org.springframework.web.bind.annotation.RestController;
 #else
 import org.springframework.stereotype.Controller;
@@ -69,8 +62,8 @@ public class ${table.controllerName} {
     @ApiOperation("分页数据")
     @ApiOperationSupport(order = 2)
     @GetMapping("/listPage")
-    public PageVO<${entity}> listPage(@ModelAttribute PageQuery pageQuery){
-        return ResultVO.okOfPage(${serviceFullName}.listPageAndIgnore(pageQuery));
+    public PageVO<${entity}> listPage(@ModelAttribute PageRequest pageRequest){
+        return ResultVO.okOfPage(${serviceFullName}.listPageAndIgnore(pageRequest));
     }
 
     @ApiOperation("新增单条数据")

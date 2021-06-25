@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://www.cdhaichuang.com" target="_blank">
-        <img width="320" src="https://dev.haichuang.pro/logo_info.png">
+        <img width="320" src="https://dev.haichuang.pro/java/haichuangframework/devdoc/logo_info.png">
     </a>
 </p>
 

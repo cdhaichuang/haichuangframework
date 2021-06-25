@@ -1,8 +1,8 @@
 package pro.haichuang.framework.base.page;
 
-
+import org.springframework.lang.NonNull;
 import pro.haichuang.framework.base.constant.PageConstant;
-import pro.haichuang.framework.base.query.PageQuery;
+import pro.haichuang.framework.base.request.PageRequest;
 import pro.haichuang.framework.base.response.vo.PageDetailVO;
 
 import java.io.Serializable;
@@ -69,7 +69,7 @@ public class PageDTO<T> implements Pageable, Serializable {
      * @param totalCount 总数
      * @param content    数据
      */
-    public PageDTO(int pageNo, int pageSize, long totalCount, Collection<T> content) {
+    public PageDTO(int pageNo, int pageSize, long totalCount, @NonNull Collection<T> content) {
         this(pageNo, pageSize);
         this.totalCount = totalCount;
         this.content = content;
@@ -79,23 +79,23 @@ public class PageDTO<T> implements Pageable, Serializable {
     /**
      * 构造器
      *
-     * @param pageQuery 分页参数
+     * @param pageRequest 分页参数
      */
-    public PageDTO(PageQuery pageQuery) {
+    public PageDTO(@NonNull PageRequest pageRequest) {
         this();
-        this.pageNo = pageQuery.getPageNo();
-        this.pageSize = pageQuery.getPageSize();
+        this.pageNo = pageRequest.getPageNo();
+        this.pageSize = pageRequest.getPageSize();
     }
 
     /**
      * 构造器
      *
-     * @param pageQuery  分页参数
+     * @param pageRequest  分页参数
      * @param content    数据
      * @param totalCount 总数
      */
-    public PageDTO(PageQuery pageQuery, long totalCount, Collection<T> content) {
-        this(pageQuery);
+    public PageDTO(@NonNull PageRequest pageRequest, long totalCount, @NonNull Collection<T> content) {
+        this(pageRequest);
         this.totalCount = totalCount;
         this.content = content;
     }
@@ -106,7 +106,7 @@ public class PageDTO<T> implements Pageable, Serializable {
      * @param pageDetailVO 分页详情
      * @param content      数据
      */
-    public PageDTO(PageDetailVO pageDetailVO, Collection<T> content) {
+    public PageDTO(@NonNull PageDetailVO pageDetailVO, @NonNull Collection<T> content) {
         this(pageDetailVO.getPageNo(), pageDetailVO.getPageSize(), pageDetailVO.getTotalCount(), content);
         adjustPageNo();
     }
@@ -232,8 +232,9 @@ public class PageDTO<T> implements Pageable, Serializable {
      * @param endDateTime   结束时间
      * @return 返回时间范围同一天结束时间
      */
-    public static LocalDateTime formatEndDate(LocalDateTime beginDateTime, LocalDateTime endDateTime) {
-        return beginDateTime != null && endDateTime != null ? endDateTime.plusDays(1) : endDateTime;
+    @NonNull
+    public static LocalDateTime formatEndDate(@NonNull LocalDateTime beginDateTime, @NonNull LocalDateTime endDateTime) {
+        return endDateTime.plusDays(1);
     }
 
     @Override

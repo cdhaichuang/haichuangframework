@@ -9,13 +9,12 @@ import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.querys.MySqlQuery;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
-import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
-import pro.haichuang.framework.mybatis.service.BaseService;
 import pro.haichuang.framework.mybatis.domain.BaseDO;
 import pro.haichuang.framework.mybatis.generate.config.CodeBasicConfig;
 import pro.haichuang.framework.mybatis.generate.config.CodeDataSourceConfig;
 import pro.haichuang.framework.mybatis.generate.config.CodePackageConfig;
+import pro.haichuang.framework.mybatis.service.BaseService;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -38,7 +37,7 @@ public class MybatisGenerateCodeService {
      * @param codeDataSourceConfig 数据源配置
      * @param codePackageConfig    包配置
      */
-    public void generate(@NonNull CodeBasicConfig codeBasicConfig, @NonNull CodeDataSourceConfig codeDataSourceConfig, @NonNull CodePackageConfig codePackageConfig) {
+    public void generate(CodeBasicConfig codeBasicConfig, CodeDataSourceConfig codeDataSourceConfig, CodePackageConfig codePackageConfig) {
         if (codeDataSourceConfig.getUrl() == null || codeDataSourceConfig.getUrl().length() == 0) {
             throw new RuntimeException("[代码生成器-数据源配置] 数据库URL未配置");
         }
@@ -100,8 +99,7 @@ public class MybatisGenerateCodeService {
      * @param codePackageConfig 包配置
      * @return 全局配置
      */
-    @NonNull
-    private GlobalConfig initGlobalConfig(@NonNull CodeBasicConfig codeBasicConfig, @NonNull CodePackageConfig codePackageConfig) {
+    private GlobalConfig initGlobalConfig( CodeBasicConfig codeBasicConfig, CodePackageConfig codePackageConfig) {
         GlobalConfig gc = new GlobalConfig();
 
         // 生成文件的输出目录【默认 D 盘根目录】
@@ -145,8 +143,7 @@ public class MybatisGenerateCodeService {
      * @param codeDataSourceConfig 数据源配置
      * @return 数据源配置
      */
-    @NonNull
-    private DataSourceConfig initDataSourceConfig(@NonNull CodeDataSourceConfig codeDataSourceConfig) {
+    private DataSourceConfig initDataSourceConfig(CodeDataSourceConfig codeDataSourceConfig) {
         DataSourceConfig dsc = new DataSourceConfig();
 
         // 数据库信息查询 （根据DbType自动生成）
@@ -175,8 +172,7 @@ public class MybatisGenerateCodeService {
      * @param codeDataSourceConfig 数据源配置
      * @return 策略配置
      */
-    @NonNull
-    private StrategyConfig initStrategyConfig(@NonNull CodeDataSourceConfig codeDataSourceConfig) {
+    private StrategyConfig initStrategyConfig(CodeDataSourceConfig codeDataSourceConfig) {
         StrategyConfig sc = new StrategyConfig();
 
         // 是否大写命名
@@ -247,8 +243,7 @@ public class MybatisGenerateCodeService {
      * @param codePackageConfig 包配置
      * @return 包配置
      */
-    @NonNull
-    private PackageConfig initPackageConfig(@NonNull CodePackageConfig codePackageConfig) {
+    private PackageConfig initPackageConfig(CodePackageConfig codePackageConfig) {
         PackageConfig pc = new PackageConfig();
 
         // 父包名。如果为空，将下面子包名必须写全部， 否则就只需写子包名

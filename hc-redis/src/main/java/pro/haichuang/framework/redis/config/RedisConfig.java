@@ -86,7 +86,7 @@ public class RedisConfig extends CachingConfigurerSupport {
 
     /**
      * RedisKey序列化规则
-     * @return RedisSerializer<String>
+     * @return RedisSerializer
      */
     private RedisSerializer<String> keySerializer() {
         return new StringRedisSerializer();
@@ -94,16 +94,21 @@ public class RedisConfig extends CachingConfigurerSupport {
 
     /**
      * RedisValue序列化规则
-     * @return RedisSerializer<Object>
+     * @return RedisSerializer
      */
     private RedisSerializer<Object> valueSerializer() {
         return new GenericJackson2JsonRedisSerializer(new ObjectMapper()
-                .activateDefaultTyping(objectMapper.getPolymorphicTypeValidator(), ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY)
+                .activateDefaultTyping(objectMapper.getPolymorphicTypeValidator(),
+                        ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY)
                 .registerModule(new JavaTimeModule()
-                        .addSerializer(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern(DatePattern.NORM_DATE_PATTERN)))
-                        .addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DatePattern.NORM_DATETIME_PATTERN)))
-                        .addDeserializer(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ofPattern(DatePattern.NORM_DATE_PATTERN)))
-                        .addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(DatePattern.NORM_DATETIME_PATTERN))))
+                        .addSerializer(LocalDate.class,
+                                new LocalDateSerializer(DateTimeFormatter.ofPattern(DatePattern.NORM_DATE_PATTERN)))
+                        .addSerializer(LocalDateTime.class,
+                                new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DatePattern.NORM_DATETIME_PATTERN)))
+                        .addDeserializer(LocalDate.class,
+                                new LocalDateDeserializer(DateTimeFormatter.ofPattern(DatePattern.NORM_DATE_PATTERN)))
+                        .addDeserializer(LocalDateTime.class,
+                                new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(DatePattern.NORM_DATETIME_PATTERN))))
         );
     }
 }

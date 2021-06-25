@@ -7,7 +7,6 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import pro.haichuang.framework.base.enums.base.SexEnum;
 import pro.haichuang.framework.base.exception.ThirdPartyException;
@@ -53,7 +52,7 @@ public class WxMpUtils {
      * @param nonce     随机数
      * @return 验证是否成功 {false: 失败, true: 成功}
      */
-    public static boolean checkSignature(@NonNull String token, @NonNull String signature, @NonNull String timestamp, @NonNull String nonce) {
+    public static boolean checkSignature(String token, String signature, String timestamp, String nonce) {
         String[] arr = new String[]{token, timestamp, nonce};
         Arrays.sort(arr);
         StringBuilder content = new StringBuilder();
@@ -71,8 +70,7 @@ public class WxMpUtils {
      * @param appSecret AppSecret
      * @return 基础AccessToken
      */
-    @NonNull
-    public static WxMpBaseAccessTokenDTO getBaseAccessToken(@NonNull String appId, @NonNull String appSecret) {
+    public static WxMpBaseAccessTokenDTO getBaseAccessToken(String appId, String appSecret) {
         return getBaseAccessToken(appId, appSecret, HttpGlobalConfig.getTimeout());
     }
 
@@ -84,8 +82,7 @@ public class WxMpUtils {
      * @param timout    超时时间
      * @return 基础AccessToken
      */
-    @NonNull
-    public static WxMpBaseAccessTokenDTO getBaseAccessToken(@NonNull String appId, @NonNull String appSecret, @NonNull int timout) {
+    public static WxMpBaseAccessTokenDTO getBaseAccessToken(String appId, String appSecret, int timout) {
         String uuid = UUIDUtils.Local.get();
         String baseUrl = "https://api.weixin.qq.com/cgi-bin/token";
         Map<String, Object> params = new HashMap<>(3);
@@ -111,8 +108,7 @@ public class WxMpUtils {
      * @param code      Code
      * @return 网页AccessTokenDTO
      */
-    @NonNull
-    public static WxMpWebAccessTokenDTO getWebAccessToken(@NonNull String appId, @NonNull String appSecret, @NonNull String code) {
+    public static WxMpWebAccessTokenDTO getWebAccessToken(String appId, String appSecret, String code) {
         return getWebAccessToken(appId, appSecret, code, HttpGlobalConfig.getTimeout());
     }
 
@@ -125,8 +121,7 @@ public class WxMpUtils {
      * @param timout    超时时间
      * @return 网页AccessTokenDTO
      */
-    @NonNull
-    public static WxMpWebAccessTokenDTO getWebAccessToken(@NonNull String appId, @NonNull String appSecret, @NonNull String code, @NonNull int timout) {
+    public static WxMpWebAccessTokenDTO getWebAccessToken(String appId, String appSecret, String code, int timout) {
         String uuid = UUIDUtils.Local.get();
         String baseUrl = "https://api.weixin.qq.com/sns/oauth2/access_token";
         Map<String, Object> params = new HashMap<>(4);
@@ -154,8 +149,7 @@ public class WxMpUtils {
      * @param refreshToken RefreshToken
      * @return 网页AccessTokenDTO
      */
-    @NonNull
-    public static WxMpWebAccessTokenDTO refreshWebAccessToken(@NonNull String appId, @NonNull String refreshToken) {
+    public static WxMpWebAccessTokenDTO refreshWebAccessToken(String appId, String refreshToken) {
         return refreshWebAccessToken(appId, refreshToken, HttpGlobalConfig.getTimeout());
     }
 
@@ -167,8 +161,7 @@ public class WxMpUtils {
      * @param timout       超时时间
      * @return 网页AccessTokenDTO
      */
-    @NonNull
-    public static WxMpWebAccessTokenDTO refreshWebAccessToken(@NonNull String appId, @NonNull String refreshToken, @NonNull int timout) {
+    public static WxMpWebAccessTokenDTO refreshWebAccessToken(String appId, String refreshToken, int timout) {
         String uuid = UUIDUtils.Local.get();
         String baseUrl = "https://api.weixin.qq.com/sns/oauth2/refresh_token";
         Map<String, Object> params = new HashMap<>(3);
@@ -193,8 +186,7 @@ public class WxMpUtils {
      * @param accessToken AccessToken
      * @return JsApiTicketDTO
      */
-    @NonNull
-    public static WxMpJsApiTicketDTO getJsApiTicket(@NonNull String accessToken) {
+    public static WxMpJsApiTicketDTO getJsApiTicket(String accessToken) {
         return getJsApiTicket(accessToken, HttpGlobalConfig.getTimeout());
     }
 
@@ -205,8 +197,7 @@ public class WxMpUtils {
      * @param timout      超时时间
      * @return JsApiTicketDTO
      */
-    @NonNull
-    public static WxMpJsApiTicketDTO getJsApiTicket(@NonNull String accessToken, @NonNull int timout) {
+    public static WxMpJsApiTicketDTO getJsApiTicket(String accessToken, int timout) {
         String uuid = UUIDUtils.Local.get();
         String baseUrl = "https://api.weixin.qq.com/cgi-bin/ticket/getticket";
         Map<String, Object> params = new HashMap<>(2);
@@ -231,7 +222,7 @@ public class WxMpUtils {
      * @return 用户信息
      */
     @Nullable
-    public static WxMpUserInfoDTO getUserInfo(@NonNull String accessToken, @NonNull String openId) {
+    public static WxMpUserInfoDTO getUserInfo(String accessToken, String openId) {
         String uuid = UUIDUtils.Local.get();
         String baseUrl = "https://api.weixin.qq.com/cgi-bin/user/info";
         Map<String, Object> params = new HashMap<>(3);
@@ -274,7 +265,7 @@ public class WxMpUtils {
      * @param jsonObject 返回JSON对象
      * @return {true: 验证失败, true: 验证成功}
      */
-    public static boolean validateFailResult(@NonNull JSONObject jsonObject) {
+    public static boolean validateFailResult(JSONObject jsonObject) {
         Integer errorCode = jsonObject.getInteger(ERROR_CODE_NAME);
         String errorMessage = jsonObject.getString(ERROR_MESSAGE_NAME);
         return ObjectUtils.anyNotNull(errorCode, errorMessage) && !errorCode.equals(0);

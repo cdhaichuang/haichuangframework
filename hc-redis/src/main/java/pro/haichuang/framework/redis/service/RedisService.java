@@ -1,6 +1,5 @@
 package pro.haichuang.framework.redis.service;
 
-import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
 import java.util.List;
@@ -25,7 +24,7 @@ public interface RedisService {
      * @param expireTime 过期时间(秒)
      * @return 返回操作结果
      */
-    boolean expire(@NonNull String key, long expireTime);
+    boolean expire(String key, long expireTime);
 
     /**
      * 根据key 获取过期时间
@@ -33,7 +32,7 @@ public interface RedisService {
      * @param key 键 不能为null
      * @return 过期时间(秒) 返回0代表为永久有效
      */
-    long getExpire(@NonNull String key);
+    long getExpire(String key);
 
     /**
      * 判断key是否存在
@@ -41,14 +40,14 @@ public interface RedisService {
      * @param key 键
      * @return true 存在 false不存在
      */
-    boolean hasKey(@NonNull String key);
+    boolean hasKey(String key);
 
     /**
      * 删除缓存
      *
      * @param key 可以传一个值 或多个
      */
-    void del(@NonNull String... key);
+    void del(String... key);
 
     // ============================ String =============================
 
@@ -60,7 +59,7 @@ public interface RedisService {
      * @return 值
      */
     @Nullable
-    <V> V get(@NonNull String key);
+    <V> V get(String key);
 
     /**
      * 普通缓存放入
@@ -69,7 +68,7 @@ public interface RedisService {
      * @param value 值
      * @return true成功 false失败
      */
-    boolean set(@NonNull String key, @NonNull Object value);
+    boolean set(String key, Object value);
 
     /**
      * 普通缓存放入并设置时间
@@ -79,7 +78,7 @@ public interface RedisService {
      * @param expireTime 过期时间(秒) time要大于0 如果time小于等于0 将设置无限期
      * @return true成功 false 失败
      */
-    boolean set(@NonNull String key, @NonNull Object value, long expireTime);
+    boolean set(String key, Object value, long expireTime);
 
     /**
      * 递增
@@ -88,7 +87,7 @@ public interface RedisService {
      * @param delta 要增加几(大于0)
      * @return 返回long
      */
-    long incr(@NonNull String key, long delta);
+    long incr(String key, long delta);
 
     /**
      * 递减
@@ -97,7 +96,7 @@ public interface RedisService {
      * @param delta 要减少几(小于0)
      * @return 返回long
      */
-    long decr(@NonNull String key, long delta);
+    long decr(String key, long delta);
 
     // ================================ Map =================================
 
@@ -109,7 +108,7 @@ public interface RedisService {
      * @param <V>  值类型
      * @return 值
      */
-    <V> V hget(@NonNull String key, @NonNull String item);
+    <V> V hget(String key, String item);
 
     /**
      * 获取hashKey对应的所有键值
@@ -118,7 +117,7 @@ public interface RedisService {
      * @return 对应的多个键值
      */
     @Nullable
-    Map<Object, Object> hmget(@NonNull String key);
+    Map<Object, Object> hmget(String key);
 
     /**
      * HashSet
@@ -127,7 +126,7 @@ public interface RedisService {
      * @param map 对应多个键值
      * @return true 成功 false 失败
      */
-    boolean hmset(@NonNull String key, @NonNull Map<String, Object> map);
+    boolean hmset(String key, Map<String, Object> map);
 
     /**
      * HashSet 并设置时间
@@ -137,7 +136,7 @@ public interface RedisService {
      * @param expireTime 过期时间(秒)
      * @return true成功 false失败
      */
-    boolean hmset(@NonNull String key, @NonNull Map<String, Object> map, long expireTime);
+    boolean hmset(String key, Map<String, Object> map, long expireTime);
 
     /**
      * 向一张hash表中放入数据,如果不存在将创建
@@ -147,7 +146,7 @@ public interface RedisService {
      * @param value 值
      * @return true 成功 false失败
      */
-    boolean hset(@NonNull String key, @NonNull String item, @NonNull Object value);
+    boolean hset(String key, String item, Object value);
 
     /**
      * 向一张hash表中放入数据,如果不存在将创建
@@ -158,7 +157,7 @@ public interface RedisService {
      * @param expireTime 过期时间(秒) 注意:如果已存在的hash表有时间,这里将会替换原有的时间
      * @return true 成功 false失败
      */
-    boolean hset(@NonNull String key, @NonNull String item, @NonNull Object value, long expireTime);
+    boolean hset(String key, String item, Object value, long expireTime);
 
     /**
      * 删除hash表中的值
@@ -166,7 +165,7 @@ public interface RedisService {
      * @param key  键 不能为null
      * @param item 项 可以使多个 不能为null
      */
-    void hdel(@NonNull String key, @NonNull Object... item);
+    void hdel(String key, Object... item);
 
     /**
      * 判断hash表中是否有该项的值
@@ -175,7 +174,7 @@ public interface RedisService {
      * @param item 项 不能为null
      * @return true 存在 false不存在
      */
-    boolean hHasKey(@NonNull String key, @NonNull String item);
+    boolean hHasKey(String key, String item);
 
     /**
      * hash递增 如果不存在,就会创建一个 并把新增后的值返回
@@ -185,7 +184,7 @@ public interface RedisService {
      * @param by   要增加几(大于0)
      * @return 返回double
      */
-    double hincr(@NonNull String key, @NonNull String item, double by);
+    double hincr(String key, String item, double by);
 
     /**
      * hash递减
@@ -195,7 +194,7 @@ public interface RedisService {
      * @param by   要减少记(小于0)
      * @return 返回double
      */
-    double hdecr(@NonNull String key, @NonNull String item, double by);
+    double hdecr(String key, String item, double by);
 
     // ============================ Set =============================
 
@@ -206,7 +205,7 @@ public interface RedisService {
      * @param <V> 值类型
      * @return 返回Set集合
      */
-    <V> Set<V> sGet(@NonNull String key);
+    <V> Set<V> sGet(String key);
 
     /**
      * 根据value从一个set中查询,是否存在
@@ -215,7 +214,7 @@ public interface RedisService {
      * @param value 值
      * @return true 存在 false不存在
      */
-    boolean sHasKey(@NonNull String key, @NonNull Object value);
+    boolean sHasKey(String key, Object value);
 
     /**
      * 将数据放入set缓存
@@ -224,7 +223,7 @@ public interface RedisService {
      * @param values 值 可以是多个
      * @return 成功个数
      */
-    long sSet(@NonNull String key, @NonNull Object... values);
+    long sSet(String key, Object... values);
 
     /**
      * 将set数据放入缓存
@@ -234,7 +233,7 @@ public interface RedisService {
      * @param values     值 可以是多个
      * @return 成功个数
      */
-    long sSetAndTime(@NonNull String key, long expireTime, @NonNull Object... values);
+    long sSetAndTime(String key, long expireTime, Object... values);
 
     /**
      * 获取set缓存的长度
@@ -242,7 +241,7 @@ public interface RedisService {
      * @param key 键
      * @return set缓存的长度
      */
-    long sGetSetSize(@NonNull String key);
+    long sGetSetSize(String key);
 
     /**
      * 移除值为value的
@@ -251,7 +250,7 @@ public interface RedisService {
      * @param values 值 可以是多个
      * @return 移除的个数
      */
-    long setRemove(@NonNull String key, @NonNull Object... values);
+    long setRemove(String key, Object... values);
 
     // =============================== List =================================
 
@@ -265,7 +264,7 @@ public interface RedisService {
      * @return 返回 {@code "List<V>"}
      */
     @Nullable
-    <V> List<V> lGet(@NonNull String key, long start, long end);
+    <V> List<V> lGet(String key, long start, long end);
 
     /**
      * 获取list缓存的长度
@@ -273,7 +272,7 @@ public interface RedisService {
      * @param key 键
      * @return 返回list缓存的长度
      */
-    long lGetListSize(@NonNull String key);
+    long lGetListSize(String key);
 
     /**
      * 通过索引 获取list中的值
@@ -284,7 +283,7 @@ public interface RedisService {
      * @return 返回Object值
      */
     @Nullable
-    <V> V lGetIndex(@NonNull String key, long index);
+    <V> V lGetIndex(String key, long index);
 
     /**
      * 将list放入缓存
@@ -293,7 +292,7 @@ public interface RedisService {
      * @param value 值
      * @return 返回操作结果
      */
-    boolean lSet(@NonNull String key, @NonNull Object value);
+    boolean lSet(String key, Object value);
 
     /**
      * 将list放入缓存
@@ -303,7 +302,7 @@ public interface RedisService {
      * @param expireTime 过期时间(秒)
      * @return 返回操作结果
      */
-    boolean lSet(@NonNull String key, @NonNull Object value, long expireTime);
+    boolean lSet(String key, Object value, long expireTime);
 
     /**
      * 将list放入缓存
@@ -312,7 +311,7 @@ public interface RedisService {
      * @param value 值
      * @return 返回 操作结果
      */
-    boolean lSet(@NonNull String key, @NonNull List<Object> value);
+    boolean lSet(String key, List<Object> value);
 
     /**
      * 将list放入缓存
@@ -322,7 +321,7 @@ public interface RedisService {
      * @param expireTime 过期时间(秒)
      * @return 返回 操作结果
      */
-    boolean lSet(@NonNull String key, @NonNull List<Object> value, long expireTime);
+    boolean lSet(String key, List<Object> value, long expireTime);
 
     /**
      * 根据索引修改list中的某条数据
@@ -332,7 +331,7 @@ public interface RedisService {
      * @param value 值
      * @return 返回修改结果
      */
-    boolean lUpdateIndex(@NonNull String key, long index, @NonNull Object value);
+    boolean lUpdateIndex(String key, long index, Object value);
 
     /**
      * 移除N个值为value的元素
@@ -342,6 +341,6 @@ public interface RedisService {
      * @param value 值
      * @return 移除的个数
      */
-    long lRemove(@NonNull String key, long count, @NonNull Object value);
+    long lRemove(String key, long count, Object value);
 
 }

@@ -13,7 +13,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import pro.haichuang.framework.base.config.annotation.LogSave;
+import pro.haichuang.framework.base.annotation.LogSave;
 import pro.haichuang.framework.base.config.interceptor.AbstractLogSave;
 import pro.haichuang.framework.base.util.common.IpUtils;
 import pro.haichuang.framework.base.util.common.UUIDUtils;
@@ -45,7 +45,7 @@ public class LogSaveAspect {
     @Autowired
     private AbstractLogSave abstractLogSave;
 
-    @Pointcut("@annotation(pro.haichuang.framework.base.config.annotation.LogSave)")
+    @Pointcut("@annotation(pro.haichuang.framework.base.annotation.LogSave)")
     public void logPointCut() {
     }
 
@@ -74,7 +74,7 @@ public class LogSaveAspect {
         if (requestAttributes != null) {
             request = requestAttributes.getRequest();
 
-            clientIp = IpUtils.getIpAddr(request);
+            clientIp = IpUtils.getIpAddress(request);
 
             MethodSignature signature = (MethodSignature) point.getSignature();
             Method method = signature.getMethod();

@@ -91,4 +91,9 @@ public class ResultVO implements Serializable {
     public static <T> PageVO<T> otherOfPage(BaseEnum baseEnum, PageDTO<T> simplePage, String userTip) {
         return new PageVO<>(baseEnum, simplePage.convertToPageDetailVO(), simplePage.getContent(), userTip);
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

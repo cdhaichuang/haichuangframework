@@ -1,7 +1,6 @@
 package pro.haichuang.framework.sdk.aliyunsms.service;
 
 import com.alibaba.fastjson.JSONObject;
-import org.springframework.lang.NonNull;
 
 /**
  * AliYunSmsService
@@ -22,8 +21,8 @@ public interface AliYunSmsService {
      * @param templateParam 短信模板变量替换JSON串, 友情提示: 如果JSON中需要带换行符, 请参照标准的JSON协议
      * @return 执行结果
      */
-    boolean send(@NonNull String signName, @NonNull String templateCode,
-                 @NonNull String phoneNumbers, @NonNull JSONObject templateParam);
+    boolean send(String signName, String templateCode,
+                 String phoneNumbers, JSONObject templateParam);
 
     /**
      * 发送短信验证码
@@ -35,7 +34,7 @@ public interface AliYunSmsService {
      * @param templateParam 短信模板变量替换JSON串, 友情提示: 如果JSON中需要带换行符, 请参照标准的JSON协议
      * @return 执行结果
      */
-    boolean send(@NonNull String templateCode, @NonNull String phoneNumbers, @NonNull JSONObject templateParam);
+    boolean send(String templateCode, String phoneNumbers, JSONObject templateParam);
 
     /**
      * 发送短信验证码
@@ -46,6 +45,6 @@ public interface AliYunSmsService {
      * @param templateParam 短信模板变量替换JSON串, 友情提示: 如果JSON中需要带换行符, 请参照标准的JSON协议
      * @return 执行结果
      */
-    boolean send(@NonNull String phoneNumbers, @NonNull JSONObject templateParam);
+    boolean send(String phoneNumbers, JSONObject templateParam);
 
 }

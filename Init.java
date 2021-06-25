@@ -238,8 +238,8 @@ public class Init {
             ) {
                 StringBuffer buffer = new StringBuffer();
                 for (String line = reader.readLine(); line != null; line = reader.readLine()) {
-                    if (line.contains("${jar-file-name}")) {
-                        line = line.replaceAll("\\$\\{jar-file-name}", originCodeName);
+                    if (line.contains("defaultJarFileName")) {
+                        line = line.replaceAll("defaultJarFileName", originCodeName);
                     }
                     buffer.append(line.concat(LINE_SEPARATOR));
                 }
@@ -252,7 +252,7 @@ public class Init {
                 e.printStackTrace();
             }
         } catch (Exception e) {
-            throw new RuntimeException(String.format("递归更改 [%s] 文件信息失败, 请联系管理员", "pom.xml"));
+            throw new RuntimeException(String.format("更改 [%s] 文件信息失败, 请联系管理员", "pom.xml"));
         }
     }
 }

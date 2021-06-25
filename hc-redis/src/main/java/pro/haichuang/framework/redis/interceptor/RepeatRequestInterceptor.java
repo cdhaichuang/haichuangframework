@@ -14,7 +14,7 @@ import pro.haichuang.framework.base.enums.abnormal.client.RequestServerAbnormalE
 import pro.haichuang.framework.base.response.ResultVO;
 import pro.haichuang.framework.base.util.common.IpUtils;
 import pro.haichuang.framework.base.util.common.ResponseUtils;
-import pro.haichuang.framework.redis.config.annotation.RepeatRequestValid;
+import pro.haichuang.framework.redis.annotation.RepeatRequestValid;
 import pro.haichuang.framework.redis.service.RedisService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +36,8 @@ public class RepeatRequestInterceptor implements HandlerInterceptor {
     private RedisService redisService;
 
     @Override
-    public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) throws Exception {
+    public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,
+                             @NonNull Object handler) throws Exception {
         if (handler instanceof HandlerMethod) {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             Method method = handlerMethod.getMethod();
@@ -52,13 +53,15 @@ public class RepeatRequestInterceptor implements HandlerInterceptor {
                 String repeatValue = redisService.get(repeatRedisKey);
                 if (StringUtils.equals(repeatValue, parameterMapString)) {
                     ApiOperation apiOperationAnnotation = method.getAnnotation(ApiOperation.class);
-                    String apiMessage = ObjectUtils.isNotEmpty(apiOperationAnnotation) ? apiOperationAnnotation.value() : null;
+                    String apiMessage = ObjectUtils.isNotEmpty(apiOperationAnnotation)
+                            ? apiOperationAnnotation.value() : null;
                     LOGGER.info("[重复请求拦截器] 拦截请求 [apiMessage: {}, requestUri: {}, clientIp: {}, params: {}]",
                             apiMessage,
                             request.getRequestURI(),
-                            IpUtils.getIpAddr(request),
+                            IpUtils.getIpAddress(request),
                             parameterMapString);
-                    ResponseUtils.write(response, ResultVO.other(RequestServerAbnormalEnum.REPEAT_REQUEST, "请求速度过快, 请稍后重试"));
+                    ResponseUtils.write(response, ResultVO.other(RequestServerAbnormalEnum.REPEAT_REQUEST,
+                            "请求速度过快, 请稍后重试"));
                     return false;
                 }else {
                     redisService.set(repeatRedisKey, parameterMapString, repeatRequestValidAnnotation.value());

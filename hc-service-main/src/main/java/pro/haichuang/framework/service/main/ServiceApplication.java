@@ -2,11 +2,11 @@ package pro.haichuang.framework.service.main;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import pro.haichuang.framework.base.config.annotation.EnableControllerAdvice;
-import pro.haichuang.framework.base.config.annotation.EnableControllerLogAspect;
-import pro.haichuang.framework.base.config.annotation.EnableLogSave;
-import pro.haichuang.framework.base.config.annotation.EnableSecurityAspect;
-import pro.haichuang.framework.redis.config.annotation.EnableRequestRepeatValidate;
+import pro.haichuang.framework.base.annotation.EnableControllerAdvice;
+import pro.haichuang.framework.base.annotation.EnableControllerLogAspect;
+import pro.haichuang.framework.base.annotation.EnableLogSave;
+import pro.haichuang.framework.base.annotation.EnableSecurityAspect;
+import pro.haichuang.framework.redis.annotation.EnableRequestRepeatValidate;
 
 /**
  * ServiceApplication

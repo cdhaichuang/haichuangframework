@@ -8,8 +8,8 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.core.annotation.Order;
-import pro.haichuang.framework.base.config.annotation.security.PrePermission;
-import pro.haichuang.framework.base.config.annotation.security.PreRole;
+import pro.haichuang.framework.base.annotation.security.PrePermission;
+import pro.haichuang.framework.base.annotation.security.PreRole;
 import pro.haichuang.framework.base.config.interceptor.AbstractSecurityValidate;
 import pro.haichuang.framework.base.enums.abnormal.client.AuthorityAbnormalEnum;
 import pro.haichuang.framework.base.exception.client.AuthorityException;
@@ -30,11 +30,11 @@ public class SecurityAspect {
     @Autowired
     private AbstractSecurityValidate securityValidate;
 
-    @Pointcut("@annotation(pro.haichuang.framework.base.config.annotation.security.PreRole)")
+    @Pointcut("@annotation(pro.haichuang.framework.base.annotation.security.PreRole)")
     public void preRolePointCut() {
     }
 
-    @Pointcut("@annotation(pro.haichuang.framework.base.config.annotation.security.PrePermission)")
+    @Pointcut("@annotation(pro.haichuang.framework.base.annotation.security.PrePermission)")
     public void prePermissionPointCut() {
     }
 

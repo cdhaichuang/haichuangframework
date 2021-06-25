@@ -340,7 +340,7 @@ public class BaseControllerAdvice {
      *
      * @param requestUri           请求地址
      * @param requestMethod        请求方法
-     * @param tp                   {@param t} 父节点
+     * @param tp                   {@code t} 父节点
      * @param t                    Throwable
      * @param uuid                 唯一标识
      * @param tag                  输出标签

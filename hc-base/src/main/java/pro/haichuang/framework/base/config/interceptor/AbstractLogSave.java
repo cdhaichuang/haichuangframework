@@ -3,7 +3,7 @@ package pro.haichuang.framework.base.config.interceptor;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import pro.haichuang.framework.base.config.annotation.LogSave;
+import pro.haichuang.framework.base.annotation.LogSave;
 
 /**
  * 保存日志
@@ -16,7 +16,7 @@ public abstract class AbstractLogSave {
     /**
      * 保存日志逻辑
      *
-     * @param logSave        {@link pro.haichuang.framework.base.config.annotation.LogSave}
+     * @param logSave        {@link pro.haichuang.framework.base.annotation.LogSave}
      * @param api            {@link Api}
      * @param apiOperation   {@link ApiOperation}
      * @param clientIp       客户端IP真实地址

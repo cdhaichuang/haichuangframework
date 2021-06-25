@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import pro.haichuang.framework.base.enums.request.ParamEnumConverterFactory;
+import pro.haichuang.framework.base.config.mvc.enums.ParamEnumConverterFactory;
 
 import java.util.List;
 

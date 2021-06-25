@@ -58,7 +58,7 @@ public class LogAspect {
         if (requestAttributes != null) {
             request = requestAttributes.getRequest();
 
-            clientIp = IpUtils.getIpAddr(request);
+            clientIp = IpUtils.getIpAddress(request);
 
             MethodSignature signature = (MethodSignature) point.getSignature();
             Method method = signature.getMethod();

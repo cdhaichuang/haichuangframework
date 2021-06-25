@@ -45,21 +45,24 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
     @Override
     public void deleteObject(String ossFilePath) {
         validateProperties();
-        AliYunOssUtils.deleteObject(ossFilePath, aliYunOssProperties.getEndpoint(), aliYunOssProperties.getAccessKeyId(),
+        AliYunOssUtils.deleteObject(ossFilePath,
+                aliYunOssProperties.getEndpoint(), aliYunOssProperties.getAccessKeyId(),
                 aliYunOssProperties.getAccessKeySecret(), aliYunOssProperties.getBucketName());
     }
 
     @Override
     public List<String> deleteObject(List<String> ossFilePaths) {
         validateProperties();
-        return AliYunOssUtils.deleteObject(ossFilePaths, aliYunOssProperties.getEndpoint(), aliYunOssProperties.getAccessKeyId(),
+        return AliYunOssUtils.deleteObject(ossFilePaths,
+                aliYunOssProperties.getEndpoint(), aliYunOssProperties.getAccessKeyId(),
                 aliYunOssProperties.getAccessKeySecret(), aliYunOssProperties.getBucketName());
     }
 
     @Override
     public List<String> deleteObject(List<String> ossFilePaths, boolean quiet) {
         validateProperties();
-        return AliYunOssUtils.deleteObject(ossFilePaths, quiet, aliYunOssProperties.getEndpoint(), aliYunOssProperties.getAccessKeyId(),
+        return AliYunOssUtils.deleteObject(ossFilePaths, quiet,
+                aliYunOssProperties.getEndpoint(), aliYunOssProperties.getAccessKeyId(),
                 aliYunOssProperties.getAccessKeySecret(), aliYunOssProperties.getBucketName());
     }
 
@@ -67,10 +70,14 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
      * 验证配置文件
      */
     private void validateProperties() {
-        ValidateUtils.validate(aliYunOssProperties.getEndpoint() == null, RequestParamAbnormalEnum.PARAMETER_EMPTY, "[EndPoint] 未在Yaml进行配置");
-        ValidateUtils.validate(aliYunOssProperties.getAccessKeyId() == null, RequestParamAbnormalEnum.PARAMETER_EMPTY, "[AccessKeyId] 未在Yaml进行配置");
-        ValidateUtils.validate(aliYunOssProperties.getAccessKeySecret() == null, RequestParamAbnormalEnum.PARAMETER_EMPTY, "[AccessKeySecret] 未在Yaml进行配置");
-        ValidateUtils.validate(aliYunOssProperties.getBucketName() == null, RequestParamAbnormalEnum.PARAMETER_EMPTY, "[BucketName] 未在Yaml进行配置");
+        ValidateUtils.validate(aliYunOssProperties.getEndpoint() == null,
+                RequestParamAbnormalEnum.PARAMETER_EMPTY, "[EndPoint] 未在Yaml进行配置");
+        ValidateUtils.validate(aliYunOssProperties.getAccessKeyId() == null,
+                RequestParamAbnormalEnum.PARAMETER_EMPTY, "[AccessKeyId] 未在Yaml进行配置");
+        ValidateUtils.validate(aliYunOssProperties.getAccessKeySecret() == null,
+                RequestParamAbnormalEnum.PARAMETER_EMPTY, "[AccessKeySecret] 未在Yaml进行配置");
+        ValidateUtils.validate(aliYunOssProperties.getBucketName() == null,
+                RequestParamAbnormalEnum.PARAMETER_EMPTY, "[BucketName] 未在Yaml进行配置");
     }
 
     /**

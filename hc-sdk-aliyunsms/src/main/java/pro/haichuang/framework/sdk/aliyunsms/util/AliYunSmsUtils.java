@@ -2,18 +2,14 @@ package pro.haichuang.framework.sdk.aliyunsms.util;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.aliyuncs.CommonRequest;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
-import com.aliyuncs.dysmsapi.model.v20170525.SendBatchSmsRequest;
-import com.aliyuncs.dysmsapi.model.v20170525.SendBatchSmsResponse;
-import com.aliyuncs.dysmsapi.model.v20170525.SendSmsRequest;
-import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
+import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.lang.NonNull;
 import pro.haichuang.framework.base.exception.ThirdPartyException;
 import pro.haichuang.framework.base.util.common.UUIDUtils;
 
@@ -32,9 +28,28 @@ public class AliYunSmsUtils {
     private static final String LOG_TAG = "AliYunSms工具类";
 
     /**
+     * DefaultRegionId
+     */
+    private static final String REGION_ID = "cn-hangzhou";
+
+    /**
+     * DefaultSysDomain
+     */
+    private static final String SYS_DOMAIN = "dysmsapi.aliyuncs.com";
+
+    /**
+     * DefaultSysVersion
+     */
+    private static final String SYS_VERSION = "2017-05-25";
+
+    /**
+     * DefaultSysAction
+     */
+    private static final String SYS_ACTION = "SendSms";
+
+    /**
      * 发送短信验证码
      *
-     * @param regionId        RegionId
      * @param accessKeyId     AccessKeyId
      * @param accessKeySecret AccessKeySecret
      * @param signName        短信签名
@@ -45,22 +60,17 @@ public class AliYunSmsUtils {
      * @param templateParam   短信模板变量替换JSON串, 友情提示: 如果JSON中需要带换行符, 请参照标准的JSON协议
      * @return 执行结果
      */
-    public static boolean send(@NonNull String regionId, @NonNull String accessKeyId, @NonNull String accessKeySecret,
-                               @NonNull String signName, @NonNull String templateCode,
-                               @NonNull String phoneNumbers, @NonNull JSONObject templateParam) {
+    public static boolean send(String accessKeyId, String accessKeySecret,
+                               String signName, String templateCode,
+                               String phoneNumbers, JSONObject templateParam) {
         String uuid = UUIDUtils.Local.get();
-        SendSmsRequest request = new SendSmsRequest();
-        request.setPhoneNumbers(phoneNumbers);
-        request.setSignName(signName);
-        request.setTemplateCode(templateCode);
-        request.setTemplateParam(templateParam.toJSONString());
+        CommonRequest request = createRequest();
+        request.putQueryParameter("PhoneNumbers", phoneNumbers);
+        request.putQueryParameter("SignName", signName);
+        request.putQueryParameter("TemplateCode", templateCode);
+        request.putQueryParameter("TemplateParam", templateParam.toJSONString());
         try {
-            SendSmsResponse response = getClient(regionId, accessKeyId, accessKeySecret).getAcsResponse(request);
-            if (!response.getCode().equals(HttpStatus.OK.name())) {
-                LOGGER.error("[{}] 发送验证码异常 [uuid: {}, errorCode: {}, errorMessage: {}]", LOG_TAG, uuid,
-                        response.getCode(), response.getMessage());
-                throw new ThirdPartyException(response.getCode(), response.getMessage());
-            }
+            getClient(accessKeyId, accessKeySecret).getCommonResponse(request);
             return true;
         } catch (ClientException e) {
             LOGGER.error("[{}] 发送验证码异常 [uuid: {}, errorCode: {}, errorMessage: {}]", LOG_TAG, uuid,
@@ -72,7 +82,6 @@ public class AliYunSmsUtils {
     /**
      * 批量发送短信验证码
      *
-     * @param regionId        RegionId
      * @param accessKeyId     AccessKeyId
      * @param accessKeySecret AccessKeySecret
      * @param signNames       短信签名, JSON格式
@@ -82,22 +91,17 @@ public class AliYunSmsUtils {
      * @param templateParam   短信模板变量替换JSON串, 友情提示: 如果JSON中需要带换行符, 请参照标准的JSON协议
      * @return 执行结果
      */
-    public static boolean sendBatch(@NonNull String regionId, @NonNull String accessKeyId, @NonNull String accessKeySecret,
-                                    @NonNull List<String> signNames, @NonNull String templateCode,
-                                    @NonNull List<String> phones, @NonNull JSONArray templateParam) {
+    public static boolean sendBatch(String accessKeyId, String accessKeySecret,
+                                    List<String> signNames, String templateCode,
+                                    List<String> phones, JSONArray templateParam) {
         String uuid = UUIDUtils.Local.get();
-        SendBatchSmsRequest request = new SendBatchSmsRequest();
-        request.setPhoneNumberJson(JSONObject.toJSONString(phones));
-        request.setSignNameJson(JSONObject.toJSONString(signNames));
-        request.setTemplateCode(templateCode);
-        request.setTemplateParamJson(templateParam.toJSONString());
+        CommonRequest request = createRequest();
+        request.putQueryParameter("PhoneNumberJson", JSONObject.toJSONString(phones));
+        request.putQueryParameter("SignNameJson", JSONObject.toJSONString(signNames));
+        request.putQueryParameter("TemplateCode", templateCode);
+        request.putQueryParameter("TemplateParamJson", templateParam.toJSONString());
         try {
-            SendBatchSmsResponse response = getClient(regionId, accessKeyId, accessKeySecret).getAcsResponse(request);
-            if (!response.getCode().equals(HttpStatus.OK.name())) {
-                LOGGER.error("[{}] 批量发送验证码异常 [uuid: {}, errorCode: {}, errorMessage: {}]", LOG_TAG, uuid,
-                        response.getCode(), response.getMessage());
-                throw new ThirdPartyException(response.getCode(), response.getMessage());
-            }
+            getClient(accessKeyId, accessKeySecret).getCommonResponse(request);
             return true;
         } catch (ClientException e) {
             LOGGER.error("[{}] 批量发送验证码异常 [uuid: {}, errorCode: {}, errorMessage: {}]", LOG_TAG, uuid,
@@ -109,15 +113,26 @@ public class AliYunSmsUtils {
     /**
      * 获取IAcsClient
      *
-     * @param regionId        RegionId
      * @param accessKeyId     AccessKeyId
      * @param accessKeySecret AccessKeySecret
      * @return IAcsClient
      */
-    @NonNull
-    private static IAcsClient getClient(@NonNull String regionId, @NonNull String accessKeyId, @NonNull String accessKeySecret) {
-        DefaultProfile profile = DefaultProfile.getProfile(regionId, accessKeyId, accessKeySecret);
-        DefaultProfile.addEndpoint(regionId, "Dysmsapi", "dysmsapi.aliyuncs.com");
+    private static IAcsClient getClient(String accessKeyId, String accessKeySecret) {
+        DefaultProfile profile = DefaultProfile.getProfile(REGION_ID, accessKeyId, accessKeySecret);
         return new DefaultAcsClient(profile);
+    }
+
+    /**
+     * 创建公共请求
+     *
+     * @return 公共请求
+     */
+    private static CommonRequest createRequest() {
+        CommonRequest request = new CommonRequest();
+        request.setSysMethod(MethodType.POST);
+        request.setSysDomain(SYS_DOMAIN);
+        request.setSysVersion(SYS_VERSION);
+        request.setSysAction(SYS_ACTION);
+        return request;
     }
 }

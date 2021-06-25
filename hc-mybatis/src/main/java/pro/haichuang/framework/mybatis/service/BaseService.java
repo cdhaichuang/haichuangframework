@@ -5,12 +5,14 @@ import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import lombok.SneakyThrows;
+import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
 import pro.haichuang.framework.base.enums.abnormal.client.RequestParamAbnormalEnum;
 import pro.haichuang.framework.base.exception.client.RequestParamException;
+import pro.haichuang.framework.base.request.PageRequest;
 import pro.haichuang.framework.mybatis.domain.BaseDO;
 import pro.haichuang.framework.base.page.PageDTO;
-import pro.haichuang.framework.base.query.PageQuery;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -35,7 +37,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param id ID
      * @return 是否存在 [true: 存在, false: 不存在]
      */
-    default boolean isExistsByIdAndIgnore(Long id) {
+    default boolean isExistsByIdAndIgnore(@Nullable Long id) {
         if (id == null) {
             return false;
         }
@@ -48,7 +50,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param ids IDs
      * @return 是否存在 [true: 存在, false: 不存在]
      */
-    default boolean isExistsByIdAndIgnore(Collection<Long> ids) {
+    default boolean isExistsByIdAndIgnore(@Nullable Collection<Long> ids) {
         if (ids == null || ids.isEmpty()) {
             return false;
         }
@@ -61,7 +63,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param id ID
      * @return 数量
      */
-    default int countByIdAndIgnore(Long id) {
+    default int countByIdAndIgnore(@Nullable Long id) {
         if (id == null) {
             return 0;
         }
@@ -74,7 +76,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param ids IDs
      * @return 数量
      */
-    default int countByIdAndIgnore(Collection<Long> ids) {
+    default int countByIdAndIgnore(@Nullable Collection<Long> ids) {
         if (ids == null || ids.isEmpty()) {
             return 0;
         }
@@ -87,7 +89,8 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param id ID
      * @return DO
      */
-    default T getByIdAndIgnore(Long id) {
+    @Nullable
+    default T getByIdAndIgnore(@Nullable Long id) {
         if (id == null) {
             return null;
         }
@@ -100,7 +103,8 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param ids IDs
      * @return DOs
      */
-    default List<T> listByIdAndIgnore(Collection<Long> ids) {
+    @NonNull
+    default List<T> listByIdAndIgnore(@Nullable Collection<Long> ids) {
         if (ids == null || ids.isEmpty()) {
             return Collections.emptyList();
         }
@@ -108,17 +112,19 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
     }
 
     /**
-     * 忽略PageQuery并获取PageDTO
+     * 忽略PageRequest并获取PageDTO
      * 默认根据 {@link BaseDO#MODIFY_TIME} 进行排序
      *
-     * @param pageQuery PageQuery
+     * @param pageRequest PageRequest
      * @return PageDTO
      */
-    default PageDTO<T> listPageAndIgnore(PageQuery pageQuery) {
-        if (pageQuery == null) {
-            return new PageDTO<>(new PageQuery());
+    @NonNull
+    default PageDTO<T> listPageAndIgnore(@Nullable PageRequest pageRequest) {
+        if (pageRequest == null) {
+            return new PageDTO<>(new PageRequest());
         }
-        return new PageDTO<T>(pageQuery).setContent(this.page(new Page<T>(pageQuery.getPageNo(), pageQuery.getPageSize()).addOrder(OrderItem.desc(BaseService.toUnderlineCase(BaseDO.MODIFY_TIME)))).getRecords());
+        return new PageDTO<T>(pageRequest).setContent(this.page(new Page<T>(pageRequest.getPageNo(), pageRequest.getPageSize())
+                .addOrder(OrderItem.desc(BaseService.toUnderlineCase(BaseDO.MODIFY_TIME)))).getRecords());
     }
 
     /**
@@ -127,11 +133,12 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param entity 实体类
      * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
      */
-    default boolean saveAndIgnore(T entity) {
+    default boolean saveAndIgnore(@Nullable T entity) {
         if (entity == null) {
             return false;
         }
-        return this.save(BaseService.clearEntityDefaultParameterAndGet(entity, true, true, true));
+        return this.save(BaseService.clearEntityDefaultParameterAndGet(entity,
+                true, true, true));
     }
 
     /**
@@ -140,7 +147,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param entities 实体对象集合
      * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
      */
-    default boolean saveAndIgnore(Collection<T> entities) {
+    default boolean saveAndIgnore(@Nullable Collection<T> entities) {
         return this.saveAndIgnore(entities, 1000);
     }
 
@@ -151,11 +158,12 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param batchSize 插入批次数量
      * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
      */
-    default boolean saveAndIgnore(Collection<T> entities, int batchSize) {
+    default boolean saveAndIgnore(@Nullable Collection<T> entities, int batchSize) {
         if (entities == null || entities.isEmpty()) {
             return false;
         }
-        return this.saveBatch(BaseService.clearEntityDefaultParameterAndGet(entities, true, true, true), batchSize);
+        return this.saveBatch(BaseService.clearEntityDefaultParameterAndGet(entities,
+                true, true, true), batchSize);
     }
 
     /**
@@ -164,7 +172,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param entity 实体类
      * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
      */
-    default boolean updateByIdAndIgnore(T entity) {
+    default boolean updateByIdAndIgnore(@Nullable T entity) {
         if (entity == null) {
             return false;
         }
@@ -177,7 +185,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param entities 实体对象集合
      * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
      */
-    default boolean updateByIdAndIgnore(Collection<T> entities) {
+    default boolean updateByIdAndIgnore(@Nullable Collection<T> entities) {
         return this.updateByIdAndIgnore(entities, 1000);
     }
 
@@ -188,7 +196,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param batchSize 插入批次数量
      * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
      */
-    default boolean updateByIdAndIgnore(Collection<T> entities, int batchSize) {
+    default boolean updateByIdAndIgnore(@Nullable Collection<T> entities, int batchSize) {
         if (entities == null || entities.isEmpty()) {
             return false;
         }
@@ -201,7 +209,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param id ID
      * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
      */
-    default boolean removeByIdAndIgnore(Long id) {
+    default boolean removeByIdAndIgnore(@Nullable Long id) {
         if (id == null) {
             return false;
         }
@@ -214,7 +222,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param ids ID集合
      * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
      */
-    default boolean removeByIdAndIgnore(Collection<Long> ids) {
+    default boolean removeByIdAndIgnore(@Nullable Collection<Long> ids) {
         if (ids == null || ids.isEmpty()) {
             return false;
         }
@@ -230,7 +238,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @return 是否存在 [true: 存在, false: 不存在]
      * @throws RequestParamException ID为空
      */
-    default boolean isExistsByIdAndValidate(Long id) throws RequestParamException {
+    default boolean isExistsByIdAndValidate(@NonNull Long id) throws RequestParamException {
         return this.isExistsByIdAndValidate(id, null);
     }
 
@@ -242,7 +250,8 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @return 是否存在 [true: 存在, false: 不存在]
      * @throws RequestParamException ID为空
      */
-    default boolean isExistsByIdAndValidate(Long id, String errorUserTip) throws RequestParamException {
+    default boolean isExistsByIdAndValidate(@Nullable Long id, @Nullable String errorUserTip)
+            throws RequestParamException {
         if (id == null) {
             throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
         }
@@ -256,7 +265,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @return 是否存在 [true: 存在, false: 不存在]
      * @throws RequestParamException ID为空
      */
-    default boolean isExistsByIdAndValidate(Collection<Long> ids) throws RequestParamException {
+    default boolean isExistsByIdAndValidate(@Nullable Collection<Long> ids) throws RequestParamException {
         return this.isExistsByIdAndValidate(ids, null);
     }
 
@@ -268,7 +277,8 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @return 是否存在 [true: 存在, false: 不存在]
      * @throws RequestParamException ID为空
      */
-    default boolean isExistsByIdAndValidate(Collection<Long> ids, String errorUserTip) throws RequestParamException {
+    default boolean isExistsByIdAndValidate(@Nullable Collection<Long> ids, @Nullable String errorUserTip)
+            throws RequestParamException {
         if (ids == null || ids.isEmpty()) {
             throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
         }
@@ -282,7 +292,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @return 数量
      * @throws RequestParamException ID为空
      */
-    default int countByIdAndValidate(Long id) throws RequestParamException {
+    default int countByIdAndValidate(@Nullable Long id) throws RequestParamException {
         return this.countByIdAndValidate(id, null);
     }
 
@@ -294,7 +304,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @return 数量
      * @throws RequestParamException ID为空
      */
-    default int countByIdAndValidate(Long id, String errorUserTip) throws RequestParamException {
+    default int countByIdAndValidate(@Nullable Long id, @Nullable String errorUserTip) throws RequestParamException {
         if (id == null) {
             throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
         }
@@ -308,7 +318,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @return 数量
      * @throws RequestParamException ID为空
      */
-    default int countByIdAndValidate(Collection<Long> ids) throws RequestParamException {
+    default int countByIdAndValidate(@Nullable Collection<Long> ids) throws RequestParamException {
         return this.countByIdAndValidate(ids, null);
     }
 
@@ -320,7 +330,8 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @return 数量
      * @throws RequestParamException ID为空
      */
-    default int countByIdAndValidate(Collection<Long> ids, String errorUserTip) throws RequestParamException {
+    default int countByIdAndValidate(@Nullable Collection<Long> ids, @Nullable String errorUserTip)
+            throws RequestParamException {
         if (ids == null || ids.isEmpty()) {
             throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
         }
@@ -334,7 +345,8 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @return DO
      * @throws RequestParamException ID为空|ID错误
      */
-    default T getByIdAndValidate(Long id) throws RequestParamException {
+    @NonNull
+    default T getByIdAndValidate(@Nullable Long id) throws RequestParamException {
         return this.getByIdAndValidate(id, null);
     }
 
@@ -346,7 +358,8 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @return DO
      * @throws RequestParamException ID为空|ID错误
      */
-    default T getByIdAndValidate(Long id, String errorUserTip) throws RequestParamException {
+    @NonNull
+    default T getByIdAndValidate(@Nullable Long id, @Nullable String errorUserTip) throws RequestParamException {
         if (id == null) {
             throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
         }
@@ -364,7 +377,8 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @return DOs
      * @throws RequestParamException ID为空|ID错误
      */
-    default List<T> listByIdAndValidate(Collection<Long> ids) throws RequestParamException {
+    @NonNull
+    default List<T> listByIdAndValidate(@Nullable Collection<Long> ids) throws RequestParamException {
         return this.listByIdAndValidate(ids, null);
     }
 
@@ -376,7 +390,9 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @return DOs
      * @throws RequestParamException ID为空|ID错误
      */
-    default List<T> listByIdAndValidate(Collection<Long> ids, String errorUserTip) throws RequestParamException {
+    @NonNull
+    default List<T> listByIdAndValidate(@Nullable Collection<Long> ids, @Nullable String errorUserTip)
+            throws RequestParamException {
         if (ids == null || ids.isEmpty()) {
             throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
         }
@@ -388,29 +404,32 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
     }
 
     /**
-     * 验证PageQuery并获取PageDTO
+     * 验证PageRequest并获取PageDTO
      * 默认根据 {@link BaseDO#MODIFY_TIME} 进行排序
      *
-     * @param pageQuery PageQuery
+     * @param pageRequest PageRequest
      * @return PageDTO
      */
-    default PageDTO<T> listPageAndValidate(PageQuery pageQuery) throws RequestParamException {
-        return this.listPageAndValidate(pageQuery, null);
+    @NonNull
+    default PageDTO<T> listPageAndValidate(@Nullable PageRequest pageRequest) throws RequestParamException {
+        return this.listPageAndValidate(pageRequest, null);
     }
 
     /**
-     * 验证PageQuery并获取PageDTO
+     * 验证PageRequest并获取PageDTO
      * 默认根据 {@link BaseDO#MODIFY_TIME} 进行排序
      *
-     * @param pageQuery    PageQuery
+     * @param pageRequest  PageRequest
      * @param errorUserTip 错误提示信息
      * @return PageDTO
      */
-    default PageDTO<T> listPageAndValidate(PageQuery pageQuery, String errorUserTip) throws RequestParamException {
-        if (pageQuery == null) {
+    @NonNull
+    default PageDTO<T> listPageAndValidate(@Nullable PageRequest pageRequest, @Nullable String errorUserTip)
+            throws RequestParamException {
+        if (pageRequest == null) {
             throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
         }
-        return new PageDTO<T>(pageQuery).setContent(this.page(new Page<T>(pageQuery.getPageNo(), pageQuery.getPageSize())
+        return new PageDTO<T>(pageRequest).setContent(this.page(new Page<T>(pageRequest.getPageNo(), pageRequest.getPageSize())
                 .addOrder(OrderItem.desc(BaseService.toUnderlineCase(BaseDO.MODIFY_TIME)))).getRecords());
     }
 
@@ -421,7 +440,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
      * @throws RequestParamException 参数为空|参数错误
      */
-    default boolean saveAndValidate(T entity) throws RequestParamException {
+    default boolean saveAndValidate(@Nullable T entity) throws RequestParamException {
         return this.saveAndValidate(entity, null);
     }
 
@@ -433,11 +452,13 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
      * @throws RequestParamException 参数为空|参数错误
      */
-    default boolean saveAndValidate(T entity, String errorUserTip) throws RequestParamException {
+    default boolean saveAndValidate(@Nullable T entity, @Nullable String errorUserTip)
+            throws RequestParamException {
         if (entity == null) {
             throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
         }
-        return this.save(BaseService.clearEntityDefaultParameterAndGet(entity, true, true, true));
+        return this.save(BaseService.clearEntityDefaultParameterAndGet(entity,
+                true, true, true));
     }
 
     /**
@@ -447,7 +468,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
      * @throws RequestParamException 参数为空|参数错误
      */
-    default boolean saveAndValidate(Collection<T> entities) throws RequestParamException {
+    default boolean saveAndValidate(@Nullable Collection<T> entities) throws RequestParamException {
         return this.saveAndValidate(entities, 1000, null);
     }
 
@@ -459,7 +480,8 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
      * @throws RequestParamException 参数为空|参数错误
      */
-    default boolean saveAndValidate(Collection<T> entities, String errorUserTip) throws RequestParamException {
+    default boolean saveAndValidate(@Nullable Collection<T> entities, @Nullable String errorUserTip)
+            throws RequestParamException {
         return this.saveAndValidate(entities, 1000, errorUserTip);
     }
 
@@ -471,7 +493,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
      * @throws RequestParamException 参数为空|参数错误
      */
-    default boolean saveAndValidate(Collection<T> entities, int batchSize) throws RequestParamException {
+    default boolean saveAndValidate(@Nullable Collection<T> entities, int batchSize) throws RequestParamException {
         return this.saveAndValidate(entities, batchSize, null);
     }
 
@@ -484,11 +506,13 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
      * @throws RequestParamException 参数为空|参数错误
      */
-    default boolean saveAndValidate(Collection<T> entities, int batchSize, String errorUserTip) throws RequestParamException {
+    default boolean saveAndValidate(@Nullable Collection<T> entities, int batchSize, @Nullable String errorUserTip)
+            throws RequestParamException {
         if (entities == null || entities.isEmpty()) {
             throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
         }
-        return this.saveBatch(BaseService.clearEntityDefaultParameterAndGet(entities, true, true, true), batchSize);
+        return this.saveBatch(BaseService.clearEntityDefaultParameterAndGet(entities,
+                true, true, true), batchSize);
     }
 
     /**
@@ -499,7 +523,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @throws RequestParamException 参数为空|参数错误
      */
     @SneakyThrows
-    default boolean updateByIdAndValidate(T entity) throws RequestParamException {
+    default boolean updateByIdAndValidate(@Nullable T entity) throws RequestParamException {
         if (entity == null) {
             throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY);
         }
@@ -519,7 +543,8 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @throws RequestParamException 参数为空|参数错误
      */
     @SneakyThrows
-    default boolean updateByIdAndValidate(T entity, String errorUserTip) throws RequestParamException {
+    default boolean updateByIdAndValidate(@Nullable T entity, @Nullable String errorUserTip)
+            throws RequestParamException {
         if (entity == null) {
             throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
         }
@@ -537,7 +562,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
      * @throws RequestParamException 参数为空|参数错误
      */
-    default boolean updateByIdAndValidate(Collection<T> entities) throws RequestParamException {
+    default boolean updateByIdAndValidate(@Nullable Collection<T> entities) throws RequestParamException {
         return this.updateByIdAndValidate(entities, 1000);
     }
 
@@ -549,7 +574,8 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
      * @throws RequestParamException 参数为空|参数错误
      */
-    default boolean updateByIdAndValidate(Collection<T> entities, String errorUserTip) throws RequestParamException {
+    default boolean updateByIdAndValidate(@Nullable Collection<T> entities, @Nullable String errorUserTip)
+            throws RequestParamException {
         return this.updateByIdAndValidate(entities, 1000, errorUserTip);
     }
 
@@ -562,7 +588,8 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @throws RequestParamException 参数为空|参数错误
      */
     @SneakyThrows
-    default boolean updateByIdAndValidate(Collection<T> entities, int batchSize) throws RequestParamException {
+    default boolean updateByIdAndValidate(@Nullable Collection<T> entities, int batchSize)
+            throws RequestParamException {
         return this.updateByIdAndValidate(entities, batchSize, null);
     }
 
@@ -576,7 +603,8 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @throws RequestParamException 参数为空|参数错误
      */
     @SneakyThrows
-    default boolean updateByIdAndValidate(Collection<T> entities, int batchSize, String errorUserTip) throws RequestParamException {
+    default boolean updateByIdAndValidate(@Nullable Collection<T> entities, int batchSize, @Nullable String errorUserTip)
+            throws RequestParamException {
         if (CollectionUtils.isEmpty(entities)) {
             throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
         }
@@ -596,7 +624,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param id ID
      * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
      */
-    default boolean removeByIdAndValidate(Long id) throws RequestParamException {
+    default boolean removeByIdAndValidate(@Nullable Long id) throws RequestParamException {
         return this.removeByIdAndValidate(id, null);
     }
 
@@ -607,7 +635,8 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param errorUserTip 错误提示信息
      * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
      */
-    default boolean removeByIdAndValidate(Long id, String errorUserTip) throws RequestParamException {
+    default boolean removeByIdAndValidate(@Nullable Long id, @Nullable String errorUserTip)
+            throws RequestParamException {
         if (this.countByIdAndValidate(id) == 0) {
             throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_ERROR, errorUserTip);
         }
@@ -620,7 +649,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param ids ID集合
      * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
      */
-    default boolean removeByIdAndValidate(Collection<Long> ids) throws RequestParamException {
+    default boolean removeByIdAndValidate(@Nullable Collection<Long> ids) throws RequestParamException {
         return this.removeByIdAndValidate(ids, null);
     }
 
@@ -631,8 +660,9 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param errorUserTip 错误提示信息
      * @return 操作是否成功 {null: 未执行, true: 成功, false: 失败}
      */
-    default boolean removeByIdAndValidate(Collection<Long> ids, String errorUserTip) throws RequestParamException {
-        if (this.countByIdAndValidate(ids) != ids.size()) {
+    default boolean removeByIdAndValidate(@Nullable Collection<Long> ids, @Nullable String errorUserTip)
+            throws RequestParamException {
+        if (ids == null || this.countByIdAndValidate(ids) != ids.size()) {
             throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_ERROR, errorUserTip);
         }
         return this.removeByIds(ids);
@@ -647,8 +677,10 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param <T>    实体类类型
      * @return 操作后的实体类
      */
-    static <T extends BaseDO> T clearEntityDefaultParameterAndGet(T entity) {
-        return BaseService.clearEntityDefaultParameterAndGet(entity, false, true, true);
+    @NonNull
+    static <T extends BaseDO> T clearEntityDefaultParameterAndGet(@NonNull T entity) {
+        return BaseService.clearEntityDefaultParameterAndGet(entity,
+                false, true, true);
     }
 
     /**
@@ -658,8 +690,10 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param <T>      实体类类型
      * @return 操作后的实体类
      */
-    static <T extends BaseDO> List<T> clearEntityDefaultParameterAndGet(Collection<T> entities) {
-        return entities.stream().map(entity -> BaseService.clearEntityDefaultParameterAndGet(entity, false, true, true)).collect(Collectors.toList());
+    @NonNull
+    static <T extends BaseDO> List<T> clearEntityDefaultParameterAndGet(@NonNull Collection<T> entities) {
+        return entities.stream().map(entity -> BaseService.clearEntityDefaultParameterAndGet(entity,
+                false, true, true)).collect(Collectors.toList());
     }
 
     /**
@@ -673,28 +707,38 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @return 操作后的实体类
      */
     @SneakyThrows
-    static <T extends BaseDO> T clearEntityDefaultParameterAndGet(T entity, boolean isClearId, boolean isClearCreateTime, boolean isClearModifyTime) {
+    @NonNull
+    static <T extends BaseDO> T clearEntityDefaultParameterAndGet(
+            @NonNull T entity, boolean isClearId, boolean isClearCreateTime, boolean isClearModifyTime) {
         if (isClearId) {
             String setIdMethodName = "set".concat(BaseDO.ID.substring(0, 1).toUpperCase().concat(BaseDO.ID.substring(1)));
             Method setIdMethod = BaseService.getDeepDeclareMethod(entity, setIdMethodName, BaseDO.ID_CLASS);
             if (setIdMethod == null) {
-                throw new NoSuchMethodException(entity.getClass().getName() + "." + setIdMethodName + "(" + BaseDO.ID_CLASS.getName() + ")");
+                throw new NoSuchMethodException(
+                        entity.getClass().getName() + "." + setIdMethodName + "(" + BaseDO.ID_CLASS.getName() + ")"
+                );
             }
             setIdMethod.invoke(entity, (Object) null);
         }
         if (isClearCreateTime) {
-            String setCreateTimeMethodName = "set".concat(BaseDO.CREATE_TIME.substring(0, 1).toUpperCase().concat(BaseDO.CREATE_TIME.substring(1)));
-            Method setCreateTimeMethod = BaseService.getDeepDeclareMethod(entity, setCreateTimeMethodName, BaseDO.CREATE_TIME_CLASS);
+            String setCreateTimeMethodName = "set".concat(BaseDO.CREATE_TIME.substring(0, 1).toUpperCase()
+                    .concat(BaseDO.CREATE_TIME.substring(1)));
+            Method setCreateTimeMethod = BaseService.getDeepDeclareMethod(entity,
+                    setCreateTimeMethodName, BaseDO.CREATE_TIME_CLASS);
             if (setCreateTimeMethod == null) {
-                throw new NoSuchMethodException(entity.getClass().getName() + "." + setCreateTimeMethodName + "(" + BaseDO.ID_CLASS.getName() + ")");
+                throw new NoSuchMethodException(entity.getClass().getName()
+                        + "." + setCreateTimeMethodName + "(" + BaseDO.ID_CLASS.getName() + ")");
             }
             setCreateTimeMethod.invoke(entity, (Object) null);
         }
         if (isClearModifyTime) {
-            String setModifyTimeMethodName = "set".concat(BaseDO.MODIFY_TIME.substring(0, 1).toUpperCase().concat(BaseDO.MODIFY_TIME.substring(1)));
-            Method setModifyTimeMethod = BaseService.getDeepDeclareMethod(entity, setModifyTimeMethodName, BaseDO.MODIFY_TIME_CLASS);
+            String setModifyTimeMethodName = "set".concat(BaseDO.MODIFY_TIME.substring(0, 1).toUpperCase()
+                    .concat(BaseDO.MODIFY_TIME.substring(1)));
+            Method setModifyTimeMethod = BaseService.getDeepDeclareMethod(entity,
+                    setModifyTimeMethodName, BaseDO.MODIFY_TIME_CLASS);
             if (setModifyTimeMethod == null) {
-                throw new NoSuchMethodException(entity.getClass().getName() + "." + setModifyTimeMethodName + "(" + BaseDO.ID_CLASS.getName() + ")");
+                throw new NoSuchMethodException(entity.getClass().getName()
+                        + "." + setModifyTimeMethodName + "(" + BaseDO.ID_CLASS.getName() + ")");
             }
             setModifyTimeMethod.invoke(entity, (Object) null);
         }
@@ -711,8 +755,11 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param <T>               实体类类型
      * @return 清除参数后的实体对象集合
      */
-    static <T extends BaseDO> Collection<T> clearEntityDefaultParameterAndGet(Collection<T> entities, boolean isClearId, boolean isClearCreateTime, boolean isClearModifyTime) {
-        return entities.stream().map(entity -> BaseService.clearEntityDefaultParameterAndGet(entity, isClearId, isClearCreateTime, isClearModifyTime)).collect(Collectors.toList());
+    @NonNull
+    static <T extends BaseDO> Collection<T> clearEntityDefaultParameterAndGet(
+            @NonNull Collection<T> entities, boolean isClearId, boolean isClearCreateTime, boolean isClearModifyTime) {
+        return entities.stream().map(entity -> BaseService.clearEntityDefaultParameterAndGet(entity,
+                isClearId, isClearCreateTime, isClearModifyTime)).collect(Collectors.toList());
     }
 
     /**
@@ -723,17 +770,20 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @return 获取ID方法
      */
     @SneakyThrows
-    static <T extends BaseDO> Method validateIdExistsAndGetIdMethod(T entity) {
+    @NonNull
+    static <T extends BaseDO> Method validateIdExistsAndGetIdMethod(@NonNull T entity) {
         String idMethodFormat = BaseDO.ID.substring(0, 1).toUpperCase().concat(BaseDO.ID.substring(1));
         String setIdMethodName = "set".concat(idMethodFormat);
         Method setIdMethod = BaseService.getDeepDeclareMethod(entity, setIdMethodName, BaseDO.ID_CLASS);
         String getIdMethodName = "get".concat(idMethodFormat);
         Method getIdMethod = BaseService.getDeepDeclareMethod(entity, getIdMethodName);
         if (setIdMethod == null) {
-            throw new NoSuchMethodException(entity.getClass().getName() + "." + setIdMethodName + "(" + BaseDO.ID_CLASS.getName() + ")");
+            throw new NoSuchMethodException(entity.getClass().getName()
+                    + "." + setIdMethodName + "(" + BaseDO.ID_CLASS.getName() + ")");
         }
         if (getIdMethod == null) {
-            throw new NoSuchMethodException(entity.getClass().getName() + "." + getIdMethodName + "(" + BaseDO.ID_CLASS.getName() + ")");
+            throw new NoSuchMethodException(entity.getClass().getName()
+                    + "." + getIdMethodName + "(" + BaseDO.ID_CLASS.getName() + ")");
         }
         return getIdMethod;
     }
@@ -747,7 +797,9 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param <T>            实体类类型
      * @return 方法
      */
-    static <T extends BaseDO> Method getDeepDeclareMethod(T entity, String methodName, Class<?>... parameterTypes) {
+    @Nullable
+    static <T extends BaseDO> Method getDeepDeclareMethod(
+            @NonNull T entity, @NonNull String methodName, @Nullable Class<?>... parameterTypes) {
         Method method = null;
         for (Class<?> clazz = entity.getClass(); clazz != Object.class; clazz = clazz.getSuperclass()) {
             try {
@@ -767,7 +819,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param value 驼峰字符串
      * @return 下划线字符串
      */
-    static String toUnderlineCase(String value) {
+    static String toUnderlineCase(@NonNull String value) {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < value.length(); i++) {
             char c = value.charAt(i);

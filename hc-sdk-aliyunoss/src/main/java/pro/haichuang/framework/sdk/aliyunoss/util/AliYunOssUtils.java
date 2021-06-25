@@ -51,18 +51,19 @@ public class AliYunOssUtils {
      * @return 上传后的路径
      * @throws IOException 获取文件流异常
      */
-    @NonNull
-    public static String upload(@NonNull MultipartFile file, @NonNull String endPoint,
-                                @NonNull String accessKeyId, @NonNull String accessKeySecret,
-                                @NonNull String bucketName, @NonNull String uploadPath, @NonNull String childrenPath) throws IOException {
+    public static String upload(MultipartFile file, String endPoint,
+                                String accessKeyId, String accessKeySecret,
+                                String bucketName, String uploadPath, String childrenPath) throws IOException {
         String uuid = UUIDUtils.Local.get();
         OSS ossClient = null;
         try {
             ossClient = new OSSClientBuilder().build(endPoint, accessKeyId, accessKeySecret);
             String fileRelativeName = concatFilename(file, uploadPath, childrenPath);
             ossClient.putObject(bucketName, fileRelativeName, file.getInputStream());
-            String resultFilePath = formatFilename(FilenameUtils.concat("/", fileRelativeName), false);
-            LOGGER.info("[{}] 简单上传 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG, uuid, bucketName, resultFilePath);
+            String resultFilePath = formatFilename(FilenameUtils.concat("/", fileRelativeName),
+                    false);
+            LOGGER.info("[{}] 简单上传 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG,
+                    uuid, bucketName, resultFilePath);
             return resultFilePath;
         } finally {
             if (ossClient != null) {
@@ -84,10 +85,10 @@ public class AliYunOssUtils {
      * @return 上传后的路径
      * @throws FileNotFoundException 文件不存在异常
      */
-    @NonNull
-    public static String upload(@NonNull String absoluteFilePath, @NonNull String endPoint,
-                                @NonNull String accessKeyId, @NonNull String accessKeySecret,
-                                @NonNull String bucketName, @NonNull String uploadPath, @NonNull String childrenPath) throws FileNotFoundException {
+    public static String upload(String absoluteFilePath, String endPoint,
+                                String accessKeyId, String accessKeySecret,
+                                String bucketName, String uploadPath, String childrenPath)
+            throws FileNotFoundException {
         String uuid = UUIDUtils.Local.get();
         OSS ossClient = null;
         try {
@@ -101,8 +102,10 @@ public class AliYunOssUtils {
             ossClient = new OSSClientBuilder().build(endPoint, accessKeyId, accessKeySecret);
             String fileRelativeName = concatFilename(absoluteFilePath, uploadPath, childrenPath);
             ossClient.putObject(bucketName, fileRelativeName, new File(absoluteFilePath));
-            String resultFilePath = formatFilename(FilenameUtils.concat("/", fileRelativeName), false);
-            LOGGER.info("[{}] 简单上传 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG, uuid, bucketName, resultFilePath);
+            String resultFilePath = formatFilename(FilenameUtils.concat("/", fileRelativeName),
+                    false);
+            LOGGER.info("[{}] 简单上传 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG,
+                    uuid, bucketName, resultFilePath);
             return resultFilePath;
         } finally {
             if (ossClient != null) {
@@ -125,12 +128,14 @@ public class AliYunOssUtils {
      * @throws IOException 获取文件流异常
      */
     @NonNull
-    public static List<String> upload(@NonNull List<MultipartFile> files, @NonNull String endPoint,
-                                      @NonNull String accessKeyId, @NonNull String accessKeySecret,
-                                      @NonNull String bucketName, @NonNull String uploadPath, @NonNull String childrenPath) throws IOException {
+    public static List<String> upload(List<MultipartFile> files, String endPoint,
+                                      String accessKeyId, String accessKeySecret,
+                                      String bucketName, String uploadPath, String childrenPath)
+            throws IOException {
         List<String> resultFilePaths = new ArrayList<>();
         for (MultipartFile file : files) {
-            resultFilePaths.add(upload(file, endPoint, accessKeyId, accessKeySecret, bucketName, uploadPath, childrenPath));
+            resultFilePaths.add(upload(file, endPoint, accessKeyId, accessKeySecret,
+                    bucketName, uploadPath, childrenPath));
         }
         return resultFilePaths;
     }
@@ -147,8 +152,9 @@ public class AliYunOssUtils {
      * @param bucketName      BucketName
      * @throws IOException 文件流转文件失败
      */
-    public static void download(@NonNull String ossFilePath, @NonNull HttpServletRequest request, @NonNull HttpServletResponse response,
-                                @NonNull String endPoint, @NonNull String accessKeyId, @NonNull String accessKeySecret, @NonNull String bucketName) throws IOException {
+    public static void download(String ossFilePath, HttpServletRequest request, HttpServletResponse response,
+                                String endPoint, String accessKeyId, String accessKeySecret, String bucketName)
+            throws IOException {
         OSS ossClient = null;
         try {
             ossClient = new OSSClientBuilder().build(endPoint, accessKeyId, accessKeySecret);
@@ -191,14 +197,15 @@ public class AliYunOssUtils {
      * @param accessKeySecret AccessKeySecret
      * @param bucketName      BucketName
      */
-    public static void deleteObject(@NonNull String ossFilePath, @NonNull String endPoint,
-                                    @NonNull String accessKeyId, @NonNull String accessKeySecret, @NonNull String bucketName) {
+    public static void deleteObject(String ossFilePath, String endPoint,
+                                    String accessKeyId, String accessKeySecret, String bucketName) {
         String uuid = UUIDUtils.Local.get();
         OSS ossClient = null;
         try {
             ossClient = new OSSClientBuilder().build(endPoint, accessKeyId, accessKeySecret);
             ossClient.deleteObject(bucketName, formatFilename(ossFilePath, true));
-            LOGGER.info("[{}] 删除文件 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG, uuid, bucketName, ossFilePath);
+            LOGGER.info("[{}] 删除文件 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG,
+                    uuid, bucketName, ossFilePath);
         } finally {
             if (ossClient != null) {
                 ossClient.shutdown();
@@ -217,8 +224,8 @@ public class AliYunOssUtils {
      * @return 删除结果
      * @see pro.haichuang.framework.sdk.aliyunoss.util.AliYunOssUtils#deleteObject(List, boolean, String, String, String, String)
      */
-    public static List<String> deleteObject(@NonNull List<String> ossFilePaths, @NonNull String endPoint,
-                                            @NonNull String accessKeyId, @NonNull String accessKeySecret, @NonNull String bucketName) {
+    public static List<String> deleteObject(List<String> ossFilePaths, String endPoint,
+                                            String accessKeyId, String accessKeySecret, String bucketName) {
         return deleteObject(ossFilePaths, false, endPoint, accessKeyId, accessKeySecret, bucketName);
     }
 
@@ -233,17 +240,19 @@ public class AliYunOssUtils {
      * @param bucketName      BucketName
      * @return 删除结果, 参考 {@code quiet} 字段
      */
-    public static List<String> deleteObject(@NonNull List<String> ossFilePaths, boolean quiet, @NonNull String endPoint,
-                                            @NonNull String accessKeyId, @NonNull String accessKeySecret, @NonNull String bucketName) {
+    public static List<String> deleteObject(List<String> ossFilePaths, boolean quiet, String endPoint,
+                                            String accessKeyId, String accessKeySecret, String bucketName) {
         String uuid = UUIDUtils.Local.get();
         OSS ossClient = null;
         try {
             ossClient = new OSSClientBuilder().build(endPoint, accessKeyId, accessKeySecret);
-            ossFilePaths = ossFilePaths.stream().map(path -> formatFilename(path, true)).collect(Collectors.toList());
+            ossFilePaths = ossFilePaths.stream().map(path ->
+                    formatFilename(path, true)).collect(Collectors.toList());
             DeleteObjectsRequest deleteObjectsRequest = new DeleteObjectsRequest(bucketName).withKeys(ossFilePaths);
             deleteObjectsRequest.setQuiet(quiet);
             DeleteObjectsResult deleteObjectsResult = ossClient.deleteObjects(deleteObjectsRequest);
-            LOGGER.info("[{}] 删除文件 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG, uuid, bucketName, ossFilePaths);
+            LOGGER.info("[{}] 删除文件 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG,
+                    uuid, bucketName, ossFilePaths);
             return deleteObjectsResult.getDeletedObjects();
         } finally {
             if (ossClient != null) {
@@ -260,13 +269,13 @@ public class AliYunOssUtils {
      * @param childrenPath 上传子路径
      * @return 拼接后的文件名 {上传相对路径 + 上传子路径 + 新文件名}
      */
-    @NonNull
-    private static String concatFilename(@NonNull MultipartFile file, @NonNull String uploadPath, @NonNull String childrenPath) {
+    private static String concatFilename(MultipartFile file, String uploadPath, String childrenPath) {
         String fileOriginalExtensionName = FilenameUtils.getExtension(file.getOriginalFilename());
         String fileNewName = fileOriginalExtensionName != null && !fileOriginalExtensionName.isEmpty()
                 ? UUIDUtils.random().concat(".") + fileOriginalExtensionName
                 : UUIDUtils.random();
-        return formatFilename(FilenameUtils.concat(FilenameUtils.concat(uploadPath, childrenPath), fileNewName), true);
+        return formatFilename(FilenameUtils.concat(FilenameUtils.concat(uploadPath, childrenPath), fileNewName),
+                true);
     }
 
     /**
@@ -277,24 +286,25 @@ public class AliYunOssUtils {
      * @param childrenPath 上传子路径
      * @return 拼接后的文件名 {上传相对路径 + 上传子路径 + 新文件名}
      */
-    @NonNull
-    private static String concatFilename(@NonNull String filePath, @NonNull String uploadPath, @NonNull String childrenPath) {
+    private static String concatFilename(String filePath, String uploadPath, String childrenPath) {
         String fileExtensionName = FilenameUtils.getExtension(filePath);
         String fileNewName = !fileExtensionName.isEmpty()
                 ? UUIDUtils.random().concat(".").concat(fileExtensionName)
                 : UUIDUtils.random();
-        return formatFilename(FilenameUtils.concat(FilenameUtils.concat(uploadPath, childrenPath), fileNewName), true);
+        return formatFilename(FilenameUtils.concat(FilenameUtils.concat(uploadPath, childrenPath), fileNewName),
+                true);
     }
 
     /**
      * 格式化文件名
      *
-     * @param filename 文件名
+     * @param filename                文件名
+     * @param isReplaceFirstSeparator 是否替换第一个分隔符
      * @return 格式化后的文件名
      */
-    @NonNull
-    private static String formatFilename(@NonNull String filename, boolean isReplaceFirstSeparator) {
+    private static String formatFilename(String filename, boolean isReplaceFirstSeparator) {
         filename = filename.replaceAll("\\\\", "/").replaceAll("//", "/");
-        return isReplaceFirstSeparator && (StringUtils.equals(String.valueOf(filename.charAt(0)), "/")) ? filename.substring(1) : filename;
+        return isReplaceFirstSeparator && (StringUtils.equals(String.valueOf(filename.charAt(0)), "/"))
+                ? filename.substring(1) : filename;
     }
 }
