@@ -1,9 +1,9 @@
 /**
- * 核心枚举-异常-客户端
+ * 支付宝支付核心工具包
  */
 @NonNullApi
 @NonNullFields
-package pro.haichuang.framework.base.enums.error.client;
+package pro.haichuang.framework.sdk.alipay.util;
 
 import org.springframework.lang.NonNullApi;
 import org.springframework.lang.NonNullFields;
