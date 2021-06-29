@@ -18,6 +18,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>pro.haichuang.framework</groupId>
+            <artifactId>hc-base</artifactId>
+            <version>1.0.0-RELEASE</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>com.alipay.sdk</groupId>
             <artifactId>alipay-easysdk</artifactId>
         </dependency>
