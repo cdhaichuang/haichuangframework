@@ -38,9 +38,9 @@ public class JwtUtils {
      * @param token  JwtToken
      * @param secret 密钥
      * @return DecodedJWT
-     * @throws ExpiredJwtException JWT过期异常
+     * @throws ExpiredJwtException   JWT过期异常
      * @throws MalformedJwtException JWT解析失败异常
-     * @throws SignatureException JWT格式错误异常
+     * @throws SignatureException    JWT格式错误异常
      */
     public static JwtPayload parseJwtToken(String token, String secret) throws ExpiredJwtException, MalformedJwtException, SignatureException {
         Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
