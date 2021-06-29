@@ -1,7 +1,7 @@
 package pro.haichuang.framework.base.exception.client;
 
 
-import pro.haichuang.framework.base.enums.abnormal.client.RequestServerAbnormalEnum;
+import pro.haichuang.framework.base.enums.error.client.RequestServerErrorEnum;
 import pro.haichuang.framework.base.exception.ApplicationException;
 
 /**
@@ -13,11 +13,11 @@ import pro.haichuang.framework.base.exception.ApplicationException;
 public class RequestServerException extends ApplicationException {
     private static final long serialVersionUID = -6311758362810869067L;
 
-    public RequestServerException(RequestServerAbnormalEnum requestServerAbnormalEnum) {
-        super(requestServerAbnormalEnum);
+    public RequestServerException(RequestServerErrorEnum requestServerErrorEnum) {
+        super(requestServerErrorEnum);
     }
 
-    public RequestServerException(RequestServerAbnormalEnum requestServerAbnormalEnum, String userTip) {
-        super(requestServerAbnormalEnum, userTip);
+    public RequestServerException(RequestServerErrorEnum requestServerErrorEnum, String userTip) {
+        super(requestServerErrorEnum, userTip);
     }
 }

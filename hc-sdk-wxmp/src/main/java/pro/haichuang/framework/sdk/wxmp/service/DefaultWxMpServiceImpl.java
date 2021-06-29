@@ -2,8 +2,8 @@ package pro.haichuang.framework.sdk.wxmp.service;
 
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
-import pro.haichuang.framework.base.enums.abnormal.client.AuthorityAbnormalEnum;
-import pro.haichuang.framework.base.enums.abnormal.client.RequestParamAbnormalEnum;
+import pro.haichuang.framework.base.enums.error.client.AuthorityErrorEnum;
+import pro.haichuang.framework.base.enums.error.client.RequestParamErrorEnum;
 import pro.haichuang.framework.base.response.ResultVO;
 import pro.haichuang.framework.base.util.common.ResponseUtils;
 import pro.haichuang.framework.base.util.common.ValidateUtils;
@@ -42,11 +42,11 @@ public class DefaultWxMpServiceImpl implements WxMpService {
                                 String echoStr, HttpServletResponse response) {
         validateProperties();
         ValidateUtils.validate(wxMpProperties.getToken() == null,
-                RequestParamAbnormalEnum.PARAMETER_EMPTY, "[Token] 未在Yaml进行配置");
+                RequestParamErrorEnum.PARAMETER_EMPTY, "[Token] 未在Yaml进行配置");
         if (WxMpUtils.checkSignature(wxMpProperties.getToken(), signature, timestamp, nonce)) {
             ResponseUtils.originalWrite(response, echoStr);
         } else {
-            ResponseUtils.write(response, ResultVO.other(AuthorityAbnormalEnum.ACCESS_BLOCKED));
+            ResponseUtils.write(response, ResultVO.other(AuthorityErrorEnum.ACCESS_BLOCKED));
         }
     }
 
@@ -115,8 +115,8 @@ public class DefaultWxMpServiceImpl implements WxMpService {
      */
     private void validateProperties() {
         ValidateUtils.validate(wxMpProperties.getAppId() == null,
-                RequestParamAbnormalEnum.PARAMETER_EMPTY, "[AppId] 未在Yaml进行配置");
+                RequestParamErrorEnum.PARAMETER_EMPTY, "[AppId] 未在Yaml进行配置");
         ValidateUtils.validate(wxMpProperties.getAppSecret() == null,
-                RequestParamAbnormalEnum.PARAMETER_EMPTY, "[AppSecret] 未在Yaml进行配置");
+                RequestParamErrorEnum.PARAMETER_EMPTY, "[AppSecret] 未在Yaml进行配置");
     }
 }

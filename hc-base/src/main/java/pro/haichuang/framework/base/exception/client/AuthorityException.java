@@ -1,7 +1,7 @@
 package pro.haichuang.framework.base.exception.client;
 
 
-import pro.haichuang.framework.base.enums.abnormal.client.AuthorityAbnormalEnum;
+import pro.haichuang.framework.base.enums.error.client.AuthorityErrorEnum;
 import pro.haichuang.framework.base.exception.ApplicationException;
 
 /**
@@ -13,11 +13,11 @@ import pro.haichuang.framework.base.exception.ApplicationException;
 public class AuthorityException extends ApplicationException {
     private static final long serialVersionUID = -862543118175686477L;
 
-    public AuthorityException(AuthorityAbnormalEnum authorityAbnormalEnum) {
-        super(authorityAbnormalEnum);
+    public AuthorityException(AuthorityErrorEnum authorityErrorEnum) {
+        super(authorityErrorEnum);
     }
 
-    public AuthorityException(AuthorityAbnormalEnum authorityAbnormalEnum, String userTip) {
-        super(authorityAbnormalEnum, userTip);
+    public AuthorityException(AuthorityErrorEnum authorityErrorEnum, String userTip) {
+        super(authorityErrorEnum, userTip);
     }
 }

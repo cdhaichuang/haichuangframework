@@ -3,7 +3,7 @@ package pro.haichuang.framework.sdk.wxmp.store;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
-import pro.haichuang.framework.base.enums.abnormal.client.RequestServerAbnormalEnum;
+import pro.haichuang.framework.base.enums.error.client.RequestServerErrorEnum;
 import pro.haichuang.framework.base.exception.StackTraceException;
 import pro.haichuang.framework.base.exception.client.RequestServerException;
 
@@ -133,7 +133,7 @@ public class DefaultWxMpDataStore implements WxMpDataStore {
      */
     private void validateDelayError() {
         if (DELAY_IS_ERROR) {
-            throw new RequestServerException(RequestServerAbnormalEnum.SERVICE_ABNORMAL,
+            throw new RequestServerException(RequestServerErrorEnum.SERVICE_ABNORMAL,
                     "[hc-sdk-wxmp] 模块微信相关Token延时队列执行异常, 无法正常运行该模块");
         }
     }

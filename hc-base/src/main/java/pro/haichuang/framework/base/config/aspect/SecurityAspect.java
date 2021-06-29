@@ -11,7 +11,7 @@ import org.springframework.core.annotation.Order;
 import pro.haichuang.framework.base.annotation.security.PrePermission;
 import pro.haichuang.framework.base.annotation.security.PreRole;
 import pro.haichuang.framework.base.config.interceptor.AbstractSecurityValidate;
-import pro.haichuang.framework.base.enums.abnormal.client.AuthorityAbnormalEnum;
+import pro.haichuang.framework.base.enums.error.client.AuthorityErrorEnum;
 import pro.haichuang.framework.base.exception.client.AuthorityException;
 
 import java.lang.reflect.Method;
@@ -46,7 +46,7 @@ public class SecurityAspect {
         PreRole preRoleAnnotation = method.getAnnotation(PreRole.class);
 
         if (!securityValidate.preRole(preRoleAnnotation.value())) {
-            throw new AuthorityException(AuthorityAbnormalEnum.UNAUTHORIZED);
+            throw new AuthorityException(AuthorityErrorEnum.UNAUTHORIZED);
         }
         return point.proceed();
     }
@@ -59,7 +59,7 @@ public class SecurityAspect {
         PrePermission prePermissionAnnotation = method.getAnnotation(PrePermission.class);
 
         if (!securityValidate.prePermission(prePermissionAnnotation.value())) {
-            throw new AuthorityException(AuthorityAbnormalEnum.UNAUTHORIZED);
+            throw new AuthorityException(AuthorityErrorEnum.UNAUTHORIZED);
         }
         return point.proceed();
     }

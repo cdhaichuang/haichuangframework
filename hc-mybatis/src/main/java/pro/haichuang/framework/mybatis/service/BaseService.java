@@ -8,7 +8,7 @@ import lombok.SneakyThrows;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
-import pro.haichuang.framework.base.enums.abnormal.client.RequestParamAbnormalEnum;
+import pro.haichuang.framework.base.enums.error.client.RequestParamErrorEnum;
 import pro.haichuang.framework.base.exception.client.RequestParamException;
 import pro.haichuang.framework.base.request.PageRequest;
 import pro.haichuang.framework.mybatis.domain.BaseDO;
@@ -253,7 +253,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
     default boolean isExistsByIdAndValidate(@Nullable Long id, @Nullable String errorUserTip)
             throws RequestParamException {
         if (id == null) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
+            throw new RequestParamException(RequestParamErrorEnum.PARAMETER_EMPTY, errorUserTip);
         }
         return this.countByIdAndValidate(id) != 0;
     }
@@ -280,7 +280,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
     default boolean isExistsByIdAndValidate(@Nullable Collection<Long> ids, @Nullable String errorUserTip)
             throws RequestParamException {
         if (ids == null || ids.isEmpty()) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
+            throw new RequestParamException(RequestParamErrorEnum.PARAMETER_EMPTY, errorUserTip);
         }
         return this.countByIdAndValidate(ids) != 0;
     }
@@ -306,7 +306,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      */
     default int countByIdAndValidate(@Nullable Long id, @Nullable String errorUserTip) throws RequestParamException {
         if (id == null) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
+            throw new RequestParamException(RequestParamErrorEnum.PARAMETER_EMPTY, errorUserTip);
         }
         return this.count(new QueryWrapper<T>().select(BaseDO.ID).eq(BaseDO.ID, id));
     }
@@ -333,7 +333,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
     default int countByIdAndValidate(@Nullable Collection<Long> ids, @Nullable String errorUserTip)
             throws RequestParamException {
         if (ids == null || ids.isEmpty()) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
+            throw new RequestParamException(RequestParamErrorEnum.PARAMETER_EMPTY, errorUserTip);
         }
         return this.count(new QueryWrapper<T>().select(BaseDO.ID).in(BaseDO.ID, ids));
     }
@@ -361,11 +361,11 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
     @NonNull
     default T getByIdAndValidate(@Nullable Long id, @Nullable String errorUserTip) throws RequestParamException {
         if (id == null) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
+            throw new RequestParamException(RequestParamErrorEnum.PARAMETER_EMPTY, errorUserTip);
         }
         T entity = this.getById(id);
         if (entity == null) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_ERROR, errorUserTip);
+            throw new RequestParamException(RequestParamErrorEnum.PARAMETER_ERROR, errorUserTip);
         }
         return entity;
     }
@@ -394,11 +394,11 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
     default List<T> listByIdAndValidate(@Nullable Collection<Long> ids, @Nullable String errorUserTip)
             throws RequestParamException {
         if (ids == null || ids.isEmpty()) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
+            throw new RequestParamException(RequestParamErrorEnum.PARAMETER_EMPTY, errorUserTip);
         }
         List<T> entity = this.listByIds(ids);
         if (entity == null || entity.isEmpty()) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_ERROR, errorUserTip);
+            throw new RequestParamException(RequestParamErrorEnum.PARAMETER_ERROR, errorUserTip);
         }
         return entity;
     }
@@ -427,7 +427,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
     default PageDTO<T> listPageAndValidate(@Nullable PageRequest pageRequest, @Nullable String errorUserTip)
             throws RequestParamException {
         if (pageRequest == null) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
+            throw new RequestParamException(RequestParamErrorEnum.PARAMETER_EMPTY, errorUserTip);
         }
         return new PageDTO<T>(pageRequest).setContent(this.page(new Page<T>(pageRequest.getPageNo(), pageRequest.getPageSize())
                 .addOrder(OrderItem.desc(BaseService.toUnderlineCase(BaseDO.MODIFY_TIME)))).getRecords());
@@ -455,7 +455,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
     default boolean saveAndValidate(@Nullable T entity, @Nullable String errorUserTip)
             throws RequestParamException {
         if (entity == null) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
+            throw new RequestParamException(RequestParamErrorEnum.PARAMETER_EMPTY, errorUserTip);
         }
         return this.save(BaseService.clearEntityDefaultParameterAndGet(entity,
                 true, true, true));
@@ -509,7 +509,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
     default boolean saveAndValidate(@Nullable Collection<T> entities, int batchSize, @Nullable String errorUserTip)
             throws RequestParamException {
         if (entities == null || entities.isEmpty()) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
+            throw new RequestParamException(RequestParamErrorEnum.PARAMETER_EMPTY, errorUserTip);
         }
         return this.saveBatch(BaseService.clearEntityDefaultParameterAndGet(entities,
                 true, true, true), batchSize);
@@ -525,11 +525,11 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
     @SneakyThrows
     default boolean updateByIdAndValidate(@Nullable T entity) throws RequestParamException {
         if (entity == null) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY);
+            throw new RequestParamException(RequestParamErrorEnum.PARAMETER_EMPTY);
         }
         Method getIdMethod = BaseService.validateIdExistsAndGetIdMethod(entity);
         if (this.countByIdAndValidate((Long) getIdMethod.invoke(entity)) == 0) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_ERROR);
+            throw new RequestParamException(RequestParamErrorEnum.PARAMETER_ERROR);
         }
         return this.updateByIdAndValidate(entity, null);
     }
@@ -546,11 +546,11 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
     default boolean updateByIdAndValidate(@Nullable T entity, @Nullable String errorUserTip)
             throws RequestParamException {
         if (entity == null) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
+            throw new RequestParamException(RequestParamErrorEnum.PARAMETER_EMPTY, errorUserTip);
         }
         Method getIdMethod = BaseService.validateIdExistsAndGetIdMethod(entity);
         if (this.countByIdAndValidate((Long) getIdMethod.invoke(entity)) == 0) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_ERROR, errorUserTip);
+            throw new RequestParamException(RequestParamErrorEnum.PARAMETER_ERROR, errorUserTip);
         }
         return this.updateById(clearEntityDefaultParameterAndGet(entity));
     }
@@ -606,14 +606,14 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
     default boolean updateByIdAndValidate(@Nullable Collection<T> entities, int batchSize, @Nullable String errorUserTip)
             throws RequestParamException {
         if (CollectionUtils.isEmpty(entities)) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, errorUserTip);
+            throw new RequestParamException(RequestParamErrorEnum.PARAMETER_EMPTY, errorUserTip);
         }
         List<Long> ids = new ArrayList<>();
         for (T entity : entities) {
             ids.add((Long) BaseService.validateIdExistsAndGetIdMethod(entity).invoke(entity));
         }
         if (this.countByIdAndValidate(ids) != entities.size()) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_ERROR, errorUserTip);
+            throw new RequestParamException(RequestParamErrorEnum.PARAMETER_ERROR, errorUserTip);
         }
         return this.updateBatchById(clearEntityDefaultParameterAndGet(entities), batchSize);
     }
@@ -638,7 +638,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
     default boolean removeByIdAndValidate(@Nullable Long id, @Nullable String errorUserTip)
             throws RequestParamException {
         if (this.countByIdAndValidate(id) == 0) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_ERROR, errorUserTip);
+            throw new RequestParamException(RequestParamErrorEnum.PARAMETER_ERROR, errorUserTip);
         }
         return this.removeById(id);
     }
@@ -663,7 +663,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
     default boolean removeByIdAndValidate(@Nullable Collection<Long> ids, @Nullable String errorUserTip)
             throws RequestParamException {
         if (ids == null || this.countByIdAndValidate(ids) != ids.size()) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_ERROR, errorUserTip);
+            throw new RequestParamException(RequestParamErrorEnum.PARAMETER_ERROR, errorUserTip);
         }
         return this.removeByIds(ids);
     }

@@ -1,4 +1,4 @@
-package pro.haichuang.framework.base.enums.abnormal.client;
+package pro.haichuang.framework.base.enums.error.client;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import pro.haichuang.framework.base.enums.BaseEnum;
@@ -9,7 +9,7 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * @author JiYinchuan
  * @version 1.0
  */
-public enum RequestServerAbnormalEnum implements BaseEnum {
+public enum RequestServerErrorEnum implements BaseEnum {
 
     /**
      * 用户请求服务异常
@@ -62,7 +62,7 @@ public enum RequestServerAbnormalEnum implements BaseEnum {
      * @param value        枚举值
      * @param reasonPhrase 枚举信息
      */
-    RequestServerAbnormalEnum(String value, String reasonPhrase) {
+    RequestServerErrorEnum(String value, String reasonPhrase) {
         this.value = value;
         this.reasonPhrase = reasonPhrase;
     }
@@ -83,7 +83,7 @@ public enum RequestServerAbnormalEnum implements BaseEnum {
     }
 
     @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-    public static RequestServerAbnormalEnum resolve(String value) {
-        return BaseEnum.resolve(value, RequestServerAbnormalEnum.class);
+    public static RequestServerErrorEnum resolve(String value) {
+        return BaseEnum.resolve(value, RequestServerErrorEnum.class);
     }
 }

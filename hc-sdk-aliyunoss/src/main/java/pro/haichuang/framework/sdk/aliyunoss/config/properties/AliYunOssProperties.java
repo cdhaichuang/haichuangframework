@@ -1,7 +1,7 @@
 package pro.haichuang.framework.sdk.aliyunoss.config.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import pro.haichuang.framework.base.enums.abnormal.client.RequestParamAbnormalEnum;
+import pro.haichuang.framework.base.enums.error.client.RequestParamErrorEnum;
 import pro.haichuang.framework.base.exception.client.RequestParamException;
 
 /**
@@ -36,10 +36,10 @@ public class AliYunOssProperties {
 
     public String getBucketDomain() {
         if (endpoint == null || endpoint.isEmpty()) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, "[Endpoint] 未在Yaml进行配置");
+            throw new RequestParamException(RequestParamErrorEnum.PARAMETER_EMPTY, "[Endpoint] 未在Yaml进行配置");
         }
         if (bucketName == null || bucketName.isEmpty()) {
-            throw new RequestParamException(RequestParamAbnormalEnum.PARAMETER_EMPTY, "[BucketName] 未在Yaml进行配置");
+            throw new RequestParamException(RequestParamErrorEnum.PARAMETER_EMPTY, "[BucketName] 未在Yaml进行配置");
         }
         return "https://".concat(bucketName).concat(".")
                 .concat(endpoint.replaceAll("^(http|https)", "")

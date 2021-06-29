@@ -16,8 +16,8 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-import pro.haichuang.framework.base.enums.abnormal.client.RequestParamAbnormalEnum;
-import pro.haichuang.framework.base.enums.abnormal.client.RequestServerAbnormalEnum;
+import pro.haichuang.framework.base.enums.error.client.RequestParamErrorEnum;
+import pro.haichuang.framework.base.enums.error.client.RequestServerErrorEnum;
 import pro.haichuang.framework.base.exception.ApplicationException;
 import pro.haichuang.framework.base.exception.EnumIllegalArgumentException;
 import pro.haichuang.framework.base.exception.StackTraceException;
@@ -89,7 +89,7 @@ public class BaseControllerAdvice {
                 LOG_TAG, uuid, request.getRequestURI(), request.getMethod(), e.getLocalizedMessage(), e);
         LOGGER.error("[{}] ------------------------- 堆栈异常信息 ------------------------- [ End - {}]", LOG_TAG, uuid);
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        return ResultVO.other(RequestServerAbnormalEnum.SERVICE_ABNORMAL, BASE_ERROR_MESSAGE);
+        return ResultVO.other(RequestServerErrorEnum.SERVICE_ABNORMAL, BASE_ERROR_MESSAGE);
     }
 
     /**
@@ -111,7 +111,7 @@ public class BaseControllerAdvice {
         LOGGER.error("[{}] ------------------------- 第三方异常信息 ------------------------- [ End - {}]", LOG_TAG, uuid);
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         return new JSONObject()
-                .fluentPut(BaseVO.ERROR_CODE, RequestServerAbnormalEnum.SERVICE_ABNORMAL.value())
+                .fluentPut(BaseVO.ERROR_CODE, RequestServerErrorEnum.SERVICE_ABNORMAL.value())
                 .fluentPut(BaseVO.ERROR_MESSAGE, e.getLocalizedMessage())
                 .fluentPut(BaseVO.USER_TIP, BASE_ERROR_MESSAGE);
     }
@@ -134,7 +134,7 @@ public class BaseControllerAdvice {
                 LOG_TAG, uuid, request.getRequestURI(), request.getMethod(), e.getLocalizedMessage(), e);
         LOGGER.error("[{}] ------------------------- 系统异常信息 ------------------------- [ End - {}]", LOG_TAG, uuid);
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        return ResultVO.other(RequestServerAbnormalEnum.SERVICE_ABNORMAL, BASE_ERROR_MESSAGE);
+        return ResultVO.other(RequestServerErrorEnum.SERVICE_ABNORMAL, BASE_ERROR_MESSAGE);
     }
 
     // ========================= 请求参数验证 =========================
@@ -160,7 +160,7 @@ public class BaseControllerAdvice {
         LOGGER.warn("[{}] ------------------------- 参数为空 ------------------------- [ End - {}]", LOG_TAG, uuid);
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         return new JSONObject()
-                .fluentPut(BaseVO.ERROR_CODE, RequestParamAbnormalEnum.PARAMETER_EMPTY.value())
+                .fluentPut(BaseVO.ERROR_CODE, RequestParamErrorEnum.PARAMETER_EMPTY.value())
                 .fluentPut(BaseVO.ERROR_MESSAGE, e.getLocalizedMessage())
                 .fluentPut(BaseVO.USER_TIP, e.getLocalizedMessage());
     }
@@ -183,7 +183,7 @@ public class BaseControllerAdvice {
         LOGGER.warn("[{}] ------------------------- 参数转换异常 ------------------------- [ End - {}]", LOG_TAG, uuid);
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         return new JSONObject()
-                .fluentPut(BaseVO.ERROR_CODE, RequestParamAbnormalEnum.PARAMETER_EMPTY.value())
+                .fluentPut(BaseVO.ERROR_CODE, RequestParamErrorEnum.PARAMETER_EMPTY.value())
                 .fluentPut(BaseVO.ERROR_MESSAGE, errorMessage)
                 .fluentPut(BaseVO.USER_TIP, e.getLocalizedMessage().equals(errorMessage) ? errorMessage : BASE_ERROR_MESSAGE);
     }
@@ -215,7 +215,7 @@ public class BaseControllerAdvice {
         LOGGER.warn("[{}] ------------------------- 验证异常 ------------------------- [ End - {}]", LOG_TAG, uuid);
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         return new JSONObject()
-                .fluentPut(BaseVO.ERROR_CODE, RequestParamAbnormalEnum.INVALID_INPUT.value())
+                .fluentPut(BaseVO.ERROR_CODE, RequestParamErrorEnum.INVALID_INPUT.value())
                 .fluentPut(BaseVO.ERROR_MESSAGE, e.getLocalizedMessage())
                 .fluentPut(BaseVO.USER_TIP, String.join(",", userTipMessages));
     }
@@ -242,7 +242,7 @@ public class BaseControllerAdvice {
         LOGGER.warn("[{}] ------------------------- 请求体异常 ------------------------- [ End - {}]", LOG_TAG, uuid);
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         return new JSONObject()
-                .fluentPut(BaseVO.ERROR_CODE, RequestParamAbnormalEnum.PARAMETER_EMPTY.value())
+                .fluentPut(BaseVO.ERROR_CODE, RequestParamErrorEnum.PARAMETER_EMPTY.value())
                 .fluentPut(BaseVO.ERROR_MESSAGE, errorMessage)
                 .fluentPut(BaseVO.USER_TIP, e.getLocalizedMessage().equals(errorMessage) ? errorMessage : BASE_ERROR_MESSAGE);
     }
@@ -275,7 +275,7 @@ public class BaseControllerAdvice {
         LOGGER.warn("[{}] ------------------------- 请求体验证异常 ------------------------- [ End - {}]", LOG_TAG, uuid);
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         return new JSONObject()
-                .fluentPut(BaseVO.ERROR_CODE, RequestParamAbnormalEnum.INVALID_INPUT.value())
+                .fluentPut(BaseVO.ERROR_CODE, RequestParamErrorEnum.INVALID_INPUT.value())
                 .fluentPut(BaseVO.ERROR_MESSAGE, String.join(", ", errorMessages))
                 .fluentPut(BaseVO.USER_TIP, String.join(", ", userTipMessages));
     }
@@ -300,7 +300,7 @@ public class BaseControllerAdvice {
         LOGGER.warn("[{}] ------------------------- 绑定异常 ------------------------- [ End - {}]", LOG_TAG, uuid);
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         return new JSONObject()
-                .fluentPut(BaseVO.ERROR_CODE, RequestParamAbnormalEnum.INVALID_INPUT.value())
+                .fluentPut(BaseVO.ERROR_CODE, RequestParamErrorEnum.INVALID_INPUT.value())
                 .fluentPut(BaseVO.ERROR_MESSAGE, e.getAllErrors().get(0).getDefaultMessage())
                 .fluentPut(BaseVO.USER_TIP, e.getAllErrors().get(0).getDefaultMessage());
     }
@@ -325,7 +325,7 @@ public class BaseControllerAdvice {
         LOGGER.warn("[{}] ------------------------- 方法不被允许 ------------------------- [ End - {}]", LOG_TAG, uuid);
         response.setStatus(HttpStatus.METHOD_NOT_ALLOWED.value());
         return new JSONObject()
-                .fluentPut(BaseVO.ERROR_CODE, RequestParamAbnormalEnum.INVALID_INPUT.value())
+                .fluentPut(BaseVO.ERROR_CODE, RequestParamErrorEnum.INVALID_INPUT.value())
                 .fluentPut(BaseVO.ERROR_MESSAGE, e.getLocalizedMessage())
                 .fluentPut(BaseVO.USER_TIP, BASE_ERROR_MESSAGE);
     }
