@@ -1,7 +1,7 @@
 package pro.haichuang.framework.base.util.jwt;
 
 import org.springframework.util.Assert;
-import pro.haichuang.framework.base.enums.abnormal.client.AuthorityAbnormalEnum;
+import pro.haichuang.framework.base.enums.error.client.AuthorityErrorEnum;
 import pro.haichuang.framework.base.exception.client.AuthorityException;
 
 /**
@@ -20,7 +20,7 @@ public class SecurityUtils {
     public static JwtPayload getContextValidate() {
         JwtPayload jwtPayload = CONTEXT_HOLDER.get();
         if (jwtPayload == null) {
-            throw new AuthorityException(AuthorityAbnormalEnum.ACCESS_BLOCKED, "获取用户信息失败");
+            throw new AuthorityException(AuthorityErrorEnum.ACCESS_BLOCKED, "获取用户信息失败");
         }
         return jwtPayload;
     }

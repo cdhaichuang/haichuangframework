@@ -3,7 +3,7 @@ package pro.haichuang.framework.base.response.vo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import pro.haichuang.framework.base.enums.BaseEnum;
-import pro.haichuang.framework.base.enums.abnormal.client.SuccessEnum;
+import pro.haichuang.framework.base.enums.error.client.SuccessEnum;
 
 import java.io.Serializable;
 import java.util.Collection;

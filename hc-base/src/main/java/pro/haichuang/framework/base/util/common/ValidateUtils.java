@@ -1,8 +1,8 @@
 package pro.haichuang.framework.base.util.common;
 
 import pro.haichuang.framework.base.enums.BaseEnum;
-import pro.haichuang.framework.base.enums.abnormal.client.*;
-import pro.haichuang.framework.base.exception.*;
+import pro.haichuang.framework.base.enums.error.client.*;
+import pro.haichuang.framework.base.exception.ApplicationException;
 import pro.haichuang.framework.base.exception.client.*;
 
 /**
@@ -40,138 +40,139 @@ public class ValidateUtils {
         }
     }
 
+
     /**
      * 验证访问权限异常
      *
-     * @param isThrow               是否抛出异常
-     * @param authorityAbnormalEnum 访问权限异常枚举
+     * @param isThrow            是否抛出异常
+     * @param authorityErrorEnum 访问权限异常枚举
      * @throws AuthorityException 访问权限异常
      */
-    public static void validate(boolean isThrow, AuthorityAbnormalEnum authorityAbnormalEnum) throws AuthorityException {
+    public static void validate(boolean isThrow, AuthorityErrorEnum authorityErrorEnum) throws AuthorityException {
         if (isThrow) {
-            throw new AuthorityException(authorityAbnormalEnum);
+            throw new AuthorityException(authorityErrorEnum);
         }
     }
 
     /**
      * 验证访问权限异常
      *
-     * @param isThrow               是否抛出异常
-     * @param authorityAbnormalEnum 访问权限异常枚举
-     * @param userTip               用户提示
+     * @param isThrow            是否抛出异常
+     * @param authorityErrorEnum 访问权限异常枚举
+     * @param userTip            用户提示
      * @throws AuthorityException 访问权限异常
      */
-    public static void validate(boolean isThrow, AuthorityAbnormalEnum authorityAbnormalEnum, String userTip) throws AuthorityException {
+    public static void validate(boolean isThrow, AuthorityErrorEnum authorityErrorEnum, String userTip) throws AuthorityException {
         if (isThrow) {
-            throw new AuthorityException(authorityAbnormalEnum, userTip);
+            throw new AuthorityException(authorityErrorEnum, userTip);
         }
     }
 
     /**
      * 验证用户登录异常
      *
-     * @param isThrow           是否抛出异常
-     * @param loginAbnormalEnum 用户登录异常枚举
+     * @param isThrow        是否抛出异常
+     * @param loginErrorEnum 用户登录异常枚举
      * @throws LoginException 用户登录异常
      */
-    public static void validate(boolean isThrow, LoginAbnormalEnum loginAbnormalEnum) throws LoginException {
+    public static void validate(boolean isThrow, LoginErrorEnum loginErrorEnum) throws LoginException {
         if (isThrow) {
-            throw new LoginException(loginAbnormalEnum);
+            throw new LoginException(loginErrorEnum);
         }
     }
 
     /**
      * 验证用户登录异常
      *
+     * @param isThrow        是否抛出异常
+     * @param loginErrorEnum 用户登录异常枚举
+     * @param userTip        用户提示
+     * @throws LoginException 用户登录异常
+     */
+    public static void validate(boolean isThrow, LoginErrorEnum loginErrorEnum, String userTip) throws LoginException {
+        if (isThrow) {
+            throw new LoginException(loginErrorEnum, userTip);
+        }
+    }
+
+    /**
+     * 验证注册异常
+     *
      * @param isThrow           是否抛出异常
-     * @param loginAbnormalEnum 用户登录异常枚举
+     * @param registerErrorEnum 注册异常枚举
+     * @throws LoginException 注册异常
+     */
+    public static void validate(boolean isThrow, RegisterErrorEnum registerErrorEnum) throws RegisterException {
+        if (isThrow) {
+            throw new RegisterException(registerErrorEnum);
+        }
+    }
+
+    /**
+     * 验证注册异常
+     *
+     * @param isThrow           是否抛出异常
+     * @param registerErrorEnum 注册异常枚举
      * @param userTip           用户提示
-     * @throws LoginException 用户登录异常
-     */
-    public static void validate(boolean isThrow, LoginAbnormalEnum loginAbnormalEnum, String userTip) throws LoginException {
-        if (isThrow) {
-            throw new LoginException(loginAbnormalEnum, userTip);
-        }
-    }
-
-    /**
-     * 验证注册异常
-     *
-     * @param isThrow              是否抛出异常
-     * @param registerAbnormalEnum 注册异常枚举
      * @throws LoginException 注册异常
      */
-    public static void validate(boolean isThrow, RegisterAbnormalEnum registerAbnormalEnum) throws RegisterException {
+    public static void validate(boolean isThrow, RegisterErrorEnum registerErrorEnum, String userTip) throws RegisterException {
         if (isThrow) {
-            throw new RegisterException(registerAbnormalEnum);
-        }
-    }
-
-    /**
-     * 验证注册异常
-     *
-     * @param isThrow              是否抛出异常
-     * @param registerAbnormalEnum 注册异常枚举
-     * @param userTip              用户提示
-     * @throws LoginException 注册异常
-     */
-    public static void validate(boolean isThrow, RegisterAbnormalEnum registerAbnormalEnum, String userTip) throws RegisterException {
-        if (isThrow) {
-            throw new RegisterException(registerAbnormalEnum, userTip);
+            throw new RegisterException(registerErrorEnum, userTip);
         }
     }
 
     /**
      * 验证请求参数异常
      *
-     * @param isThrow                  是否抛出异常
-     * @param requestParamAbnormalEnum 请求参数异常
+     * @param isThrow               是否抛出异常
+     * @param requestParamErrorEnum 请求参数异常
      * @throws RequestParamException 请求参数异常
      */
-    public static void validate(boolean isThrow, RequestParamAbnormalEnum requestParamAbnormalEnum) throws RequestParamException {
+    public static void validate(boolean isThrow, RequestParamErrorEnum requestParamErrorEnum) throws RequestParamException {
         if (isThrow) {
-            throw new RequestParamException(requestParamAbnormalEnum);
+            throw new RequestParamException(requestParamErrorEnum);
         }
     }
 
     /**
      * 验证请求参数异常
      *
-     * @param isThrow                  是否抛出异常
-     * @param requestParamAbnormalEnum 请求参数异常
-     * @param userTip                  用户提示
+     * @param isThrow               是否抛出异常
+     * @param requestParamErrorEnum 请求参数异常
+     * @param userTip               用户提示
      * @throws RequestParamException 请求参数异常
      */
-    public static void validate(boolean isThrow, RequestParamAbnormalEnum requestParamAbnormalEnum, String userTip) throws RequestParamException {
+    public static void validate(boolean isThrow, RequestParamErrorEnum requestParamErrorEnum, String userTip) throws RequestParamException {
         if (isThrow) {
-            throw new RequestParamException(requestParamAbnormalEnum, userTip);
+            throw new RequestParamException(requestParamErrorEnum, userTip);
         }
     }
 
     /**
      * 验证请求服务异常
      *
-     * @param isThrow                   是否抛出异常
-     * @param requestServerAbnormalEnum 请求服务异常
+     * @param isThrow                是否抛出异常
+     * @param requestServerErrorEnum 请求服务异常
      * @throws RequestServerException 请求服务异常
      */
-    public static void validate(boolean isThrow, RequestServerAbnormalEnum requestServerAbnormalEnum) throws RequestServerException {
+    public static void validate(boolean isThrow, RequestServerErrorEnum requestServerErrorEnum) throws RequestServerException {
         if (isThrow) {
-            throw new RequestServerException(requestServerAbnormalEnum);
+            throw new RequestServerException(requestServerErrorEnum);
         }
     }
 
     /**
      * 验证请求服务异常
      *
-     * @param isThrow                   是否抛出异常
-     * @param requestServerAbnormalEnum 请求服务异常
-     * @param userTip                   用户提示
+     * @param isThrow                是否抛出异常
+     * @param requestServerErrorEnum 请求服务异常
+     * @param userTip                用户提示
      * @throws RequestServerException 请求服务异常
      */
-    public static void validate(boolean isThrow, RequestServerAbnormalEnum requestServerAbnormalEnum, String userTip) throws RequestServerException {
+    public static void validate(boolean isThrow, RequestServerErrorEnum requestServerErrorEnum, String userTip) throws RequestServerException {
         if (isThrow) {
-            throw new RequestServerException(requestServerAbnormalEnum, userTip);
+            throw new RequestServerException(requestServerErrorEnum, userTip);
         }
     }
 }

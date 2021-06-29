@@ -1,4 +1,4 @@
-package pro.haichuang.framework.base.enums.abnormal.client;
+package pro.haichuang.framework.base.enums.error.client;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import pro.haichuang.framework.base.enums.BaseEnum;

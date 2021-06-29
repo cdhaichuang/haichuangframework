@@ -4,7 +4,7 @@ import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.web.multipart.MultipartFile;
-import pro.haichuang.framework.base.enums.abnormal.client.RequestParamAbnormalEnum;
+import pro.haichuang.framework.base.enums.error.client.RequestParamErrorEnum;
 import pro.haichuang.framework.base.util.common.ValidateUtils;
 import pro.haichuang.framework.sdk.aliyunoss.config.properties.AliYunOssProperties;
 import pro.haichuang.framework.sdk.aliyunoss.util.AliYunOssUtils;
@@ -71,13 +71,13 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
      */
     private void validateProperties() {
         ValidateUtils.validate(aliYunOssProperties.getEndpoint() == null,
-                RequestParamAbnormalEnum.PARAMETER_EMPTY, "[EndPoint] 未在Yaml进行配置");
+                RequestParamErrorEnum.PARAMETER_EMPTY, "[EndPoint] 未在Yaml进行配置");
         ValidateUtils.validate(aliYunOssProperties.getAccessKeyId() == null,
-                RequestParamAbnormalEnum.PARAMETER_EMPTY, "[AccessKeyId] 未在Yaml进行配置");
+                RequestParamErrorEnum.PARAMETER_EMPTY, "[AccessKeyId] 未在Yaml进行配置");
         ValidateUtils.validate(aliYunOssProperties.getAccessKeySecret() == null,
-                RequestParamAbnormalEnum.PARAMETER_EMPTY, "[AccessKeySecret] 未在Yaml进行配置");
+                RequestParamErrorEnum.PARAMETER_EMPTY, "[AccessKeySecret] 未在Yaml进行配置");
         ValidateUtils.validate(aliYunOssProperties.getBucketName() == null,
-                RequestParamAbnormalEnum.PARAMETER_EMPTY, "[BucketName] 未在Yaml进行配置");
+                RequestParamErrorEnum.PARAMETER_EMPTY, "[BucketName] 未在Yaml进行配置");
     }
 
     /**
@@ -88,8 +88,8 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
      */
     private void validateParams(@Nullable String uploadPath, @Nullable String childrenPath) {
         ValidateUtils.validate(uploadPath == null || uploadPath.isEmpty(),
-                RequestParamAbnormalEnum.PARAMETER_EMPTY, "[上传相对路径] 不能为空");
+                RequestParamErrorEnum.PARAMETER_EMPTY, "[上传相对路径] 不能为空");
         ValidateUtils.validate(childrenPath == null || childrenPath.isEmpty(),
-                RequestParamAbnormalEnum.PARAMETER_EMPTY, "[上传子路径|业务模块名] 不能为空");
+                RequestParamErrorEnum.PARAMETER_EMPTY, "[上传子路径|业务模块名] 不能为空");
     }
 }

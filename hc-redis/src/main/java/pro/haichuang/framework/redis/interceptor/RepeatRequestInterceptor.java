@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
-import pro.haichuang.framework.base.enums.abnormal.client.RequestServerAbnormalEnum;
+import pro.haichuang.framework.base.enums.error.client.RequestServerErrorEnum;
 import pro.haichuang.framework.base.response.ResultVO;
 import pro.haichuang.framework.base.util.common.IpUtils;
 import pro.haichuang.framework.base.util.common.ResponseUtils;
@@ -60,7 +60,7 @@ public class RepeatRequestInterceptor implements HandlerInterceptor {
                             request.getRequestURI(),
                             IpUtils.getIpAddress(request),
                             parameterMapString);
-                    ResponseUtils.write(response, ResultVO.other(RequestServerAbnormalEnum.REPEAT_REQUEST,
+                    ResponseUtils.write(response, ResultVO.other(RequestServerErrorEnum.REPEAT_REQUEST,
                             "请求速度过快, 请稍后重试"));
                     return false;
                 }else {

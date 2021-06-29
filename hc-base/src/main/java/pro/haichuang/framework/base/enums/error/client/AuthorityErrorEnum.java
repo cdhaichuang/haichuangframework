@@ -1,4 +1,4 @@
-package pro.haichuang.framework.base.enums.abnormal.client;
+package pro.haichuang.framework.base.enums.error.client;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import pro.haichuang.framework.base.enums.BaseEnum;
@@ -9,7 +9,7 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * @author JiYinchuan
  * @version 1.0
  */
-public enum AuthorityAbnormalEnum implements BaseEnum {
+public enum AuthorityErrorEnum implements BaseEnum {
 
     /**
      * 访问权限异常
@@ -107,7 +107,7 @@ public enum AuthorityAbnormalEnum implements BaseEnum {
      * @param value        枚举值
      * @param reasonPhrase 枚举信息
      */
-    AuthorityAbnormalEnum(String value, String reasonPhrase) {
+    AuthorityErrorEnum(String value, String reasonPhrase) {
         this.value = value;
         this.reasonPhrase = reasonPhrase;
     }
@@ -129,7 +129,7 @@ public enum AuthorityAbnormalEnum implements BaseEnum {
     }
 
     @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-    public static AuthorityAbnormalEnum resolve(String value) {
-        return BaseEnum.resolve(value, AuthorityAbnormalEnum.class);
+    public static AuthorityErrorEnum resolve(String value) {
+        return BaseEnum.resolve(value, AuthorityErrorEnum.class);
     }
 }

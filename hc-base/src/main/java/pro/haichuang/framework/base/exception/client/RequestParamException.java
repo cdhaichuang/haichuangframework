@@ -1,7 +1,7 @@
 package pro.haichuang.framework.base.exception.client;
 
 
-import pro.haichuang.framework.base.enums.abnormal.client.RequestParamAbnormalEnum;
+import pro.haichuang.framework.base.enums.error.client.RequestParamErrorEnum;
 import pro.haichuang.framework.base.exception.ApplicationException;
 
 /**
@@ -13,11 +13,11 @@ import pro.haichuang.framework.base.exception.ApplicationException;
 public class RequestParamException extends ApplicationException {
     private static final long serialVersionUID = -4632443521803372966L;
 
-    public RequestParamException(RequestParamAbnormalEnum requestParamAbnormalEnum) {
-        super(requestParamAbnormalEnum);
+    public RequestParamException(RequestParamErrorEnum requestParamErrorEnum) {
+        super(requestParamErrorEnum);
     }
 
-    public RequestParamException(RequestParamAbnormalEnum requestParamAbnormalEnum, String userTip) {
-        super(requestParamAbnormalEnum, userTip);
+    public RequestParamException(RequestParamErrorEnum requestParamErrorEnum, String userTip) {
+        super(requestParamErrorEnum, userTip);
     }
 }
