@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import pro.haichuang.framework.redis.annotation.RepeatRequestValid;
 import pro.haichuang.framework.base.validate.Group;
 
-    #if(${restControllerStyle})
+#if(${restControllerStyle})
 import org.springframework.web.bind.annotation.RestController;
 #else
 import org.springframework.stereotype.Controller;
@@ -56,14 +56,14 @@ public class ${table.controllerName} {
     @ApiOperationSupport(order = 1)
     @GetMapping("/{id}")
     public SingleVO<${entity}> get(@PathVariable("id") Long id) {
-        return ResultVO.okOfSingle(${serviceFullName}.getByIdAndIgnore(id));
+        return ResultVO.okOfSingle(${serviceFullName}.getByIdAndValidate(id));
     }
 
     @ApiOperation("分页数据")
     @ApiOperationSupport(order = 2)
     @GetMapping("/listPage")
     public PageVO<${entity}> listPage(@ModelAttribute PageRequest pageRequest){
-        return ResultVO.okOfPage(${serviceFullName}.listPageAndIgnore(pageRequest));
+        return ResultVO.okOfPage(${serviceFullName}.listPageAndValidate(pageRequest));
     }
 
     @ApiOperation("新增单条数据")
@@ -72,7 +72,7 @@ public class ${table.controllerName} {
     @ApiResponse(code = 500, message = "[A0500: 新增单条数据异常]")
     @RepeatRequestValid
     public BaseVO add(@RequestBody @Validated(Group.Insert.class) ${entity} $entityParseName){
-        return ResultVO.ok(${serviceFullName}.saveAndIgnore($entityParseName));
+        return ResultVO.ok(${serviceFullName}.saveAndValidate($entityParseName));
     }
 
     @ApiOperation("更新单条数据")
@@ -81,7 +81,7 @@ public class ${table.controllerName} {
     @ApiResponse(code = 500, message = "[A0500: 更新单条数据异常]")
     @RepeatRequestValid
     public BaseVO edit(@RequestBody @Validated(Group.Update.class) ${entity} $entityParseName){
-        return ResultVO.ok(${serviceFullName}.updateByIdAndIgnore($entityParseName));
+        return ResultVO.ok(${serviceFullName}.updateByIdAndValidate($entityParseName));
     }
 
     @ApiOperation("批量删除数据")
@@ -90,7 +90,7 @@ public class ${table.controllerName} {
     @ApiResponse(code = 500, message = "[A0500: 批量删除数据异常]")
     @RepeatRequestValid
     public BaseVO del(@RequestBody List<Long> ids){
-        return ResultVO.ok(${serviceFullName}.removeByIdAndIgnore(ids));
+        return ResultVO.ok(${serviceFullName}.removeByIdAndValidate(ids));
     }
 }
 
