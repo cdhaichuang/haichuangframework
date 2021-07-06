@@ -9,7 +9,10 @@ import pro.haichuang.framework.mybatis.generate.config.CodeDataSourceConfig;
 import pro.haichuang.framework.mybatis.generate.config.CodePackageConfig;
 
 /**
- * CodeGenerateTest
+ * 执行代码生成器, 提供简单生成与完整生成示例
+ * 该类下所有静态常量均可根据实际情况进行修改, 其他配置信息不建议修改
+ * Danger: 请谨慎执行, 每次执行会自动覆盖已有代码, 请务必提前做好备份
+ * ps: 如只需要生成部分表请修改 {@link CodeGenerateTest#DATASOURCE_TABLE_INCLUDE} 字段
  *
  * @author JiYinchuan
  * @version 1.0
