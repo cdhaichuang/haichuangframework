@@ -222,6 +222,7 @@ public class WxMpUtils {
      * @return 用户信息
      */
     @Nullable
+    @SuppressWarnings("AlibabaUndefineMagicConstant")
     public static WxMpUserInfoDTO getUserInfo(String accessToken, String openId) {
         String uuid = UUIDUtils.Local.get();
         String baseUrl = "https://api.weixin.qq.com/cgi-bin/user/info";

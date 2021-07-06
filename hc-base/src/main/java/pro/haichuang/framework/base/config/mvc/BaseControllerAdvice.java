@@ -46,7 +46,6 @@ import java.util.regex.Pattern;
 @RestControllerAdvice
 public class BaseControllerAdvice {
 
-    public static final String BASE_ERROR_MESSAGE = "网络开小差了, 请稍后再试 (╯﹏╰)";
     private static final Logger LOGGER = LoggerFactory.getLogger(BaseControllerAdvice.class);
     private static final String LOG_TAG = "全局控制器异常捕获";
     private static final Pattern ENUM_ILLEGAL_ARGUMENT_PRINT_PATTERN = Pattern.compile("(\\[.*])\\s");
@@ -89,7 +88,7 @@ public class BaseControllerAdvice {
                 LOG_TAG, uuid, request.getRequestURI(), request.getMethod(), e.getLocalizedMessage(), e);
         LOGGER.error("[{}] ------------------------- 堆栈异常信息 ------------------------- [ End - {}]", LOG_TAG, uuid);
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        return ResultVO.other(RequestServerErrorEnum.SERVICE_ABNORMAL, BASE_ERROR_MESSAGE);
+        return ResultVO.other(RequestServerErrorEnum.SERVICE_ABNORMAL, ApplicationException.DEFAULT_ERROR_USER_TIP);
     }
 
     /**
@@ -113,7 +112,7 @@ public class BaseControllerAdvice {
         return new JSONObject()
                 .fluentPut(BaseVO.ERROR_CODE, RequestServerErrorEnum.SERVICE_ABNORMAL.value())
                 .fluentPut(BaseVO.ERROR_MESSAGE, e.getLocalizedMessage())
-                .fluentPut(BaseVO.USER_TIP, BASE_ERROR_MESSAGE);
+                .fluentPut(BaseVO.USER_TIP, ApplicationException.DEFAULT_ERROR_USER_TIP);
     }
 
     /**
@@ -134,7 +133,7 @@ public class BaseControllerAdvice {
                 LOG_TAG, uuid, request.getRequestURI(), request.getMethod(), e.getLocalizedMessage(), e);
         LOGGER.error("[{}] ------------------------- 系统异常信息 ------------------------- [ End - {}]", LOG_TAG, uuid);
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        return ResultVO.other(RequestServerErrorEnum.SERVICE_ABNORMAL, BASE_ERROR_MESSAGE);
+        return ResultVO.other(RequestServerErrorEnum.SERVICE_ABNORMAL, ApplicationException.DEFAULT_ERROR_USER_TIP);
     }
 
     // ========================= 请求参数验证 =========================
@@ -185,7 +184,7 @@ public class BaseControllerAdvice {
         return new JSONObject()
                 .fluentPut(BaseVO.ERROR_CODE, RequestParamErrorEnum.PARAMETER_EMPTY.value())
                 .fluentPut(BaseVO.ERROR_MESSAGE, errorMessage)
-                .fluentPut(BaseVO.USER_TIP, e.getLocalizedMessage().equals(errorMessage) ? errorMessage : BASE_ERROR_MESSAGE);
+                .fluentPut(BaseVO.USER_TIP, e.getLocalizedMessage().equals(errorMessage) ? errorMessage : ApplicationException.DEFAULT_ERROR_USER_TIP);
     }
 
     /**
@@ -244,7 +243,7 @@ public class BaseControllerAdvice {
         return new JSONObject()
                 .fluentPut(BaseVO.ERROR_CODE, RequestParamErrorEnum.PARAMETER_EMPTY.value())
                 .fluentPut(BaseVO.ERROR_MESSAGE, errorMessage)
-                .fluentPut(BaseVO.USER_TIP, e.getLocalizedMessage().equals(errorMessage) ? errorMessage : BASE_ERROR_MESSAGE);
+                .fluentPut(BaseVO.USER_TIP, e.getLocalizedMessage().equals(errorMessage) ? errorMessage : ApplicationException.DEFAULT_ERROR_USER_TIP);
     }
 
     /**
@@ -327,7 +326,7 @@ public class BaseControllerAdvice {
         return new JSONObject()
                 .fluentPut(BaseVO.ERROR_CODE, RequestParamErrorEnum.INVALID_INPUT.value())
                 .fluentPut(BaseVO.ERROR_MESSAGE, e.getLocalizedMessage())
-                .fluentPut(BaseVO.USER_TIP, BASE_ERROR_MESSAGE);
+                .fluentPut(BaseVO.USER_TIP, ApplicationException.DEFAULT_ERROR_USER_TIP);
     }
 
     /**

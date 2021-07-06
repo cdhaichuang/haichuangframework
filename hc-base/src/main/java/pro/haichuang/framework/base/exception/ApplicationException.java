@@ -1,5 +1,6 @@
 package pro.haichuang.framework.base.exception;
 
+import org.springframework.lang.Nullable;
 import pro.haichuang.framework.base.enums.BaseEnum;
 
 /**
@@ -10,6 +11,8 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  */
 public class ApplicationException extends RuntimeException {
     private static final long serialVersionUID = -8205556312320530419L;
+
+    public static String DEFAULT_ERROR_USER_TIP = "网络开小差了, 请稍后再试 (╯﹏╰)";
 
     /**
      * 错误码
@@ -41,6 +44,7 @@ public class ApplicationException extends RuntimeException {
         this.errorCode = baseEnum.value();
         this.errorMessage = baseEnum.getReasonPhrase();
         this.baseEnum = baseEnum;
+        userTip = DEFAULT_ERROR_USER_TIP;
     }
 
     /**
@@ -49,11 +53,11 @@ public class ApplicationException extends RuntimeException {
      * @param baseEnum 枚举基类
      * @param userTip  提示信息
      */
-    public ApplicationException(BaseEnum baseEnum, String userTip) {
+    public ApplicationException(BaseEnum baseEnum, @Nullable String userTip) {
         super("errorCode: " + baseEnum.value() + ", errorMessage: " + baseEnum.getReasonPhrase() + ", userTip: " + userTip);
         this.errorCode = baseEnum.value();
         this.errorMessage = baseEnum.getReasonPhrase();
-        this.userTip = userTip;
+        this.userTip = userTip == null || userTip.isEmpty() ? DEFAULT_ERROR_USER_TIP : userTip;
         this.baseEnum = baseEnum;
     }
 

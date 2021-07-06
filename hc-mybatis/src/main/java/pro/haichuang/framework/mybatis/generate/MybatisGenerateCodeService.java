@@ -11,6 +11,8 @@ import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import org.springframework.stereotype.Service;
 import pro.haichuang.framework.mybatis.domain.BaseDO;
+import pro.haichuang.framework.mybatis.enums.error.MybatisGenerateErrorEnum;
+import pro.haichuang.framework.mybatis.exception.MybatisGenerateErrorApplication;
 import pro.haichuang.framework.mybatis.generate.config.CodeBasicConfig;
 import pro.haichuang.framework.mybatis.generate.config.CodeDataSourceConfig;
 import pro.haichuang.framework.mybatis.generate.config.CodePackageConfig;
@@ -28,7 +30,12 @@ import java.util.Map;
  * @version 1.0
  */
 @Service
+@SuppressWarnings("SpellCheckingInspection")
 public class MybatisGenerateCodeService {
+
+    public static final String DEFAULT_SUPER_MAPPER_CLASS = "com.baomidou.mybatisplus.core.mapper.BaseMapper";
+    public static final String DEFAULT_SUPER_SERVICE_CLASS = "pro.haichuang.framework.mybatis.service.BaseService";
+    public static final String DEFAULT_SUPER_SERVICE_IMPL_CLASS = "pro.haichuang.framework.mybatis.service.BaseServiceImpl";
 
     /**
      * 代码生成
@@ -36,19 +43,21 @@ public class MybatisGenerateCodeService {
      * @param codeBasicConfig      基本配置
      * @param codeDataSourceConfig 数据源配置
      * @param codePackageConfig    包配置
+     * @throws MybatisGenerateErrorApplication 代码生成异常
      */
-    public void generate(CodeBasicConfig codeBasicConfig, CodeDataSourceConfig codeDataSourceConfig, CodePackageConfig codePackageConfig) {
+    public void generate(CodeBasicConfig codeBasicConfig, CodeDataSourceConfig codeDataSourceConfig,
+                         CodePackageConfig codePackageConfig) throws MybatisGenerateErrorApplication {
         if (codeDataSourceConfig.getUrl() == null || codeDataSourceConfig.getUrl().length() == 0) {
-            throw new RuntimeException("[代码生成器-数据源配置] 数据库URL未配置");
+            throw new MybatisGenerateErrorApplication(MybatisGenerateErrorEnum.DATA_SOURCE_URL_IS_BLANK);
         }
         if (codeDataSourceConfig.getUsername() == null || codeDataSourceConfig.getUsername().length() == 0) {
-            throw new RuntimeException("[代码生成器-数据源配置] 数据库帐号未配置");
+            throw new MybatisGenerateErrorApplication(MybatisGenerateErrorEnum.DATA_SOURCE_USERNAME_IS_BLANK);
         }
         if (codeDataSourceConfig.getPassword() == null || codeDataSourceConfig.getPassword().length() == 0) {
-            throw new RuntimeException("[代码生成器-数据源配置] 数据库密码未配置");
+            throw new MybatisGenerateErrorApplication(MybatisGenerateErrorEnum.DATA_SOURCE_PASSWORD_IS_BLANK);
         }
         if (codePackageConfig.getParentModelName() == null || codePackageConfig.getParentModelName().length() == 0) {
-            throw new RuntimeException("[代码生成器-包配置] 父包模块名未配置");
+            throw new MybatisGenerateErrorApplication(MybatisGenerateErrorEnum.PACKAGE_PARENT_MODEL_NAME_IS_BLANK);
         }
         AutoGenerator ag = new AutoGenerator();
         ag.setGlobalConfig(this.initGlobalConfig(codeBasicConfig, codePackageConfig));
@@ -99,7 +108,7 @@ public class MybatisGenerateCodeService {
      * @param codePackageConfig 包配置
      * @return 全局配置
      */
-    private GlobalConfig initGlobalConfig( CodeBasicConfig codeBasicConfig, CodePackageConfig codePackageConfig) {
+    private GlobalConfig initGlobalConfig(CodeBasicConfig codeBasicConfig, CodePackageConfig codePackageConfig) {
         GlobalConfig gc = new GlobalConfig();
 
         // 生成文件的输出目录【默认 D 盘根目录】
@@ -124,7 +133,7 @@ public class MybatisGenerateCodeService {
         gc.setDateType(DateType.TIME_PACK);
         // 开启 baseColumnList
         gc.setBaseColumnList(false);
-        // 各层文件名称方式，例如： %sAction 生成 UserAction
+        // 各层文件名称方式, 例如： %sAction 生成 UserAction
         gc.setEntityName("%sDO");
         gc.setMapperName("%sMapper");
         gc.setXmlName("%sMapper");
@@ -191,19 +200,18 @@ public class MybatisGenerateCodeService {
         }
         // 字段前缀
         sc.setFieldPrefix("");
-        // 自定义继承的Entity类全称，带包名
+        // 自定义继承的Entity类全称, 带包名
         sc.setSuperEntityClass(BaseDO.class);
-        // 自定义基础的Entity类，公共字段
+        // 自定义基础的Entity类, 公共字段
         sc.setSuperEntityColumns(BaseDO.ID, BaseService.toUnderlineCase(BaseDO.CREATE_TIME), BaseService.toUnderlineCase(BaseDO.MODIFY_TIME));
-        // 自定义继承的Mapper类全称，带包名 （默认）
-        sc.setSuperMapperClass("com.baomidou.mybatisplus.core.mapper.BaseMapper");
-        // 自定义继承的Service类全称，带包名 （默认=com.baomidou.mybatisplus.extension.service.IService）
-        sc.setSuperServiceClass("pro.haichuang.framework.mybatis.service.BaseService");
-        // 自定义继承的ServiceImpl类全称，带包名 （默认=com.baomidou.mybatisplus.extension.service.impl.ServiceImpl）
-        sc.setSuperServiceImplClass("pro.haichuang.framework.mybatis.service.BaseServiceImpl");
-        // 自定义继承的Controller类全称，带包名 （默认=null）
-        // sc.setSuperControllerClass(null);
-        // 需要包含的表名（与exclude二选一配置，likeTable|notLikeTable可以模糊匹配）
+        // 自定义继承的Mapper类全称, 带包名 （默认）
+        sc.setSuperMapperClass(DEFAULT_SUPER_MAPPER_CLASS);
+        // 自定义继承的Service类全称, 带包名 （默认=com.baomidou.mybatisplus.extension.service.IService）
+        sc.setSuperServiceClass(DEFAULT_SUPER_SERVICE_CLASS);
+        // 自定义继承的ServiceImpl类全称, 带包名 （默认=com.baomidou.mybatisplus.extension.service.impl.ServiceImpl）
+        sc.setSuperServiceImplClass(DEFAULT_SUPER_SERVICE_IMPL_CLASS);
+        // 自定义继承的Controller类全称, 带包名（默认=null）[sc.setSuperControllerClass(null);]
+        // 需要包含的表名（与exclude二选一配置, likeTable|notLikeTable可以模糊匹配）
         if (codeDataSourceConfig.getInclude() != null && codeDataSourceConfig.getInclude().length != 0) {
             sc.setInclude(codeDataSourceConfig.getInclude());
         }
@@ -221,7 +229,7 @@ public class MybatisGenerateCodeService {
         sc.setRestControllerStyle(true);
         // 驼峰转连字符（@RequestMapping）
         sc.setControllerMappingHyphenStyle(false);
-        // 是否生成实体时，生成字段注解
+        // 是否生成实体时, 生成字段注解
         sc.setEntityTableFieldAnnotationEnable(true);
         // 乐观锁属性名称
         sc.setVersionFieldName(null);
@@ -230,8 +238,8 @@ public class MybatisGenerateCodeService {
         // 表填充字段
         sc.setTableFillList(null);
         // 启用sql过滤
-        // 语法不能支持使用sql过滤表的话，可以考虑关闭此开关.
-        // 目前所知微软系需要关闭，其他数据库等待反馈，sql可能要改动一下才能支持，没数据库环境搞，请手动关闭使用内存过滤的方式。
+        // 语法不能支持使用sql过滤表的话, 可以考虑关闭此开关.
+        // 目前所知微软系需要关闭, 其他数据库等待反馈, sql可能要改动一下才能支持, 没数据库环境搞, 请手动关闭使用内存过滤的方式。
         sc.setEnableSqlFilter(true);
 
         return sc;
@@ -246,7 +254,7 @@ public class MybatisGenerateCodeService {
     private PackageConfig initPackageConfig(CodePackageConfig codePackageConfig) {
         PackageConfig pc = new PackageConfig();
 
-        // 父包名。如果为空，将下面子包名必须写全部， 否则就只需写子包名
+        // 父包名。如果为空, 将下面子包名必须写全部,  否则就只需写子包名
         pc.setParent(codePackageConfig.getOutputPackage());
         // 父包模块名
         pc.setModuleName(codePackageConfig.getParentModelName());

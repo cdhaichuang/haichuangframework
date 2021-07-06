@@ -117,7 +117,7 @@ public class PageDTO<T> implements Pageable, Serializable {
      * @param <T> 分页数据类型
      * @return 空分页DTO
      */
-    public static <T> PageDTO<T> EMPTY() {
+    public static <T> PageDTO<T> empty() {
         return new PageDTO<>();
     }
 
