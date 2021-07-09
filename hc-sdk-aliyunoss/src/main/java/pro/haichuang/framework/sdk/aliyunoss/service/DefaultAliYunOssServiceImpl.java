@@ -15,7 +15,7 @@ import java.util.List;
  * AliYunOssService默认实现
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 public class DefaultAliYunOssServiceImpl implements AliYunOssService {
 

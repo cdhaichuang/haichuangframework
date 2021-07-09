@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * 微信公众号配置文件
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 @ConfigurationProperties(prefix = "haichuang.sdk.wxmp")
 public class WxMpProperties {

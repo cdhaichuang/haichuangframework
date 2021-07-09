@@ -15,7 +15,7 @@ import java.util.Collection;
  * 全局响应工具类
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 public class ResultVO implements Serializable {
     private static final long serialVersionUID = 2830894283845180061L;

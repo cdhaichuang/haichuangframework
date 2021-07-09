@@ -6,7 +6,7 @@ import com.alibaba.fastjson.JSONObject;
  * AliYunSmsService
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 public interface AliYunSmsService {
 

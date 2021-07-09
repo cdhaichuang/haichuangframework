@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  * Service基类
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 @SuppressWarnings("unused")
 public interface BaseService<T extends BaseDO> extends IService<T> {

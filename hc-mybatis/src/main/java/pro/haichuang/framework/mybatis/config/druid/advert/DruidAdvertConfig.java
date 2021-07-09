@@ -15,7 +15,7 @@ import pro.haichuang.framework.mybatis.config.druid.advert.filter.DruidAdvertFil
  * Druid广告拦截配置
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 @Configuration
 @ConditionalOnWebApplication

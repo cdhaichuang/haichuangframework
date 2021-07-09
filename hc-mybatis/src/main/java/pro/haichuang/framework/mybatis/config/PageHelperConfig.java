@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
  * PageHelper分页插件配置
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 @Configuration(proxyBeanMethods = false)
 public class PageHelperConfig {

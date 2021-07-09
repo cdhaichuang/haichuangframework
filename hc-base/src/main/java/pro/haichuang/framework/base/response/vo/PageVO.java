@@ -13,7 +13,7 @@ import java.util.Collections;
  * 分页VO
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 @ApiModel("PageVO")
 public class PageVO<T> extends BaseVO implements Serializable {

@@ -14,7 +14,7 @@ import pro.haichuang.framework.sdk.wxmp.service.WxMpService;
  * 微信公众号自动配置
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(WxMpProperties.class)

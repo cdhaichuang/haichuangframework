@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  * 数据自动过期采用 {@link java.util.concurrent.DelayQueue} 延时队列实现
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 public class DefaultWxMpDataStore implements WxMpDataStore {
 
@@ -142,7 +142,7 @@ public class DefaultWxMpDataStore implements WxMpDataStore {
      * 延时队列管理, 用于处理相关数据过期自动删除功能
      *
      * @author JiYinchuan
-     * @version 1.0
+     * @version 1.0.0
      */
     @SuppressWarnings("InfiniteLoopStatement")
     public static class DelayQueueManager implements CommandLineRunner {
@@ -183,7 +183,7 @@ public class DefaultWxMpDataStore implements WxMpDataStore {
      * 延时实体, 用户存放每条数据相关信息
      *
      * @author JiYinchuan
-     * @version 1.0
+     * @version 1.0.0
      */
     static class DelayBase implements Delayed {
 
@@ -228,7 +228,7 @@ public class DefaultWxMpDataStore implements WxMpDataStore {
      * 延时数据类型
      *
      * @author JiYinchuan
-     * @version 1.0
+     * @version 1.0.0
      */
     enum DelayDataType {
 

@@ -25,7 +25,7 @@ import java.util.Map;
  * 微信公众号工具类
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 @SuppressWarnings("SpellCheckingInspection")
 public class WxMpUtils {

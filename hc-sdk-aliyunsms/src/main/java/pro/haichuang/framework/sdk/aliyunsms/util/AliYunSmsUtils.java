@@ -19,7 +19,7 @@ import java.util.List;
  * 阿里云短信工具类
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 @SuppressWarnings("SpellCheckingInspection")
 public class AliYunSmsUtils {

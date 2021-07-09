@@ -27,10 +27,14 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 日志切面
+ * 日志持久化切面
+ *
+ * <p>该类具体实现了日志持久化相关封装, 具体持久化逻辑需要自定义继承 {@link AbstractLogSave} 抽象类</p>
+ * <p>注意: 该类启用的前置条件为标注了 {@link pro.haichuang.framework.base.annotation.EnableLogSave @EnableLogSave} 注解</p>
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
+ * @since 1.0.0
  */
 @Aspect
 @Order(3)

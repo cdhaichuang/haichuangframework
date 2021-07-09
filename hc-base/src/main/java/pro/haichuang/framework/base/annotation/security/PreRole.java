@@ -6,7 +6,8 @@ import java.lang.annotation.*;
  * 自定义角色拦截注解
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
+ * @deprecated 该注解暂时废弃, 等待后续更新
  */
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
@@ -15,7 +16,7 @@ import java.lang.annotation.*;
 public @interface PreRole {
 
     /**
-     * @return 允许的Role名称
+     * @return 允许的 Role 名称
      */
     String[] value();
 

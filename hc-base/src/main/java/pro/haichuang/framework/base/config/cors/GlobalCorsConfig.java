@@ -16,8 +16,15 @@ import java.util.Map;
 /**
  * 全局跨域配置
  *
+ * <p>该类具体实现了全局的跨域配置, 使用了 {@link FilterRegistrationBean} 进行实现,
+ * 同时将跨域过滤器 {@link CorsFilter} 的优先级设置为最高(最先执行), 保证了跨域的有效性</p>
+ * <p>注意: 该类启用的前置条件为标注了
+ * {@link pro.haichuang.framework.base.annotation.EnableGlobalCorsConfig @EnableGlobalCorsConfig} 注解</p>
+ *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
+ * @since 1.0.0
+ * @see pro.haichuang.framework.base.annotation.EnableGlobalCorsConfig
  */
 public class GlobalCorsConfig {
 
@@ -56,6 +63,7 @@ public class GlobalCorsConfig {
         configurationSource.setCorsConfigurations(configurationMap);
 
         FilterRegistrationBean<CorsFilter> registrationBean = new FilterRegistrationBean<>(new CorsFilter(configurationSource));
+        // 设置 Filter 的优先级为最高(最先执行)
         registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE);
         return registrationBean;
     }

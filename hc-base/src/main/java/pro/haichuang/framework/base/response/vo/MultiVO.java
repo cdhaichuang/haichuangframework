@@ -11,7 +11,7 @@ import java.util.Collections;
  * 多条数据VO
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 @ApiModel("MultiVO")
 public class MultiVO<T> extends BaseVO implements Serializable {

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
  * Mybatis参数配置
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 @Component
 @ConfigurationProperties(prefix = "haichuang.mybatis")

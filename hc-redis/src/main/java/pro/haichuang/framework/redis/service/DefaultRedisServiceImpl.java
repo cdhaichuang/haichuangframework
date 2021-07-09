@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * RedisService默认实现
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 @SuppressWarnings({"unchecked", "unused", "UnusedReturnValue", "SpellCheckingInspection"})
 public class DefaultRedisServiceImpl implements RedisService {

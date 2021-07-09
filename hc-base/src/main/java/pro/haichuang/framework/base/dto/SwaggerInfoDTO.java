@@ -9,8 +9,14 @@ import java.util.List;
 /**
  * Swagger信息DTO
  *
+ * <p>该类为 {@code Swagger} 相关信息封装,
+ * 配合 {@link pro.haichuang.framework.base.config.swagger.factory.SwaggerFactory} 工厂类生成
+ * {@link springfox.documentation.spring.web.plugins.Docket} 对象, 创建相关接口文档数据</p>
+ *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
+ * @since 1.0.0
+ * @see pro.haichuang.framework.base.config.swagger.factory.SwaggerFactory
  */
 public class SwaggerInfoDTO {
 
@@ -62,11 +68,11 @@ public class SwaggerInfoDTO {
 
     /**
      * 授权参数
-     * {@code
-     *  1. KeyValue: new ApiKey("参数说明(Token)", "参数名(Authorization)", "参数位置(header|query)")
-     *  2. TODO BasicAuth Not Finish
-     *  3. TODO OAuth
-     * }
+     * <ul>
+     *     <li>KeyValue: new ApiKey("参数说明(Token)", "参数名(Authorization)", "参数位置(header|query)")</li>
+     *     <li>TODO BasicAuth Not Finish</li>
+     *     <li>TODO OAuth</li>
+     * </ul>
      */
     private final List<SecurityScheme> parameters;
 

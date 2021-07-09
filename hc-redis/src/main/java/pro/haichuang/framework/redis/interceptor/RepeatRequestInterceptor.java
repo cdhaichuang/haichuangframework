@@ -26,7 +26,7 @@ import java.util.Map;
  * 重复请求拦截器
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 public class RepeatRequestInterceptor implements HandlerInterceptor {
 

@@ -4,7 +4,7 @@ package pro.haichuang.framework.base.validate;
  * 验证分组
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 public class Group {
 

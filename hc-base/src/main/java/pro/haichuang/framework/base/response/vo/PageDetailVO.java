@@ -10,7 +10,7 @@ import java.io.Serializable;
  * 分页详情VO
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 @ApiModel("PageDetailVO")
 public class PageDetailVO implements Serializable {

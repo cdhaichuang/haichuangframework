@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
  * 阿里云OSS工具类
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 public class AliYunOssUtils {
 

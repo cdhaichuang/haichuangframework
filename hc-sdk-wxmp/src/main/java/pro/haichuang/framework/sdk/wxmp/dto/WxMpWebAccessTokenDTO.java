@@ -7,7 +7,7 @@ import java.time.Duration;
  * WebAccessTokenDTO
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 public class WxMpWebAccessTokenDTO implements Serializable {
     private static final long serialVersionUID = -9121624711237083374L;

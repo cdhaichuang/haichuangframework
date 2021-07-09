@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
  * Redis配置文件
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 @Component
 @ConfigurationProperties(prefix = "haichuang.redis.config")

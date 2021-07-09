@@ -4,7 +4,8 @@ package pro.haichuang.framework.base.config.interceptor;
  * 自定义权限验证
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
+ * @deprecated 该抽象类暂时废弃, 等待后续更新
  */
 public abstract class AbstractSecurityValidate {
 

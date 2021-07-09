@@ -8,7 +8,7 @@ import pro.haichuang.framework.base.exception.client.AuthorityException;
  * Security工具类
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 public class SecurityUtils {
     private static final ThreadLocal<JwtPayload> CONTEXT_HOLDER = new ThreadLocal<>();

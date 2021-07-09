@@ -9,7 +9,7 @@ import java.io.IOException;
  * Druid广告过滤器
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 public class DruidAdvertFilter implements Filter {
 

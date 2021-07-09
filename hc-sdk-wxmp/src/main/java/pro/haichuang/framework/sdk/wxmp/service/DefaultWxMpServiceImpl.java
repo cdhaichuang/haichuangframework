@@ -11,6 +11,7 @@ import pro.haichuang.framework.sdk.wxmp.config.properties.WxMpProperties;
 import pro.haichuang.framework.sdk.wxmp.constant.WxMpKeyPrefix;
 import pro.haichuang.framework.sdk.wxmp.dto.WxMpBaseAccessTokenDTO;
 import pro.haichuang.framework.sdk.wxmp.dto.WxMpJsApiTicketDTO;
+import pro.haichuang.framework.sdk.wxmp.dto.WxMpUserInfoDTO;
 import pro.haichuang.framework.sdk.wxmp.dto.WxMpWebAccessTokenDTO;
 import pro.haichuang.framework.sdk.wxmp.store.WxMpDataStore;
 import pro.haichuang.framework.sdk.wxmp.util.WxMpUtils;
@@ -22,7 +23,7 @@ import java.time.Duration;
  * WxMpService默认实现
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 public class DefaultWxMpServiceImpl implements WxMpService {
 
@@ -108,6 +109,11 @@ public class DefaultWxMpServiceImpl implements WxMpService {
                     wxMpJsApiTicketDTO.getEffectiveTime());
         }
         return wxMpJsApiTicket;
+    }
+
+    @Override
+    public WxMpUserInfoDTO getUserInfo(String openId) {
+        return WxMpUtils.getUserInfo(getBaseAccessToken(), openId);
     }
 
     /**

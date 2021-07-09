@@ -6,7 +6,9 @@ import java.lang.annotation.*;
  * 自定义权限拦截注解
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
+ * @since 1.0.0
+ * @deprecated 该注解暂时废弃, 等待后续更新
  */
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
@@ -15,7 +17,7 @@ import java.lang.annotation.*;
 public @interface PrePermission {
 
     /**
-     * @return 允许的Permission名称
+     * @return 允许的 Permission 名称
      */
     String[] value();
 

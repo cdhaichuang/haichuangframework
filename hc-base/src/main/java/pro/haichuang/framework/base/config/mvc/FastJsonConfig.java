@@ -6,6 +6,7 @@ import com.alibaba.fastjson.serializer.*;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.lang.Nullable;
 import pro.haichuang.framework.base.enums.BaseEnum;
 
 import java.lang.reflect.Type;
@@ -17,10 +18,26 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.Temporal;
 
 /**
- * FastJsonConfig
+ * FastJson默认配置
+ *
+ * <p>该类默认配置了 {@code FastJson} 的常用功能, 如需自定义配置需要手动注入 {@link FastJsonConfig}</p>
+ * 已默认配置的如下:
+ * <ul>
+ *     <li>{@link BigInteger} 自动序列化为 {@link String} 字符串</li>
+ *     <li>{@link Long} 自动序列化为 {@link String} 字符串</li>
+ *     <li>{@link javax.xml.crypto.Data} 自动序列化为 {@code yyyy-MM-dd HH:mm:ss} 字符串</li>
+ *     <li>{@link LocalDateTime} 自动序列化为 {@code yyyy-MM-dd HH:mm:ss} 字符串</li>
+ *     <li>{@link LocalDate} 自动序列化为 {@code yyyy-MM-dd} 字符串</li>
+ *     <li>{@link LocalTime} 自动序列化为 {@code HH:mm:ss} 字符串</li>
+ *     <li>{@link BaseEnum} 下枚举 自动序列化为 {@link BaseEnum#value()} 字符串</li>
+ *     <li>{@link Enum} 自动序列化为 {@link String} 字符串</li>
+ *     <li>{@link java.util.List} 为空时自动序列化为 {@code []} 空集合</li>
+ * </ul>
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
+ * @since 1.0.0
+ * @see WebMvcConfig
  */
 @Configuration(proxyBeanMethods = false)
 public class FastJsonConfig {
@@ -53,12 +70,19 @@ public class FastJsonConfig {
         return fastJsonConfig;
     }
 
+    /**
+     * 时间类型序列化内部类
+     *
+     * @author JiYinchuan
+     * @version 1.0.0
+     * @since 1.0.0
+     */
     public static class DateSerializer implements ObjectSerializer {
 
         public static final DateSerializer INSTANCE = new DateSerializer();
 
         @Override
-        public void write(JSONSerializer serializer, Object object, Object fieldName, Type fieldType, int features) {
+        public void write(JSONSerializer serializer, @Nullable Object object, Object fieldName, Type fieldType, int features) {
             SerializeWriter out = serializer.out;
             if (object == null) {
                 out.writeNull();
@@ -75,12 +99,19 @@ public class FastJsonConfig {
         }
     }
 
+    /**
+     * 枚举类型序列化内部类
+     *
+     * @author JiYinchuan
+     * @version 1.0.0
+     * @since 1.0.0
+     */
     public static class EnumSerializer implements ObjectSerializer {
 
         public static final DateSerializer INSTANCE = new DateSerializer();
 
         @Override
-        public void write(JSONSerializer serializer, Object object, Object fieldName, Type fieldType, int features) {
+        public void write(JSONSerializer serializer, @Nullable Object object, Object fieldName, Type fieldType, int features) {
             SerializeWriter out = serializer.out;
             if (object == null) {
                 out.writeNull();

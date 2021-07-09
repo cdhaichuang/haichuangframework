@@ -22,17 +22,50 @@ import java.util.stream.Collectors;
 /**
  * swagger工厂类
  *
+ * <p>该类为 {@code Swagger} 工厂类, 主要用于根据 {@link SwaggerInfoDTO} 创建 {@link Docket} 对象</p>
+ * <p>该类指定了部分默认参数, 如需自定义在参数 {@link SwaggerInfoDTO} 中进行填充相关属性即可</p>
+ *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
+ * @since 1.0.0
+ * @see SwaggerInfoDTO
  */
 public class SwaggerFactory {
 
+    /**
+     * 默认分组名
+     */
     public static final String DEFAULT_GROUP_NAME = "default";
+
+    /**
+     * 默认标题
+     */
     public static final String DEFAULT_TITLE = "HaiChuang Restful Apis";
-    public static final String DEFAULT_DESCRIPTION = "HaiChuang Restful Apis";
+
+    /**
+     * 默认描述
+     */
+    public static final String DEFAULT_DESCRIPTION = "HaiChuang Restful Apis Description";
+
+    /**
+     * 默认服务条款URL
+     */
     public static final String DEFAULT_TERMS_OF_SERVICE_URL = "https://www.haichuang.pro";
+
+    /**
+     * 默认作者信息
+     */
     public static final Contact DEFAULT_CONTACT = new Contact("JiYinchuan", "https://www.haichuang.pro", "jiyinchuan@haichuang.pro");
-    public static final String DEFAULT_VERSION = "1.0";
+
+    /**
+     * 默认版本号
+     */
+    public static final String DEFAULT_VERSION = "1.0.0";
+
+    /**
+     * 忽略权限的正则表达式
+     * 主要用于接口文档中默认对匹配的路径不加上请求头, 方便操作
+     */
     public static final Pattern IGNORE_PATTERN = Pattern.compile("^((?!common).)*$");
 
     /**

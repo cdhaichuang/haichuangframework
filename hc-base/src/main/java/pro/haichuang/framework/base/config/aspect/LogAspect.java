@@ -23,8 +23,13 @@ import java.lang.reflect.Method;
 /**
  * 日志切面
  *
+ * <p>该类具体实现了记录请求日志的功能, 切点为标注了 {@link ApiOperation @ApiOperation} 注解的方法, 记录相关请求与响应数据</p>
+ * <p>注意: 该类启用的前提条件为标注了
+ * {@link pro.haichuang.framework.base.annotation.EnableControllerLogAspect @EnableControllerLogAspect} 注解</p>
+ *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
+ * @since 1.0.0
  */
 @Aspect
 @Order(1)

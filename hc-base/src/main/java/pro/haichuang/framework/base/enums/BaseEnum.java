@@ -1,15 +1,23 @@
 package pro.haichuang.framework.base.enums;
 
-import com.alibaba.fastjson.annotation.JSONField;
-import com.alibaba.fastjson.support.spring.annotation.FastJsonView;
 import com.fasterxml.jackson.annotation.JsonValue;
 import pro.haichuang.framework.base.exception.EnumIllegalArgumentException;
 
 /**
- * 全局枚举基类
+ * 全局枚举父接口
+ *
+ * <p>该类为全局枚举父接口, 为避免部分功能失效, 项目中所有的自定义枚举原则上都必须实现该接口</p>
+ * 目前该类主要关联说明:
+ * <ul>
+ *     <li>请求参数枚举转换: {@link pro.haichuang.framework.base.config.mvc.enums.ParamEnumConverterFactory}</li>
+ *     <li>FastJson枚举序列化: {@link pro.haichuang.framework.base.config.mvc.FastJsonConfig}</li>
+ *     <li>自定义异常封装: {@link pro.haichuang.framework.base.exception.ApplicationException}</li>
+ *     <li>全局统一响应: {@link pro.haichuang.framework.base.response.ResultVO}</li>
+ * </ul>
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
+ * @since 1.0.0
  */
 public interface BaseEnum {
 

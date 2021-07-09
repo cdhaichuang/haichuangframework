@@ -7,7 +7,7 @@ import java.util.Date;
  * JWT载荷
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 public class JwtPayload implements Serializable {
     private static final long serialVersionUID = -3034724392253728198L;

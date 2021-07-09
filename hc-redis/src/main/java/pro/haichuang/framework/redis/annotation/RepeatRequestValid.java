@@ -7,7 +7,7 @@ import java.lang.annotation.*;
  * 基于 Redis 实现, 使用时请先引入 {@code hc-redis} 依赖, 否则不生效
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 @Inherited
 @Target(ElementType.METHOD)

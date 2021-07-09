@@ -5,8 +5,17 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * 核心配置文件
  *
+ * <p>该类为 {@code hc-base} 核心的配置文件类</p>
+ * 配置文件示例:
+ * <pre>
+ *     # ========================= Haichuang Setting =========================
+ *     haichuang:
+ *       // 是否启用配置
+ *       enable: true
+ * </pre>
+ *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 @ConfigurationProperties(prefix = "haichuang")
 public class BaseConfigProperties {

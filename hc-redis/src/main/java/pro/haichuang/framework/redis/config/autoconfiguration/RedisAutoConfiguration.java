@@ -13,7 +13,7 @@ import pro.haichuang.framework.redis.config.properties.RedisProperties;
  * 标注 {@link AutoConfigureBefore} 注解后会在指定自动配置类前加载
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  * @see org.springframework.boot.autoconfigure.AutoConfigureOrder
  * @see org.springframework.boot.autoconfigure.AutoConfigureAfter
  */

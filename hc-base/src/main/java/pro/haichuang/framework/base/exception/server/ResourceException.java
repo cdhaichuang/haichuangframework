@@ -7,7 +7,8 @@ import pro.haichuang.framework.base.exception.ApplicationException;
  * 系统执行出错自定义异常
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
+ * @since 1.0.0
  */
 public class ResourceException extends ApplicationException {
     private static final long serialVersionUID = 5657258945670528713L;

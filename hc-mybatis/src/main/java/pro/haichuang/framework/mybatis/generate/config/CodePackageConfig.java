@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
  * MyBatisPlus包配置
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 @Component
 public class CodePackageConfig {

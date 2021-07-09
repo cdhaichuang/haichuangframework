@@ -9,7 +9,7 @@ import java.io.Serializable;
  * 单条数据VO
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 @ApiModel("SingleVO")
 public class SingleVO<T> extends BaseVO implements Serializable {

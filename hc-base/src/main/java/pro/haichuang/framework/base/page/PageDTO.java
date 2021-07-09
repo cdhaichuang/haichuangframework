@@ -14,7 +14,7 @@ import java.util.Collections;
  * 分页DTO
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 public class PageDTO<T> implements Pageable, Serializable {
     private static final long serialVersionUID = -110663046876892030L;

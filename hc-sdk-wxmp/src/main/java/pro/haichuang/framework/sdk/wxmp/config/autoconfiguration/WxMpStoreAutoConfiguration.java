@@ -11,7 +11,7 @@ import pro.haichuang.framework.sdk.wxmp.store.WxMpDataStore;
  * 微信公众号数据存储自动配置
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnMissingBean(WxMpDataStore.class)

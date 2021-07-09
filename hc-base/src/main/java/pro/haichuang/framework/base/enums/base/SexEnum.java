@@ -7,24 +7,25 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * 性别枚举
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
+ * @since 1.0.0
  */
 public enum SexEnum implements BaseEnum {
 
     /**
      * 未知
      */
-    UNKNOWN("UNKNOWN", "UNKNOWN"),
+    UNKNOWN("0", "UNKNOWN"),
 
     /**
      * 男
      */
-    MAN("MAN", "男"),
+    MAN("1", "男"),
 
     /**
      * 女
      */
-    WOMAN("WOMAN", "女");
+    WOMAN("2", "女");
 
     /**
      * 枚举值

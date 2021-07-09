@@ -6,11 +6,19 @@ import pro.haichuang.framework.base.enums.BaseEnum;
 /**
  * 全局自定义异常基类
  *
+ * <p>该类为全局自定义异常基类, 为避免部分功能失效, 项目中所有的自定义枚举原则上都必须继承该类</p>
+ * 目前该类主要关联说明:
+ * <ul>
+ *     <li>全局Controller异常处理: {@link pro.haichuang.framework.base.config.mvc.BaseControllerAdvice}</li>
+ *     <li>验证工具类: {@link pro.haichuang.framework.base.util.common.ValidateUtils}</li>
+ * </ul>
+ *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
+ * @since 1.0.0
  */
 public class ApplicationException extends RuntimeException {
-    private static final long serialVersionUID = -8205556312320530419L;
+    private static final long serialVersionUID = 6539659393927269036L;
 
     public static String DEFAULT_ERROR_USER_TIP = "网络开小差了, 请稍后再试 (╯﹏╰)";
 

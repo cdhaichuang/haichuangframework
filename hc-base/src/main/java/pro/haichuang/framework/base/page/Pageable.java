@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * 分页接口
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 public interface Pageable {
 

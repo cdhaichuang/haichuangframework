@@ -10,7 +10,7 @@ import java.io.Serializable;
  * VO基类
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 @ApiIgnore
 public class BaseVO implements Serializable {

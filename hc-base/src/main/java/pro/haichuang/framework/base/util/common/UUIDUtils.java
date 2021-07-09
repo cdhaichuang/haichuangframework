@@ -9,7 +9,7 @@ import java.util.UUID;
  * UUID工具类
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 public class UUIDUtils {
 

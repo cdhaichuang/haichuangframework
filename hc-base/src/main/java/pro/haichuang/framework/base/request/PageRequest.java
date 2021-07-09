@@ -12,7 +12,7 @@ import java.io.Serializable;
  * 分页查询基类
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 @ApiModel("分页查询基类")
 public class PageRequest implements Serializable {

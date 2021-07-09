@@ -14,7 +14,7 @@ import pro.haichuang.framework.base.util.common.ValidateUtils;
  * 支付宝支付工具类
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 public class AliPayUtils {
 

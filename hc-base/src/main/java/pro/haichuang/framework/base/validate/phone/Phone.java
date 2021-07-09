@@ -8,7 +8,7 @@ import java.lang.annotation.*;
  * 手机号验证
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 @Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.TYPE_USE})
 @Retention(RetentionPolicy.RUNTIME)

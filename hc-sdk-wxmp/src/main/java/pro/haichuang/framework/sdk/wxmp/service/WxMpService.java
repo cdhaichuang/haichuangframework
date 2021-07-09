@@ -1,7 +1,7 @@
 package pro.haichuang.framework.sdk.wxmp.service;
 
-import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
+import pro.haichuang.framework.sdk.wxmp.dto.WxMpUserInfoDTO;
 import pro.haichuang.framework.sdk.wxmp.dto.WxMpWebAccessTokenDTO;
 
 import javax.servlet.http.HttpServletResponse;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
  * WxMpService
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 public interface WxMpService {
 
@@ -23,26 +23,24 @@ public interface WxMpService {
      * @param echoStr   请求响应值
      * @param response  HttpServletResponse
      */
-    void verifyWxMessage(@NonNull String signature, @NonNull String timestamp, @NonNull String nonce,
-                         @NonNull String echoStr, @NonNull HttpServletResponse response);
+    void verifyWxMessage(String signature, String timestamp, String nonce, String echoStr, HttpServletResponse response);
 
     /**
      * 获取基础AccessToken
      *
      * @return 基础AccessToken
      */
-    @NonNull
     String getBaseAccessToken();
 
     /**
      * 获取网页AccessToken
      *
-     * @param openId openId
-     * @return 网页AccessTokenDTO, 值为 [null] 时则视为未登录, 需要重新进行授权
+     * @param openId OpenId
+     * @return 网页AccessTokenDTO, 值为 {@code null} 时则视为未登录, 需要重新进行授权
      * @see pro.haichuang.framework.sdk.wxmp.service.WxMpService#getWebAccessTokenByCode(String)
      */
     @Nullable
-    WxMpWebAccessTokenDTO getWebAccessTokenByOpenId(@NonNull String openId);
+    WxMpWebAccessTokenDTO getWebAccessTokenByOpenId(String openId);
 
     /**
      * 获取网页AccessToken
@@ -51,15 +49,22 @@ public interface WxMpService {
      * @param code Code
      * @return 网页AccessTokenDTO
      */
-    @NonNull
-    WxMpWebAccessTokenDTO getWebAccessTokenByCode(@NonNull String code);
+    WxMpWebAccessTokenDTO getWebAccessTokenByCode(String code);
 
     /**
      * 获取JsApiTicket
      *
      * @return JsApiTicket
      */
-    @NonNull
     String getJsApiTicket();
+
+    /**
+     * 获取用户信息
+     *
+     * @param openId OpenId
+     * @return 用户信息DTO, 当用户未关注当前公众号时值为 {@code null}
+     */
+    @Nullable
+    WxMpUserInfoDTO getUserInfo(String openId);
 
 }

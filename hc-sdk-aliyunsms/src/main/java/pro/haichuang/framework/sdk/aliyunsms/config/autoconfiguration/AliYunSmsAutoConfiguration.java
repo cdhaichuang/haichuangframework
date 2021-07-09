@@ -13,7 +13,7 @@ import pro.haichuang.framework.sdk.aliyunsms.service.DefaultAliYunSmsServiceImpl
  * 阿里云SMS自动配置
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(AliYunSmsProperties.class)

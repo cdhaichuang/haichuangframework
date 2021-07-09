@@ -20,11 +20,13 @@ import java.lang.reflect.Method;
  * 权限切面
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
+ * @deprecated 该注解暂时废弃, 等待后续更新
  */
 @Aspect
 @Order(2)
 @ConditionalOnBean(AbstractSecurityValidate.class)
+@Deprecated
 public class SecurityAspect {
 
     @Autowired

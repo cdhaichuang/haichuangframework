@@ -10,7 +10,7 @@ import java.util.Set;
  * RedisService
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 @SuppressWarnings({"unused", "UnusedReturnValue", "SpellCheckingInspection"})
 public interface RedisService {

@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
@@ -40,8 +39,14 @@ import java.util.regex.Pattern;
 /**
  * 全局Controller异常处理
  *
+ * <p>该类具体实现了全局请求异常的拦截, 对于不同的异常有不同的拦截并返回, 无论是自定义异常/校验异常/未知异常等都有具体的实现,
+ * 拦截后给予客户端友好的返回, 同时将异常规范的写出到日志文件中, 便于项目运行中通过日志排查问题</p>
+ * <p>注意: 该类启用的前置条件为标注了
+ * {@link pro.haichuang.framework.base.annotation.EnableControllerAdvice @EnableControllerAdvice} 注解</p>
+ *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
+ * @since 1.0.0
  */
 @RestControllerAdvice
 public class BaseControllerAdvice {
@@ -60,12 +65,11 @@ public class BaseControllerAdvice {
      * @return 结果响应
      */
     @ExceptionHandler(ApplicationException.class)
-    @NonNull
-    public BaseVO generalErrorHandle(@NonNull ApplicationException e,
-                                     @NonNull HttpServletRequest request) {
+    public BaseVO generalErrorHandle(ApplicationException e, HttpServletRequest request) {
         String uuid = UUIDUtils.Local.get();
         LOGGER.warn("[{}] ------------------------- 自定义异常信息 ------------------------- [Begin - {}]", LOG_TAG, uuid);
-        printStackTraceFormat(request.getRequestURI(), request.getMethod(), e, e.getCause(), uuid, "自定义异常信息", null);
+        printStackTraceFormat(request.getRequestURI(), request.getMethod(), e, e.getCause(),
+                uuid, "自定义异常信息", null);
         LOGGER.warn("[{}] ------------------------- 自定义异常信息 ------------------------- [ End - {} ]", LOG_TAG, uuid);
         return ResultVO.other(e.getBaseEnum(), e.getUserTip());
     }
@@ -79,9 +83,7 @@ public class BaseControllerAdvice {
      * @return 结果响应
      */
     @ExceptionHandler(StackTraceException.class)
-    @NonNull
-    public BaseVO stackTracerErrorHandler(@NonNull StackTraceException e,
-                                          @NonNull HttpServletRequest request, @NonNull HttpServletResponse response) {
+    public BaseVO stackTracerErrorHandler(StackTraceException e, HttpServletRequest request, HttpServletResponse response) {
         String uuid = UUIDUtils.Local.get();
         LOGGER.error("[{}] ------------------------- 堆栈异常信息 ------------------------- [Begin - {}]", LOG_TAG, uuid);
         LOGGER.error("[{}] 堆栈异常信息 [uuid: {}, requestUri: {}, requestMethod: {}, errorMessage: {}]",
@@ -100,9 +102,7 @@ public class BaseControllerAdvice {
      * @return 结果响应
      */
     @ExceptionHandler(ThirdPartyException.class)
-    @NonNull
-    public JSONObject thirdPartyErrorHandler(@NonNull ThirdPartyException e,
-                                             @NonNull HttpServletRequest request, @NonNull HttpServletResponse response) {
+    public JSONObject thirdPartyErrorHandler(ThirdPartyException e, HttpServletRequest request, HttpServletResponse response) {
         String uuid = UUIDUtils.Local.get();
         LOGGER.error("[{}] ------------------------- 第三方异常信息 ------------------------- [Begin - {}]", LOG_TAG, uuid);
         LOGGER.error("[{}] 第三方异常信息 [uuid: {}, requestUri: {}, requestMethod: {}, errorCode: {}, errorMessage: {}]",
@@ -124,9 +124,7 @@ public class BaseControllerAdvice {
      * @return 结果响应
      */
     @ExceptionHandler(Exception.class)
-    @NonNull
-    public BaseVO serverErrorHandler(@NonNull Exception e,
-                                     @NonNull HttpServletRequest request, @NonNull HttpServletResponse response) {
+    public BaseVO serverErrorHandler(Exception e, HttpServletRequest request, HttpServletResponse response) {
         String uuid = UUIDUtils.Local.get();
         LOGGER.error("[{}] ------------------------- 系统异常信息 ------------------------- [Begin - {}]", LOG_TAG, uuid);
         LOGGER.error("[{}] 系统异常信息 [uuid: {}, requestUri: {}, requestMethod: {}, errorMessage: {}]",
@@ -149,9 +147,8 @@ public class BaseControllerAdvice {
      * @return 结果响应
      */
     @ExceptionHandler(MissingServletRequestParameterException.class)
-    @NonNull
-    public JSONObject validationExceptionHandler(@NonNull MissingServletRequestParameterException e,
-                                                 @NonNull HttpServletRequest request, @NonNull HttpServletResponse response) {
+    public JSONObject validationExceptionHandler(MissingServletRequestParameterException e,
+                                                 HttpServletRequest request, HttpServletResponse response) {
         String uuid = UUIDUtils.Local.get();
         LOGGER.warn("[{}] ------------------------- 参数为空 ------------------------- [Begin - {}]", LOG_TAG, uuid);
         LOGGER.warn("[{}] 参数为空 [uuid: {}, requestUri: {}, requestMethod: {}, errorMessage: {}]", LOG_TAG, uuid,
@@ -173,18 +170,19 @@ public class BaseControllerAdvice {
      * @return 结果响应
      */
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    @NonNull
-    public JSONObject validationExceptionHandler(@NonNull MethodArgumentTypeMismatchException e,
-                                                 @NonNull HttpServletRequest request, @NonNull HttpServletResponse response) {
+    public JSONObject validationExceptionHandler(MethodArgumentTypeMismatchException e,
+                                                 HttpServletRequest request, HttpServletResponse response) {
         String uuid = UUIDUtils.Local.get();
         LOGGER.warn("[{}] ------------------------- 参数转换异常 ------------------------- [Begin - {}]", LOG_TAG, uuid);
-        String errorMessage = this.printStackTraceFormat(request.getRequestURI(), request.getMethod(), e, e.getCause(), uuid, "参数转换异常", e.getLocalizedMessage());
+        String errorMessage = this.printStackTraceFormat(request.getRequestURI(), request.getMethod(), e, e.getCause(),
+                uuid, "参数转换异常", e.getLocalizedMessage());
         LOGGER.warn("[{}] ------------------------- 参数转换异常 ------------------------- [ End - {}]", LOG_TAG, uuid);
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         return new JSONObject()
                 .fluentPut(BaseVO.ERROR_CODE, RequestParamErrorEnum.PARAMETER_EMPTY.value())
                 .fluentPut(BaseVO.ERROR_MESSAGE, errorMessage)
-                .fluentPut(BaseVO.USER_TIP, e.getLocalizedMessage().equals(errorMessage) ? errorMessage : ApplicationException.DEFAULT_ERROR_USER_TIP);
+                .fluentPut(BaseVO.USER_TIP, e.getLocalizedMessage().equals(errorMessage)
+                        ? errorMessage : ApplicationException.DEFAULT_ERROR_USER_TIP);
     }
 
     /**
@@ -198,9 +196,8 @@ public class BaseControllerAdvice {
      * @return 结果响应
      */
     @ExceptionHandler(ValidationException.class)
-    @NonNull
-    public JSONObject validationExceptionHandler(@NonNull ValidationException e,
-                                                 @NonNull HttpServletRequest request, @NonNull HttpServletResponse response) {
+    public JSONObject validationExceptionHandler(ValidationException e,
+                                                 HttpServletRequest request, HttpServletResponse response) {
         String uuid = UUIDUtils.Local.get();
         LOGGER.warn("[{}] ------------------------- 验证异常 ------------------------- [Begin - {}]", LOG_TAG, uuid);
         LOGGER.warn("[{}] 验证异常 [uuid: {}, requestUri: {}, requestMethod: {}, errorMessage: {}]",
@@ -232,18 +229,19 @@ public class BaseControllerAdvice {
      * <p>Enum deserialize failed exception is unsolved</p>
      */
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    @NonNull
-    public JSONObject validationExceptionHandler(@NonNull HttpMessageNotReadableException e,
-                                                 @NonNull HttpServletRequest request, @NonNull HttpServletResponse response) {
+    public JSONObject validationExceptionHandler(HttpMessageNotReadableException e,
+                                                 HttpServletRequest request, HttpServletResponse response) {
         String uuid = UUIDUtils.Local.get();
         LOGGER.warn("[{}] ------------------------- 请求体异常 ------------------------- [Begin - {}]", LOG_TAG, uuid);
-        String errorMessage = this.printStackTraceFormat(request.getRequestURI(), request.getMethod(), e, e.getCause(), uuid, "请求体异常", e.getLocalizedMessage());
+        String errorMessage = this.printStackTraceFormat(request.getRequestURI(), request.getMethod(), e, e.getCause(),
+                uuid, "请求体异常", e.getLocalizedMessage());
         LOGGER.warn("[{}] ------------------------- 请求体异常 ------------------------- [ End - {}]", LOG_TAG, uuid);
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         return new JSONObject()
                 .fluentPut(BaseVO.ERROR_CODE, RequestParamErrorEnum.PARAMETER_EMPTY.value())
                 .fluentPut(BaseVO.ERROR_MESSAGE, errorMessage)
-                .fluentPut(BaseVO.USER_TIP, e.getLocalizedMessage().equals(errorMessage) ? errorMessage : ApplicationException.DEFAULT_ERROR_USER_TIP);
+                .fluentPut(BaseVO.USER_TIP, e.getLocalizedMessage().equals(errorMessage)
+                        ? errorMessage : ApplicationException.DEFAULT_ERROR_USER_TIP);
     }
 
     /**
@@ -257,9 +255,8 @@ public class BaseControllerAdvice {
      * @return 结果响应
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    @NonNull
-    public JSONObject validationExceptionHandler(@NonNull MethodArgumentNotValidException e,
-                                                 @NonNull HttpServletRequest request, @NonNull HttpServletResponse response) {
+    public JSONObject validationExceptionHandler(MethodArgumentNotValidException e,
+                                                 HttpServletRequest request, HttpServletResponse response) {
         String uuid = UUIDUtils.Local.get();
         LOGGER.warn("[{}] ------------------------- 请求体验证异常 ------------------------- [Begin - {}]", LOG_TAG, uuid);
         List<String> errorMessages = new ArrayList<>();
@@ -288,14 +285,13 @@ public class BaseControllerAdvice {
      * @return 结果响应
      */
     @ExceptionHandler(BindException.class)
-    @NonNull
-    public JSONObject validationExceptionHandler(@NonNull BindException e,
-                                                 @NonNull HttpServletRequest request, @NonNull HttpServletResponse response) {
+    public JSONObject validationExceptionHandler(BindException e, HttpServletRequest request, HttpServletResponse response) {
         String uuid = UUIDUtils.Local.get();
         LOGGER.warn("[{}] ------------------------- 绑定异常 ------------------------- [Begin - {}]", LOG_TAG, uuid);
         LOGGER.warn("[{}] 绑定异常 [uuid: {}, requestUri: {}, requestMethod: {}, errorMessage: {}]", LOG_TAG, uuid,
                 request.getRequestURI(), request.getMethod(), e.getAllErrors().get(0).getDefaultMessage());
-        this.printStackTraceFormat(request.getRequestURI(), request.getMethod(), e, e.getCause(), uuid, "绑定异常", null);
+        this.printStackTraceFormat(request.getRequestURI(), request.getMethod(), e, e.getCause(),
+                uuid, "绑定异常", null);
         LOGGER.warn("[{}] ------------------------- 绑定异常 ------------------------- [ End - {}]", LOG_TAG, uuid);
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         return new JSONObject()
@@ -313,9 +309,8 @@ public class BaseControllerAdvice {
      * @return 结果响应
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    @NonNull
-    public JSONObject validationExceptionHandler(@NonNull HttpRequestMethodNotSupportedException e,
-                                                 @NonNull HttpServletRequest request, @NonNull HttpServletResponse response) {
+    public JSONObject validationExceptionHandler(HttpRequestMethodNotSupportedException e,
+                                                 HttpServletRequest request, HttpServletResponse response) {
         String uuid = UUIDUtils.Local.get();
         LOGGER.warn("[{}] ------------------------- 方法不被允许 ------------------------- [Begin - {}]", LOG_TAG, uuid);
         LOGGER.warn("[{}] 方法不被允许 [uuid: {}, requestUri: {}, requestMethod: {}, errorMessage: {}]", LOG_TAG, uuid,
@@ -346,8 +341,8 @@ public class BaseControllerAdvice {
      * @param originalErrorMessage 原始错误信息
      * @return 格式化后的错误信息
      */
-    private String printStackTraceFormat(@NonNull String requestUri, @NonNull String requestMethod, @NonNull Throwable tp,
-                                         @Nullable Throwable t, @NonNull String uuid, @NonNull String tag, @Nullable String originalErrorMessage) {
+    private String printStackTraceFormat(String requestUri, String requestMethod, Throwable tp, @Nullable Throwable t,
+                                         String uuid, String tag, @Nullable String originalErrorMessage) {
         if (t == null) {
             if (tp instanceof EnumIllegalArgumentException) {
                 Matcher matcher = ENUM_ILLEGAL_ARGUMENT_PRINT_PATTERN.matcher(tp.getLocalizedMessage());
@@ -355,14 +350,14 @@ public class BaseControllerAdvice {
                 if (matcher.find()) {
                     originalErrorMessage = originalErrorMessage.replace(matcher.group(), "");
                 }
-                LOGGER.warn("[{}] {} [uuid: {}, requestUri: {}, requestMethod: {}, errorMessage: {}]", LOG_TAG, tag, uuid,
-                        requestUri, requestMethod, tp.getLocalizedMessage());
+                LOGGER.warn("[{}] {} [uuid: {}, requestUri: {}, requestMethod: {}, errorMessage: {}]", LOG_TAG, tag,
+                        uuid, requestUri, requestMethod, tp.getLocalizedMessage());
             } else {
                 boolean isPrintStack = false;
                 for (StackTraceElement stackTraceElement : tp.getStackTrace()) {
                     if (stackTraceElement.getClassName().contains("pro.haichuang")) {
-                        LOGGER.warn("[{}] {} [uuid: {}, requestUri: {}, requestMethod: {}, stackTrace: {}]", LOG_TAG, tag, uuid,
-                                requestUri, requestMethod, stackTraceElement);
+                        LOGGER.warn("[{}] {} [uuid: {}, requestUri: {}, requestMethod: {}, stackTrace: {}]", LOG_TAG, tag,
+                                uuid, requestUri, requestMethod, stackTraceElement);
                         isPrintStack = true;
                     }
                 }

@@ -7,7 +7,7 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * Mybatis代码生成异常枚举
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 public enum MybatisGenerateErrorEnum implements BaseEnum {
 

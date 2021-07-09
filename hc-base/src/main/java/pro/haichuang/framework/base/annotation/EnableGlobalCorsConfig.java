@@ -9,8 +9,13 @@ import java.lang.annotation.*;
 /**
  * 启用全局跨域配置
  *
+ * <p>启用此注解后, 将全局添加跨域配置</p>
+ * <p>具体实现请参阅 {@link GlobalCorsConfig}</p>
+ *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
+ * @since 1.0.0
+ * @see GlobalCorsConfig
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})

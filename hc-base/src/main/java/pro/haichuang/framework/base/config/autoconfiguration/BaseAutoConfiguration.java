@@ -12,8 +12,15 @@ import pro.haichuang.framework.base.config.properties.BaseConfigProperties;
 /**
  * 核心自动配置
  *
+ * <p>该类为 {@code hc-base} 模块核心自动配置类</p>
+ * <p>可以在 {@code yaml} 配置文件中指定 {@link BaseConfigProperties} 中相关的属性</p>
+ *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
+ * @since 1.0.0
+ * @see WebMvcConfig
+ * @see JacksonConfig
+ * @see pro.haichuang.framework.base.config.mvc.FastJsonConfig
  */
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(BaseConfigProperties.class)
@@ -29,5 +36,4 @@ import pro.haichuang.framework.base.config.properties.BaseConfigProperties;
         FastJsonConfig.class
 })
 public class BaseAutoConfiguration {
-
 }

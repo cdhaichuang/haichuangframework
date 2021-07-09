@@ -7,7 +7,7 @@ import java.util.Arrays;
  * 运行命令: java Init (项目Code) (运行端口)
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 public class Init {
 

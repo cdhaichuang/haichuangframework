@@ -12,7 +12,7 @@ import pro.haichuang.framework.sdk.aliyunsms.util.AliYunSmsUtils;
  * AliYunSmsService默认实现
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 public class DefaultAliYunSmsServiceImpl implements AliYunSmsService {
 

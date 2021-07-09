@@ -8,7 +8,7 @@ import pro.haichuang.framework.base.exception.client.RequestParamException;
  * 阿里云OSS配置文件
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 @SuppressWarnings("SpellCheckingInspection")
 @ConfigurationProperties(prefix = "haichuang.sdk.aliyunoss")

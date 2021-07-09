@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiModelProperty;
  * 简单分页查询
  *
  * @author JiYinchuan
- * @version 1.0
+ * @version 1.0.0
  */
 @ApiModel("简单分页查询")
 public class SimplePageRequest extends PageRequest {
