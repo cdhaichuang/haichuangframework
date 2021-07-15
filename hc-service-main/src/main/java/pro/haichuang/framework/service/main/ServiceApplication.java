@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import pro.haichuang.framework.base.annotation.EnableControllerAdvice;
 import pro.haichuang.framework.base.annotation.EnableControllerLogAspect;
 import pro.haichuang.framework.base.annotation.EnableLogSave;
-import pro.haichuang.framework.base.annotation.EnableSecurityAspect;
 import pro.haichuang.framework.redis.annotation.EnableRequestRepeatValidate;
 
 /**
@@ -17,7 +16,6 @@ import pro.haichuang.framework.redis.annotation.EnableRequestRepeatValidate;
 @SpringBootApplication
 @EnableControllerAdvice
 @EnableControllerLogAspect
-@EnableSecurityAspect
 @EnableLogSave
 @EnableRequestRepeatValidate
 public class ServiceApplication {
