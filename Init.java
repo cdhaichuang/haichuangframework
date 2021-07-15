@@ -97,7 +97,7 @@ public class Init {
                 replaceCodeAndFlushWrite(resourcesDirFile.isDirectory() || (resourcesDirFile.isFile() && resourcesDirFile.getName().startsWith("application")),
                         resourcesDirFile, originCodeName, port);
                 // 更改 [pom.xml] 文件 [Jar] 名称
-                replaceCodeAndFlushWrite(false, resourcesDirFile, originCodeName, port);
+                replaceCodeAndFlushWrite(false, pomFile, originCodeName, port);
             } catch (Exception e) {
                 System.out.println("运行异常, 请联系管理员");
             }
