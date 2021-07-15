@@ -10,9 +10,10 @@ import pro.haichuang.framework.base.exception.ApplicationException;
  * @author JiYinchuan
  * @version 1.0.0
  * @since 1.0.0
+ * @see RequestServerErrorEnum
  */
 public class RequestServerException extends ApplicationException {
-    private static final long serialVersionUID = -6311758362810869067L;
+    private static final long serialVersionUID = 4863187527609960249L;
 
     public RequestServerException(RequestServerErrorEnum requestServerErrorEnum) {
         super(requestServerErrorEnum);

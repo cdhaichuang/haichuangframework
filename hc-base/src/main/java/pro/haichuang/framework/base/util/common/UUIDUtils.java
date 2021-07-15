@@ -1,15 +1,19 @@
 package pro.haichuang.framework.base.util.common;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.lang.NonNull;
 
 import java.util.UUID;
 
 /**
  * UUID工具类
  *
+ * <p>该类用于便捷的生成指定格式的 {@code uuid}</p>
+ * <p>该类中包含一个内部类 {@link Local}, 用于获取当前线程中唯一的 {@code uuid}, 通常用于日志记录等情况</p>
+ *
  * @author JiYinchuan
  * @version 1.0.0
+ * @see Local
+ * @since 1.0.0
  */
 public class UUIDUtils {
 
@@ -18,19 +22,40 @@ public class UUIDUtils {
      *
      * @return UUID
      */
+    @NonNull
     public static String random() {
         return UUID.randomUUID().toString().replaceAll("-", "");
     }
 
     /**
-     * specified length by UUID
+     * UUID
+     *
+     * @return UUID
+     */
+    public static long randomOfLang() {
+        return Long.parseLong(UUID.randomUUID().toString().replaceAll("-", ""));
+    }
+
+    /**
+     * Specified Length By UUID
      *
      * @param length length
      * @return UUID
      */
+    @NonNull
     public static String random(int length) {
         String uuid = UUIDUtils.random();
         return uuid.substring(0, Math.min(length, uuid.length()));
+    }
+
+    /**
+     * Specified Length By UUID
+     *
+     * @param length length
+     * @return UUID
+     */
+    public static long randomOfLang(int length) {
+        return Long.parseLong(random(length));
     }
 
     /**
@@ -38,8 +63,6 @@ public class UUIDUtils {
      */
     public static class Local {
 
-        private static final Logger LOGGER = LoggerFactory.getLogger(Local.class);
-        private static final String LOG_TAG = "UUID.Local";
         private static final ThreadLocal<String> LOCAL = new ThreadLocal<>();
 
         /**
@@ -63,10 +86,11 @@ public class UUIDUtils {
         }
 
         /**
-         * 获取当前线程存储的UUID
+         * 获取当前线程存储的UUID, 未获取到当前线程的UUID时会创建一个新的UUID并设置到当前线程中
          *
          * @return UUID.Local
          */
+        @NonNull
         public static String get() {
             if (LOCAL.get() == null) {
                 init();
@@ -76,6 +100,10 @@ public class UUIDUtils {
 
         /**
          * 移除当前线程存储的UUID
+         *
+         * <p>因为 {@link ThreadLocal} 底层使用的内部类 {@code ThreadLocalMap} 实现的, 生命周期为当前线程,
+         * 所以不执行此方法当线程终止后 {@code ThreadLocalMap} 中的值会被JVM垃圾回收,
+         * 但推荐在不需要使用的时候显性的执行此方法, 便于理解</p>
          */
         public static void remove() {
             LOCAL.remove();

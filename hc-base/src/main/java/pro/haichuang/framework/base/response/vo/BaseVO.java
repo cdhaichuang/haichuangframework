@@ -9,12 +9,17 @@ import java.io.Serializable;
 /**
  * VO基类
  *
+ * <p>该类为全局VO响应基类, 提供了默认响应参数, 用于无数据返回的情况下使用,
+ * 使用时必须使用 {@link pro.haichuang.framework.base.response.ResultVO} 中相关方法进行返回</p>
+ *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
+ * @see pro.haichuang.framework.base.response.ResultVO
  */
 @ApiIgnore
 public class BaseVO implements Serializable {
-    private static final long serialVersionUID = 4031780604297964211L;
+    private static final long serialVersionUID = -4184414745184461718L;
 
     public static final String ERROR_CODE = "errorCode";
     public static final String ERROR_MESSAGE = "errorMessage";

@@ -12,15 +12,21 @@ import java.util.Collections;
 /**
  * 分页VO
  *
+ * <p>该类为分页VO, 用于分页数据返回的情况下使用, 分页详情数据请参考 {@link PageDetailVO} 说明,
+ * 使用时必须使用 {@link pro.haichuang.framework.base.response.ResultVO} 中相关方法进行返回</p>
+ *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
+ * @see PageDetailVO
+ * @see pro.haichuang.framework.base.response.ResultVO
  */
 @ApiModel("PageVO")
 public class PageVO<T> extends BaseVO implements Serializable {
-    private static final long serialVersionUID = 5452051337130717431L;
+    private static final long serialVersionUID = 2207315013077490485L;
 
     /**
-     * 分页详情返回
+     * 分页详情数据
      */
     @ApiModelProperty("PageDetail")
     private PageDetailVO detail;

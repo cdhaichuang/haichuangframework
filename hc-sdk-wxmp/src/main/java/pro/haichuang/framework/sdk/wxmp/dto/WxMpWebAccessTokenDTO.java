@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.Duration;
 
 /**
- * WebAccessTokenDTO
+ * 微信公众号基础AccessTokenDTO
  *
  * @author JiYinchuan
  * @version 1.0.0

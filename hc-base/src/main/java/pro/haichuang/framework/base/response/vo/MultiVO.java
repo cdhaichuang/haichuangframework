@@ -10,12 +10,17 @@ import java.util.Collections;
 /**
  * 多条数据VO
  *
+ * <p>该类为多条数据VO, 用于多条数据返回的情况下使用, 多条数据+分页时请使用 {@link PageVO},
+ * 使用时必须使用 {@link pro.haichuang.framework.base.response.ResultVO} 中相关方法进行返回</p>
+ *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
+ * @see pro.haichuang.framework.base.response.ResultVO
  */
 @ApiModel("MultiVO")
 public class MultiVO<T> extends BaseVO implements Serializable {
-    private static final long serialVersionUID = 8867565885729989450L;
+    private static final long serialVersionUID = -9191522053300516216L;
 
     /**
      * 多条数据

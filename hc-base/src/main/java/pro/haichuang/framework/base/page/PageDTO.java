@@ -1,6 +1,5 @@
 package pro.haichuang.framework.base.page;
 
-import org.springframework.lang.NonNull;
 import pro.haichuang.framework.base.constant.PageConstant;
 import pro.haichuang.framework.base.request.PageRequest;
 import pro.haichuang.framework.base.response.vo.PageDetailVO;
@@ -8,16 +7,19 @@ import pro.haichuang.framework.base.response.vo.PageDetailVO;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Collections;
 
 /**
  * 分页DTO
  *
+ * <p>该类为分页DTO, 用于项目中所有分页相关功能数据传输, 原则上所有分页相关功能均使用此类</p>
+ *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
+ * @see Pageable
  */
 public class PageDTO<T> implements Pageable, Serializable {
-    private static final long serialVersionUID = -110663046876892030L;
+    private static final long serialVersionUID = -4773020592878421576L;
 
     /**
      * 页码
@@ -69,7 +71,7 @@ public class PageDTO<T> implements Pageable, Serializable {
      * @param totalCount 总数
      * @param content    数据
      */
-    public PageDTO(int pageNo, int pageSize, long totalCount, @NonNull Collection<T> content) {
+    public PageDTO(int pageNo, int pageSize, long totalCount, Collection<T> content) {
         this(pageNo, pageSize);
         this.totalCount = totalCount;
         this.content = content;
@@ -81,7 +83,7 @@ public class PageDTO<T> implements Pageable, Serializable {
      *
      * @param pageRequest 分页参数
      */
-    public PageDTO(@NonNull PageRequest pageRequest) {
+    public PageDTO(PageRequest pageRequest) {
         this();
         this.pageNo = pageRequest.getPageNo();
         this.pageSize = pageRequest.getPageSize();
@@ -94,7 +96,7 @@ public class PageDTO<T> implements Pageable, Serializable {
      * @param content    数据
      * @param totalCount 总数
      */
-    public PageDTO(@NonNull PageRequest pageRequest, long totalCount, @NonNull Collection<T> content) {
+    public PageDTO(PageRequest pageRequest, long totalCount, Collection<T> content) {
         this(pageRequest);
         this.totalCount = totalCount;
         this.content = content;
@@ -106,7 +108,7 @@ public class PageDTO<T> implements Pageable, Serializable {
      * @param pageDetailVO 分页详情
      * @param content      数据
      */
-    public PageDTO(@NonNull PageDetailVO pageDetailVO, @NonNull Collection<T> content) {
+    public PageDTO(PageDetailVO pageDetailVO, Collection<T> content) {
         this(pageDetailVO.getPageNo(), pageDetailVO.getPageSize(), pageDetailVO.getTotalCount(), content);
         adjustPageNo();
     }
@@ -198,7 +200,7 @@ public class PageDTO<T> implements Pageable, Serializable {
     }
 
     public PageDTO<T> setContent(Collection<T> content) {
-        this.content = content == null ? Collections.emptyList() : content;
+        this.content = content;
         return this;
     }
 
@@ -232,8 +234,7 @@ public class PageDTO<T> implements Pageable, Serializable {
      * @param endDateTime   结束时间
      * @return 返回时间范围同一天结束时间
      */
-    @NonNull
-    public static LocalDateTime formatEndDate(@NonNull LocalDateTime beginDateTime, @NonNull LocalDateTime endDateTime) {
+    public static LocalDateTime formatEndDate(LocalDateTime beginDateTime, LocalDateTime endDateTime) {
         return endDateTime.plusDays(1);
     }
 

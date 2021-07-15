@@ -10,6 +10,7 @@ import pro.haichuang.framework.base.exception.ApplicationException;
  * @author JiYinchuan
  * @version 1.0.0
  * @since 1.0.0
+ * @see DeviceErrorEnum
  */
 public class DeviceException extends ApplicationException {
     private static final long serialVersionUID = 6330999937960360108L;

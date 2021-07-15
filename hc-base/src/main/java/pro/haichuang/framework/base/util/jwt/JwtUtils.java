@@ -1,12 +1,17 @@
 package pro.haichuang.framework.base.util.jwt;
 
 import io.jsonwebtoken.*;
+import org.springframework.lang.NonNull;
 
 /**
  * JWT工具类
  *
+ * <p>该类为JWT工具类, 对于JWT的操作一律使用此类</p>
+ *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
+ * @see JwtPayload
  */
 public class JwtUtils {
 
@@ -17,7 +22,8 @@ public class JwtUtils {
      * @param secret  密钥
      * @return JWT字符串
      */
-    public static String generateJwt(JwtPayload payload, String secret) {
+    @NonNull
+    public static String generateJwt(@NonNull JwtPayload payload, @NonNull String secret) {
         return Jwts.builder()
                 .setId(payload.getJti())
                 .setIssuer(payload.getIss())
@@ -37,12 +43,14 @@ public class JwtUtils {
      *
      * @param token  JwtToken
      * @param secret 密钥
-     * @return DecodedJWT
+     * @return DecodedJWT字符串
      * @throws ExpiredJwtException   JWT过期异常
      * @throws MalformedJwtException JWT解析失败异常
      * @throws SignatureException    JWT格式错误异常
      */
-    public static JwtPayload parseJwtToken(String token, String secret) throws ExpiredJwtException, MalformedJwtException, SignatureException {
+    @NonNull
+    public static JwtPayload parseJwtToken(@NonNull String token, @NonNull String secret)
+            throws ExpiredJwtException, MalformedJwtException, SignatureException {
         Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
         JwtPayload jwtPayload = new JwtPayload();
         jwtPayload.setJti(claims.getId());

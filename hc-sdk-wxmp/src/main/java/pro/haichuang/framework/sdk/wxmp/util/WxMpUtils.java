@@ -86,9 +86,9 @@ public class WxMpUtils {
         String uuid = UUIDUtils.Local.get();
         String baseUrl = "https://api.weixin.qq.com/cgi-bin/token";
         Map<String, Object> params = new HashMap<>(3);
-        params.put("grant_type", "client_credential");
         params.put("appid", appId);
         params.put("secret", appSecret);
+        params.put("grant_type", "client_credential");
         JSONObject resultJson = JSONObject.parseObject(HttpUtil.get(baseUrl, params, timout));
         if (validateFailResult(resultJson)) {
             LOGGER.error("[{}] 获取基础AccessToken异常 [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
@@ -264,7 +264,7 @@ public class WxMpUtils {
      * 验证失败返回结果
      *
      * @param jsonObject 返回JSON对象
-     * @return {true: 验证失败, true: 验证成功}
+     * @return {false: 验证失败, true: 验证成功}
      */
     public static boolean validateFailResult(JSONObject jsonObject) {
         Integer errorCode = jsonObject.getInteger(ERROR_CODE_NAME);

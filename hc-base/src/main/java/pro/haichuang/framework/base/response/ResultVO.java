@@ -12,13 +12,20 @@ import java.io.Serializable;
 import java.util.Collection;
 
 /**
- * 全局响应工具类
+ * 全局响应VO类
+ *
+ * <p>该类为全局响应VO, 所有控制器返回必须使用此类进行返回, 返回值类型参考 {@link BaseVO} 下所有实现</p>
  *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
+ * @see BaseVO
+ * @see SingleVO
+ * @see MultiVO
+ * @see PageVO
  */
 public class ResultVO implements Serializable {
-    private static final long serialVersionUID = 2830894283845180061L;
+    private static final long serialVersionUID = -7437022394115877815L;
 
     // ------------------------- OK -------------------------
 

@@ -8,12 +8,17 @@ import java.io.Serializable;
 /**
  * 单条数据VO
  *
+ * <p>该类为单条数据VO, 用于单条数据返回的情况下使用,
+ * 使用时必须使用 {@link pro.haichuang.framework.base.response.ResultVO} 中相关方法进行返回</p>
+ *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
+ * @see pro.haichuang.framework.base.response.ResultVO
  */
 @ApiModel("SingleVO")
 public class SingleVO<T> extends BaseVO implements Serializable {
-    private static final long serialVersionUID = -791674624589468027L;
+    private static final long serialVersionUID = -3162181461276163016L;
 
     /**
      * 数据

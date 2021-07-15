@@ -11,12 +11,17 @@ import java.io.Serializable;
 /**
  * 分页查询基类
  *
+ * <p>该类为分页查询基类, 所有带分页参数的请求实体均必须继承此类, 此类也可以单独进行使用</p>
+ * <p>已默认提供一个基础分页查询实体 {@link SimplePageRequest}</p>
+ *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
+ * @see PageConstant
  */
 @ApiModel("分页查询基类")
 public class PageRequest implements Serializable {
-    private static final long serialVersionUID = 9011320097226993676L;
+    private static final long serialVersionUID = 5161339755291232348L;
 
     /**
      * 页码

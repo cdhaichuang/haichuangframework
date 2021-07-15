@@ -10,6 +10,7 @@ import pro.haichuang.framework.base.exception.ApplicationException;
  * @author JiYinchuan
  * @version 1.0.0
  * @since 1.0.0
+ * @see UploadFileErrorEnum
  */
 public class UploadFileException extends ApplicationException {
     private static final long serialVersionUID = -5150359400314378661L;

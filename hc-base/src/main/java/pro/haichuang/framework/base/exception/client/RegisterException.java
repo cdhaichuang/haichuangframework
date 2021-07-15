@@ -10,9 +10,10 @@ import pro.haichuang.framework.base.exception.ApplicationException;
  * @author JiYinchuan
  * @version 1.0.0
  * @since 1.0.0
+ * @see RegisterErrorEnum
  */
 public class RegisterException extends ApplicationException {
-    private static final long serialVersionUID = 4479131057139745095L;
+    private static final long serialVersionUID = 1376920858643859913L;
 
     public RegisterException(RegisterErrorEnum registerErrorEnum) {
         super(registerErrorEnum);

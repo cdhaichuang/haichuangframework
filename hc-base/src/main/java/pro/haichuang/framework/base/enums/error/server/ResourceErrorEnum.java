@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import pro.haichuang.framework.base.enums.BaseEnum;
 
 /**
- * 系统资源异常异常枚举
+ * 系统资源异常枚举
  *
  * @author JiYinchuan
  * @version 1.0.0

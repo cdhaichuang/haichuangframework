@@ -58,9 +58,9 @@ public class RepeatRequestInterceptor implements HandlerInterceptor {
                     LOGGER.info("[重复请求拦截器] 拦截请求 [apiMessage: {}, requestUri: {}, clientIp: {}, params: {}]",
                             apiMessage,
                             request.getRequestURI(),
-                            IpUtils.getIpAddress(request),
+                            IpUtils.getIpv4Address(request),
                             parameterMapString);
-                    ResponseUtils.write(response, ResultVO.other(RequestServerErrorEnum.REPEAT_REQUEST,
+                    ResponseUtils.writeOfJson(response, ResultVO.other(RequestServerErrorEnum.REPEAT_REQUEST,
                             "请求速度过快, 请稍后重试"));
                     return false;
                 }else {

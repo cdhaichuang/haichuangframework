@@ -78,7 +78,7 @@ public class LogSaveAspect {
         if (requestAttributes != null) {
             request = requestAttributes.getRequest();
 
-            clientIp = IpUtils.getIpAddress(request);
+            clientIp = IpUtils.getIpv4Address(request);
 
             MethodSignature signature = (MethodSignature) point.getSignature();
             Method method = signature.getMethod();
@@ -89,7 +89,7 @@ public class LogSaveAspect {
 
             fullMethodName = point.getTarget().getClass().getName() + "." + method.getName() + "()";
 
-            userId = SecurityUtils.getContext().getUserId();
+            userId = SecurityUtils.getJwtPayload().getUserId();
         }
 
         Object result = point.proceed();

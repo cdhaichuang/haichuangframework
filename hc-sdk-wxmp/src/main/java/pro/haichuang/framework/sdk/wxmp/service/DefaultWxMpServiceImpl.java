@@ -45,9 +45,9 @@ public class DefaultWxMpServiceImpl implements WxMpService {
         ValidateUtils.validate(wxMpProperties.getToken() == null,
                 RequestParamErrorEnum.PARAMETER_EMPTY, "[Token] 未在Yaml进行配置");
         if (WxMpUtils.checkSignature(wxMpProperties.getToken(), signature, timestamp, nonce)) {
-            ResponseUtils.originalWrite(response, echoStr);
+            ResponseUtils.writeOfOriginal(response, echoStr);
         } else {
-            ResponseUtils.write(response, ResultVO.other(AuthorityErrorEnum.ACCESS_BLOCKED));
+            ResponseUtils.writeOfJson(response, ResultVO.other(AuthorityErrorEnum.ACCESS_BLOCKED));
         }
     }
 

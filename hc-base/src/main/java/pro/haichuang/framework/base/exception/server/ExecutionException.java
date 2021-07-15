@@ -1,6 +1,6 @@
 package pro.haichuang.framework.base.exception.server;
 
-import pro.haichuang.framework.base.enums.error.server.ResourceErrorEnum;
+import pro.haichuang.framework.base.enums.error.server.ExecutionErrorEnum;
 import pro.haichuang.framework.base.exception.ApplicationException;
 
 /**
@@ -9,15 +9,16 @@ import pro.haichuang.framework.base.exception.ApplicationException;
  * @author JiYinchuan
  * @version 1.0.0
  * @since 1.0.0
+ * @see ExecutionErrorEnum
  */
 public class ExecutionException extends ApplicationException {
-    private static final long serialVersionUID = 2702182334838015686L;
+    private static final long serialVersionUID = -8235265562486853178L;
 
-    public ExecutionException(ResourceErrorEnum resourceErrorEnum) {
-        super(resourceErrorEnum);
+    public ExecutionException(ExecutionErrorEnum executionErrorEnum) {
+        super(executionErrorEnum);
     }
 
-    public ExecutionException(ResourceErrorEnum resourceErrorEnum, String userTip) {
-        super(resourceErrorEnum, userTip);
+    public ExecutionException(ExecutionErrorEnum executionErrorEnum, String userTip) {
+        super(executionErrorEnum, userTip);
     }
 }

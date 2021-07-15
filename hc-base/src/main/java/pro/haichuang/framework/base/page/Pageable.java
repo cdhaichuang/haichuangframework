@@ -6,8 +6,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
  * 分页接口
  *
+ * <p>该接口为业务分页接口, 项目开发中需要用其子类</p>
+ * <p>已默认内置 {@link PageDTO}</p>
+ *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
+ * @see PageDTO
  */
 public interface Pageable {
 

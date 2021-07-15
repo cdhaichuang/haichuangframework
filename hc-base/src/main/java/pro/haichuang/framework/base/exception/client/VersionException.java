@@ -10,6 +10,7 @@ import pro.haichuang.framework.base.exception.ApplicationException;
  * @author JiYinchuan
  * @version 1.0.0
  * @since 1.0.0
+ * @see VersionErrorEnum
  */
 public class VersionException extends ApplicationException {
     private static final long serialVersionUID = 4058423515389560860L;

@@ -10,9 +10,10 @@ import pro.haichuang.framework.base.exception.ApplicationException;
  * @author JiYinchuan
  * @version 1.0.0
  * @since 1.0.0
+ * @see RequestParamErrorEnum
  */
 public class RequestParamException extends ApplicationException {
-    private static final long serialVersionUID = -4632443521803372966L;
+    private static final long serialVersionUID = 4612740762019763844L;
 
     public RequestParamException(RequestParamErrorEnum requestParamErrorEnum) {
         super(requestParamErrorEnum);

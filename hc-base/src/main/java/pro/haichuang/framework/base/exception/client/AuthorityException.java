@@ -10,9 +10,10 @@ import pro.haichuang.framework.base.exception.ApplicationException;
  * @author JiYinchuan
  * @version 1.0.0
  * @since 1.0.0
+ * @see AuthorityErrorEnum
  */
 public class AuthorityException extends ApplicationException {
-    private static final long serialVersionUID = -862543118175686477L;
+    private static final long serialVersionUID = -8157596811164270886L;
 
     public AuthorityException(AuthorityErrorEnum authorityErrorEnum) {
         super(authorityErrorEnum);

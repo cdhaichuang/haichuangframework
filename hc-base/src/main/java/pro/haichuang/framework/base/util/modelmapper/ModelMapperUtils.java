@@ -2,12 +2,18 @@ package pro.haichuang.framework.base.util.modelmapper;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.lang.NonNull;
 
 /**
  * ModelMapper映射工具类
  *
+ * <p>该类用于创建 {@link ModelMapper} 对象</p>
+ *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
+ * @see ModelMapper
+ * @see MatchingStrategies
  */
 public class ModelMapperUtils {
 
@@ -17,6 +23,7 @@ public class ModelMapperUtils {
      *
      * @return ModelMapper实例
      */
+    @NonNull
     public static ModelMapper get() {
         return new ModelMapper();
     }
@@ -26,6 +33,7 @@ public class ModelMapperUtils {
      *
      * @return ModelMapper实例
      */
+    @NonNull
     public static ModelMapper getStrictModelMapper() {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);

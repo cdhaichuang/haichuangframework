@@ -63,7 +63,7 @@ public class LogAspect {
         if (requestAttributes != null) {
             request = requestAttributes.getRequest();
 
-            clientIp = IpUtils.getIpAddress(request);
+            clientIp = IpUtils.getIpv4Address(request);
 
             MethodSignature signature = (MethodSignature) point.getSignature();
             Method method = signature.getMethod();
@@ -74,7 +74,7 @@ public class LogAspect {
 
             message = String.join(",", apiAnnotation.tags()) + "-" + apiOperationAnnotation.value();
 
-            userId = SecurityUtils.getContext().getUserId();
+            userId = SecurityUtils.getJwtPayload().getUserId();
 
             LOGGER.info("[AOP] [Begin] 检测到请求 [uuid: {}, apiMessage: {}, requestUri: {}, method: {}," +
                             "clientIp: {}, userId: {}, params: {}]",
