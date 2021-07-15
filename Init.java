@@ -46,10 +46,15 @@ public class Init {
                     throw new RuntimeException("项目运行端口配置错误");
                 }
             }
-            String originCodeName = codeName;
-            codeName = codeName.toLowerCase();
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < codeName.length(); i++) {
+                char tempChar = codeName.charAt(i);
+                if (!Character.isLowerCase(tempChar)) {
+                    result.append(tempChar);
+                }
+            }
             // 新项目包名
-            String newProjectPackageName = String.join(".", Arrays.copyOf(PROJECT_ORIGIN_PACKAGE_NAME.split("\\."), PROJECT_ORIGIN_PACKAGE_NAME.split("\\.").length - 1)).concat(".").concat(codeName);
+            String newProjectPackageName = String.join(".", Arrays.copyOf(PROJECT_ORIGIN_PACKAGE_NAME.split("\\."), PROJECT_ORIGIN_PACKAGE_NAME.split("\\.").length - 1)).concat(".").concat(result.toString().toLowerCase());
             // 服务模块对象
             File serviceModelDirFile = new File(PROJECT_SERVICE_MODEL_NAME);
             if (!serviceModelDirFile.exists()) {
@@ -98,9 +103,9 @@ public class Init {
                     throw new RuntimeException("重命名项目包名失败");
                 }
                 // 重命名资源文件信息
-                renameFileResourceInfo(resourcesDirFile, codeName, port);
+                renameFileResourceInfo(resourcesDirFile, codeName.toLowerCase(), port);
                 // 更改 [pom.xml] 文件 [Jar] 名称
-                renameFilePomInfo(pomFile, originCodeName);
+                renameFilePomInfo(pomFile, codeName);
             } catch (Exception e) {
                 System.out.println("运行异常, 请联系管理员");
             }
