@@ -14,7 +14,7 @@ spring:
       - scheduling
     active: dev
   application:
-    name: hc-service-${hc.code-name}-${hc.server.port}
+    name: hc-service-${hc.origin-lowercase-code-name}-${hc.server.port}
   servlet:
     multipart:
       max-file-size: 100GB

@@ -24,7 +24,7 @@ public class CodeGenerateTest {
      * 项目Code
      * 项目代号缩写(项目代号首字母全小写+数字)
      */
-    private static final String PROJECT_CODE = "${hc.code-name}";
+    private static final String PROJECT_CODE = "${hc.project-code-name}";
 
     /**
      * 作者
