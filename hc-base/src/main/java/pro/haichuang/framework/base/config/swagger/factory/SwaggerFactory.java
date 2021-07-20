@@ -22,8 +22,9 @@ import java.util.stream.Collectors;
 /**
  * swagger工厂类
  *
- * <p>该类为 {@code Swagger} 工厂类, 主要用于根据 {@link SwaggerInfoDTO} 创建 {@link Docket} 对象</p>
- * <p>该类指定了部分默认参数, 如需自定义在参数 {@link SwaggerInfoDTO} 中进行填充相关属性即可</p>
+ * <p>该类为 [Swagger] 工厂类, 主要用于根据 {@link SwaggerInfoDTO} 创建 {@link Docket} 对象</p>
+ * <p>该类指定了部分默认参数, 如需自定义在参数 {@link SwaggerInfoDTO} 中进行赋值相关属性即可</p>
+ * <p>注意: 请求地址中带有 [common] 字段时 {@link SecurityContext} 将不生效</p>
  *
  * @author JiYinchuan
  * @version 1.0.0

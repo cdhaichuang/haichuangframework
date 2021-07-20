@@ -341,6 +341,7 @@ public class BaseControllerAdvice {
      * @param originalErrorMessage 原始错误信息
      * @return 格式化后的错误信息
      */
+    @Nullable
     private String printStackTraceFormat(String requestUri, String requestMethod, Throwable tp, @Nullable Throwable t,
                                          String uuid, String tag, @Nullable String originalErrorMessage) {
         if (t == null) {

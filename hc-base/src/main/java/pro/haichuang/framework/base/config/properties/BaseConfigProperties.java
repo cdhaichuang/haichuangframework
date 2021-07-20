@@ -16,6 +16,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
  */
 @ConfigurationProperties(prefix = "haichuang")
 public class BaseConfigProperties {

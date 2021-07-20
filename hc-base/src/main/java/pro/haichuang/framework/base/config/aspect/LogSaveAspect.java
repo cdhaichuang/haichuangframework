@@ -35,6 +35,8 @@ import java.util.concurrent.TimeUnit;
  * @author JiYinchuan
  * @version 1.0.0
  * @since 1.0.0
+ * @see pro.haichuang.framework.base.annotation.EnableLogSave
+ * @see AbstractLogSave
  */
 @Aspect
 @Order(3)

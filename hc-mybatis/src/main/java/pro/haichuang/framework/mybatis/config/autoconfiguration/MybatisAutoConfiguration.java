@@ -12,8 +12,12 @@ import pro.haichuang.framework.mybatis.generate.MybatisGenerateCodeService;
 /**
  * Mybatis自动配置
  *
+ * <p>该类为 {@code hc-mybatis} 模块核心自动配置类</p>
+ * <p>可以在 {@code yaml} 配置文件中指定 {@link MybatisProperties} 中相关的属性</p>
+ *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
  */
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(MybatisProperties.class)

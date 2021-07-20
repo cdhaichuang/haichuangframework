@@ -74,7 +74,7 @@ public class LogAspect {
 
             message = String.join(",", apiAnnotation.tags()) + "-" + apiOperationAnnotation.value();
 
-            userId = SecurityUtils.getJwtPayload().getUserId();
+            userId = SecurityUtils.getJwtPayloadOrNewInstance().getUserId();
 
             LOGGER.info("[AOP] [Begin] 检测到请求 [uuid: {}, apiMessage: {}, requestUri: {}, method: {}," +
                             "clientIp: {}, userId: {}, params: {}]",

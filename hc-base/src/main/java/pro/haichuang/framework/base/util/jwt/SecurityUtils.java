@@ -13,9 +13,9 @@ import pro.haichuang.framework.base.exception.client.AuthorityException;
  *
  * @author JiYinchuan
  * @version 1.0.0
- * @since 1.0.0
  * @see ThreadLocal
  * @see JwtPayload
+ * @since 1.0.0
  */
 public class SecurityUtils {
     private static final ThreadLocal<JwtPayload> CONTEXT_HOLDER = new ThreadLocal<>();
@@ -38,6 +38,16 @@ public class SecurityUtils {
     @Nullable
     public static JwtPayload getJwtPayload() {
         return CONTEXT_HOLDER.get();
+    }
+
+    /**
+     * 获取JWT载荷, 为空时则自动创建新的对象
+     *
+     * @return JWT载荷
+     */
+    @NonNull
+    public static JwtPayload getJwtPayloadOrNewInstance() {
+        return CONTEXT_HOLDER.get() == null ? new JwtPayload() : CONTEXT_HOLDER.get();
     }
 
     /**
