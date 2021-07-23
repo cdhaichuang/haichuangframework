@@ -35,25 +35,25 @@ public class WxMpUserInfoDTO {
 
     /**
      * 用户是否订阅该公众号标识, 值为0时, 代表此用户没有关注该公众号, 拉取不到其余信息
-     * 示例: [1]
+     * Example: [1]
      */
     private Integer subscribe;
 
     /**
      * 用户的标识, 对当前公众号唯一
-     * 示例: [o6_bmjrPTlm6_2sgVt7hMZOPfL2M]
+     * Example: [o6_bmjrPTlm6_2sgVt7hMZOPfL2M]
      */
     private String openId;
 
     /**
      * 用户的昵称
-     * 示例: [Band]
+     * Example: [Band]
      */
     private String nickname;
 
     /**
      * 用户的性别, 值为 [1] 时是男性, 值为 [2] 时是女性, 值为 [0] 时是未知
-     * 示例: [1]
+     * Example: [1]
      */
     private SexEnum sex;
 
@@ -64,19 +64,19 @@ public class WxMpUserInfoDTO {
 
     /**
      * 用户所在城市
-     * 示例: [广州]
+     * Example: [广州]
      */
     private String city;
 
     /**
      * 用户所在省份
-     * 示例: [广东]
+     * Example: [广东]
      */
     private String province;
 
     /**
      * 用户所在国家
-     * 示例: [中国]
+     * Example: [中国]
      */
     private String country;
 

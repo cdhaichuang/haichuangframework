@@ -7,7 +7,8 @@ import org.springframework.stereotype.Component;
  * Mybatis参数配置
  *
  * <p>该类为 {@code hc-mybatis} 核心的配置文件类</p>
- * 配置文件示例:
+ * <hr/>
+ * Example:
  * <pre>
  *     # ========================= Haichuang Setting =========================
  *     haichuang:

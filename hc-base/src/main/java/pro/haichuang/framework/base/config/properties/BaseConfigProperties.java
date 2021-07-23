@@ -6,7 +6,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * 核心配置文件
  *
  * <p>该类为 {@code hc-base} 核心的配置文件类</p>
- * 配置文件示例:
+ * <hr/>
+ * Example:
  * <pre>
  *     # ========================= Haichuang Setting =========================
  *     haichuang:

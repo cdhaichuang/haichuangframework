@@ -21,6 +21,8 @@ public class PageConverter {
     /**
      * 将Mybatis中的Page转换为PageDTO
      *
+     * <p>该方法转换结果数据对象类型与 {@link IPage} 中一致</p>
+     *
      * @param iPage Mybatis{@link IPage}
      * @param <T>   对象类型
      * @return PageDTO
@@ -31,6 +33,8 @@ public class PageConverter {
 
     /**
      * 将Mybatis中的Page转换为PageDTO
+     *
+     * <p>该方法转换结果数据对象类型为 {@code toClass} 类型(根据反射进行严格转换)</p>
      *
      * @param iPage   Mybatis中的 {@link IPage}
      * @param toClass 转换对象Class
@@ -45,6 +49,17 @@ public class PageConverter {
     }
 
     /**
+     * 将Mybatis中的Page转换为PageDTO
+     *
+     * <p>该方法可以自定义转换 {@link IPage} 中的数据(原始数据与目标数据字段名称或类型不一致时)</p>
+     * <hr/>
+     * Example:
+     * <pre>
+     *     PageConverter.converter(iPage, originData -> {
+     *         // Do Something And Return
+     *     });
+     * </pre>
+     *
      * @param iPage    Mybatis中的 {@link IPage}
      * @param function 转换对象的Function
      * @param <T>      原始对象类型
