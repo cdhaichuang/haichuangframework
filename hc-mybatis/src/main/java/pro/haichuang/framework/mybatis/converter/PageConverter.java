@@ -52,10 +52,10 @@ public class PageConverter {
      * 将Mybatis中的Page转换为PageDTO
      *
      * <p>该方法可以自定义转换 {@link IPage} 中的数据(原始数据与目标数据字段名称或类型不一致时)</p>
-     * <hr/>
+     * <hr>
      * Example:
      * <pre>
-     *     PageConverter.converter(iPage, originData -> {
+     *     PageConverter.converter(iPage, originData -&gt; {
      *         // Do Something And Return
      *     });
      * </pre>

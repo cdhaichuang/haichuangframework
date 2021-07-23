@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 /**
  * MybatisPlus配置
  *
+ * <p>该类为MybatisPlus核心配置</p>
+ *
  * @author JiYinchuan
  * @version 1.0.0
  */
