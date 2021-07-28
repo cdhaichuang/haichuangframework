@@ -1,7 +1,7 @@
 package pro.haichuang.framework.base.response;
 
 import pro.haichuang.framework.base.enums.BaseEnum;
-import pro.haichuang.framework.base.enums.error.client.SuccessEnum;
+import pro.haichuang.framework.base.enums.success.SuccessEnum;
 import pro.haichuang.framework.base.page.PageDTO;
 import pro.haichuang.framework.base.response.vo.BaseVO;
 import pro.haichuang.framework.base.response.vo.MultiVO;
@@ -14,7 +14,7 @@ import java.util.Collection;
 /**
  * 全局响应VO类
  *
- * <p>该类为全局响应VO, 所有控制器返回必须使用此类进行返回, 返回值类型参考 {@link BaseVO} 下所有实现</p>
+ * <p>该类为全局响应VO, 所有控制器返回必须使用此类进行返回, 返回值类型参考 {@link BaseVO} 下所有实现
  *
  * @author JiYinchuan
  * @version 1.0.0

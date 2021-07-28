@@ -1,5 +1,6 @@
 package pro.haichuang.framework.base.util.common;
 
+import com.alibaba.ttl.TransmittableThreadLocal;
 import org.springframework.lang.NonNull;
 
 import java.util.UUID;
@@ -7,8 +8,8 @@ import java.util.UUID;
 /**
  * UUID工具类
  *
- * <p>该类用于便捷的生成指定格式的 {@code uuid}</p>
- * <p>该类中包含一个内部类 {@link Local}, 用于获取当前线程中唯一的 {@code uuid}, 通常用于日志记录等情况</p>
+ * <p>该类用于便捷的生成指定格式的 {@code uuid}
+ * <p>该类中包含一个内部类 {@link Local}, 用于获取当前线程中唯一的 {@code uuid}, 通常用于日志记录等情况
  *
  * @author JiYinchuan
  * @version 1.0.0
@@ -63,7 +64,7 @@ public class UUIDUtils {
      */
     public static class Local {
 
-        private static final ThreadLocal<String> LOCAL = new ThreadLocal<>();
+        private static final TransmittableThreadLocal<String> LOCAL = new TransmittableThreadLocal<>();
 
         /**
          * 设置当前线程存储的UUID
@@ -103,7 +104,7 @@ public class UUIDUtils {
          *
          * <p>因为 {@link ThreadLocal} 底层使用的内部类 {@code ThreadLocalMap} 实现的, 生命周期为当前线程,
          * 所以不执行此方法当线程终止后 {@code ThreadLocalMap} 中的值会被JVM垃圾回收,
-         * 但推荐在不需要使用的时候显性的执行此方法, 便于理解</p>
+         * 但推荐在不需要使用的时候显性的执行此方法, 便于理解
          */
         public static void remove() {
             LOCAL.remove();

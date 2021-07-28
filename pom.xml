@@ -45,6 +45,7 @@
         <jjwt.version>0.9.1</jjwt.version>
         <hutool-all.version>5.6.4</hutool-all.version>
         <fastjson.version>1.2.76</fastjson.version>
+        <transmittable-thread-local.version>2.13.0-Beta1</transmittable-thread-local.version>
         <modelmapper.version>2.4.2</modelmapper.version>
         <!-- AliYun SDK-->
         <aliyun-sdk-core.version>4.5.3</aliyun-sdk-core.version>

@@ -20,7 +20,7 @@ import java.time.temporal.Temporal;
 /**
  * FastJson默认配置
  *
- * <p>该类默认配置了 {@code FastJson} 的常用功能, 如需自定义配置需要手动注入 {@link FastJsonConfig}</p>
+ * <p>该类默认配置了 {@code FastJson} 的常用功能, 如需自定义配置需要手动注入 {@link FastJsonConfig}
  * 已默认配置的如下:
  * <ul>
  *     <li>{@link BigInteger} 自动序列化为 {@link String} 字符串</li>

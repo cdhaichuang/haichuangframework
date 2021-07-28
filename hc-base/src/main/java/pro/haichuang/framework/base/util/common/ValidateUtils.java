@@ -11,7 +11,7 @@ import pro.haichuang.framework.base.exception.server.*;
 /**
  * 验证工具类
  *
- * <p>该类主要用于验证参数是否符合要求, 如果不符合则抛出指定异常, 避免重复性写大量 {@code if/else} 语句</p>
+ * <p>该类主要用于验证参数是否符合要求, 如果不符合则抛出指定异常, 避免重复性写大量 {@code if/else} 语句
  * <hr>
  * <ul>
  *     <li>客户端异常枚举包: {@link pro.haichuang.framework.base.enums.error.client}</li>

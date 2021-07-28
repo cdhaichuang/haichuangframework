@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
  *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
+ * @see pro.haichuang.framework.mybatis.generate.MybatisGenerateCodeService
  */
 @Component
 public class CodeDataSourceConfig {

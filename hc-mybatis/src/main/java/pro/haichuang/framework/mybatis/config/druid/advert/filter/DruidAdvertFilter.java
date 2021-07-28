@@ -8,7 +8,7 @@ import java.io.IOException;
 /**
  * Druid广告过滤器
  *
- * <p>该过滤器主要用于去掉 [druid] 网页中的底部广告内容</p>
+ * <p>该过滤器主要用于去掉 [druid] 网页中的底部广告内容
  *
  * @author JiYinchuan
  * @version 1.0.0

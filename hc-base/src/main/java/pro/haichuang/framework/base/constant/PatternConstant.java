@@ -3,7 +3,7 @@ package pro.haichuang.framework.base.constant;
 /**
  * 正则表达式常量
  *
- * <p>该类主要用于存储预置正则表达式信息</p>
+ * <p>该类主要用于存储预置正则表达式信息
  *
  * @author JiYinchuan
  * @version 1.0.0

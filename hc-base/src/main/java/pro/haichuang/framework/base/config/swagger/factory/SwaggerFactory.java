@@ -2,7 +2,7 @@ package pro.haichuang.framework.base.config.swagger.factory;
 
 import io.swagger.annotations.Api;
 import org.apache.commons.lang3.StringUtils;
-import pro.haichuang.framework.base.dto.SwaggerInfoDTO;
+import pro.haichuang.framework.base.config.swagger.SwaggerInfo;
 import springfox.documentation.RequestHandler;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -22,14 +22,14 @@ import java.util.stream.Collectors;
 /**
  * swagger工厂类
  *
- * <p>该类为 [Swagger] 工厂类, 主要用于根据 {@link SwaggerInfoDTO} 创建 {@link Docket} 对象</p>
- * <p>该类指定了部分默认参数, 如需自定义在参数 {@link SwaggerInfoDTO} 中进行赋值相关属性即可</p>
- * <p>注意: 请求地址中带有 [common] 字段时 {@link SecurityContext} 将不生效</p>
+ * <p>该类为 [Swagger] 工厂类, 主要用于根据 {@link SwaggerInfo} 创建 {@link Docket} 对象
+ * <p>该类指定了部分默认参数, 如需自定义在参数 {@link SwaggerInfo} 中进行赋值相关属性即可
+ * <p>注意: 请求地址中带有 [common] 字段时 {@link SecurityContext} 将不生效
  *
  * @author JiYinchuan
  * @version 1.0.0
  * @since 1.0.0
- * @see SwaggerInfoDTO
+ * @see SwaggerInfo
  */
 public class SwaggerFactory {
 
@@ -75,7 +75,7 @@ public class SwaggerFactory {
      * @param infoDTO Swagger信息
      * @return API文档
      */
-    public static Docket createRestApi(SwaggerInfoDTO infoDTO) {
+    public static Docket createRestApi(SwaggerInfo infoDTO) {
         Docket docket = new Docket(DocumentationType.SWAGGER_2);
         if (infoDTO.getParameters() != null && !infoDTO.getParameters().isEmpty()) {
             docket.securitySchemes(new ArrayList<>(infoDTO.getParameters()))
@@ -101,7 +101,7 @@ public class SwaggerFactory {
      * @param infoDTO Swagger信息
      * @return API信息
      */
-    private static ApiInfo apiInfo(SwaggerInfoDTO infoDTO) {
+    private static ApiInfo apiInfo(SwaggerInfo infoDTO) {
         return new ApiInfoBuilder()
                 .title(StringUtils.isNotBlank(infoDTO.getTitle()) ? infoDTO.getTitle() : DEFAULT_TITLE)
                 .description(StringUtils.isNotBlank(infoDTO.getDescription()) ? infoDTO.getDescription() : DEFAULT_DESCRIPTION)

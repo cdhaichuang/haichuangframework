@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * JWT载荷
  *
- * <p>该类为JWT标准载荷+自定义载荷, 其中包含了两个自定义参数, 对JWT相关操作请参考 {@link JwtUtils}</p>
+ * <p>该类为JWT标准载荷+自定义载荷, 其中包含了两个自定义参数, 对JWT相关操作请参考 {@link JwtUtils}
  * <ul>
  *     <li>userId: 用户ID</li>
  *     <li>internal: 是否为系统内置</li>

@@ -1,4 +1,4 @@
-package pro.haichuang.framework.base.enums.error.client;
+package pro.haichuang.framework.base.enums.success;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import pro.haichuang.framework.base.enums.BaseEnum;
@@ -9,6 +9,7 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * @author JiYinchuan
  * @version 1.0.0
  * @since 1.0.0
+ * @see pro.haichuang.framework.base.response.ResultVO
  */
 public enum SuccessEnum implements BaseEnum {
 

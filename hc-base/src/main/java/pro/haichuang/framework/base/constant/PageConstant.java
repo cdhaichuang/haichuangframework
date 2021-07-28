@@ -3,7 +3,7 @@ package pro.haichuang.framework.base.constant;
 /**
  * 分页常量
  *
- * <p>该类主要用于存储分页的常量信息</p>
+ * <p>该类主要用于存储分页的常量信息
  *
  * @author JiYinchuan
  * @version 1.0.0

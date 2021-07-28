@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 /**
  * IP工具类
  *
- * <p>该类提供了获取客户端IP的方法</p>
+ * <p>该类提供了获取客户端IP的方法
  *
  * @author JiYinchuan
  * @version 1.0.0
@@ -25,10 +25,10 @@ public class IpUtils {
      * 获取客户端真实IP地址
      *
      * <p>使用Nginx等反向代理软件， 则不能通过{@link HttpServletRequest#getRemoteAddr()} 获取IP地址,
-     * 否则拿到的是Nginx等反向代理软件所在的IP地址, 并非真实的客户端IP</p>
+     * 否则拿到的是Nginx等反向代理软件所在的IP地址, 并非真实的客户端IP
      * <p>当设置了 {@code X-Forwarded-For} 时, 如果使用了多级反向代理, {@code X-Forwarded-For} 的值并不止一个(),
      * 而是一串IP地址(逗号分割), {@code X-Forwarded-For} 中第一个非 {@code unknown} 的有效IP字符串, 则为真实IP地址
-     * (客户端可以伪造 {@code X-Forwarded-For} 请求头, 需要验证IP正确性)</p>
+     * (客户端可以伪造 {@code X-Forwarded-For} 请求头, 需要验证IP正确性)
      * <hr>
      * <ul>
      *     <li>X-Forwarded-For: 该字段为行业统一请求头, 并非标准请求头, 用于Nginx等反向代理软件转发请求来源的IP地址</li>

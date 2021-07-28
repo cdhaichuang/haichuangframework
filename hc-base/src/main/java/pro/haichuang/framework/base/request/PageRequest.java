@@ -11,8 +11,8 @@ import java.io.Serializable;
 /**
  * 分页查询基类
  *
- * <p>该类为分页查询基类, 所有带分页参数的请求实体均必须继承此类, 此类也可以单独进行使用</p>
- * <p>已默认提供一个基础分页查询实体 {@link SimplePageRequest}</p>
+ * <p>该类为分页查询基类, 所有带分页参数的请求实体均必须继承此类, 此类也可以单独进行使用
+ * <p>已默认提供一个基础分页查询实体 {@link SimplePageRequest}
  *
  * @author JiYinchuan
  * @version 1.0.0

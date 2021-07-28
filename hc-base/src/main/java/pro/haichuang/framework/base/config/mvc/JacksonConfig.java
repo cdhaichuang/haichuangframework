@@ -22,7 +22,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Jackson自动配置
  *
- * <p>该类自动配置了 {@code Jackson} 的常用功能</p>
+ * <p>该类自动配置了 {@code Jackson} 的常用功能
  * 已默认配置的如下:
  * <ul>
  *     <li>{@link BigInteger} 自动序列化为 {@link String} 字符串</li>
@@ -33,7 +33,7 @@ import java.time.format.DateTimeFormatter;
  *     <li>{@link LocalTime} 自动序列化为 {@code HH:mm:ss} 字符串</li>
  * </ul>
  * <p>该类采用 {@link Jackson2ObjectMapperBuilderCustomizer} 的原因是默认 {@code Jackson} 已存在一些默认配置内容,
- * 通过此种方式可以实现在不修改默认配置的情况下插入我们自定义的配置</p>
+ * 通过此种方式可以实现在不修改默认配置的情况下插入我们自定义的配置
  *
  *
  * @author JiYinchuan

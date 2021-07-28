@@ -10,9 +10,11 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import pro.haichuang.framework.base.util.common.HttpServletRequestUtils;
 import pro.haichuang.framework.base.util.common.IpUtils;
 import pro.haichuang.framework.base.util.common.UUIDUtils;
 import pro.haichuang.framework.base.util.jwt.SecurityUtils;
@@ -23,9 +25,9 @@ import java.lang.reflect.Method;
 /**
  * 日志切面
  *
- * <p>该类具体实现了记录请求日志的功能, 切点为标注了 {@link ApiOperation @ApiOperation} 注解的方法, 记录相关请求与响应数据</p>
+ * <p>该类具体实现了记录请求日志的功能, 切点为标注了 {@link ApiOperation @ApiOperation} 注解的方法, 记录相关请求与响应数据
  * <p>注意: 该类启用的前提条件为标注了
- * {@link pro.haichuang.framework.base.annotation.EnableControllerLogAspect @EnableControllerLogAspect} 注解</p>
+ * {@link pro.haichuang.framework.base.annotation.EnableControllerLogAspect @EnableControllerLogAspect} 注解
  *
  * @author JiYinchuan
  * @version 1.0.0
@@ -37,13 +39,15 @@ public class LogAspect {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LogAspect.class);
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @Pointcut("@annotation(io.swagger.annotations.ApiOperation)")
     public void logPointCut() {
     }
 
     @Around("logPointCut()")
     public Object around(ProceedingJoinPoint point) throws Throwable {
-        UUIDUtils.Local.init();
         // UUID
         String uuid = UUIDUtils.Local.get();
         // 开始执行时间
@@ -55,7 +59,7 @@ public class LogAspect {
         // 完整方法名
         String fullMethodName = null;
         // 描述信息
-        String message = null;
+        String apiMessage = null;
         // 用户ID
         Long userId = null;
 
@@ -72,29 +76,30 @@ public class LogAspect {
 
             fullMethodName = point.getTarget().getClass().getName() + "." + method.getName() + "()";
 
-            message = String.join(",", apiAnnotation.tags()) + "-" + apiOperationAnnotation.value();
+            apiMessage = apiAnnotation != null && apiOperationAnnotation != null
+                    ? String.join(",", apiAnnotation.tags()) + "-" + apiOperationAnnotation.value() : null;
 
+            HttpServletRequestUtils.parseDTO(request, apiAnnotation, apiOperationAnnotation);
             userId = SecurityUtils.getJwtPayloadOrNewInstance().getUserId();
 
-            LOGGER.info("[AOP] [Begin] 检测到请求 [uuid: {}, apiMessage: {}, requestUri: {}, method: {}," +
+            LOGGER.info("[AOP] [Begin] 检测到请求 [uuid: {}, apiMessage: {}, requestUri: {}, method: {}, " +
                             "clientIp: {}, userId: {}, params: {}]",
-                    uuid, message, request.getRequestURI(), fullMethodName,
+                    uuid, apiMessage, request.getRequestURI(), fullMethodName,
                     clientIp, userId, point.getArgs());
         }
 
         Object result = point.proceed();
         long executionTime = System.currentTimeMillis() - beginTime;
 
-        LOGGER.debug("[AOP] [Details-End] 检测到请求 [uuid: {}, apiMessage: {}, requestUri: {}, method: {}," +
-                        "clientIp: {}, userId: {}, params: {}, executionTime: {}, result: {}]",
-                uuid, message, request != null ? request.getRequestURI() : "null", fullMethodName,
-                clientIp, userId, point.getArgs(), executionTime, new ObjectMapper().writeValueAsString(result));
-        LOGGER.info("[AOP] [ End ] 检测到请求 [uuid: {}, apiMessage: {}, requestUri: {}, method: {}," +
+        LOGGER.debug("[AOP] [Details] 检测到请求 [uuid: {}, apiMessage: {}, requestUri: {}, method: {}, " +
+                        "clientIp: {}, userId: {}, executionTime: {}, params: {}, result: {}]",
+                uuid, apiMessage, request != null ? request.getRequestURI() : "null", fullMethodName,
+                clientIp, userId, executionTime, point.getArgs(), objectMapper.writeValueAsString(result));
+        LOGGER.info("[AOP] [ End ] 检测到请求 [uuid: {}, apiMessage: {}, requestUri: {}, method: {}, " +
                         "clientIp: {}, userId: {}, executionTime: {}]",
-                uuid, message, request != null ? request.getRequestURI() : "null", fullMethodName,
+                uuid, apiMessage, request != null ? request.getRequestURI() : "null", fullMethodName,
                 clientIp, userId, executionTime);
 
-        UUIDUtils.Local.remove();
         return result;
     }
 }

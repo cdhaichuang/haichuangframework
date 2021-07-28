@@ -19,7 +19,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * HTTP响应工具类
  *
- * <p>该类主要用于直接对响应流的操作</p>
+ * <p>该类主要用于直接对响应流的操作
  *
  * @author JiYinchuan
  * @version 1.0.0

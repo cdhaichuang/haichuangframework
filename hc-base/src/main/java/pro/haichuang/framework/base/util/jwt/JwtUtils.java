@@ -6,7 +6,7 @@ import org.springframework.lang.NonNull;
 /**
  * JWT工具类
  *
- * <p>该类为JWT工具类, 对于JWT的操作一律使用此类</p>
+ * <p>该类为JWT工具类, 对于JWT的操作一律使用此类
  *
  * @author JiYinchuan
  * @version 1.0.0

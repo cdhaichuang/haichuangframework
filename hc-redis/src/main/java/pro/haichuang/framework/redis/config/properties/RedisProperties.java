@@ -1,16 +1,27 @@
 package pro.haichuang.framework.redis.config.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
 /**
  * Redis配置文件
  *
+ * <p>该类为 {@code hc-redis} 核心的配置文件类
+ * <hr>
+ * Example:
+ * <pre>
+ *     # ========================= Haichuang Setting =========================
+ *     haichuang:
+ *       redis:
+ *         // 是否启用配置
+ *         enable: true
+ * </pre>
+ *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
+ * @see pro.haichuang.framework.redis.config.autoconfiguration.RedisAutoConfiguration
  */
-@Component
-@ConfigurationProperties(prefix = "haichuang.redis.config")
+@ConfigurationProperties(prefix = "haichuang.redis")
 public class RedisProperties {
 
     /**

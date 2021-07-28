@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 /**
  * 分页转换器
  *
- * <p>该类主要用于将Mybatis中 {@link IPage} 转换为 {@link PageDTO}</p>
+ * <p>该类主要用于将 [Mybatis] 中 {@link IPage} 转换为 {@link PageDTO}
  *
  * @author JiYinchuan
  * @version 1.0.0
@@ -21,7 +21,7 @@ public class PageConverter {
     /**
      * 将Mybatis中的Page转换为PageDTO
      *
-     * <p>该方法转换结果数据对象类型与 {@link IPage} 中一致</p>
+     * <p>该方法转换结果数据对象类型与 {@link IPage} 中一致
      *
      * @param iPage Mybatis{@link IPage}
      * @param <T>   对象类型
@@ -34,7 +34,7 @@ public class PageConverter {
     /**
      * 将Mybatis中的Page转换为PageDTO
      *
-     * <p>该方法转换结果数据对象类型为 {@code toClass} 类型(根据反射进行严格转换)</p>
+     * <p>该方法转换结果数据对象类型为 {@code toClass} 类型(根据反射进行严格转换)
      *
      * @param iPage   Mybatis中的 {@link IPage}
      * @param toClass 转换对象Class
@@ -51,7 +51,7 @@ public class PageConverter {
     /**
      * 将Mybatis中的Page转换为PageDTO
      *
-     * <p>该方法可以自定义转换 {@link IPage} 中的数据(原始数据与目标数据字段名称或类型不一致时)</p>
+     * <p>该方法可以自定义转换 {@link IPage} 中的数据(原始数据与目标数据字段名称或类型不一致时)
      * <hr>
      * Example:
      * <pre>

@@ -17,8 +17,12 @@ import java.time.LocalDateTime;
 /**
  * DO基类
  *
+ * <p>该类为 [DO] 层基类, 所有 [DO] 层必须继承此类
+ * <p>该类中指定了映射到数据库中每张表的 {@code id ID} / {@code createTime 创建时间} / {@code modifyTime 最后修改时间}
+ *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
  */
 @ApiModel("BaseDO")
 public class BaseDO implements Serializable {

@@ -17,9 +17,9 @@ import java.util.Map;
  * 全局跨域配置
  *
  * <p>该类具体实现了全局的跨域配置, 使用了 {@link FilterRegistrationBean} 进行实现,
- * 同时将跨域过滤器 {@link CorsFilter} 的优先级设置为最高(最先执行), 保证了跨域的有效性</p>
+ * 同时将跨域过滤器 {@link CorsFilter} 的优先级设置为最高(最先执行), 保证了跨域的有效性
  * <p>注意: 该类启用的前置条件为标注了
- * {@link pro.haichuang.framework.base.annotation.EnableGlobalCorsConfig @EnableGlobalCorsConfig} 注解</p>
+ * {@link pro.haichuang.framework.base.annotation.EnableGlobalCorsConfig @EnableGlobalCorsConfig} 注解
  *
  * @author JiYinchuan
  * @version 1.0.0

@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * WebMvc配置
  *
- * <p>该类为默认 {@code WebMvc} 配置</p>
+ * <p>该类为默认 {@code WebMvc} 配置
  *
  * @author JiYinchuan
  * @version 1.0.0

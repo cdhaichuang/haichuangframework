@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 /**
  * 项目工具类
  *
- * <p>该类封装了项目中常用的方法</p>
+ * <p>该类封装了项目中常用的方法
  *
  * @author JiYinchuan
  * @version 1.0.0

@@ -9,7 +9,7 @@ import pro.haichuang.framework.base.exception.client.AuthorityException;
 /**
  * Security工具类
  *
- * <p>该类为辅助JWT工具类, 用于在全局便捷获取JWT载荷功能</p>
+ * <p>该类为辅助JWT工具类, 用于在全局便捷获取JWT载荷功能
  *
  * @author JiYinchuan
  * @version 1.0.0
@@ -69,7 +69,7 @@ public class SecurityUtils {
      *
      * <p>因为 {@link ThreadLocal} 底层使用的内部类 {@code ThreadLocalMap} 实现的, 生命周期为当前线程,
      * 所以不执行此方法当线程终止后 {@code ThreadLocalMap} 中的值会被JVM垃圾回收,
-     * 但推荐在不需要使用的时候显性的执行此方法, 便于理解</p>
+     * 但推荐在不需要使用的时候显性的执行此方法, 便于理解
      */
     public static void remove() {
         CONTEXT_HOLDER.remove();

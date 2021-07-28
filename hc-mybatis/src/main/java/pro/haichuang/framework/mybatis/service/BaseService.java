@@ -22,10 +22,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Service基类
+ * MybatisService基类
+ *
+ * <p>该类为 [MybatisService] 基类, 所有 [DO] 层关联 [Service] 必须继承该类
+ * <p>该类对 [MybatisPlus] 自带的 {@link IService} 进行了进一步的封装, 增强业务效果, 项目中均采用该类的方法以替代 {@link IService} 中的方法
  *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
  */
 @SuppressWarnings("unused")
 public interface BaseService<T extends BaseDO> extends IService<T> {

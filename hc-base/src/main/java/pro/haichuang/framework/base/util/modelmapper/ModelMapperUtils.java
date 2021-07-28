@@ -7,7 +7,7 @@ import org.springframework.lang.NonNull;
 /**
  * ModelMapper映射工具类
  *
- * <p>该类用于创建 {@link ModelMapper} 对象</p>
+ * <p>该类用于创建 {@link ModelMapper} 对象
  *
  * @author JiYinchuan
  * @version 1.0.0

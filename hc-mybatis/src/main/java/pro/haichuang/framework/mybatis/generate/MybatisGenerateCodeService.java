@@ -26,8 +26,16 @@ import java.util.Map;
 /**
  * MybatisPlus代码生成器
  *
+ * <p>该类为 [MybatisPlus] 代码生成器服务, 自动将数据库表生成为 [Java] 代码
+ * <p>Danger: 代码生成器将自动覆盖原有文件, 推荐在生成之前做好代码备份,
+ * 如只需自动生成指定表则设置 {@link CodeDataSourceConfig#setInclude(String...)} 即可
+ *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
+ * @see CodeBasicConfig
+ * @see CodeDataSourceConfig
+ * @see CodePackageConfig
  */
 @Service
 @SuppressWarnings("SpellCheckingInspection")

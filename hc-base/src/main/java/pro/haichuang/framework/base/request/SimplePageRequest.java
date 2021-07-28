@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * 简单分页查询
  *
- * <p>该类为简单分页查询实体, 包含了一个默认 {@code keyword} 字段用于查询参数</p>
+ * <p>该类为简单分页查询实体, 包含了一个默认 {@code keyword} 字段用于查询参数
  *
  * @author JiYinchuan
  * @version 1.0.0

@@ -9,6 +9,8 @@ import pro.haichuang.framework.mybatis.enums.error.MybatisGenerateErrorEnum;
  *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
+ * @see MybatisGenerateErrorEnum
  */
 public class MybatisGenerateErrorApplication extends ApplicationException {
     private static final long serialVersionUID = 8463634516603437883L;

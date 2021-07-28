@@ -9,7 +9,7 @@ import java.io.Serializable;
  * 分页详情VO
  *
  * <p>该类为 {@link PageVO} 中分页详情数据抽离, 禁止直接使用此类用于返回,
- * 需要配合 {@link PageVO}, 并通过 {@link pro.haichuang.framework.base.response.ResultVO} 进行返回</p>
+ * 需要配合 {@link PageVO}, 并通过 {@link pro.haichuang.framework.base.response.ResultVO} 进行返回
  *
  * @author JiYinchuan
  * @version 1.0.0

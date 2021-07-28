@@ -9,6 +9,7 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * @author JiYinchuan
  * @version 1.0.0
  * @since 1.0.0
+ * @see pro.haichuang.framework.base.exception.client.ResourceException
  */
 public enum ResourceErrorEnum implements BaseEnum {
 

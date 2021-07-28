@@ -1,4 +1,4 @@
-package pro.haichuang.framework.base.dto;
+package pro.haichuang.framework.base.config.swagger;
 
 import com.github.xiaoymin.knife4j.spring.extension.OpenApiExtensionResolver;
 import springfox.documentation.service.Contact;
@@ -7,18 +7,18 @@ import springfox.documentation.service.SecurityScheme;
 import java.util.List;
 
 /**
- * Swagger信息DTO
+ * Swagger信息
  *
  * <p>该类为 {@code Swagger} 相关信息封装,
  * 配合 {@link pro.haichuang.framework.base.config.swagger.factory.SwaggerFactory} 工厂类生成
- * {@link springfox.documentation.spring.web.plugins.Docket} 对象, 创建相关接口文档数据</p>
+ * {@link springfox.documentation.spring.web.plugins.Docket} 对象, 创建相关接口文档数据
  *
  * @author JiYinchuan
  * @version 1.0.0
  * @since 1.0.0
  * @see pro.haichuang.framework.base.config.swagger.factory.SwaggerFactory
  */
-public class SwaggerInfoDTO {
+public class SwaggerInfo {
 
     /**
      * 分组名称
@@ -76,9 +76,9 @@ public class SwaggerInfoDTO {
      */
     private final List<SecurityScheme> parameters;
 
-    public SwaggerInfoDTO(String groupName, String title, String description, String termsOfServiceUrl,
-                          Contact contact, String version, String basePackage,
-                          OpenApiExtensionResolver openApiExtensionResolver, List<SecurityScheme> parameters) {
+    public SwaggerInfo(String groupName, String title, String description, String termsOfServiceUrl,
+                       Contact contact, String version, String basePackage,
+                       OpenApiExtensionResolver openApiExtensionResolver, List<SecurityScheme> parameters) {
         this.groupName = groupName;
         this.title = title;
         this.description = description;
@@ -157,8 +157,8 @@ public class SwaggerInfoDTO {
         private OpenApiExtensionResolver openApiExtensionResolver;
         private List<SecurityScheme> parameters;
 
-        public SwaggerInfoDTO build() {
-            return new SwaggerInfoDTO(this.groupName, this.title, this.description, this.termsOfServiceUrl, this.contact, this.version, this.basePackage, this.openApiExtensionResolver, this.parameters);
+        public SwaggerInfo build() {
+            return new SwaggerInfo(this.groupName, this.title, this.description, this.termsOfServiceUrl, this.contact, this.version, this.basePackage, this.openApiExtensionResolver, this.parameters);
         }
 
         public SwaggerInfoDtoBuilder groupName(final String groupName) {

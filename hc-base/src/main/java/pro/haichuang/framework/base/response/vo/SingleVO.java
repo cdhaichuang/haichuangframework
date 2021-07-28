@@ -9,7 +9,7 @@ import java.io.Serializable;
  * 单条数据VO
  *
  * <p>该类为单条数据VO, 用于单条数据返回的情况下使用,
- * 使用时必须使用 {@link pro.haichuang.framework.base.response.ResultVO} 中相关方法进行返回</p>
+ * 使用时必须使用 {@link pro.haichuang.framework.base.response.ResultVO} 中相关方法进行返回
  *
  * @author JiYinchuan
  * @version 1.0.0

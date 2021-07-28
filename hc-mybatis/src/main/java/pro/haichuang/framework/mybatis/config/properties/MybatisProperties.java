@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 /**
  * Mybatis参数配置
  *
- * <p>该类为 {@code hc-mybatis} 核心的配置文件类</p>
+ * <p>该类为 {@code hc-mybatis} 核心的配置文件类
  * <hr>
  * Example:
  * <pre>

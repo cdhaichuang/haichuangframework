@@ -1,13 +1,21 @@
 package pro.haichuang.framework.redis.annotation;
 
+import pro.haichuang.framework.redis.interceptor.RepeatRequestInterceptor;
+
 import java.lang.annotation.*;
 
 /**
  * 重复请求自定义注解
- * 基于 Redis 实现, 使用时请先引入 {@code hc-redis} 依赖, 否则不生效
+ *
+ * <p>该注解配合 {@link EnableRequestRepeatValidate @EnableRequestRepeatValidate} 注解使用, 当开启了 {@code @EnableRequestRepeatValidate} 后,
+ * 在 [Controller] 方法上标注该注解, 从而实现重复请求拦截
+ * <p>具体实现请参阅 {@link RepeatRequestInterceptor}
  *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
+ * @see EnableRequestRepeatValidate
+ * @see RepeatRequestInterceptor
  */
 @Inherited
 @Target(ElementType.METHOD)

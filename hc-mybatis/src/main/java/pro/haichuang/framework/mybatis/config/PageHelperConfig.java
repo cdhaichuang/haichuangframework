@@ -9,8 +9,11 @@ import org.springframework.context.annotation.Configuration;
 /**
  * PageHelper分页插件配置
  *
+ * <p>该类为 [PageHelper] 分页插件核心配置
+ *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
  */
 @Configuration(proxyBeanMethods = false)
 public class PageHelperConfig {

@@ -36,8 +36,12 @@ import java.time.format.DateTimeFormatter;
 /**
  * RedisConfig
  *
+ * 该类为 [Redis] 核心配置, 对 {@code spring-boot-starter-cache} 组件进行了集成, 同时优化了 {@link RedisTemplate} 的序列化与反序列化规则
+ *
  * @author JiYinchuan
  * @version 1.0.0
+ * @see pro.haichuang.framework.redis.config.autoconfiguration.RedisAutoConfiguration
+ * @since 1.0.0
  */
 @Configuration
 @EnableCaching
@@ -65,7 +69,7 @@ public class RedisConfig extends CachingConfigurerSupport {
     }
 
     @Bean
-    public <V> RedisTemplate<String, V> redisTemplate(RedisConnectionFactory connectionFactory) {
+    public <V> RedisTemplate<String, V> redisTemplate() {
         RedisTemplate<String, V> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(connectionFactory);
 
@@ -81,11 +85,12 @@ public class RedisConfig extends CachingConfigurerSupport {
     @Bean
     @ConditionalOnMissingBean(RedisService.class)
     public RedisService redisService() {
-        return new DefaultRedisServiceImpl(redisTemplate(connectionFactory));
+        return new DefaultRedisServiceImpl(redisTemplate());
     }
 
     /**
      * RedisKey序列化规则
+     *
      * @return RedisSerializer
      */
     private RedisSerializer<String> keySerializer() {
@@ -94,6 +99,7 @@ public class RedisConfig extends CachingConfigurerSupport {
 
     /**
      * RedisValue序列化规则
+     *
      * @return RedisSerializer
      */
     private RedisSerializer<Object> valueSerializer() {

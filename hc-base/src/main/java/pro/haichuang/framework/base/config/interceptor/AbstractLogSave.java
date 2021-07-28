@@ -8,10 +8,10 @@ import pro.haichuang.framework.base.annotation.LogSave;
 /**
  * 保存日志抽象类
  *
- * <p>该类为实现请求参数持久化的抽象类, 需要自定义类实现该类, 进行指定具体持久化逻辑</p>
+ * <p>该类为实现请求参数持久化的抽象类, 需要自定义类实现该类, 进行指定具体持久化逻辑
  * <p>注意: 该类中 {@link #saveLog(LogSave, Api, ApiOperation, String, String, Long, long)} 方法只有在标注了
  * {@link pro.haichuang.framework.base.annotation.EnableLogSave @EnableLogSave} 注解和在对应的方法上标注
- * {@link LogSave @LogSave} 注解才会生效</p>
+ * {@link LogSave @LogSave} 注解才会生效
  *
  * @author JiYinchuan
  * @version 1.0.0
