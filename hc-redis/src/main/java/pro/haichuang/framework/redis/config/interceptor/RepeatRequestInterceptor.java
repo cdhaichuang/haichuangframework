@@ -1,23 +1,21 @@
-package pro.haichuang.framework.redis.interceptor;
+package pro.haichuang.framework.redis.config.interceptor;
 
 import com.alibaba.fastjson.JSONObject;
-import io.swagger.annotations.ApiOperation;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
+import pro.haichuang.framework.base.dto.HttpServletRequestDTO;
 import pro.haichuang.framework.base.enums.error.client.RequestServerErrorEnum;
 import pro.haichuang.framework.base.response.ResultVO;
-import pro.haichuang.framework.base.util.common.IpUtils;
+import pro.haichuang.framework.base.util.common.HttpServletRequestUtils;
 import pro.haichuang.framework.base.util.common.ResponseUtils;
-import pro.haichuang.framework.base.util.jwt.SecurityUtils;
+import pro.haichuang.framework.base.util.common.UUIDUtils;
 import pro.haichuang.framework.redis.annotation.RepeatRequestValid;
+import pro.haichuang.framework.redis.constant.RedisKeyOfFramework;
 import pro.haichuang.framework.redis.service.RedisService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,6 +38,7 @@ import java.util.Map;
 public class RepeatRequestInterceptor implements HandlerInterceptor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RepeatRequestInterceptor.class);
+    private static final String LOG_TAG = "重复请求拦截器";
 
     @Autowired
     private RedisService redisService;
@@ -52,33 +51,37 @@ public class RepeatRequestInterceptor implements HandlerInterceptor {
             Method method = handlerMethod.getMethod();
             RepeatRequestValid repeatRequestValidAnnotation = method.getAnnotation(RepeatRequestValid.class);
             if (repeatRequestValidAnnotation != null) {
-                String clientIp = IpUtils.getIpv4Address(request);
+                String uuid = UUIDUtils.Local.get();
+                HttpServletRequestDTO httpServletRequestDTO = HttpServletRequestUtils.parseInfo(request, method);
+                // 客户端真实请求IP地址
+                String clientIp = httpServletRequestDTO.getClientIp();
+                // 请求信息
+                String apiMessage = httpServletRequestDTO.getApiMessage();
+                // 请求用户ID
+                Long userId = httpServletRequestDTO.getUserId();
+                // 完整请求方法
+                String fullMethodName = httpServletRequestDTO.getFullMethodName();
 
-                Long userId = SecurityUtils.getJwtPayloadOrNewInstance().getUserId();
-
-                String repeatRedisKey = repeatRequestValidAnnotation.preKey()
-                        .concat("#").concat(clientIp)
-                        .concat("#").concat(request.getRequestURI());
-
+                // RequestParams
                 Map<String, String[]> parameterMap = request.getParameterMap();
+                String parameterString = parameterMap == null || parameterMap.isEmpty()
+                        ? IOUtils.toString(request.getInputStream(), StandardCharsets.UTF_8)
+                        : JSONObject.toJSONString(parameterMap);
 
-                String parameterMd5Hex = parameterMap == null || parameterMap.isEmpty()
-                        ? DigestUtils.md5Hex(IOUtils.toString(request.getInputStream(), StandardCharsets.UTF_8))
-                        : DigestUtils.md5Hex(JSONObject.toJSONString(parameterMap));
+                // RedisKey
+                String repeatRedisKey = RedisKeyOfFramework.repeatRequest(repeatRequestValidAnnotation.preKey(),
+                        clientIp, String.valueOf(userId), request.getRequestURI());
 
-                // 判断同一用户
-                String repeatValue = redisService.get(repeatRedisKey);
-                if (StringUtils.equals(repeatValue, parameterMd5Hex)) {
-                    ApiOperation apiOperationAnnotation = method.getAnnotation(ApiOperation.class);
-                    String apiMessage = ObjectUtils.isNotEmpty(apiOperationAnnotation)
-                            ? apiOperationAnnotation.value() : null;
-                    LOGGER.warn("[重复请求拦截器] 拦截请求 [apiMessage: {}, requestUri: {}, clientIp: {}, userId: {}, params: {}]",
-                            apiMessage, request.getRequestURI(), clientIp, userId, parameterMd5Hex);
+                String rdbParameterString = redisService.get(repeatRedisKey);
+                if (rdbParameterString == null) {
+                    redisService.set(repeatRedisKey, parameterString, repeatRequestValidAnnotation.value());
+                } else {
+                    LOGGER.warn("[{}] 拦截请求 [uuid: {}, apiMessage: {}, requestUri: {}, method: {}, " +
+                                    "clientIp: {}, userId: {}, params: {}]",
+                            LOG_TAG, uuid, apiMessage, request.getRequestURI(), fullMethodName, clientIp, userId, parameterString);
                     ResponseUtils.writeOfJson(response, ResultVO.other(RequestServerErrorEnum.REPEAT_REQUEST,
                             "请求速度过快, 请稍后重试"));
                     return false;
-                } else {
-                    redisService.set(repeatRedisKey, parameterMd5Hex, repeatRequestValidAnnotation.value());
                 }
             }
         }

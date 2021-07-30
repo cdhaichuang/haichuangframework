@@ -197,7 +197,7 @@ public class DefaultWxMpDataStore implements WxMpDataStore {
         private final String key;
         /**
          * 过期时间
-         * 单位 [ms]
+         * 单位 [毫秒]
          */
         private final long expireMillis;
 
@@ -205,7 +205,7 @@ public class DefaultWxMpDataStore implements WxMpDataStore {
          * 构造器
          * @param dataType 延时数据类型
          * @param key 延时对应Key
-         * @param duration 过期时间, 单位 [ms]
+         * @param duration 过期时间, 单位 [毫秒]
          */
         public DelayBase(DelayDataType dataType, String key, Duration duration) {
             this.dataType = dataType;

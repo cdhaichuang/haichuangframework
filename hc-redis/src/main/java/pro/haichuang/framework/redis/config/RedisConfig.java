@@ -25,8 +25,8 @@ import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSeriali
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-import pro.haichuang.framework.redis.service.RedisService;
 import pro.haichuang.framework.redis.service.DefaultRedisServiceImpl;
+import pro.haichuang.framework.redis.service.RedisService;
 
 import java.time.Duration;
 import java.time.LocalDate;

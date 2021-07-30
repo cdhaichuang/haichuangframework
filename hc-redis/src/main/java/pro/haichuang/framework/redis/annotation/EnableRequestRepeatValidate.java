@@ -3,7 +3,7 @@ package pro.haichuang.framework.redis.annotation;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Import;
 import pro.haichuang.framework.redis.config.WebMvcConfig;
-import pro.haichuang.framework.redis.interceptor.RepeatRequestInterceptor;
+import pro.haichuang.framework.redis.config.interceptor.RepeatRequestInterceptor;
 
 import java.lang.annotation.*;
 

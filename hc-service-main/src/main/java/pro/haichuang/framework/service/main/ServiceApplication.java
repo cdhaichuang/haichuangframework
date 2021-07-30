@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import pro.haichuang.framework.base.annotation.EnableControllerAdvice;
 import pro.haichuang.framework.base.annotation.EnableControllerLogAspect;
+import pro.haichuang.framework.base.annotation.EnableGlobalCorsConfig;
 import pro.haichuang.framework.base.annotation.EnableLogSave;
 import pro.haichuang.framework.redis.annotation.EnableRequestRepeatValidate;
 
@@ -14,6 +15,7 @@ import pro.haichuang.framework.redis.annotation.EnableRequestRepeatValidate;
  * @version 1.0.0
  */
 @SpringBootApplication
+@EnableGlobalCorsConfig
 @EnableControllerAdvice
 @EnableControllerLogAspect
 @EnableLogSave

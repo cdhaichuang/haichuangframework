@@ -1,7 +1,6 @@
 package pro.haichuang.framework.base.config.aspect;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -12,12 +11,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
+import org.springframework.util.Assert;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import pro.haichuang.framework.base.dto.HttpServletRequestDTO;
+import pro.haichuang.framework.base.exception.ApplicationException;
 import pro.haichuang.framework.base.util.common.HttpServletRequestUtils;
-import pro.haichuang.framework.base.util.common.IpUtils;
 import pro.haichuang.framework.base.util.common.UUIDUtils;
-import pro.haichuang.framework.base.util.jwt.SecurityUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
@@ -38,6 +38,7 @@ import java.lang.reflect.Method;
 public class LogAspect {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LogAspect.class);
+    private static final String LOG_TAG = "Request";
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -48,57 +49,42 @@ public class LogAspect {
 
     @Around("logPointCut()")
     public Object around(ProceedingJoinPoint point) throws Throwable {
-        // UUID
         String uuid = UUIDUtils.Local.get();
         // 开始执行时间
         long beginTime = System.currentTimeMillis();
-        // 请求
-        HttpServletRequest request = null;
-        // 客户端IP真实地址
-        String clientIp = null;
-        // 完整方法名
-        String fullMethodName = null;
-        // 描述信息
-        String apiMessage = null;
-        // 用户ID
-        Long userId = null;
 
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        if (requestAttributes != null) {
-            request = requestAttributes.getRequest();
+        Assert.notNull(requestAttributes, ApplicationException.DEFAULT_ERROR_USER_TIP);
+        HttpServletRequest request = requestAttributes.getRequest();
 
-            clientIp = IpUtils.getIpv4Address(request);
+        MethodSignature signature = (MethodSignature) point.getSignature();
+        Method method = signature.getMethod();
 
-            MethodSignature signature = (MethodSignature) point.getSignature();
-            Method method = signature.getMethod();
-            Api apiAnnotation = method.getDeclaringClass().getAnnotation(Api.class);
-            ApiOperation apiOperationAnnotation = method.getAnnotation(ApiOperation.class);
+        HttpServletRequestDTO httpServletRequestDTO = HttpServletRequestUtils.parseInfo(request, method);
+        // 客户端真实请求IP地址
+        String clientIp = httpServletRequestDTO.getClientIp();
+        // 请求信息
+        String apiMessage = httpServletRequestDTO.getApiMessage();
+        // 请求用户ID
+        Long userId = httpServletRequestDTO.getUserId();
+        // 完整请求方法
+        String fullMethodName = httpServletRequestDTO.getFullMethodName();
 
-            fullMethodName = point.getTarget().getClass().getName() + "." + method.getName() + "()";
-
-            apiMessage = apiAnnotation != null && apiOperationAnnotation != null
-                    ? String.join(",", apiAnnotation.tags()) + "-" + apiOperationAnnotation.value() : null;
-
-            HttpServletRequestUtils.parseDTO(request, apiAnnotation, apiOperationAnnotation);
-            userId = SecurityUtils.getJwtPayloadOrNewInstance().getUserId();
-
-            LOGGER.info("[AOP] [Begin] 检测到请求 [uuid: {}, apiMessage: {}, requestUri: {}, method: {}, " +
-                            "clientIp: {}, userId: {}, params: {}]",
-                    uuid, apiMessage, request.getRequestURI(), fullMethodName,
-                    clientIp, userId, point.getArgs());
-        }
+        LOGGER.info("[{}] [Begin] 检测到请求 [uuid: {}, apiMessage: {}, requestUri: {}, method: {}, " +
+                        "clientIp: {}, userId: {}, params: {}]",
+                LOG_TAG, uuid, apiMessage, request.getRequestURI(), fullMethodName,
+                clientIp, userId, point.getArgs());
 
         Object result = point.proceed();
         long executionTime = System.currentTimeMillis() - beginTime;
 
-        LOGGER.debug("[AOP] [Details] 检测到请求 [uuid: {}, apiMessage: {}, requestUri: {}, method: {}, " +
-                        "clientIp: {}, userId: {}, executionTime: {}, params: {}, result: {}]",
-                uuid, apiMessage, request != null ? request.getRequestURI() : "null", fullMethodName,
-                clientIp, userId, executionTime, point.getArgs(), objectMapper.writeValueAsString(result));
-        LOGGER.info("[AOP] [ End ] 检测到请求 [uuid: {}, apiMessage: {}, requestUri: {}, method: {}, " +
+        LOGGER.info("[{}] [ End ] 检测到请求 [uuid: {}, apiMessage: {}, requestUri: {}, method: {}, " +
                         "clientIp: {}, userId: {}, executionTime: {}]",
-                uuid, apiMessage, request != null ? request.getRequestURI() : "null", fullMethodName,
-                clientIp, userId, executionTime);
+                LOG_TAG, uuid, apiMessage, request.getRequestURI(), fullMethodName, clientIp, userId, executionTime);
+        LOGGER.debug("[{}] 检测到请求 [uuid: {}, apiMessage: {}, requestUri: {}, method: {}, " +
+                        "clientIp: {}, userId: {}, executionTime: {}, params: {}, result: {}]",
+                LOG_TAG, uuid, apiMessage, request.getRequestURI(), fullMethodName, clientIp, userId, executionTime,
+                point.getArgs(), objectMapper.writeValueAsString(result));
 
         return result;
     }

@@ -12,8 +12,11 @@ import java.util.stream.Collectors;
 /**
  * RedisService默认实现
  *
+ * <p>该类为 {@link RedisService} 默认实现
+ *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
  */
 @SuppressWarnings({"unchecked", "unused", "UnusedReturnValue", "SpellCheckingInspection"})
 public class DefaultRedisServiceImpl implements RedisService {
@@ -28,17 +31,11 @@ public class DefaultRedisServiceImpl implements RedisService {
 
     @Override
     public boolean expire(String key, long expireTime) {
-        boolean result = false;
-        try {
-            if (expireTime > 0) {
-                redisTemplate.expire(key, expireTime, TimeUnit.SECONDS);
-            }
-            result = true;
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (expireTime > 0) {
+            Boolean result = redisTemplate.expire(key, expireTime, TimeUnit.SECONDS);
+            return result != null && result;
         }
-
-        return result;
+        return false;
     }
 
     @Override
@@ -49,18 +46,13 @@ public class DefaultRedisServiceImpl implements RedisService {
 
     @Override
     public boolean hasKey(String key) {
-        try {
-            Boolean result = redisTemplate.hasKey(key);
-            return result != null && result;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        Boolean result = redisTemplate.hasKey(key);
+        return result != null && result;
     }
 
     @Override
     public void del(String... key) {
-        if (key != null && key.length > 0) {
+        if (key.length > 0) {
             if (key.length == 1) {
                 redisTemplate.delete(key[0]);
             } else {
@@ -73,55 +65,38 @@ public class DefaultRedisServiceImpl implements RedisService {
 
     @Override
     public <V> V get(String key) {
-        return key == null ? null : (V) redisTemplate.opsForValue().get(key);
+        return (V) redisTemplate.opsForValue().get(key);
     }
 
     @Override
-    public boolean set(String key, Object value) {
-        boolean result = false;
-        try {
-            redisTemplate.opsForValue().set(key, value);
-            result = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return result;
+    public void set(String key, Object value) {
+        redisTemplate.opsForValue().set(key, value);
     }
 
     @Override
-    public boolean set(String key, Object value, long expireTime) {
-        boolean result = false;
-        try {
-            if (expireTime > 0) {
-                redisTemplate.opsForValue().set(key, value, expireTime, TimeUnit.SECONDS);
-            } else {
-                set(key, value);
-            }
-            result = true;
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void set(String key, Object value, long expireTime) {
+        if (expireTime > 0) {
+            redisTemplate.opsForValue().set(key, value, expireTime, TimeUnit.SECONDS);
+        } else {
+            set(key, value);
         }
-
-        return result;
     }
 
     @Override
-    public long incr(String key, long delta) {
-        if (delta < 0) {
-            throw new RuntimeException("递增因子必须大于0");
+    public long incr(String key, long factor) {
+        if (factor <= 0) {
+            throw new RuntimeException("递增因子必须大于 [0]");
         }
-
-        Long result = redisTemplate.opsForValue().increment(key, delta);
+        Long result = redisTemplate.opsForValue().increment(key, factor);
         return result == null ? -1 : result;
     }
 
     @Override
-    public long decr(String key, long delta) {
-        if (delta < 0) {
-            throw new RuntimeException("递减因子必须大于0");
+    public long decr(String key, long factor) {
+        if (factor <= 0) {
+            throw new RuntimeException("递减因子必须大于 [0]");
         }
-        Long result = redisTemplate.opsForValue().increment(key, -delta);
+        Long result = redisTemplate.opsForValue().increment(key, -factor);
         return (result == null) ? -1 : result;
     }
 
@@ -138,62 +113,29 @@ public class DefaultRedisServiceImpl implements RedisService {
     }
 
     @Override
-    public boolean hmset(String key, Map<String, Object> map) {
-        boolean result = false;
-
-        try {
-            redisTemplate.opsForHash().putAll(key, map);
-            result = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return result;
+    public void hmset(String key, Map<String, Object> map) {
+        redisTemplate.opsForHash().putAll(key, map);
     }
 
     @Override
-    public boolean hmset(String key, Map<String, Object> map, long expireTime) {
-        boolean result = false;
-        try {
-            redisTemplate.opsForHash().putAll(key, map);
-            if (expireTime > 0) {
-                expire(key, expireTime);
-            }
-            result = true;
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void hmset(String key, Map<String, Object> map, long expireTime) {
+        redisTemplate.opsForHash().putAll(key, map);
+        if (expireTime > 0) {
+            expire(key, expireTime);
         }
-
-        return result;
     }
 
     @Override
-    public boolean hset(String key, String item, Object value) {
-        boolean result = false;
-        try {
-            redisTemplate.opsForHash().put(key, item, value);
-            result = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return result;
+    public void hset(String key, String item, Object value) {
+        redisTemplate.opsForHash().put(key, item, value);
     }
 
     @Override
-    public boolean hset(String key, String item, Object value, long expireTime) {
-        boolean result = false;
-        try {
-            redisTemplate.opsForHash().put(key, item, value);
-            if (expireTime > 0) {
-                expire(key, expireTime);
-            }
-            result = true;
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void hset(String key, String item, Object value, long expireTime) {
+        redisTemplate.opsForHash().put(key, item, value);
+        if (expireTime > 0) {
+            expire(key, expireTime);
         }
-
-        return result;
     }
 
     @Override
@@ -207,89 +149,53 @@ public class DefaultRedisServiceImpl implements RedisService {
     }
 
     @Override
-    public double hincr(String key, String item, double by) {
-        return redisTemplate.opsForHash().increment(key, item, by);
+    public double hincr(String key, String item, double factor) {
+        return redisTemplate.opsForHash().increment(key, item, factor);
     }
 
     @Override
-    public double hdecr(String key, String item, double by) {
-        return redisTemplate.opsForHash().increment(key, item, -by);
+    public double hdecr(String key, String item, double factor) {
+        return redisTemplate.opsForHash().increment(key, item, -factor);
     }
 
     // ============================ Set =============================
 
     @Override
     public <V> Set<V> sGet(String key) {
-        Set<Object> set = null;
-        try {
-            set = redisTemplate.opsForSet().members(key);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return set == null ? null : set.stream().map(v -> (V) v).collect(Collectors.toSet());
+        Set<Object> result = redisTemplate.opsForSet().members(key);
+        return result == null ? null : result.stream().map(v -> (V) v).collect(Collectors.toSet());
     }
 
     @Override
     public boolean sHasKey(String key, Object value) {
-        Boolean result = null;
-        try {
-            result = redisTemplate.opsForSet().isMember(key, value);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        Boolean result = redisTemplate.opsForSet().isMember(key, value);
         return result != null && result;
     }
 
     @Override
     public long sSet(String key, Object... values) {
-        Long result = null;
-        try {
-            result = redisTemplate.opsForSet().add(key, values);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        Long result = redisTemplate.opsForSet().add(key, values);
         return (result == null) ? -1 : result;
     }
 
     @Override
-    public long sSetAndTime(String key, long expireTime, Object... values) {
-        Long count = null;
-        try {
-            count = redisTemplate.opsForSet().add(key, values);
-            if (expireTime > 0) {
-                expire(key, expireTime);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    public long sSet(String key, long expireTime, Object... values) {
+        Long count = redisTemplate.opsForSet().add(key, values);
+        if (expireTime > 0) {
+            expire(key, expireTime);
         }
-
         return (count == null) ? -1 : count;
     }
 
     @Override
-    public long sGetSetSize(String key) {
-        Long result = null;
-        try {
-            result = redisTemplate.opsForSet().size(key);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+    public long sGetSize(String key) {
+        Long result = redisTemplate.opsForSet().size(key);
         return (result == null) ? -1 : result;
     }
 
     @Override
-    public long setRemove(String key, Object... values) {
-        Long count = null;
-        try {
-            count = redisTemplate.opsForSet().remove(key, values);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+    public long sdel(String key, Object... values) {
+        Long count = redisTemplate.opsForSet().remove(key, values);
         return (count == null) ? -1 : count;
     }
 
@@ -297,120 +203,55 @@ public class DefaultRedisServiceImpl implements RedisService {
 
     @Override
     public <V> List<V> lGet(String key, long start, long end) {
-        List<Object> result = null;
-        try {
-            result = redisTemplate.opsForList().range(key, start, end);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        List<Object> result = redisTemplate.opsForList().range(key, start, end);
         return result == null ? null : result.stream().map(v -> (V) v).collect(Collectors.toList());
     }
 
     @Override
-    public long lGetListSize(String key) {
-        Long result = null;
-        try {
-            result = redisTemplate.opsForList().size(key);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+    public long lGetSize(String key) {
+        Long result = redisTemplate.opsForList().size(key);
         return (result == null) ? -1 : result;
     }
 
     @Override
     public <V> V lGetIndex(String key, long index) {
-        Object result = null;
-        try {
-            result = redisTemplate.opsForList().index(key, index);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return (V) result;
+        return (V) redisTemplate.opsForList().index(key, index);
     }
 
     @Override
-    public boolean lSet(String key, Object value) {
-        boolean result = false;
-        try {
-            redisTemplate.opsForList().rightPush(key, value);
-            result = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return result;
+    public void lSet(String key, Object value) {
+        redisTemplate.opsForList().rightPush(key, value);
     }
 
     @Override
-    public boolean lSet(String key, Object value, long expireTime) {
-        boolean result = false;
-        try {
-            redisTemplate.opsForList().rightPush(key, value);
-            if (expireTime > 0) {
-                expire(key, expireTime);
-            }
-            result = true;
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void lSet(String key, Object value, long expireTime) {
+        redisTemplate.opsForList().rightPush(key, value);
+        if (expireTime > 0) {
+            expire(key, expireTime);
         }
-
-        return result;
     }
 
     @Override
-    public boolean lSet(String key, List<Object> value) {
-        boolean result = false;
-        try {
-            redisTemplate.opsForList().rightPushAll(key, value);
-            result = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return result;
+    public void lSet(String key, List<Object> value) {
+        redisTemplate.opsForList().rightPushAll(key, value);
     }
 
     @Override
-    public boolean lSet(String key, List<Object> value, long expireTime) {
-        boolean result = false;
-        try {
-            redisTemplate.opsForList().rightPushAll(key, value);
-            if (expireTime > 0) {
-                expire(key, expireTime);
-            }
-            result = true;
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void lSet(String key, List<Object> value, long expireTime) {
+        redisTemplate.opsForList().rightPushAll(key, value);
+        if (expireTime > 0) {
+            expire(key, expireTime);
         }
-
-        return result;
     }
 
     @Override
-    public boolean lUpdateIndex(String key, long index, Object value) {
-        boolean result = false;
-        try {
-            redisTemplate.opsForList().set(key, index, value);
-            result = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return result;
+    public void lEditIndex(String key, long index, Object value) {
+        redisTemplate.opsForList().set(key, index, value);
     }
 
     @Override
-    public long lRemove(String key, long count, Object value) {
-        Long remove = null;
-        try {
-            remove = redisTemplate.opsForList().remove(key, count, value);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+    public long lDel(String key, long count, Object value) {
+        Long remove = redisTemplate.opsForList().remove(key, count, value);
         return (remove == null) ? -1 : remove;
     }
 }

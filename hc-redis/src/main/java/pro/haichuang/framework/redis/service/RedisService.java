@@ -7,10 +7,15 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * RedisService
+ * RedisService服务
+ *
+ * <p>该类为 [Redis] 操作核心服务接口, 项目中所有关于 [Redis] 的操作均使用此接口
+ * <p>该类已默认注入到 [Spring] 中, 默认实现为 {@link DefaultRedisServiceImpl}, 如需自定义实现请实现该接口并手动注入该接口
  *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
+ * @see DefaultRedisServiceImpl
  */
 @SuppressWarnings({"unused", "UnusedReturnValue", "SpellCheckingInspection"})
 public interface RedisService {
@@ -21,16 +26,16 @@ public interface RedisService {
      * 指定缓存失效时间
      *
      * @param key        键
-     * @param expireTime 过期时间(秒)
+     * @param expireTime 过期时间, 单位 [秒]
      * @return 返回操作结果
      */
     boolean expire(String key, long expireTime);
 
     /**
-     * 根据key 获取过期时间
+     * 根据Key获取过期时间
      *
-     * @param key 键 不能为null
-     * @return 过期时间(秒) 返回0代表为永久有效
+     * @param key 键
+     * @return 过期时间, 单位 [秒], 不存在则小于 [0]
      */
     long getExpire(String key);
 
@@ -38,14 +43,14 @@ public interface RedisService {
      * 判断key是否存在
      *
      * @param key 键
-     * @return true 存在 false不存在
+     * @return {false: 不存在, true: 存在}
      */
     boolean hasKey(String key);
 
     /**
      * 删除缓存
      *
-     * @param key 可以传一个值 或多个
+     * @param key 键
      */
     void del(String... key);
 
@@ -66,52 +71,53 @@ public interface RedisService {
      *
      * @param key   键
      * @param value 值
-     * @return true成功 false失败
+     * @return {false: 失败, true: 成功}
      */
-    boolean set(String key, Object value);
+    void set(String key, Object value);
 
     /**
-     * 普通缓存放入并设置时间
+     * 普通缓存放入并设置过期时间
      *
      * @param key        键
      * @param value      值
-     * @param expireTime 过期时间(秒) time要大于0 如果time小于等于0 将设置无限期
-     * @return true成功 false 失败
+     * @param expireTime 过期时间, 单位 [秒], 小于等于 [0] 将永不过期
+     * @return {false: 失败, true: 成功}
      */
-    boolean set(String key, Object value, long expireTime);
+    void set(String key, Object value, long expireTime);
 
     /**
-     * 递增
+     * 普通缓存递增
      *
-     * @param key   键
-     * @param delta 要增加几(大于0)
-     * @return 返回long
+     * @param key    键
+     * @param factor 递增因子, 必须大于 [0]
+     * @return 递增后的值, 不存在则小于 [0]
      */
-    long incr(String key, long delta);
+    long incr(String key, long factor);
 
     /**
-     * 递减
+     * 普通缓存递减
      *
-     * @param key   键
-     * @param delta 要减少几(小于0)
-     * @return 返回long
+     * @param key    键
+     * @param factor 递减因子, 必须大于 [0]
+     * @return 递减后的值, 不存在则小于 [0]
      */
-    long decr(String key, long delta);
+    long decr(String key, long factor);
 
     // ================================ Map =================================
 
     /**
-     * HashGet
+     * Hash缓存获取项
      *
-     * @param key  键 不能为null
-     * @param item 项 不能为null
+     * @param key  键
+     * @param item 项
      * @param <V>  值类型
      * @return 值
      */
+    @Nullable
     <V> V hget(String key, String item);
 
     /**
-     * 获取hashKey对应的所有键值
+     * Hash缓存获取所有项
      *
      * @param key 键
      * @return 对应的多个键值
@@ -120,227 +126,228 @@ public interface RedisService {
     Map<Object, Object> hmget(String key);
 
     /**
-     * HashSet
+     * Hash缓存放入所有项
      *
      * @param key 键
      * @param map 对应多个键值
-     * @return true 成功 false 失败
+     * @return {false: 失败, true: 成功}
      */
-    boolean hmset(String key, Map<String, Object> map);
+    void hmset(String key, Map<String, Object> map);
 
     /**
-     * HashSet 并设置时间
+     * Hash缓存放入所有项并指定过期时间
      *
      * @param key        键
-     * @param map        对应多个键值
+     * @param map        对应多个键与项
      * @param expireTime 过期时间(秒)
-     * @return true成功 false失败
+     * @return {false: 失败, true: 成功}
      */
-    boolean hmset(String key, Map<String, Object> map, long expireTime);
+    void hmset(String key, Map<String, Object> map, long expireTime);
 
     /**
-     * 向一张hash表中放入数据,如果不存在将创建
+     * Hash缓存放入项的值
      *
      * @param key   键
      * @param item  项
      * @param value 值
-     * @return true 成功 false失败
+     * @return {false: 失败, true: 成功}
      */
-    boolean hset(String key, String item, Object value);
+    void hset(String key, String item, Object value);
 
     /**
-     * 向一张hash表中放入数据,如果不存在将创建
+     * Hash缓存放入项的值并指定过期时间
      *
      * @param key        键
      * @param item       项
      * @param value      值
-     * @param expireTime 过期时间(秒) 注意:如果已存在的hash表有时间,这里将会替换原有的时间
-     * @return true 成功 false失败
+     * @param expireTime 过期时间, 单位 [秒]
+     * @return {false: 失败, true: 成功}
      */
-    boolean hset(String key, String item, Object value, long expireTime);
+    void hset(String key, String item, Object value, long expireTime);
 
     /**
-     * 删除hash表中的值
+     * Hash删除项
      *
-     * @param key  键 不能为null
-     * @param item 项 可以使多个 不能为null
+     * @param key  键
+     * @param item 项
      */
     void hdel(String key, Object... item);
 
     /**
-     * 判断hash表中是否有该项的值
+     * 判断Hash缓存中是否存在该项的值
      *
-     * @param key  键 不能为null
-     * @param item 项 不能为null
-     * @return true 存在 false不存在
+     * @param key  键
+     * @param item 项
+     * @return {false: 不存在, true: 存在}
      */
     boolean hHasKey(String key, String item);
 
     /**
-     * hash递增 如果不存在,就会创建一个 并把新增后的值返回
+     * Hash缓存项递增
      *
-     * @param key  键
-     * @param item 项
-     * @param by   要增加几(大于0)
-     * @return 返回double
+     * @param key    键
+     * @param item   项
+     * @param factor 递增因子
+     * @return 递增后的值
      */
-    double hincr(String key, String item, double by);
+    double hincr(String key, String item, double factor);
 
     /**
-     * hash递减
+     * Hash缓存项递减
      *
-     * @param key  键
-     * @param item 项
-     * @param by   要减少记(小于0)
-     * @return 返回double
+     * @param key    键
+     * @param item   项
+     * @param factor 递减因子
+     * @return 递减后的值
      */
-    double hdecr(String key, String item, double by);
+    double hdecr(String key, String item, double factor);
 
     // ============================ Set =============================
 
     /**
-     * 根据key获取Set中的所有值
+     * Set缓存获取
      *
      * @param key 键
      * @param <V> 值类型
-     * @return 返回Set集合
+     * @return 值
      */
+    @Nullable
     <V> Set<V> sGet(String key);
 
     /**
-     * 根据value从一个set中查询,是否存在
-     *
-     * @param key   键
-     * @param value 值
-     * @return true 存在 false不存在
-     */
-    boolean sHasKey(String key, Object value);
-
-    /**
-     * 将数据放入set缓存
+     * Set缓存放入
      *
      * @param key    键
-     * @param values 值 可以是多个
-     * @return 成功个数
+     * @param values 值
+     * @return 成功放入个数
      */
     long sSet(String key, Object... values);
 
     /**
-     * 将set数据放入缓存
+     * Set缓存放入并指定过期时间
      *
      * @param key        键
-     * @param expireTime 过期时间(秒)
-     * @param values     值 可以是多个
-     * @return 成功个数
+     * @param expireTime 过期时间, 单位 [秒]
+     * @param values     值
+     * @return 成功放入个数
      */
-    long sSetAndTime(String key, long expireTime, Object... values);
+    long sSet(String key, long expireTime, Object... values);
 
     /**
-     * 获取set缓存的长度
+     * Set缓存长度获取
      *
      * @param key 键
-     * @return set缓存的长度
+     * @return Set缓存长度获取
      */
-    long sGetSetSize(String key);
+    long sGetSize(String key);
 
     /**
-     * 移除值为value的
+     * 判断Set缓存是否存在值
+     *
+     * @param key   键
+     * @param value 值
+     * @return {false: 不存在, true: 存在}
+     */
+    boolean sHasKey(String key, Object value);
+
+    /**
+     * Set缓存删除指定值
      *
      * @param key    键
-     * @param values 值 可以是多个
-     * @return 移除的个数
+     * @param values 值
+     * @return 成功删除的个数
      */
-    long setRemove(String key, Object... values);
+    long sdel(String key, Object... values);
 
     // =============================== List =================================
 
     /**
-     * 获取list缓存的内容
+     * List缓存获取
      *
      * @param key   键
      * @param start 开始
-     * @param end   结束 0 到 -1代表所有值
+     * @param end   结束
      * @param <V>   值类型
-     * @return 返回 {@code "List<V>"}
+     * @return 值
      */
     @Nullable
     <V> List<V> lGet(String key, long start, long end);
 
     /**
-     * 获取list缓存的长度
+     * List缓存长度获取
      *
      * @param key 键
-     * @return 返回list缓存的长度
+     * @return List缓存长度
      */
-    long lGetListSize(String key);
+    long lGetSize(String key);
 
     /**
-     * 通过索引 获取list中的值
+     * List缓存指定索引获取
      *
      * @param key   键
-     * @param index 索引 {@code "index >= 0"}时， 0 表头，1 第二个元素，依次类推；{@code "index < 0"} 时，-1，表尾，-2倒数第二个元素，依次类推
+     * @param index 索引, 小于 [0] 时则表示从末尾开始计算
      * @param <V>   值类型
-     * @return 返回Object值
+     * @return 值
      */
     @Nullable
     <V> V lGetIndex(String key, long index);
 
     /**
-     * 将list放入缓存
+     * List缓存放入
      *
      * @param key   键
      * @param value 值
-     * @return 返回操作结果
+     * @return {false: 失败, true: 成功}
      */
-    boolean lSet(String key, Object value);
+    void lSet(String key, Object value);
 
     /**
-     * 将list放入缓存
+     * List缓存放入并指定过期时间
      *
      * @param key        键
      * @param value      值
-     * @param expireTime 过期时间(秒)
-     * @return 返回操作结果
+     * @param expireTime 过期时间, 单位 [秒]
+     * @return {false: 失败, true: 成功}
      */
-    boolean lSet(String key, Object value, long expireTime);
+    void lSet(String key, Object value, long expireTime);
 
     /**
-     * 将list放入缓存
+     * List缓存放入
      *
      * @param key   键
      * @param value 值
-     * @return 返回 操作结果
+     * @return {false: 失败, true: 成功}
      */
-    boolean lSet(String key, List<Object> value);
+    void lSet(String key, List<Object> value);
 
     /**
-     * 将list放入缓存
+     * List缓存批量放入
      *
      * @param key        键
      * @param value      值
-     * @param expireTime 过期时间(秒)
-     * @return 返回 操作结果
+     * @param expireTime 过期时间, 单位 [秒]
+     * @return {false: 失败, true: 成功}
      */
-    boolean lSet(String key, List<Object> value, long expireTime);
+    void lSet(String key, List<Object> value, long expireTime);
 
     /**
-     * 根据索引修改list中的某条数据
+     * List缓存根据索引修改
      *
      * @param key   键
      * @param index 索引
      * @param value 值
-     * @return 返回修改结果
+     * @return {false: 失败, true: 成功}
      */
-    boolean lUpdateIndex(String key, long index, Object value);
+    void lEditIndex(String key, long index, Object value);
 
     /**
-     * 移除N个值为value的元素
+     * List缓存删除Count个值为value的值
      *
      * @param key   键
      * @param count 移除多少个
      * @param value 值
-     * @return 移除的个数
+     * @return 成功删除个数
      */
-    long lRemove(String key, long count, Object value);
+    long lDel(String key, long count, Object value);
 
 }

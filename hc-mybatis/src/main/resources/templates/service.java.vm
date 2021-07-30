@@ -14,6 +14,7 @@ import ${superServiceClassPackage};
  *
  * @author ${author}
  * @version ${cfg.version}
+ * @since ${cfg.version}
  */
 #if(${kotlin})
 interface ${table.serviceName} : ${superServiceClass}<${entity}>

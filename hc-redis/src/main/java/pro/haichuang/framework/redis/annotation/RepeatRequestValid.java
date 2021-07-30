@@ -1,6 +1,6 @@
 package pro.haichuang.framework.redis.annotation;
 
-import pro.haichuang.framework.redis.interceptor.RepeatRequestInterceptor;
+import pro.haichuang.framework.redis.config.interceptor.RepeatRequestInterceptor;
 
 import java.lang.annotation.*;
 
@@ -24,7 +24,7 @@ import java.lang.annotation.*;
 public @interface RepeatRequestValid {
 
     /**
-     * 设置重复请求的间隔时间, 单位s
+     * 设置重复请求的间隔时间, 单位 [秒]
      * 默认 {@code "3s"}
      *
      * @return 间隔时间

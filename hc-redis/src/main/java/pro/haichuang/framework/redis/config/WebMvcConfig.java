@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import pro.haichuang.framework.redis.config.autoconfiguration.RedisAutoConfiguration;
-import pro.haichuang.framework.redis.interceptor.RepeatRequestInterceptor;
+import pro.haichuang.framework.redis.config.interceptor.RepeatRequestInterceptor;
 
 /**
  * WebMvcConfig

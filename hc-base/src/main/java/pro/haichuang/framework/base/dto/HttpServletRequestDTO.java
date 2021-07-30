@@ -10,12 +10,7 @@ import java.io.Serializable;
  * @since 1.0.0
  */
 public class HttpServletRequestDTO implements Serializable {
-    private static final long serialVersionUID = 771686212576678477L;
-
-    /**
-     * 当前请求UUID
-     */
-    private String uuid;
+    private static final long serialVersionUID = -8724659073656593786L;
 
     /**
      * 客户端真实请求IP地址
@@ -23,28 +18,19 @@ public class HttpServletRequestDTO implements Serializable {
     private String clientIp;
 
     /**
-     * 完整请求方法
+     * 请求信息
      */
-    private String fullMethodName;
-
-    /**
-     * 请求方法描述
-     */
-    private String methodDescription;
+    private String apiMessage;
 
     /**
      * 请求用户ID
      */
     private Long userId;
 
-    public String getUuid() {
-        return uuid;
-    }
-
-    public HttpServletRequestDTO setUuid(String uuid) {
-        this.uuid = uuid;
-        return this;
-    }
+    /**
+     * 完整请求方法
+     */
+    private String fullMethodName;
 
     public String getClientIp() {
         return clientIp;
@@ -55,21 +41,12 @@ public class HttpServletRequestDTO implements Serializable {
         return this;
     }
 
-    public String getFullMethodName() {
-        return fullMethodName;
+    public String getApiMessage() {
+        return apiMessage;
     }
 
-    public HttpServletRequestDTO setFullMethodName(String fullMethodName) {
-        this.fullMethodName = fullMethodName;
-        return this;
-    }
-
-    public String getMethodDescription() {
-        return methodDescription;
-    }
-
-    public HttpServletRequestDTO setMethodDescription(String methodDescription) {
-        this.methodDescription = methodDescription;
+    public HttpServletRequestDTO setApiMessage(String apiMessage) {
+        this.apiMessage = apiMessage;
         return this;
     }
 
@@ -82,14 +59,22 @@ public class HttpServletRequestDTO implements Serializable {
         return this;
     }
 
+    public String getFullMethodName() {
+        return fullMethodName;
+    }
+
+    public HttpServletRequestDTO setFullMethodName(String fullMethodName) {
+        this.fullMethodName = fullMethodName;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "HttpServletRequestDTO{" +
-                "uuid='" + uuid + '\'' +
-                ", clientIp='" + clientIp + '\'' +
+                "clientIp='" + clientIp + '\'' +
+                ", apiMessage='" + apiMessage + '\'' +
                 ", userId=" + userId +
                 ", fullMethodName='" + fullMethodName + '\'' +
-                ", apiDescription='" + methodDescription + '\'' +
                 '}';
     }
 }
