@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * 重复请求包装器
+ * 重复获取请求流包装器
  *
  * @author JiYinchuan
  * @version 1.0.0
@@ -26,7 +26,7 @@ public class RepeatRequestWrapper extends HttpServletRequestWrapper {
      * Constructs a request object wrapping the given request.
      *
      * @param request The request to wrap
-     * @throws IllegalArgumentException if the request is null
+     * @throws IOException If the request is null
      */
     public RepeatRequestWrapper(HttpServletRequest request) throws IOException {
         super(request);
@@ -63,7 +63,7 @@ public class RepeatRequestWrapper extends HttpServletRequestWrapper {
                     } catch (IOException e) {
                         readListener.onError(e);
                     }
-                }else {
+                } else {
                     try {
                         readListener.onAllDataRead();
                     } catch (IOException e) {

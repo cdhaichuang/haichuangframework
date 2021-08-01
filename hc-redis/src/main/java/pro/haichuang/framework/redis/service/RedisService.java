@@ -71,7 +71,6 @@ public interface RedisService {
      *
      * @param key   键
      * @param value 值
-     * @return {false: 失败, true: 成功}
      */
     void set(String key, Object value);
 
@@ -81,7 +80,6 @@ public interface RedisService {
      * @param key        键
      * @param value      值
      * @param expireTime 过期时间, 单位 [秒], 小于等于 [0] 将永不过期
-     * @return {false: 失败, true: 成功}
      */
     void set(String key, Object value, long expireTime);
 
@@ -130,7 +128,6 @@ public interface RedisService {
      *
      * @param key 键
      * @param map 对应多个键值
-     * @return {false: 失败, true: 成功}
      */
     void hmset(String key, Map<String, Object> map);
 
@@ -140,7 +137,6 @@ public interface RedisService {
      * @param key        键
      * @param map        对应多个键与项
      * @param expireTime 过期时间(秒)
-     * @return {false: 失败, true: 成功}
      */
     void hmset(String key, Map<String, Object> map, long expireTime);
 
@@ -150,7 +146,6 @@ public interface RedisService {
      * @param key   键
      * @param item  项
      * @param value 值
-     * @return {false: 失败, true: 成功}
      */
     void hset(String key, String item, Object value);
 
@@ -161,7 +156,6 @@ public interface RedisService {
      * @param item       项
      * @param value      值
      * @param expireTime 过期时间, 单位 [秒]
-     * @return {false: 失败, true: 成功}
      */
     void hset(String key, String item, Object value, long expireTime);
 
@@ -297,7 +291,6 @@ public interface RedisService {
      *
      * @param key   键
      * @param value 值
-     * @return {false: 失败, true: 成功}
      */
     void lSet(String key, Object value);
 
@@ -307,7 +300,6 @@ public interface RedisService {
      * @param key        键
      * @param value      值
      * @param expireTime 过期时间, 单位 [秒]
-     * @return {false: 失败, true: 成功}
      */
     void lSet(String key, Object value, long expireTime);
 
@@ -316,7 +308,6 @@ public interface RedisService {
      *
      * @param key   键
      * @param value 值
-     * @return {false: 失败, true: 成功}
      */
     void lSet(String key, List<Object> value);
 
@@ -326,7 +317,6 @@ public interface RedisService {
      * @param key        键
      * @param value      值
      * @param expireTime 过期时间, 单位 [秒]
-     * @return {false: 失败, true: 成功}
      */
     void lSet(String key, List<Object> value, long expireTime);
 
@@ -336,7 +326,6 @@ public interface RedisService {
      * @param key   键
      * @param index 索引
      * @param value 值
-     * @return {false: 失败, true: 成功}
      */
     void lEditIndex(String key, long index, Object value);
 
