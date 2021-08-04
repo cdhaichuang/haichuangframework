@@ -1,6 +1,8 @@
 package pro.haichuang.framework.base.config.mvc.filter;
 
 import org.apache.commons.io.IOUtils;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 
 import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
@@ -20,7 +22,7 @@ import java.io.InputStreamReader;
  */
 public class RepeatRequestWrapper extends HttpServletRequestWrapper {
 
-    private final byte[] body;
+    private byte[] body = new byte[0];
 
     /**
      * Constructs a request object wrapping the given request.
@@ -30,17 +32,19 @@ public class RepeatRequestWrapper extends HttpServletRequestWrapper {
      */
     public RepeatRequestWrapper(HttpServletRequest request) throws IOException {
         super(request);
-        body = IOUtils.toByteArray(request.getInputStream());
+        if (isJsonRequest()) {
+            this.body = IOUtils.toByteArray(request.getInputStream());
+        }
     }
 
     @Override
-    public BufferedReader getReader() {
-        return new BufferedReader(new InputStreamReader(new ByteArrayInputStream(body)));
+    public BufferedReader getReader() throws IOException {
+        return isJsonRequest() ? new BufferedReader(new InputStreamReader(new ByteArrayInputStream(body))) : super.getReader();
     }
 
     @Override
-    public ServletInputStream getInputStream() {
-        return new ServletInputStream() {
+    public ServletInputStream getInputStream() throws IOException {
+        return isJsonRequest() ? new ServletInputStream() {
             private int lastIndexRetrieved = -1;
             private ReadListener readListener = null;
 
@@ -89,6 +93,15 @@ public class RepeatRequestWrapper extends HttpServletRequestWrapper {
                 }
                 return index;
             }
-        };
+        } : super.getInputStream();
+    }
+
+    /**
+     * 判断是否为JSON请求
+     *
+     * @return {false: 否, true: 是}
+     */
+    private boolean isJsonRequest() {
+        return MediaType.APPLICATION_JSON_VALUE.equalsIgnoreCase(super.getHeader(HttpHeaders.CONTENT_TYPE));
     }
 }
