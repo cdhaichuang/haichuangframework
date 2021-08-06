@@ -35,7 +35,6 @@ import java.time.format.DateTimeFormatter;
  * <p>该类采用 {@link Jackson2ObjectMapperBuilderCustomizer} 的原因是默认 {@code Jackson} 已存在一些默认配置内容,
  * 通过此种方式可以实现在不修改默认配置的情况下插入我们自定义的配置
  *
- *
  * @author JiYinchuan
  * @version 1.0.0
  * @since 1.0.0
@@ -53,16 +52,16 @@ public class JacksonConfig {
             jacksonObjectMapperBuilder.serializerByType(LocalTime.class,
                     new LocalTimeSerializer(DateTimeFormatter.ofPattern(DatePattern.NORM_TIME_PATTERN)));
             jacksonObjectMapperBuilder.serializerByType(LocalDate.class,
-                    new LocalDateSerializer(DatePattern.NORM_DATE_FORMATTER));
+                    new LocalDateSerializer(DateTimeFormatter.ofPattern(DatePattern.NORM_DATE_PATTERN)));
             jacksonObjectMapperBuilder.serializerByType(LocalDateTime.class,
-                    new LocalDateTimeSerializer(DatePattern.NORM_DATETIME_FORMATTER));
+                    new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DatePattern.NORM_DATETIME_PATTERN)));
 
             jacksonObjectMapperBuilder.deserializerByType(LocalTime.class,
                     new LocalTimeDeserializer(DateTimeFormatter.ofPattern(DatePattern.NORM_TIME_PATTERN)));
             jacksonObjectMapperBuilder.deserializerByType(LocalDate.class,
-                    new LocalDateDeserializer(DatePattern.NORM_DATE_FORMATTER));
+                    new LocalDateDeserializer(DateTimeFormatter.ofPattern(DatePattern.NORM_DATE_PATTERN)));
             jacksonObjectMapperBuilder.deserializerByType(LocalDateTime.class,
-                    new LocalDateTimeDeserializer(DatePattern.NORM_DATETIME_FORMATTER));
+                    new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(DatePattern.NORM_DATETIME_PATTERN)));
         };
     }
 
