@@ -16,7 +16,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import pro.haichuang.framework.base.dto.HttpServletRequestDTO;
 import pro.haichuang.framework.base.exception.ApplicationException;
-import pro.haichuang.framework.base.util.common.HttpServletRequestUtils;
+import pro.haichuang.framework.base.util.common.RequestUtils;
 import pro.haichuang.framework.base.util.common.UUIDUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -60,7 +60,7 @@ public class LogAspect {
         MethodSignature signature = (MethodSignature) point.getSignature();
         Method method = signature.getMethod();
 
-        HttpServletRequestDTO httpServletRequestDTO = HttpServletRequestUtils.parseInfo(request, method);
+        HttpServletRequestDTO httpServletRequestDTO = RequestUtils.parseInfo(request, method);
         // 客户端真实请求IP地址
         String clientIp = httpServletRequestDTO.getClientIp();
         // 请求信息

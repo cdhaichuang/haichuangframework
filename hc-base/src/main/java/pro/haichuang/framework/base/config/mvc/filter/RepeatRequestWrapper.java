@@ -1,8 +1,7 @@
 package pro.haichuang.framework.base.config.mvc.filter;
 
 import org.apache.commons.io.IOUtils;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import pro.haichuang.framework.base.util.common.RequestUtils;
 
 import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
@@ -15,6 +14,9 @@ import java.io.InputStreamReader;
 
 /**
  * 重复获取请求流包装器
+ *
+ * <p>该类主要为解决 {@link HttpServletRequest} 中 {@code inputStream} 流只能被读取一次问题
+ * <p>在处理表单请求时需要注意, 如果带有文件将会调用 {@link HttpServletRequest#getParts()} 拿到文件相关属性
  *
  * @author JiYinchuan
  * @version 1.0.0
@@ -32,19 +34,19 @@ public class RepeatRequestWrapper extends HttpServletRequestWrapper {
      */
     public RepeatRequestWrapper(HttpServletRequest request) throws IOException {
         super(request);
-        if (isJsonRequest()) {
+        if (RequestUtils.isJsonRequest(this)) {
             this.body = IOUtils.toByteArray(request.getInputStream());
         }
     }
 
     @Override
     public BufferedReader getReader() throws IOException {
-        return isJsonRequest() ? new BufferedReader(new InputStreamReader(new ByteArrayInputStream(body))) : super.getReader();
+        return RequestUtils.isJsonRequest(this) ? new BufferedReader(new InputStreamReader(new ByteArrayInputStream(body))) : super.getReader();
     }
 
     @Override
     public ServletInputStream getInputStream() throws IOException {
-        return isJsonRequest() ? new ServletInputStream() {
+        return RequestUtils.isJsonRequest(this) ? new ServletInputStream() {
             private int lastIndexRetrieved = -1;
             private ReadListener readListener = null;
 
@@ -94,14 +96,5 @@ public class RepeatRequestWrapper extends HttpServletRequestWrapper {
                 return index;
             }
         } : super.getInputStream();
-    }
-
-    /**
-     * 判断是否为JSON请求
-     *
-     * @return {false: 否, true: 是}
-     */
-    private boolean isJsonRequest() {
-        return MediaType.APPLICATION_JSON_VALUE.equalsIgnoreCase(super.getHeader(HttpHeaders.CONTENT_TYPE));
     }
 }

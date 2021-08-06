@@ -2,6 +2,8 @@ package pro.haichuang.framework.base.util.common;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.lang.NonNull;
 import pro.haichuang.framework.base.dto.HttpServletRequestDTO;
 import pro.haichuang.framework.base.util.jwt.SecurityUtils;
@@ -22,7 +24,7 @@ import java.util.List;
  * @version 1.0.0
  * @since 1.0.0
  */
-public class HttpServletRequestUtils {
+public class RequestUtils {
 
     /**
      * 解析HttpServletRequest请求相关信息
@@ -56,5 +58,17 @@ public class HttpServletRequestUtils {
                 .setApiMessage(methodDescription)
                 .setUserId(userId)
                 .setFullMethodName(fullMethodName);
+    }
+
+
+    /**
+     * 判断是否为JSON请求
+     *
+     * @param request HttpServletRequest
+     * @return {false: 否, true: 是}
+     */
+    public static boolean isJsonRequest(@NonNull HttpServletRequest request) {
+        String contentTypeInHeaderValue = request.getHeader(HttpHeaders.CONTENT_TYPE);
+        return contentTypeInHeaderValue != null && contentTypeInHeaderValue.contains(MediaType.APPLICATION_JSON_VALUE);
     }
 }

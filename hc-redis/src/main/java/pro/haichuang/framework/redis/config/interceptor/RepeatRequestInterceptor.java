@@ -11,7 +11,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import pro.haichuang.framework.base.dto.HttpServletRequestDTO;
 import pro.haichuang.framework.base.enums.error.client.RequestServerErrorEnum;
 import pro.haichuang.framework.base.response.ResultVO;
-import pro.haichuang.framework.base.util.common.HttpServletRequestUtils;
+import pro.haichuang.framework.base.util.common.RequestUtils;
 import pro.haichuang.framework.base.util.common.ResponseUtils;
 import pro.haichuang.framework.base.util.common.UUIDUtils;
 import pro.haichuang.framework.redis.annotation.RepeatRequestValid;
@@ -52,7 +52,7 @@ public class RepeatRequestInterceptor implements HandlerInterceptor {
             RepeatRequestValid repeatRequestValidAnnotation = method.getAnnotation(RepeatRequestValid.class);
             if (repeatRequestValidAnnotation != null) {
                 String uuid = UUIDUtils.Local.get();
-                HttpServletRequestDTO httpServletRequestDTO = HttpServletRequestUtils.parseInfo(request, method);
+                HttpServletRequestDTO httpServletRequestDTO = RequestUtils.parseInfo(request, method);
                 // 客户端真实请求IP地址
                 String clientIp = httpServletRequestDTO.getClientIp();
                 // 请求信息
@@ -64,15 +64,20 @@ public class RepeatRequestInterceptor implements HandlerInterceptor {
 
                 // RequestParams
                 Map<String, String[]> parameterMap = request.getParameterMap();
-                String parameterString = parameterMap == null || parameterMap.isEmpty()
-                        ? IOUtils.toString(request.getInputStream(), StandardCharsets.UTF_8)
-                        : JSONObject.toJSONString(parameterMap);
+                String parameterString = "";
+                if (parameterMap != null && !parameterMap.isEmpty()) {
+                    // Params
+                    parameterString = JSONObject.toJSONString(parameterMap);
+                } else if (RequestUtils.isJsonRequest(request)) {
+                    // Body
+                    parameterString = IOUtils.toString(request.getInputStream(), StandardCharsets.UTF_8);
+                }
 
                 // RedisKey
                 String repeatRedisKey = RedisKeyOfFramework.repeatRequest(repeatRequestValidAnnotation.preKey(),
                         clientIp, String.valueOf(userId), request.getRequestURI());
-
                 String rdbParameterString = redisService.get(repeatRedisKey);
+
                 if (rdbParameterString == null) {
                     redisService.set(repeatRedisKey, parameterString, repeatRequestValidAnnotation.value());
                 } else {

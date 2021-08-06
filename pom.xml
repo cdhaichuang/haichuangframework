@@ -11,6 +11,7 @@
         <module>hc-sdk-aliyunsms</module>
         <module>hc-sdk-wxmp</module>
         <module>hc-service-main</module>
+        <module>hc-service-test</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
