@@ -13,8 +13,8 @@ import java.util.Set;
  * <p>该类已默认注入到 [Spring] 中, 默认实现为 {@link DefaultRedisServiceImpl}, 如需自定义实现请实现该接口并手动注入该接口
  *
  * @author JiYinchuan
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.0
  * @see DefaultRedisServiceImpl
  */
 @SuppressWarnings({"unused", "UnusedReturnValue", "SpellCheckingInspection"})

@@ -8,8 +8,8 @@ import pro.haichuang.framework.base.exception.ApplicationException;
  * 用户登录自定义异常
  *
  * @author JiYinchuan
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.0
  */
 public class LoginException extends ApplicationException {
     private static final long serialVersionUID = 351437489895655523L;

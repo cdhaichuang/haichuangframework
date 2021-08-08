@@ -18,8 +18,8 @@ import pro.haichuang.framework.redis.config.interceptor.RepeatRequestInterceptor
  * 标注 {@link pro.haichuang.framework.redis.service.RedisService} 注入时才启用本配置
  *
  * @author JiYinchuan
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.0
  * @see RedisAutoConfiguration
  */
 @Configuration(proxyBeanMethods = false)

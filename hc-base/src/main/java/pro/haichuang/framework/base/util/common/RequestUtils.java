@@ -21,8 +21,8 @@ import java.util.List;
  * <p>该类主要用于处理请求相关数据
  *
  * @author JiYinchuan
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.0
  */
 public class RequestUtils {
 

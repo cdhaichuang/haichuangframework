@@ -16,8 +16,8 @@ import pro.haichuang.framework.redis.config.properties.RedisProperties;
  * <p>注意: 该启动类必须在 {@link org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration} 自动配置类前加载
  *
  * @author JiYinchuan
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.0
  * @see RedisProperties
  * @see RedisAutoConfiguration
  */

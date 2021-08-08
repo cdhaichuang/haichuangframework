@@ -13,8 +13,8 @@ import ${superServiceClassPackage};
  * $!{table.comment} Service
  *
  * @author ${author}
- * @version ${cfg.version}
  * @since ${cfg.version}
+ * @version ${cfg.version}
  */
 #if(${kotlin})
 interface ${table.serviceName} : ${superServiceClass}<${entity}>

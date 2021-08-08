@@ -35,8 +35,8 @@ import java.time.temporal.Temporal;
  * </ul>
  *
  * @author JiYinchuan
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.0
  * @see WebMvcConfig
  */
 @Configuration(proxyBeanMethods = false)

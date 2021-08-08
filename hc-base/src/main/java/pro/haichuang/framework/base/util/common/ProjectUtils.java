@@ -10,8 +10,8 @@ import java.io.FileNotFoundException;
  * <p>该类封装了项目中常用的方法
  *
  * @author JiYinchuan
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.0
  */
 public class ProjectUtils {
 

@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
  * <p>该类主要用于将 [Mybatis] 中 {@link IPage} 转换为 {@link PageDTO}
  *
  * @author JiYinchuan
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.0
  */
 public class PageConverter {
 

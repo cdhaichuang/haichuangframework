@@ -8,8 +8,8 @@ import pro.haichuang.framework.base.exception.ApplicationException;
  * 用户隐私未授权自定义异常
  *
  * @author JiYinchuan
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.0
  * @see PrivacyErrorEnum
  */
 public class PrivacyException extends ApplicationException {

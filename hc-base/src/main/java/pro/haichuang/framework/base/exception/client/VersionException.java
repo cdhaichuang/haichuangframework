@@ -8,8 +8,8 @@ import pro.haichuang.framework.base.exception.ApplicationException;
  * 用户当前版本自定义异常
  *
  * @author JiYinchuan
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.0
  * @see VersionErrorEnum
  */
 public class VersionException extends ApplicationException {

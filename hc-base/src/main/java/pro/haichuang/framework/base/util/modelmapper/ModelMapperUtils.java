@@ -10,8 +10,8 @@ import org.springframework.lang.NonNull;
  * <p>该类用于创建 {@link ModelMapper} 对象
  *
  * @author JiYinchuan
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.0
  * @see ModelMapper
  * @see MatchingStrategies
  */

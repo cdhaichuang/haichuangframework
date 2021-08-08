@@ -22,8 +22,8 @@ import java.nio.charset.StandardCharsets;
  * <p>该类主要用于直接对响应流的操作
  *
  * @author JiYinchuan
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.0
  */
 public class ResponseUtils {
 

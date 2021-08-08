@@ -16,8 +16,8 @@ import java.util.function.Supplier;
  * <p>该类用于处理项目开发过程的各类空指针问题, 采用JDK8新特性 {@link Optional} 类进行封装, 更加方便的处理项目中空指针问题
  *
  * @author JiYinchuan
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.0
  * @see Optional
  */
 public class NullUtils {

@@ -25,8 +25,8 @@ import java.util.Map;
  * </pre>
  *
  * @author JiYinchuan
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.0
  * @see pro.haichuang.framework.base.config.mvc.WebMvcConfig
  * @see BaseEnum
  */

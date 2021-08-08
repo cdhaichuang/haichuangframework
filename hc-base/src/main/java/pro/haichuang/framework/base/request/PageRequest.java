@@ -15,8 +15,8 @@ import java.io.Serializable;
  * <p>已默认提供一个基础分页查询实体 {@link SimplePageRequest}
  *
  * @author JiYinchuan
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.0
  * @see PageConstant
  */
 @ApiModel("分页查询基类")

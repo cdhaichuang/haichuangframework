@@ -47,8 +47,8 @@ import java.util.regex.Pattern;
  * {@link pro.haichuang.framework.base.annotation.EnableControllerAdvice @EnableControllerAdvice} 注解
  *
  * @author JiYinchuan
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.0
  */
 @RestControllerAdvice
 public class BaseControllerAdvice {

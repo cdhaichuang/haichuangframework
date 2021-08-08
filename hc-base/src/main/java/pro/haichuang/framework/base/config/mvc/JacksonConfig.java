@@ -36,8 +36,8 @@ import java.time.format.DateTimeFormatter;
  * 通过此种方式可以实现在不修改默认配置的情况下插入我们自定义的配置
  *
  * @author JiYinchuan
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.0
  * @see WebMvcConfig
  */
 @Configuration(proxyBeanMethods = false)

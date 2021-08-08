@@ -9,8 +9,8 @@ import org.springframework.lang.NonNull;
  * <p>该类为JWT工具类, 对于JWT的操作一律使用此类
  *
  * @author JiYinchuan
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.0
  * @see JwtPayload
  */
 public class JwtUtils {

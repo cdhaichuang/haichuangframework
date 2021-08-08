@@ -14,8 +14,8 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * </ul>
  *
  * @author JiYinchuan
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.0
  */
 public class ApplicationException extends RuntimeException {
     private static final long serialVersionUID = 6539659393927269036L;

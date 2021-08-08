@@ -6,8 +6,8 @@ import java.io.Serializable;
  * HttpServletRequestDTO
  *
  * @author JiYinchuan
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.0
  */
 public class HttpServletRequestDTO implements Serializable {
     private static final long serialVersionUID = -8724659073656593786L;

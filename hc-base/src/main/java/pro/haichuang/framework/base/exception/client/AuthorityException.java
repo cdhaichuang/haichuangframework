@@ -8,8 +8,8 @@ import pro.haichuang.framework.base.exception.ApplicationException;
  * 访问权限自定义异常
  *
  * @author JiYinchuan
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.0
  * @see AuthorityErrorEnum
  */
 public class AuthorityException extends ApplicationException {

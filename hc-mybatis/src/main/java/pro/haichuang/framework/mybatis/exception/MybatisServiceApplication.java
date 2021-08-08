@@ -8,8 +8,8 @@ import pro.haichuang.framework.mybatis.enums.error.MybatisServiceErrorEnum;
  * MybatisService自定义异常
  *
  * @author JiYinchuan
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.0
  * @see MybatisServiceErrorEnum
  */
 public class MybatisServiceApplication extends ApplicationException {

@@ -34,8 +34,8 @@ import java.util.List;
  * $!{table.comment} Controller
  *
  * @author ${author}
- * @version ${cfg.version}
  * @since ${cfg.version}
+ * @version ${cfg.version}
  */
 @Api(tags = "[CMS] $!{table.comment}")
 #if(${restControllerStyle})

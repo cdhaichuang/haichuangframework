@@ -14,8 +14,8 @@ import java.util.Collection;
  * <p>该类为分页DTO, 用于项目中所有分页相关功能数据传输, 原则上所有分页相关功能均使用此类
  *
  * @author JiYinchuan
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.0
  * @see Pageable
  */
 public class PageDTO<T> implements Pageable, Serializable {

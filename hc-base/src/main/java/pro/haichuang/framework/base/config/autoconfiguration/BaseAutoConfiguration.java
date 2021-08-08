@@ -17,8 +17,8 @@ import pro.haichuang.framework.base.config.properties.BaseConfigProperties;
  * <p>可以在 {@code yaml} 配置文件中指定 {@link BaseConfigProperties} 中相关的属性
  *
  * @author JiYinchuan
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.0
  * @see WebMvcConfig
  * @see JacksonConfig
  * @see FastJsonConfig
