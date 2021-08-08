@@ -16,7 +16,7 @@ public enum AuthorityErrorEnum implements BaseEnum {
     /**
      * 访问权限异常
      */
-    AUTHORITY_ABNORMAL("A0300", "访问权限异常"),
+    AUTHORITY_ERROR("A0300", "访问权限异常"),
 
     /**
      * 访问未授权
@@ -86,7 +86,7 @@ public enum AuthorityErrorEnum implements BaseEnum {
     /**
      * 用户签名异常
      */
-    USER_SIGNATURE_ABNORMAL("A0340", "用户签名异常"),
+    USER_SIGNATURE_ERROR("A0340", "用户签名异常"),
 
     /**
      * RSA 签名错误

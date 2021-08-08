@@ -6,5 +6,5 @@
 
 <hr/>
 <p style="text-align: center">
-    <b>该目录为项目VO层存放目录</b>
+    <b>该目录为项目启动类存放目录</b>
 </p>

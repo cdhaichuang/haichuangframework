@@ -116,7 +116,7 @@ public enum RequestParamErrorEnum implements BaseEnum {
     /**
      * 用户操作异常
      */
-    OPERATION_ABNORMAL("A0440", "用户操作异常"),
+    OPERATION_ERROR("A0440", "用户操作异常"),
 
     /**
      * 用户支付超时

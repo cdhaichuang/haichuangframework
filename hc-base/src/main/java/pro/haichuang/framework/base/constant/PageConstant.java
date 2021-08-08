@@ -11,6 +11,8 @@ package pro.haichuang.framework.base.constant;
  */
 public class PageConstant {
 
+    // ========================= 基础 =========================
+
     /**
      * 默认页码
      */
@@ -30,5 +32,27 @@ public class PageConstant {
      * 默认总数
      */
     public static final long DEFAULT_TOTAL_COUNT = 0;
+
+    // ========================= 字符串 =========================
+
+    /**
+     * 默认页码字符串
+     */
+    public static final String DEFAULT_PAGE_NO_STRING = "1";
+
+    /**
+     * 默认每页展示数量字符串
+     */
+    public static final String DEFAULT_PAGE_SIZE_STRING = "10";
+
+    /**
+     * 默认最大每页数量字符串
+     */
+    public static final String DEFAULT_MAX_PAGE_SIZE_STRING = "1000";
+
+    /**
+     * 默认总数字符串
+     */
+    public static final String DEFAULT_TOTAL_COUNT_STRING = "0";
 
 }

@@ -86,7 +86,7 @@ public enum RegisterErrorEnum implements BaseEnum {
     /**
      * 用户证件异常
      */
-    USER_CERTIFICATE_ABNORMAL("A0140", "用户证件异常"),
+    USER_CERTIFICATE_ERROR("A0140", "用户证件异常"),
 
     /**
      * 用户证件类型未选择

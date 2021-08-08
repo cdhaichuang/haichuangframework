@@ -96,7 +96,7 @@ public class BaseControllerAdvice {
                 LOG_TAG, uuid, request.getRequestURI(), request.getMethod(), clientIp, userId, e.getLocalizedMessage(), e);
         LOGGER.error("[{}] ------------------------- 堆栈异常信息 ------------------------- [ End - {}]", LOG_TAG, uuid);
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        return ResultVO.other(RequestServerErrorEnum.SERVICE_ABNORMAL, ApplicationException.DEFAULT_ERROR_USER_TIP);
+        return ResultVO.other(RequestServerErrorEnum.SERVICE_ERROR, ApplicationException.DEFAULT_ERROR_USER_TIP);
     }
 
     /**
@@ -118,7 +118,7 @@ public class BaseControllerAdvice {
         LOGGER.error("[{}] ------------------------- 第三方异常信息 ------------------------- [ End - {}]", LOG_TAG, uuid);
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         return new JSONObject()
-                .fluentPut(BaseVO.ERROR_CODE, RequestServerErrorEnum.SERVICE_ABNORMAL.value())
+                .fluentPut(BaseVO.ERROR_CODE, RequestServerErrorEnum.SERVICE_ERROR.value())
                 .fluentPut(BaseVO.ERROR_MESSAGE, e.getLocalizedMessage())
                 .fluentPut(BaseVO.USER_TIP, ApplicationException.DEFAULT_ERROR_USER_TIP);
     }
@@ -141,7 +141,7 @@ public class BaseControllerAdvice {
                 LOG_TAG, uuid, request.getRequestURI(), request.getMethod(), clientIp, userId, e.getLocalizedMessage(), e);
         LOGGER.error("[{}] ------------------------- 系统异常信息 ------------------------- [ End - {}]", LOG_TAG, uuid);
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        return ResultVO.other(RequestServerErrorEnum.SERVICE_ABNORMAL, ApplicationException.DEFAULT_ERROR_USER_TIP);
+        return ResultVO.other(RequestServerErrorEnum.SERVICE_ERROR, ApplicationException.DEFAULT_ERROR_USER_TIP);
     }
 
     // ========================= 请求参数验证 =========================

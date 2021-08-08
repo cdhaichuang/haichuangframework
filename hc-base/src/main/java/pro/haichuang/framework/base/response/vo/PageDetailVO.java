@@ -2,6 +2,7 @@ package pro.haichuang.framework.base.response.vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import pro.haichuang.framework.base.constant.PageConstant;
 
 import java.io.Serializable;
 
@@ -23,19 +24,19 @@ public class PageDetailVO implements Serializable {
     /**
      * 页码
      */
-    @ApiModelProperty(value = "页码", example = "1")
+    @ApiModelProperty(value = "页码", example = PageConstant.DEFAULT_PAGE_NO_STRING)
     private Integer pageNo;
 
     /**
      * 每页展示数量
      */
-    @ApiModelProperty(value = "每页展示数量", example = "10")
+    @ApiModelProperty(value = "每页展示数量", example = PageConstant.DEFAULT_PAGE_SIZE_STRING)
     private Integer pageSize;
 
     /**
      * 总数
      */
-    @ApiModelProperty(value = "总数", example = "0")
+    @ApiModelProperty(value = "总数", example = PageConstant.DEFAULT_TOTAL_COUNT_STRING)
     private Long totalCount;
 
     public PageDetailVO(Integer pageNo, Integer pageSize, Long totalCount) {

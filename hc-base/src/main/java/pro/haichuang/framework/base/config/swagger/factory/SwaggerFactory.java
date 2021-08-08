@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
  *
  * <p>该类为 [Swagger] 工厂类, 主要用于根据 {@link SwaggerInfo} 创建 {@link Docket} 对象
  * <p>该类指定了部分默认参数, 如需自定义在参数 {@link SwaggerInfo} 中进行赋值相关属性即可
- * <p>注意: 请求地址中带有 [common] 字段时 {@link SecurityContext} 将不生效
+ * <p>注意: 请求地址中带有 [common] 字段时 {@link SecurityContext} 上下文将不生效
  *
  * @author JiYinchuan
  * @since 1.0.0

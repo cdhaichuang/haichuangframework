@@ -1,5 +1,6 @@
 package pro.haichuang.framework.mybatis.service;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -15,10 +16,7 @@ import pro.haichuang.framework.mybatis.enums.error.MybatisServiceErrorEnum;
 import pro.haichuang.framework.mybatis.exception.MybatisServiceApplication;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -28,8 +26,8 @@ import java.util.stream.Collectors;
  * <p>该类对 [MybatisPlus] 自带的 {@link IService} 进行了进一步的封装, 增强业务效果, 项目中均采用该类的方法以替代 {@link IService} 中的方法
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
+ * @since 1.0.0
  */
 @SuppressWarnings("unused")
 public interface BaseService<T extends BaseDO> extends IService<T> {
@@ -103,6 +101,16 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
     }
 
     /**
+     * 忽略ID并获取DO
+     *
+     * @param id ID
+     * @return DO
+     */
+    default Optional<T> getByIdAndIgnoreOpt(@Nullable Long id) {
+        return Optional.ofNullable(this.getByIdAndIgnore(id));
+    }
+
+    /**
      * 忽略IDs并获取DO
      *
      * @param ids IDs
@@ -113,6 +121,21 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
             return Collections.emptyList();
         }
         return this.listByIds(ids);
+    }
+
+    /**
+     * 忽略结果并获取DO
+     *
+     * @param wrapper wrapper
+     * @return DOs
+     */
+    @Nullable
+    default List<T> listAndIgnore(Wrapper<T> wrapper) {
+        List<T> result = this.list(wrapper);
+        if (result == null || result.isEmpty()) {
+            return Collections.emptyList();
+        }
+        return result;
     }
 
     /**
@@ -385,6 +408,17 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
     /**
      * 验证IDs并获取DOs
      *
+     * @param wrapper wrapper
+     * @return DOs
+     * @throws MybatisServiceApplication ID为空|ID错误
+     */
+    default List<T> listByIdAndValidate(Wrapper<T> wrapper) throws MybatisServiceApplication {
+        return this.listAndValidate(wrapper, null);
+    }
+
+    /**
+     * 验证IDs并获取DOs
+     *
      * @param ids          IDs
      * @param errorUserTip 错误提示信息
      * @return DOs
@@ -395,11 +429,28 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
         if (ids == null || ids.isEmpty()) {
             throw new MybatisServiceApplication(MybatisServiceErrorEnum.ID_IS_NULL, errorUserTip);
         }
-        List<T> entity = this.listByIds(ids);
-        if (entity == null || entity.isEmpty()) {
+        List<T> entities = this.listByIds(ids);
+        if (entities == null || entities.isEmpty()) {
             throw new MybatisServiceApplication(MybatisServiceErrorEnum.RESULT_SET_IS_NULL, errorUserTip);
         }
-        return entity;
+        return entities;
+    }
+
+    /**
+     * 验证IDs并获取DOs
+     *
+     * @param wrapper      wrapper
+     * @param errorUserTip 错误提示信息
+     * @return DOs
+     * @throws MybatisServiceApplication ID为空|ID错误
+     */
+    default List<T> listAndValidate(Wrapper<T> wrapper, @Nullable String errorUserTip)
+            throws MybatisServiceApplication {
+        List<T> entities = this.list(wrapper);
+        if (entities == null || entities.isEmpty()) {
+            throw new MybatisServiceApplication(MybatisServiceErrorEnum.ID_IS_NULL, errorUserTip);
+        }
+        return entities;
     }
 
     /**

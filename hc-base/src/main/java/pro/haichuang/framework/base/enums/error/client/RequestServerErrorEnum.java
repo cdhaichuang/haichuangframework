@@ -16,7 +16,7 @@ public enum RequestServerErrorEnum implements BaseEnum {
     /**
      * 用户请求服务异常
      */
-    SERVICE_ABNORMAL("A0500", "用户请求服务异常"),
+    SERVICE_ERROR("A0500", "用户请求服务异常"),
 
     /**
      * 请求次数超出限制
@@ -36,7 +36,7 @@ public enum RequestServerErrorEnum implements BaseEnum {
     /**
      * WebSocket 连接异常
      */
-    WEBSOCKET_CONNECTION_ABNORMAL("A0504", "WebSocket 连接异常"),
+    WEBSOCKET_CONNECTION_ERROR("A0504", "WebSocket 连接异常"),
 
     /**
      * WebSocket 连接断开

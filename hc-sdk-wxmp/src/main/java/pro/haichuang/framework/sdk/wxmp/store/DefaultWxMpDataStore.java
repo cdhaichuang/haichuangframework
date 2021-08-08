@@ -133,7 +133,7 @@ public class DefaultWxMpDataStore implements WxMpDataStore {
      */
     private void validateDelayError() {
         if (DELAY_IS_ERROR) {
-            throw new RequestServerException(RequestServerErrorEnum.SERVICE_ABNORMAL,
+            throw new RequestServerException(RequestServerErrorEnum.SERVICE_ERROR,
                     "[hc-sdk-wxmp] 模块微信相关Token延时队列执行异常, 无法正常运行该模块");
         }
     }

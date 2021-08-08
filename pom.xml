@@ -11,7 +11,6 @@
         <module>hc-sdk-aliyunsms</module>
         <module>hc-sdk-wxmp</module>
         <module>hc-service-main</module>
-        <module>hc-service-test</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -32,7 +31,7 @@
         <maven.compiler.target>8</maven.compiler.target>
         <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
         <!-- knife4j -->
-        <knife4j.version>2.0.8</knife4j.version>
+        <knife4j.version>2.0.9</knife4j.version>
         <!-- Mysql + MybatisPlus -->
         <druid.version>1.2.6</druid.version>
         <mybatis-plus.version>3.4.1</mybatis-plus.version>

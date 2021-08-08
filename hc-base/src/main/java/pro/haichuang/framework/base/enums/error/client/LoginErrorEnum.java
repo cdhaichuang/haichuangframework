@@ -16,7 +16,7 @@ public enum LoginErrorEnum implements BaseEnum {
     /**
      * 用户登录异常
      */
-    USER_LOGIN_ABNORMAL("A0200", "用户登录异常"),
+    USER_LOGIN_ERROR("A0200", "用户登录异常"),
 
     /**
      * 用户账户不存在
