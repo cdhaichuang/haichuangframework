@@ -30,8 +30,8 @@ import java.lang.reflect.Method;
  * {@link pro.haichuang.framework.base.annotation.EnableControllerLogAspect @EnableControllerLogAspect} 注解
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
+ * @since 1.0.0
  */
 @Aspect
 @Order(1)

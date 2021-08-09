@@ -31,11 +31,11 @@ import java.util.Map;
  * 如只需自动生成指定表则设置 {@link CodeDataSourceConfig#setInclude(String...)} 即可
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
  * @see CodeBasicConfig
  * @see CodeDataSourceConfig
  * @see CodePackageConfig
+ * @since 1.0.0
  */
 @Service
 @SuppressWarnings("SpellCheckingInspection")

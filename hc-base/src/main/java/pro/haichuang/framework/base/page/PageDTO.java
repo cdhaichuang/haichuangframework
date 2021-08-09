@@ -14,9 +14,9 @@ import java.util.Collection;
  * <p>该类为分页DTO, 用于项目中所有分页相关功能数据传输, 原则上所有分页相关功能均使用此类
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
  * @see Pageable
+ * @since 1.0.0
  */
 public class PageDTO<T> implements Pageable, Serializable {
     private static final long serialVersionUID = -4773020592878421576L;
@@ -92,9 +92,9 @@ public class PageDTO<T> implements Pageable, Serializable {
     /**
      * 构造器
      *
-     * @param pageRequest  分页参数
-     * @param content    数据
-     * @param totalCount 总数
+     * @param pageRequest 分页参数
+     * @param content     数据
+     * @param totalCount  总数
      */
     public PageDTO(PageRequest pageRequest, long totalCount, Collection<T> content) {
         this(pageRequest);

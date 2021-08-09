@@ -17,12 +17,12 @@ import java.util.List;
  * <p>该类为默认 {@code WebMvc} 配置
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
  * @see pro.haichuang.framework.base.config.mvc.FastJsonConfig
  * @see JacksonConfig.LocalDateTimeConverter
  * @see JacksonConfig.LocalDateConverter
  * @see JacksonConfig.LocalTimeConverter
+ * @since 1.0.0
  */
 @Configuration(proxyBeanMethods = false)
 public class WebMvcConfig implements WebMvcConfigurer {

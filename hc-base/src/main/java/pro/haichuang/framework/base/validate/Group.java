@@ -9,10 +9,10 @@ package pro.haichuang.framework.base.validate;
  * 则可以只验证指定分组(当指定了分组后不会验证默认没有分组的数据)
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
  * @see org.springframework.validation.annotation.Validated
  * @see javax.validation.constraints
+ * @since 1.0.0
  */
 public class Group {
 

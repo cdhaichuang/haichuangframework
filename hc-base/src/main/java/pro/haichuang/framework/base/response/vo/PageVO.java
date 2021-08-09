@@ -16,10 +16,10 @@ import java.util.Collections;
  * 使用时必须使用 {@link pro.haichuang.framework.base.response.ResultVO} 中相关方法进行返回
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
  * @see PageDetailVO
  * @see pro.haichuang.framework.base.response.ResultVO
+ * @since 1.0.0
  */
 @ApiModel("PageVO")
 public class PageVO<T> extends BaseVO implements Serializable {

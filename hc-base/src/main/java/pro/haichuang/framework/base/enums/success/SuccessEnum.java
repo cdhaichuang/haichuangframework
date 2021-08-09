@@ -7,9 +7,9 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * 成功枚举
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
  * @see pro.haichuang.framework.base.response.ResultVO
+ * @since 1.0.0
  */
 public enum SuccessEnum implements BaseEnum {
 

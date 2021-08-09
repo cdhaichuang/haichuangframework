@@ -9,9 +9,9 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * <p>该类为 [MybatisService] 层异常枚举
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
  * @see pro.haichuang.framework.mybatis.exception.MybatisServiceApplication
+ * @since 1.0.0
  */
 public enum MybatisServiceErrorEnum implements BaseEnum {
 

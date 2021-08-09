@@ -2,19 +2,21 @@ package pro.haichuang.framework.mybatis.converter;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import pro.haichuang.framework.base.page.PageDTO;
+import pro.haichuang.framework.base.request.PageRequest;
 import pro.haichuang.framework.base.util.modelmapper.ModelMapperUtils;
 
+import java.util.Collection;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
  * 分页转换器
  *
- * <p>该类主要用于将 [Mybatis] 中 {@link IPage} 转换为 {@link PageDTO}
+ * <p>该类主要用于将各类参数转换为 {@link PageDTO}
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
+ * @since 1.0.0
  */
 public class PageConverter {
 
@@ -69,5 +71,20 @@ public class PageConverter {
     public static <T, R> PageDTO<R> converter(IPage<T> iPage, Function<T, R> function) {
         return new PageDTO<>((int) iPage.getCurrent(), (int) iPage.getSize(), iPage.getTotal(),
                 iPage.getRecords().stream().map(function).collect(Collectors.toList()));
+    }
+
+    /**
+     * 将PageRequest转换为PageDTO
+     *
+     * <p>该方法可以组和 {@link PageRequest} 中的数据和形参数据
+     *
+     * @param pageRequest 分页参数
+     * @param totalCount  总数
+     * @param content     数据
+     * @param <T>         对象类型
+     * @return PageDTO
+     */
+    public static <T> PageDTO<T> converter(PageRequest pageRequest, int totalCount, Collection<T> content) {
+        return new PageDTO<>(pageRequest, totalCount, content);
     }
 }

@@ -7,9 +7,9 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * 系统容灾功能被触发异常枚举
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
  * @see pro.haichuang.framework.base.exception.server.DisasterRecoveryException
+ * @since 1.0.0
  */
 public enum DisasterRecoveryErrorEnum implements BaseEnum {
 

@@ -17,12 +17,12 @@ import java.util.Collection;
  * <p>该类为全局响应VO, 所有控制器返回必须使用此类进行返回, 返回值类型参考 {@link BaseVO} 下所有实现
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
  * @see BaseVO
  * @see SingleVO
  * @see MultiVO
  * @see PageVO
+ * @since 1.0.0
  */
 public class ResultVO implements Serializable {
     private static final long serialVersionUID = -7437022394115877815L;

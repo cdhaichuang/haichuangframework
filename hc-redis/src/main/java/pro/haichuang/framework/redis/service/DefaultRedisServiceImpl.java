@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
  * <p>该类为 {@link RedisService} 默认实现
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
+ * @since 1.0.0
  */
 @SuppressWarnings({"unchecked", "unused", "UnusedReturnValue", "SpellCheckingInspection"})
 public class DefaultRedisServiceImpl implements RedisService {

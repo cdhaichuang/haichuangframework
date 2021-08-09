@@ -35,9 +35,9 @@ import java.time.temporal.Temporal;
  * </ul>
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
  * @see WebMvcConfig
+ * @since 1.0.0
  */
 @Configuration(proxyBeanMethods = false)
 public class FastJsonConfig {
@@ -91,9 +91,9 @@ public class FastJsonConfig {
             Temporal val = (Temporal) object;
             if (val instanceof LocalDateTime) {
                 out.writeString(DateTimeFormatter.ofPattern(DatePattern.NORM_DATETIME_PATTERN).format(val));
-            }else if (val instanceof LocalDate) {
+            } else if (val instanceof LocalDate) {
                 out.writeString(DateTimeFormatter.ofPattern(DatePattern.NORM_DATE_PATTERN).format(val));
-            }else if (val instanceof LocalTime) {
+            } else if (val instanceof LocalTime) {
                 out.writeString(DateTimeFormatter.ofPattern(DatePattern.NORM_TIME_PATTERN).format(val));
             }
         }

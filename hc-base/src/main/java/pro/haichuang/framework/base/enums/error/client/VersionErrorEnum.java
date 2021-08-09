@@ -7,9 +7,9 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * 用户当前版本异常枚举
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
  * @see pro.haichuang.framework.base.exception.client.VersionException
+ * @since 1.0.0
  */
 public enum VersionErrorEnum implements BaseEnum {
 

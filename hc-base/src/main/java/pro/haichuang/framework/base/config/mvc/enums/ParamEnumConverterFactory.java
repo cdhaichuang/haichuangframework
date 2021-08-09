@@ -25,10 +25,10 @@ import java.util.Map;
  * </pre>
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
  * @see pro.haichuang.framework.base.config.mvc.WebMvcConfig
  * @see BaseEnum
+ * @since 1.0.0
  */
 public class ParamEnumConverterFactory implements ConverterFactory<String, BaseEnum> {
 

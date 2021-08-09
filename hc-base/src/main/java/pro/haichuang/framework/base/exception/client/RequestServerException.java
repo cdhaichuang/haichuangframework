@@ -8,9 +8,9 @@ import pro.haichuang.framework.base.exception.ApplicationException;
  * 请求服务自定义异常
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
  * @see RequestServerErrorEnum
+ * @since 1.0.0
  */
 public class RequestServerException extends ApplicationException {
     private static final long serialVersionUID = 4863187527609960249L;

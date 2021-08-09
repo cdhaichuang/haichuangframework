@@ -47,8 +47,8 @@ import java.util.regex.Pattern;
  * {@link pro.haichuang.framework.base.annotation.EnableControllerAdvice @EnableControllerAdvice} 注解
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
+ * @since 1.0.0
  */
 @RestControllerAdvice
 public class BaseControllerAdvice {
@@ -73,7 +73,7 @@ public class BaseControllerAdvice {
         Long userId = SecurityUtils.getJwtPayloadOrNewInstance().getUserId();
         LOGGER.warn("[{}] ------------------------- 自定义异常信息 ------------------------- [Begin - {}]", LOG_TAG, uuid);
         printStackTraceFormat(request.getRequestURI(), request.getMethod(), e, e.getCause(),
-                uuid, "自定义异常信息", clientIp, userId,null);
+                uuid, "自定义异常信息", clientIp, userId, null);
         LOGGER.warn("[{}] ------------------------- 自定义异常信息 ------------------------- [ End - {} ]", LOG_TAG, uuid);
         return ResultVO.other(e.getBaseEnum(), e.getUserTip());
     }
@@ -224,7 +224,7 @@ public class BaseControllerAdvice {
             userTipMessages.add(constraintViolation.getMessage());
         }
         this.printStackTraceFormat(request.getRequestURI(), request.getMethod(), e, e.getCause(),
-                uuid, "验证异常", clientIp, userId,null);
+                uuid, "验证异常", clientIp, userId, null);
         LOGGER.warn("[{}] ------------------------- 验证异常 ------------------------- [ End - {}]", LOG_TAG, uuid);
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         return new JSONObject()
@@ -343,7 +343,7 @@ public class BaseControllerAdvice {
         LOGGER.warn("[{}] 方法不被允许 [uuid: {}, requestUri: {}, requestMethod: {}, clientIp: {}, userId: {}, errorMessage: {}]",
                 LOG_TAG, uuid, request.getRequestURI(), request.getMethod(), clientIp, userId, e.getLocalizedMessage());
         this.printStackTraceFormat(request.getRequestURI(), request.getMethod(), e, e.getCause(),
-                uuid, "方法不被允许", clientIp, userId,null);
+                uuid, "方法不被允许", clientIp, userId, null);
         LOGGER.warn("[{}] ------------------------- 方法不被允许 ------------------------- [ End - {}]", LOG_TAG, uuid);
         response.setStatus(HttpStatus.METHOD_NOT_ALLOWED.value());
         return new JSONObject()

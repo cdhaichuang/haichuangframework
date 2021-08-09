@@ -4,8 +4,8 @@ package pro.haichuang.framework.base.exception;
  * 第三方自定义异常
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
+ * @since 1.0.0
  */
 public class ThirdPartyException extends RuntimeException {
     private static final long serialVersionUID = 1876698766653470982L;

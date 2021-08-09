@@ -150,7 +150,7 @@ public class Init {
                     replaceCodeAndFlushWrite(true, childrenFile, originCodeName, port);
                 }
             }
-        } else if (file.isFile()){
+        } else if (file.isFile()) {
             try (
                     BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8))
             ) {

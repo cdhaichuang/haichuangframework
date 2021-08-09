@@ -8,9 +8,9 @@ import pro.haichuang.framework.base.exception.ApplicationException;
  * 用户上传文件自定义异常
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
  * @see UploadFileErrorEnum
+ * @since 1.0.0
  */
 public class UploadFileException extends ApplicationException {
     private static final long serialVersionUID = -5150359400314378661L;

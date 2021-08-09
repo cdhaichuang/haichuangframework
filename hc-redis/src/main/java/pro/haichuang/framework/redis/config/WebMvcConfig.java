@@ -14,13 +14,12 @@ import pro.haichuang.framework.redis.config.interceptor.RepeatRequestInterceptor
  *
  * <p>该类为 {@code hc-redis} 的 [WebMvc] 配置
  * <p>该类需要在 {@link RedisAutoConfiguration} 之后加载
- *
- * 标注 {@link pro.haichuang.framework.redis.service.RedisService} 注入时才启用本配置
+ * <p>标注 {@link pro.haichuang.framework.redis.service.RedisService} 注入时才启用本配置
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
  * @see RedisAutoConfiguration
+ * @since 1.0.0
  */
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureAfter(RedisAutoConfiguration.class)

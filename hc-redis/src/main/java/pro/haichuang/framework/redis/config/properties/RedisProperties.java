@@ -17,9 +17,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * </pre>
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
  * @see pro.haichuang.framework.redis.config.autoconfiguration.RedisAutoConfiguration
+ * @since 1.0.0
  */
 @ConfigurationProperties(prefix = "haichuang.redis")
 public class RedisProperties {

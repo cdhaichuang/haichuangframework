@@ -21,12 +21,12 @@ import pro.haichuang.framework.base.exception.server.*;
  * </ul>
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
  * @see pro.haichuang.framework.base.enums.error.client 客户端异常枚举包
  * @see pro.haichuang.framework.base.exception.client 客户端自定义异常包
  * @see pro.haichuang.framework.base.enums.error.server 服务端异常枚举包
  * @see pro.haichuang.framework.base.exception.server 服务端自定义异常包
+ * @since 1.0.0
  */
 public class ValidateUtils {
 

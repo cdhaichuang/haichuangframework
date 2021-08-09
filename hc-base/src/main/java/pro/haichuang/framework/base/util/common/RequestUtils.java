@@ -21,15 +21,15 @@ import java.util.List;
  * <p>该类主要用于处理请求相关数据
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
+ * @since 1.0.0
  */
 public class RequestUtils {
 
     /**
      * 解析HttpServletRequest请求相关信息
      *
-     * 该类一般用于AOP或Intercept中, 传入 {@link HttpServletRequest} 与 {@link Method} 参数, 返回该请求相关的信息
+     * <p>该类一般用于AOP或Intercept中, 传入 {@link HttpServletRequest} 与 {@link Method} 参数, 返回该请求相关的信息
      *
      * @param request HttpServletRequest
      * @param method  method

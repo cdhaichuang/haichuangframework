@@ -15,9 +15,9 @@ public interface AliYunOssService {
     /**
      * 上传文件
      *
-     * @param file 文件
-     * @param uploadPath      上传相对路径|文件类型
-     * @param childrenPath    上传子路径|业务模块名
+     * @param file         文件
+     * @param uploadPath   上传相对路径|文件类型
+     * @param childrenPath 上传子路径|业务模块名
      * @return 上传后文件路径
      */
     String upload(MultipartFile file, String uploadPath, String childrenPath);
@@ -25,9 +25,9 @@ public interface AliYunOssService {
     /**
      * 上传文件
      *
-     * @param files 文件
-     * @param uploadPath      上传相对路径|文件类型
-     * @param childrenPath    上传子路径|业务模块名
+     * @param files        文件
+     * @param uploadPath   上传相对路径|文件类型
+     * @param childrenPath 上传子路径|业务模块名
      * @return 上传后文件路径
      */
     List<String> upload(List<MultipartFile> files, String uploadPath, String childrenPath);

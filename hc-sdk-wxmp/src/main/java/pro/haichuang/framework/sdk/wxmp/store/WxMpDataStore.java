@@ -89,5 +89,6 @@ public interface WxMpDataStore {
      * 打印所有数据
      * 仅限测试使用
      */
-    default void printAllData() {}
+    default void printAllData() {
+    }
 }

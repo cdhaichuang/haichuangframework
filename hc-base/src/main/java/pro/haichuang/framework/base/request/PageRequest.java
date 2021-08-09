@@ -15,9 +15,9 @@ import java.io.Serializable;
  * <p>已默认提供一个基础分页查询实体 {@link SimplePageRequest}
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
  * @see PageConstant
+ * @since 1.0.0
  */
 @ApiModel("分页查询基类")
 public class PageRequest implements Serializable {

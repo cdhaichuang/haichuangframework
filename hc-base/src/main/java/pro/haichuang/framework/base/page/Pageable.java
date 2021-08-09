@@ -10,9 +10,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * <p>已默认内置 {@link PageDTO}
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
  * @see PageDTO
+ * @since 1.0.0
  */
 public interface Pageable {
 

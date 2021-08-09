@@ -36,7 +36,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * RedisConfig
  *
- * 该类为 [Redis] 核心配置, 对 {@code spring-boot-starter-cache} 组件进行了集成, 同时优化了 {@link RedisTemplate} 的序列化与反序列化规则
+ * <p>该类为 [Redis] 核心配置, 对 {@code spring-boot-starter-cache} 组件进行了集成, 同时优化了 {@link RedisTemplate} 的序列化与反序列化规则
  *
  * @author JiYinchuan
  * @version 1.0.0

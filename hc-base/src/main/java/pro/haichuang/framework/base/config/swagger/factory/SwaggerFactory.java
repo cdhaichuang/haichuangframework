@@ -27,9 +27,9 @@ import java.util.stream.Collectors;
  * <p>注意: 请求地址中带有 [common] 字段时 {@link SecurityContext} 上下文将不生效
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
  * @see SwaggerInfo
+ * @since 1.0.0
  */
 public class SwaggerFactory {
 

@@ -22,16 +22,16 @@ import java.util.Map;
  * {@link pro.haichuang.framework.base.annotation.EnableGlobalCorsConfig @EnableGlobalCorsConfig} 注解
  *
  * @author JiYinchuan
- * @since 1.0.0
  * @version 1.0.0
  * @see pro.haichuang.framework.base.annotation.EnableGlobalCorsConfig
+ * @since 1.0.0
  */
 public class GlobalCorsConfig {
 
     @Bean
     public FilterRegistrationBean<CorsFilter> corsFilter() {
         // 添加CORS配置信息
-        Map<String , CorsConfiguration> configurationMap = new HashMap<>(1);
+        Map<String, CorsConfiguration> configurationMap = new HashMap<>(1);
         CorsConfiguration corsConfiguration = new CorsConfiguration();
 
         // 允许的域, 为'*'时Cookie无法使用
