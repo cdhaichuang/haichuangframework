@@ -9,8 +9,8 @@ import org.apache.ibatis.annotations.Mapper;
  * $!{table.comment} Mapper
  *
  * @author ${author}
- * @since ${cfg.version}
  * @version ${cfg.version}
+ * @since ${cfg.version}
  */
 @Repository
 @Mapper

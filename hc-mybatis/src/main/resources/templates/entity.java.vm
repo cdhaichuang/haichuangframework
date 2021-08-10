@@ -24,8 +24,8 @@ import pro.haichuang.framework.mybatis.domain.BaseDO;
  * $!{table.comment} Domain
  *
  * @author ${author}
- * @since ${cfg.version}
  * @version ${cfg.version}
+ * @since ${cfg.version}
  */
 #if(${swagger2})
 @ApiModel("$!{table.comment}")
