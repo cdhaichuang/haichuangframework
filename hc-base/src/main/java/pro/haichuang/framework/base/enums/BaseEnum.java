@@ -41,11 +41,11 @@ public interface BaseEnum {
      *
      * @param value     参数值
      * @param enumClass 需要解析的枚举类
-     * @param <E>       集成 {@link BaseEnum}
+     * @param <E>       继承 {@link BaseEnum} 的枚举类型
      * @return 解析后的枚举对象
      * @throws EnumIllegalArgumentException 解析异常
      */
-    static <E extends BaseEnum> E resolve(String value, Class<E> enumClass) throws EnumIllegalArgumentException {
+    static <T,E extends Enum<E> & BaseEnum> E resolve(String value, Class<E> enumClass) throws EnumIllegalArgumentException {
         E enumValue = null;
         E[] enumConstants = enumClass.getEnumConstants();
         for (E enumConstant : enumConstants) {
