@@ -45,7 +45,10 @@ public interface BaseEnum {
      * @return 解析后的枚举对象
      * @throws EnumIllegalArgumentException 解析异常
      */
-    static <T,E extends Enum<E> & BaseEnum> E resolve(String value, Class<E> enumClass) throws EnumIllegalArgumentException {
+    static <E extends BaseEnum> E resolve(String value, Class<E> enumClass) throws EnumIllegalArgumentException {
+        if (!enumClass.isEnum()) {
+            throw new EnumIllegalArgumentException(enumClass.getPackage().getName() + " is not a Enum");
+        }
         E enumValue = null;
         E[] enumConstants = enumClass.getEnumConstants();
         for (E enumConstant : enumConstants) {
