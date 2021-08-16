@@ -11,7 +11,7 @@ import java.lang.annotation.*;
  * 启用重复请求校验
  *
  * <p>启用此注解后, 在 [Controller] 层方法上标注 {@link RepeatRequestValid @RepeatRequestValid} 注解,
- * 将采用 [Redis] 的方式进行请求验证, 避免重复请求
+ * 将采用 {@code redis} 的方式进行请求验证, 避免重复请求
  * <p>具体实现请参阅 {@link RepeatRequestInterceptor}
  *
  * @author JiYinchuan

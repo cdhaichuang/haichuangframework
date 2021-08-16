@@ -27,7 +27,7 @@ import java.util.Map;
 /**
  * 重复请求拦截器
  *
- * <p>基于 [Redis] 实现, 使用时请先引入 {@code hc-redis} 依赖, 否则不生效
+ * <p>基于 {@code redis} 实现, 使用时请先引入 {@code hc-redis} 依赖, 否则不生效
  *
  * @author JiYinchuan
  * @version 1.0.0

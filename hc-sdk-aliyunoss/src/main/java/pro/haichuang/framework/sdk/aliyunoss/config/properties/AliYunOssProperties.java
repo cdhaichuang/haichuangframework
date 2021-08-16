@@ -7,10 +7,30 @@ import pro.haichuang.framework.base.exception.client.RequestParamException;
 /**
  * 阿里云OSS配置文件
  *
+ * <p>该类为 {@code hc-sdk-aliyunoss} SDK模块配置文件类
+ * <hr>
+ * Example:
+ * <pre>
+ *     # ========================= Haichuang Setting =========================
+ *     haichuang:
+ *       sdk:
+ *         aliyunoss:
+ *           // AccessKeyId
+ *           accessKeyId: xxx
+ *           // AccessKeySecret
+ *           accessKeySecret: xxx
+ *           // BucketName
+ *           bucketName: xxx
+ *           // Endpoint地域节点
+ *           endpoint: xxx
+ * </pre>
+ * <hr>
+ * <p>参数配置完毕后可通过 {@link #getBucketDomain()} 方法获取访问 {@code Bucket域名} 地址
+ *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
  */
-@SuppressWarnings("SpellCheckingInspection")
 @ConfigurationProperties(prefix = "haichuang.sdk.aliyunoss")
 public class AliYunOssProperties {
 
@@ -30,13 +50,13 @@ public class AliYunOssProperties {
     private String bucketName;
 
     /**
-     * Endpoint
+     * Endpoint地域节点
      */
     private String endpoint;
 
     public String getBucketDomain() {
         if (endpoint == null || endpoint.isEmpty()) {
-            throw new RequestParamException(RequestParamErrorEnum.PARAMETER_EMPTY, "[Endpoint] 未在Yaml进行配置");
+            throw new RequestParamException(RequestParamErrorEnum.PARAMETER_EMPTY, "[Endpoint地域节点] 未在Yaml进行配置");
         }
         if (bucketName == null || bucketName.isEmpty()) {
             throw new RequestParamException(RequestParamErrorEnum.PARAMETER_EMPTY, "[BucketName] 未在Yaml进行配置");

@@ -9,8 +9,8 @@ import java.util.Set;
 /**
  * RedisService服务
  *
- * <p>该类为 [Redis] 操作核心服务接口, 项目中所有关于 [Redis] 的操作均使用此接口
- * <p>该类已默认注入到 [Spring] 中, 默认实现为 {@link DefaultRedisServiceImpl}, 如需自定义实现请实现该接口并手动注入该接口
+ * <p>该类为 {@code redis} 操作核心服务接口, 项目中所有 {@code redis} 的操作均使用此接口
+ * <p>该类已默认注入到 {@code spring} 中, 默认实现为 {@link DefaultRedisServiceImpl}, 如需自定义实现请实现该接口并手动注入该接口
  *
  * @author JiYinchuan
  * @version 1.0.0
@@ -43,7 +43,7 @@ public interface RedisService {
      * 判断key是否存在
      *
      * @param key 键
-     * @return {false: 不存在, true: 存在}
+     * @return 是否存在 [false: 不存在, true: 存在]
      */
     boolean hasKey(String key);
 
@@ -172,7 +172,7 @@ public interface RedisService {
      *
      * @param key  键
      * @param item 项
-     * @return {false: 不存在, true: 存在}
+     * @return 是否存在 [false: 不存在, true: 存在]
      */
     boolean hHasKey(String key, String item);
 
@@ -240,7 +240,7 @@ public interface RedisService {
      *
      * @param key   键
      * @param value 值
-     * @return {false: 不存在, true: 存在}
+     * @return 是否存在 [false: 不存在, true: 存在]
      */
     boolean sHasKey(String key, Object value);
 
