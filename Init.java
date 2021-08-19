@@ -86,12 +86,18 @@ public class Init {
                 // 重命名项目测试文件信息
                 replaceCodeAndFlushWrite(projectTestDirFile.isDirectory(), projectTestDirFile, originCodeName, port);
                 // 重命名项目包名
-                String tempProjectDirNamePath = projectDirFile.getAbsolutePath().replaceAll("\\\\", "/");
-                String tempProjectOriginPackageDirPath = PROJECT_ORIGIN_PACKAGE_NAME.replaceAll("\\.", "/");
-                String tempProjectNewPackageDirPath = getNewPackage(originCodeName).replaceAll("\\.", "/");
-                boolean renameProjectDirResult = projectDirFile.renameTo(new File(tempProjectDirNamePath.replace(tempProjectOriginPackageDirPath, tempProjectNewPackageDirPath)));
+                String projectNewPackageDirPath = getNewPackage(originCodeName).replaceAll("\\.", "/");
+
+                String projectOriginPackageDirPath = PROJECT_ORIGIN_PACKAGE_NAME.replaceAll("\\.", "/");
+                String projectDirNamePath = projectDirFile.getAbsolutePath().replaceAll("\\\\", "/");
+                boolean renameProjectDirResult = projectDirFile.renameTo(new File(projectDirNamePath.replace(projectOriginPackageDirPath, projectNewPackageDirPath)));
                 if (!renameProjectDirResult) {
                     throw new RuntimeException("重命名项目包名失败");
+                }
+                String projecTesttDirNamePath = projectTestDirFile.getAbsolutePath().replaceAll("\\\\", "/");
+                boolean renameProjectTestDirResult = projectTestDirFile.renameTo(new File(projecTesttDirNamePath.replace(projectOriginPackageDirPath, projectNewPackageDirPath)));
+                if (!renameProjectTestDirResult) {
+                    throw new RuntimeException("重命名项目测试包名失败");
                 }
                 // 重命名资源文件信息
                 replaceCodeAndFlushWrite(resourcesDirFile.isDirectory() || (resourcesDirFile.isFile() && resourcesDirFile.getName().startsWith("application")),
