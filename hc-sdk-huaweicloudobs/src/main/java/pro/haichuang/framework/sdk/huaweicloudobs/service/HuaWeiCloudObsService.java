@@ -1,5 +1,6 @@
-package pro.haichuang.framework.sdk.aliyunoss.service;
+package pro.haichuang.framework.sdk.huaweicloudobs.service;
 
+import com.obs.services.model.DeleteObjectsResult;
 import org.springframework.lang.Nullable;
 import org.springframework.web.multipart.MultipartFile;
 import pro.haichuang.framework.base.enums.upload.UploadTypeEnum;
@@ -14,16 +15,16 @@ import java.util.List;
 /**
  * AliYunOssService
  *
- * <p>该类为 {@code aliyunoss} 第三方操作核心接口, 项目中所有 {@code aliyunoss} 的操作均使用此接口
- * <p>该类已默认注入到 {@code spring} 中, 默认实现为 {@link DefaultAliYunOssServiceImpl}, 如需自定义实现请实现该接口并手动注入该接口
+ * <p>该类为 {@code aliyunobs} 第三方操作核心接口, 项目中所有 {@code aliyunobs} 的操作均使用此接口
+ * <p>该类已默认注入到 {@code spring} 中, 默认实现为 {@link DefaultHuaWeiCloudObsServiceImpl}, 如需自定义实现请实现该接口并手动注入该接口
  *
  * @author JiYinchuan
  * @version 1.0.0
- * @see DefaultAliYunOssServiceImpl
+ * @see DefaultHuaWeiCloudObsServiceImpl
  * @since 1.0.0
  */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
-public interface AliYunOssService {
+public interface HuaWeiCloudObsService {
 
     // ========================= Upload =========================
 
@@ -164,74 +165,72 @@ public interface AliYunOssService {
     /**
      * 下载文件至 HttpServletResponse
      *
-     * @param ossFilePath OSS文件路径
+     * @param obsFilePath OBS文件路径
      * @param request     {@link HttpServletRequest}
      * @param response    {@link HttpServletResponse}
      */
-    void downloadToResponse(String ossFilePath, HttpServletRequest request, HttpServletResponse response);
+    void downloadToResponse(String obsFilePath, HttpServletRequest request, HttpServletResponse response);
 
     /**
      * 下载文件至 HttpServletResponse
      *
-     * @param ossFilePath OSS文件路径
-     * @param fileName    新文件名称, 为空时则为OSS文件名
+     * @param obsFilePath OBS文件路径
+     * @param fileName    新文件名称, 为空时则为OBS文件名
      * @param request     {@link HttpServletRequest}
      * @param response    {@link HttpServletResponse}
      */
-    void downloadToResponse(String ossFilePath, @Nullable String fileName,
+    void downloadToResponse(String obsFilePath, @Nullable String fileName,
                             HttpServletRequest request, HttpServletResponse response);
 
     /**
      * 下载文件至 File 对象
      *
-     * @param ossFilePath OSS文件路径
+     * @param obsFilePath OBS文件路径
      * @return File对象
      */
-    File downloadToFile(String ossFilePath);
+    File downloadToFile(String obsFilePath);
 
     /**
      * 下载文件至 File 对象
      *
-     * @param ossFilePath OSS文件路径
-     * @param fileName    新文件名称, 为空时则为OSS文件名
+     * @param obsFilePath OBS文件路径
+     * @param outFileName 新文件名称, 为空时则为OBS文件名
      * @return File对象
      */
-    File downloadToFile(String ossFilePath, @Nullable String fileName);
+    File downloadToFile(String obsFilePath, @Nullable String outFileName);
 
     /**
      * 下载文件至 File 对象
      *
-     * @param ossFilePath OSS文件路径
-     * @param file        新文件对象, 为空时则文件名为OSS文件名
+     * @param obsFilePath OBS文件路径
+     * @param outFile     新文件对象, 为空时则文件名为OBS文件名
      * @return File对象
      */
-    File downloadToFile(String ossFilePath, @Nullable File file);
+    File downloadToFile(String obsFilePath, @Nullable File outFile);
 
     // ========================= Delete =========================
 
     /**
      * 删除文件
      *
-     * @param ossFilePath OSS文件路径
+     * @param obsFilePath OBS文件路径
      */
-    void deleteObject(String ossFilePath);
+    void deleteObjectResSuccess(String obsFilePath);
 
     /**
      * 删除文件
      *
-     * @param ossFilePaths OSS文件路径
+     * @param obsFilePaths OBS文件路径
      * @return 删除成功的文件路径集合
      */
-    List<String> deleteObject(Collection<String> ossFilePaths);
+    List<DeleteObjectsResult.DeleteObjectResult> deleteObjectResSuccess(Collection<String> obsFilePaths);
 
     /**
      * 删除文件
      *
-     * @param ossFilePaths OSS文件路径
-     * @param quiet        返回模式
-     *                     [default: false-详细模式, {true: 简单模式(删除失败的文件路径集合), false: 详细模式(删除成功的文件路径集合)}]
-     * @return 返回结果参考 {@code quiet} 形参注释
+     * @param obsFilePaths OBS文件路径
+     * @return 删除失败的文件路径集合
      */
-    List<String> deleteObject(Collection<String> ossFilePaths, boolean quiet);
+    List<DeleteObjectsResult.ErrorResult> deleteObjectResError(Collection<String> obsFilePaths);
 
 }

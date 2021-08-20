@@ -9,6 +9,7 @@
         <module>hc-redis</module>
         <module>hc-sdk-aliyunoss</module>
         <module>hc-sdk-aliyunsms</module>
+        <module>hc-sdk-huaweicloudobs</module>
         <module>hc-sdk-wxmp</module>
         <module>hc-service-main</module>
     </modules>
@@ -40,6 +41,7 @@
         <!-- Commons -->
         <common-io.version>2.8.0</common-io.version>
         <commons-fileupload.version>1.4</commons-fileupload.version>
+        <commons-validator.version>1.7</commons-validator.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <!-- Utils -->
         <jjwt.version>0.9.1</jjwt.version>
@@ -51,6 +53,8 @@
         <aliyun-sdk-core.version>4.5.3</aliyun-sdk-core.version>
         <aliyun-sdk-oss.version>3.12.0</aliyun-sdk-oss.version>
         <alipay-easysdk.version>2.2.0</alipay-easysdk.version>
+        <!-- HuaWeiCloud SDK -->
+        <esdk-obs-java.version>3.21.4.1</esdk-obs-java.version>
     </properties>
 
     <dependencies>
@@ -133,6 +137,11 @@
                 <version>${commons-fileupload.version}</version>
             </dependency>
             <dependency>
+                <groupId>commons-validator</groupId>
+                <artifactId>commons-validator</artifactId>
+                <version>${commons-validator.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-collections4</artifactId>
                 <version>${commons-collections4.version}</version>
@@ -180,6 +189,13 @@
                 <groupId>com.alipay.sdk</groupId>
                 <artifactId>alipay-easysdk</artifactId>
                 <version>${alipay-easysdk.version}</version>
+            </dependency>
+
+            <!-- HuaWeiCloud SDK -->
+            <dependency>
+                <groupId>com.huaweicloud</groupId>
+                <artifactId>esdk-obs-java</artifactId>
+                <version>${esdk-obs-java.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

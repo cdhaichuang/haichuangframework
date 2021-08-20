@@ -8,7 +8,7 @@ import pro.haichuang.framework.base.util.common.ValidateUtils;
 import pro.haichuang.framework.sdk.aliyunoss.config.properties.AliYunOssProperties;
 import pro.haichuang.framework.sdk.aliyunoss.enums.error.AliYunOssConfigErrorEnum;
 import pro.haichuang.framework.sdk.aliyunoss.enums.error.AliYunOssUploadErrorEnum;
-import pro.haichuang.framework.sdk.aliyunoss.enums.upload.UploadTypeEnum;
+import pro.haichuang.framework.base.enums.upload.UploadTypeEnum;
 import pro.haichuang.framework.sdk.aliyunoss.util.AliYunOssUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -169,7 +169,7 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
         validateProperties();
         AliYunOssUtils.downloadToResponse(ossFilePath,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
-                aliYunOssProperties.getBucketDomain(), aliYunOssProperties.getEndpoint(),
+                aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
                 request, response);
     }
 
@@ -180,7 +180,7 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
         validateProperties();
         AliYunOssUtils.downloadToResponse(ossFilePath,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
-                aliYunOssProperties.getBucketDomain(), aliYunOssProperties.getEndpoint(),
+                aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
                 fileName, request, response);
     }
 
@@ -189,7 +189,7 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
         validateProperties();
         return AliYunOssUtils.downloadToFile(ossFilePath,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
-                aliYunOssProperties.getBucketDomain(), aliYunOssProperties.getEndpoint());
+                aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint());
     }
 
     @Override
@@ -197,7 +197,7 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
         validateProperties();
         return AliYunOssUtils.downloadToFile(ossFilePath,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
-                aliYunOssProperties.getBucketDomain(), aliYunOssProperties.getEndpoint(),
+                aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
                 fileName);
     }
 
@@ -206,7 +206,7 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
         validateProperties();
         return AliYunOssUtils.downloadToFile(ossFilePath,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
-                aliYunOssProperties.getBucketDomain(), aliYunOssProperties.getEndpoint(),
+                aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
                 file);
     }
 

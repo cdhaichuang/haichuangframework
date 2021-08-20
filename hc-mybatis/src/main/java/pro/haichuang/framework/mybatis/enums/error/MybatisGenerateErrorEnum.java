@@ -18,42 +18,42 @@ public enum MybatisGenerateErrorEnum implements BaseEnum {
     /**
      * Mybatis代码生成异常
      */
-    MYBATIS_CODE_GENERATE_ERROR("H0200", "Mybatis代码生成异常"),
+    MYBATIS_CODE_GENERATE_ERROR("M0200", "Mybatis代码生成异常"),
 
     /**
      * 基本配置异常
      */
-    BASIC_ERROR("H0210", "数据源异常"),
+    BASIC_ERROR("M0201", "基本配置异常"),
 
     /**
      * 数据源配置异常
      */
-    DATA_SOURCE_ERROR("H0220", "数据源异常"),
+    DATA_SOURCE_ERROR("M0202", "数据源配置异常"),
 
     /**
      * 数据源URL为空
      */
-    DATA_SOURCE_URL_IS_BLANK("H0221", "数据源URL为空"),
+    DATA_SOURCE_URL_IS_BLANK("M0203", "数据源URL为空"),
 
     /**
      * 数据源用户名为空
      */
-    DATA_SOURCE_USERNAME_IS_BLANK("H0222", "数据源用户名为空"),
+    DATA_SOURCE_USERNAME_IS_BLANK("M0204", "数据源用户名为空"),
 
     /**
      * 数据源密码为空
      */
-    DATA_SOURCE_PASSWORD_IS_BLANK("H0223", "数据源密码为空"),
+    DATA_SOURCE_PASSWORD_IS_BLANK("M0205", "数据源密码为空"),
 
     /**
      * 包配置异常
      */
-    PACKAGE_ERROR("H0230", "包配置异常"),
+    PACKAGE_ERROR("M0206", "包配置异常"),
 
     /**
      * 父包模块名为空
      */
-    PACKAGE_PARENT_MODEL_NAME_IS_BLANK("H0231", "包配置异常");
+    PACKAGE_PARENT_MODEL_NAME_IS_BLANK("M0207", "包配置异常");
 
 
     /**

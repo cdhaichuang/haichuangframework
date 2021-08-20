@@ -1,38 +1,18 @@
-package pro.haichuang.framework.sdk.aliyunoss.config.properties;
+package pro.haichuang.framework.sdk.huaweicloudobs.config.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import pro.haichuang.framework.base.enums.error.client.RequestParamErrorEnum;
 import pro.haichuang.framework.base.exception.client.RequestParamException;
 
 /**
- * 阿里云OSS配置文件
- *
- * <p>该类为 {@code hc-sdk-aliyunoss} SDK模块配置文件类
- * <hr>
- * Example:
- * <pre>
- *     # ========================= Haichuang Setting =========================
- *     haichuang:
- *       sdk:
- *         aliyunoss:
- *           // AccessKeyId
- *           accessKeyId: xxx
- *           // AccessKeySecret
- *           accessKeySecret: xxx
- *           // BucketName
- *           bucketName: xxx
- *           // Endpoint地域节点
- *           endpoint: xxx
- * </pre>
- * <hr>
- * <p>参数配置完毕后可通过 {@link #getBucketDomain()} 方法获取访问 {@code Bucket域名} 地址
+ * 华为云OBS配置文件
  *
  * @author JiYinchuan
  * @version 1.0.0
  * @since 1.0.0
  */
-@ConfigurationProperties(prefix = "haichuang.sdk.aliyunoss")
-public class AliYunOssProperties {
+@ConfigurationProperties(prefix = "haichuang.sdk.huaweicloudobs")
+public class HuaWeiCloudObsProperties {
 
     /**
      * AccessKeyId

@@ -18,17 +18,17 @@ public enum MybatisServiceErrorEnum implements BaseEnum {
     /**
      * MybatisService异常
      */
-    MYBATIS_SERVICE_ERROR("H0100", "MybatisService异常"),
+    MYBATIS_SERVICE_ERROR("M0100", "MybatisService异常"),
 
     /**
      * ID为空
      */
-    ID_IS_NULL("H0101", "ID为空"),
+    ID_IS_NULL("M0101", "ID为空"),
 
     /**
      * 结果集为空
      */
-    RESULT_SET_IS_NULL("H0102", "结果集为空");
+    RESULT_SET_IS_NULL("M0102", "结果集为空");
 
     /**
      * 枚举值

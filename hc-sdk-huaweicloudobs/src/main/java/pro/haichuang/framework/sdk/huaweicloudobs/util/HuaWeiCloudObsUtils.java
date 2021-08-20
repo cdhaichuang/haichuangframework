@@ -1,10 +1,10 @@
-package pro.haichuang.framework.sdk.aliyunoss.util;
+package pro.haichuang.framework.sdk.huaweicloudobs.util;
 
-import com.aliyun.oss.OSS;
-import com.aliyun.oss.OSSClientBuilder;
-import com.aliyun.oss.model.DeleteObjectsRequest;
-import com.aliyun.oss.model.DeleteObjectsResult;
-import com.aliyun.oss.model.GetObjectRequest;
+import com.alibaba.fastjson.JSONObject;
+import com.obs.services.ObsClient;
+import com.obs.services.model.DeleteObjectsRequest;
+import com.obs.services.model.DeleteObjectsResult;
+import com.obs.services.model.ObsObject;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
@@ -16,34 +16,33 @@ import org.springframework.lang.Nullable;
 import org.springframework.web.multipart.MultipartFile;
 import pro.haichuang.framework.base.util.common.FileUriUtils;
 import pro.haichuang.framework.base.util.common.UUIDUtils;
-import pro.haichuang.framework.sdk.aliyunoss.enums.error.AliYunOssUploadErrorEnum;
-import pro.haichuang.framework.sdk.aliyunoss.exception.AliYunOssUploadException;
+import pro.haichuang.framework.sdk.huaweicloudobs.enums.error.HuaWeCloudObsUploadErrorEnum;
+import pro.haichuang.framework.sdk.huaweicloudobs.exception.HuaWeiCloudObsUploadException;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * 阿里云OSS工具类
+ * 华为云OBS工具类
  *
- * <p>该类为 {@code aliyunoss} 相关操作工具类, 提供了对 {@code aliyunoss} 相关操作的封装
+ * <p>该类为 {@code huaweicloudobs} 相关操作工具类, 提供了对 {@code huaweicloudobs} 相关操作的封装
  *
  * @author JiYinchuan
  * @version 1.0.0
  * @since 1.0.0
  */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
-public class AliYunOssUtils {
+public class HuaWeiCloudObsUtils {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AliYunOssUtils.class);
-    private static final String LOG_TAG = "[sdk-aliyunoss] AliYunOss工具类";
-
-    // ========================= SingleUpload =========================
+    private static final Logger LOGGER = LoggerFactory.getLogger(HuaWeiCloudObsUtils.class);
+    private static final String LOG_TAG = "[sdk-huaweicloudobs] HuaWeiCloudObsUtils工具类";
 
     /**
      * 简单上传文件
@@ -56,15 +55,15 @@ public class AliYunOssUtils {
      * @param uploadBasePath  上传主路径, 建议填写业务模块相关名称
      * @param uploadSubPath   上传子路径, 建议填写文件类型
      * @return 上传后的路径
-     * @throws AliYunOssUploadException 阿里云文件上传异常
-     * @throws IOException              获取文件流异常
+     * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
+     * @throws IOException                   获取文件流异常
      * @see #uploadByMultipart(MultipartFile, String, String, String, String, String, String, String)
      */
     public static String uploadByMultipart(MultipartFile uploadFile,
                                            String accessKeyId, String accessKeySecret,
                                            String bucketName, String endPoint,
                                            String uploadBasePath, String uploadSubPath)
-            throws AliYunOssUploadException, IOException {
+            throws HuaWeiCloudObsUploadException, IOException {
         return uploadByMultipart(uploadFile, null, accessKeyId, accessKeySecret,
                 bucketName, endPoint, uploadBasePath, uploadSubPath);
     }
@@ -81,15 +80,15 @@ public class AliYunOssUtils {
      * @param uploadBasePath  上传主路径, 建议填写业务模块相关名称
      * @param uploadSubPath   上传子路径, 建议填写文件类型
      * @return 上传后的路径
-     * @throws AliYunOssUploadException 阿里云文件上传异常
-     * @throws IOException              获取文件流异常
+     * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
+     * @throws IOException                   获取文件流异常
      * @see #baseFileUploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String)
      */
     public static String uploadByMultipart(MultipartFile uploadFile, @Nullable String newFileName,
                                            String accessKeyId, String accessKeySecret,
                                            String bucketName, String endPoint,
                                            String uploadBasePath, String uploadSubPath)
-            throws AliYunOssUploadException, IOException {
+            throws HuaWeiCloudObsUploadException, IOException {
         String uuid = UUIDUtils.Local.get();
         String resultFilePath = baseFileUploadByMultipart(new LinkedList<>(Collections.singletonList(uploadFile)),
                 newFileName != null ? new LinkedList<>(Collections.singletonList(newFileName)) : null,
@@ -111,14 +110,15 @@ public class AliYunOssUtils {
      * @param uploadBasePath   上传主路径, 建议填写业务模块相关名称
      * @param uploadSubPath    上传子路径, 建议填写文件类型
      * @return 上传后的路径
-     * @throws AliYunOssUploadException 阿里云文件上传异常
+     * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
+     * @throws IOException                   关闭 {@code obs} 连接异常
      * @see #uploadByPath(String, String, String, String, String, String, String, String)
      */
     public static String uploadByPath(String absoluteFilePath,
                                       String accessKeyId, String accessKeySecret,
                                       String bucketName, String endPoint,
                                       String uploadBasePath, String uploadSubPath)
-            throws AliYunOssUploadException {
+            throws HuaWeiCloudObsUploadException, IOException {
         return uploadByPath(absoluteFilePath, null, accessKeyId, accessKeySecret,
                 bucketName, endPoint, uploadBasePath, uploadSubPath);
     }
@@ -135,14 +135,15 @@ public class AliYunOssUtils {
      * @param uploadBasePath   上传主路径, 建议填写业务模块相关名称
      * @param uploadSubPath    上传子路径, 建议填写文件类型
      * @return 上传后的路径
-     * @throws AliYunOssUploadException 阿里云文件上传异常
+     * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
+     * @throws IOException                   关闭 {@code obs} 连接异常
      * @see #uploadByFile(File, String, String, String, String, String, String, String)
      */
     public static String uploadByPath(String absoluteFilePath, @Nullable String newFileName,
                                       String accessKeyId, String accessKeySecret,
                                       String bucketName, String endPoint,
                                       String uploadBasePath, String uploadSubPath)
-            throws AliYunOssUploadException {
+            throws HuaWeiCloudObsUploadException, IOException {
         return uploadByFile(new File(absoluteFilePath), newFileName, accessKeyId, accessKeySecret,
                 bucketName, endPoint, uploadBasePath, uploadSubPath);
     }
@@ -158,14 +159,15 @@ public class AliYunOssUtils {
      * @param uploadBasePath  上传主路径, 建议填写业务模块相关名称
      * @param uploadSubPath   上传子路径, 建议填写文件类型
      * @return 上传后的路径
-     * @throws AliYunOssUploadException 阿里云文件上传异常
+     * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
+     * @throws IOException                   关闭 {@code obs} 连接异常
      * @see #uploadByFile(File, String, String, String, String, String, String, String)
      */
     public static String uploadByFile(File uploadFile,
                                       String accessKeyId, String accessKeySecret,
                                       String bucketName, String endPoint,
                                       String uploadBasePath, String uploadSubPath)
-            throws AliYunOssUploadException {
+            throws HuaWeiCloudObsUploadException, IOException {
         return uploadByFile(uploadFile, null, accessKeyId, accessKeySecret,
                 bucketName, endPoint, uploadBasePath, uploadSubPath);
     }
@@ -182,14 +184,15 @@ public class AliYunOssUtils {
      * @param uploadBasePath  上传主路径, 建议填写业务模块相关名称
      * @param uploadSubPath   上传子路径, 建议填写文件类型
      * @return 上传后的路径
-     * @throws AliYunOssUploadException 阿里云文件上传异常
+     * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
+     * @throws IOException                   关闭 {@code obs} 连接异常
      * @see #baseFileUploadByFile(LinkedList, LinkedList, String, String, String, String, String, String)
      */
     public static String uploadByFile(File uploadFile, @Nullable String newFileName,
                                       String accessKeyId, String accessKeySecret,
                                       String bucketName, String endPoint,
                                       String uploadBasePath, String uploadSubPath)
-            throws AliYunOssUploadException {
+            throws HuaWeiCloudObsUploadException, IOException {
         String uuid = UUIDUtils.Local.get();
         String resultFilePath = baseFileUploadByFile(new LinkedList<>(Collections.singletonList(uploadFile)),
                 newFileName != null ? new LinkedList<>(Collections.singletonList(newFileName)) : null,
@@ -213,15 +216,15 @@ public class AliYunOssUtils {
      * @param uploadBasePath  上传主路径, 建议填写业务模块相关名称
      * @param uploadSubPath   上传子路径, 建议填写文件类型
      * @return 上传后的路径集合
-     * @throws AliYunOssUploadException 阿里云文件上传异常
-     * @throws IOException              获取文件流异常
+     * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
+     * @throws IOException                   获取文件流异常
      * @see #uploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String)
      */
     public static List<String> uploadByMultipart(Collection<MultipartFile> uploadFiles,
                                                  String accessKeyId, String accessKeySecret,
                                                  String bucketName, String endPoint,
                                                  String uploadBasePath, String uploadSubPath)
-            throws AliYunOssUploadException, IOException {
+            throws HuaWeiCloudObsUploadException, IOException {
         return uploadByMultipart(new LinkedList<>(uploadFiles), null, accessKeyId, accessKeySecret,
                 bucketName, endPoint, uploadBasePath, uploadSubPath);
     }
@@ -238,8 +241,8 @@ public class AliYunOssUtils {
      * @param uploadBasePath  上传主路径, 建议填写业务模块相关名称
      * @param uploadSubPath   上传子路径, 建议填写文件类型
      * @return 上传后的路径集合
-     * @throws AliYunOssUploadException 阿里云文件上传异常
-     * @throws IOException              获取文件流异常
+     * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
+     * @throws IOException                   获取文件流异常
      * @see #baseFileUploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String)
      */
     public static List<String> uploadByMultipart(LinkedList<MultipartFile> uploadFiles,
@@ -247,11 +250,10 @@ public class AliYunOssUtils {
                                                  String accessKeyId, String accessKeySecret,
                                                  String bucketName, String endPoint,
                                                  String uploadBasePath, String uploadSubPath)
-            throws AliYunOssUploadException, IOException {
+            throws HuaWeiCloudObsUploadException, IOException {
         String uuid = UUIDUtils.Local.get();
         if (uploadFiles.isEmpty()) {
-            LOGGER.warn("[{}] 批量上传文件为空 [uuid: {}, bucketName: {}, uploadFiles: {}]", LOG_TAG,
-                    uuid, bucketName, uploadFiles);
+            LOGGER.warn("[{}] 批量上传文件为空 [uuid: {}, bucketName: {}]", LOG_TAG, uuid, bucketName);
             return new ArrayList<>();
         }
         List<String> resultFilePaths = baseFileUploadByMultipart(uploadFiles, newFileNames, accessKeyId, accessKeySecret,
@@ -272,14 +274,15 @@ public class AliYunOssUtils {
      * @param uploadBasePath    上传主路径, 建议填写业务模块相关名称
      * @param uploadSubPath     上传子路径, 建议填写文件类型
      * @return 上传后的路径集合
-     * @throws AliYunOssUploadException 阿里云文件上传异常
+     * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
+     * @throws IOException                   关闭 {@code obs} 连接异常
      * @see #uploadByPath(LinkedList, LinkedList, String, String, String, String, String, String)
      */
     public static List<String> uploadByPath(Collection<String> absoluteFilePaths,
                                             String accessKeyId, String accessKeySecret,
                                             String bucketName, String endPoint,
                                             String uploadBasePath, String uploadSubPath)
-            throws AliYunOssUploadException {
+            throws HuaWeiCloudObsUploadException, IOException {
         return uploadByPath(new LinkedList<>(absoluteFilePaths), null, accessKeyId, accessKeySecret,
                 bucketName, endPoint, uploadBasePath, uploadSubPath);
     }
@@ -296,18 +299,19 @@ public class AliYunOssUtils {
      * @param uploadBasePath    上传主路径, 建议填写业务模块相关名称
      * @param uploadSubPath     上传子路径, 建议填写文件类型
      * @return 上传后的路径集合
-     * @throws AliYunOssUploadException 阿里云文件上传异常
+     * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
+     * @throws IOException                   关闭 {@code obs} 连接异常
+     * @see #uploadByFile(LinkedList, LinkedList, String, String, String, String, String, String)
      */
     public static List<String> uploadByPath(LinkedList<String> absoluteFilePaths,
                                             @Nullable LinkedList<String> newFileNames,
                                             String accessKeyId, String accessKeySecret,
                                             String bucketName, String endPoint,
                                             String uploadBasePath, String uploadSubPath)
-            throws AliYunOssUploadException {
+            throws HuaWeiCloudObsUploadException, IOException {
         String uuid = UUIDUtils.Local.get();
         if (absoluteFilePaths.isEmpty()) {
-            LOGGER.warn("[{}] 批量上传文件为空 [uuid: {}, bucketName: {}, absoluteFilePaths: {}]", LOG_TAG,
-                    uuid, bucketName, absoluteFilePaths);
+            LOGGER.warn("[{}] 批量上传文件为空 [uuid: {}, bucketName: {}]", LOG_TAG, uuid, bucketName);
             return new ArrayList<>();
         }
         List<String> resultFilePaths = uploadByFile(absoluteFilePaths.stream().map(File::new)
@@ -329,14 +333,15 @@ public class AliYunOssUtils {
      * @param uploadBasePath  上传主路径, 建议填写业务模块相关名称
      * @param uploadSubPath   上传子路径, 建议填写文件类型
      * @return 上传后的路径集合
-     * @throws AliYunOssUploadException 阿里云文件上传异常
+     * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
+     * @throws IOException                   关闭 {@code obs} 连接异常
      * @see #uploadByFile(LinkedList, LinkedList, String, String, String, String, String, String)
      */
     public static List<String> uploadByFile(Collection<File> uploadFiles,
                                             String accessKeyId, String accessKeySecret,
                                             String bucketName, String endPoint,
                                             String uploadBasePath, String uploadSubPath)
-            throws AliYunOssUploadException {
+            throws HuaWeiCloudObsUploadException, IOException {
         return uploadByFile(new LinkedList<>(uploadFiles), null, accessKeyId, accessKeySecret,
                 bucketName, endPoint, uploadBasePath, uploadSubPath);
     }
@@ -353,7 +358,8 @@ public class AliYunOssUtils {
      * @param uploadBasePath  上传主路径, 建议填写业务模块相关名称
      * @param uploadSubPath   上传子路径, 建议填写文件类型
      * @return 上传后的路径集合
-     * @throws AliYunOssUploadException 阿里云文件上传异常
+     * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
+     * @throws IOException                   关闭 {@code obs} 连接异常
      * @see #baseFileUploadByFile(LinkedList, LinkedList, String, String, String, String, String, String)
      */
     public static List<String> uploadByFile(LinkedList<File> uploadFiles,
@@ -361,11 +367,10 @@ public class AliYunOssUtils {
                                             String accessKeyId, String accessKeySecret,
                                             String bucketName, String endPoint,
                                             String uploadBasePath, String uploadSubPath)
-            throws AliYunOssUploadException {
+            throws HuaWeiCloudObsUploadException, IOException {
         String uuid = UUIDUtils.Local.get();
         if (uploadFiles.isEmpty()) {
-            LOGGER.warn("[{}] 批量上传文件为空 [uuid: {}, bucketName: {}, uploadFiles: {}]", LOG_TAG,
-                    uuid, bucketName, uploadFiles);
+            LOGGER.warn("[{}] 批量上传文件为空 [uuid: {}, bucketName: {}]", LOG_TAG, uuid, bucketName);
             return new ArrayList<>();
         }
         List<String> resultFilePaths = baseFileUploadByFile(uploadFiles, newFileNames, accessKeyId, accessKeySecret,
@@ -380,7 +385,7 @@ public class AliYunOssUtils {
     /**
      * 下载文件至 HttpServletResponse
      *
-     * @param ossFilePath     OSS文件路径
+     * @param obsFilePath     OBS文件路径
      * @param accessKeyId     AccessKeyId
      * @param accessKeySecret AccessKeySecret
      * @param bucketName      BucketName
@@ -390,36 +395,36 @@ public class AliYunOssUtils {
      * @throws IOException 文件流转文件失败
      * @see #downloadToResponse(String, String, String, String, String, String, HttpServletRequest, HttpServletResponse)
      */
-    public static void downloadToResponse(String ossFilePath,
+    public static void downloadToResponse(String obsFilePath,
                                           String accessKeyId, String accessKeySecret,
                                           String bucketName, String endPoint,
                                           HttpServletRequest request, HttpServletResponse response)
             throws IOException {
-        downloadToResponse(ossFilePath, accessKeyId, accessKeySecret, bucketName, endPoint, null, request, response);
+        downloadToResponse(obsFilePath, accessKeyId, accessKeySecret, bucketName, endPoint, null, request, response);
     }
 
     /**
      * 下载文件至 HttpServletResponse
      *
-     * @param ossFilePath     OSS文件路径
+     * @param obsFilePath     OBS文件路径
      * @param accessKeyId     AccessKeyId
      * @param accessKeySecret AccessKeySecret
      * @param bucketName      BucketName
      * @param endPoint        Endpoint地域节点
-     * @param fileName        新文件名, 为空时则为OSS文件名
+     * @param outFileName     新文件名, 为空时则为OBS文件名
      * @param request         {@link HttpServletRequest}
      * @param response        {@link HttpServletResponse}
      * @throws IOException 文件流转文件失败
      */
-    public static void downloadToResponse(String ossFilePath,
+    public static void downloadToResponse(String obsFilePath,
                                           String accessKeyId, String accessKeySecret,
                                           String bucketName, String endPoint,
-                                          @Nullable String fileName,
+                                          @Nullable String outFileName,
                                           HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         MediaType mediaType;
-        String fileBaseName = FilenameUtils.getName(fileName != null && !fileName.isEmpty() ? fileName : ossFilePath);
-        File file = downloadToFile(ossFilePath, accessKeyId, accessKeySecret, bucketName, endPoint, fileBaseName);
+        String fileBaseName = FilenameUtils.getName(outFileName != null && !outFileName.isEmpty() ? outFileName : obsFilePath);
+        File file = downloadToFile(obsFilePath, accessKeyId, accessKeySecret, bucketName, endPoint, fileBaseName);
 
         ServletContext servletContext = request.getServletContext();
         String mineType = servletContext.getMimeType(fileBaseName);
@@ -440,77 +445,77 @@ public class AliYunOssUtils {
     /**
      * 下载文件至 File 对象
      *
-     * @param ossFilePath     OSS文件路径
+     * @param obsFilePath     OBS文件路径
      * @param accessKeyId     AccessKeyId
      * @param accessKeySecret AccessKeySecret
      * @param bucketName      BucketName
      * @param endPoint        Endpoint地域节点
      * @return File对象
+     * @throws IOException 文件流转文件失败|关闭 {@code obs} 连接异常
      * @see #downloadToFile(String, String, String, String, String, String)
      */
-    public static File downloadToFile(String ossFilePath,
+    public static File downloadToFile(String obsFilePath,
                                       String accessKeyId, String accessKeySecret,
-                                      String bucketName, String endPoint) {
-        return downloadToFile(ossFilePath, accessKeyId, accessKeySecret, bucketName, endPoint, "");
+                                      String bucketName, String endPoint)
+            throws IOException {
+        return downloadToFile(obsFilePath, accessKeyId, accessKeySecret, bucketName, endPoint, "");
     }
 
     /**
      * 下载文件至 File 对象
      *
-     * @param ossFilePath     OSS文件路径
+     * @param obsFilePath     OBS文件路径
      * @param accessKeyId     AccessKeyId
      * @param accessKeySecret AccessKeySecret
      * @param bucketName      BucketName
      * @param endPoint        Endpoint地域节点
-     * @param fileName        新文件名, 为空时则为OSS文件名
+     * @param outFileName     新文件名, 为空时则为OBS文件名
      * @return File对象
+     * @throws IOException 文件流转文件失败|关闭 {@code obs} 连接异常
      */
-    public static File downloadToFile(String ossFilePath,
+    public static File downloadToFile(String obsFilePath,
                                       String accessKeyId, String accessKeySecret,
                                       String bucketName, String endPoint,
-                                      @Nullable String fileName) {
-        File file;
-        OSS ossClient = null;
-        try {
-            ossClient = new OSSClientBuilder().build(endPoint, accessKeyId, accessKeySecret);
-            ossFilePath = FileUriUtils.formatFilename(ossFilePath, true);
-            String fileBaseName = FilenameUtils.getName(fileName != null && !fileName.isEmpty() ? fileName : ossFilePath);
-            file = new File(fileBaseName);
-            ossClient.getObject(new GetObjectRequest(bucketName, ossFilePath), file);
-            return file;
-        } finally {
-            if (ossClient != null) {
-                ossClient.shutdown();
+                                      @Nullable String outFileName)
+            throws IOException {
+        File outFile;
+        try (ObsClient obsClient = new ObsClient(accessKeyId, accessKeySecret, endPoint)) {
+            obsFilePath = FileUriUtils.formatFilename(obsFilePath, true);
+            String fileBaseName = FilenameUtils.getName(outFileName != null && !outFileName.isEmpty() ? outFileName : obsFilePath);
+            outFile = new File(fileBaseName);
+            ObsObject obsObject = obsClient.getObject(bucketName, obsFilePath);
+            try(InputStream inputStream = obsObject.getObjectContent()) {
+                FileUtils.copyToFile(inputStream, outFile);
             }
+            return outFile;
         }
     }
 
     /**
      * 下载文件至 File 对象
      *
-     * @param ossFilePath     OSS文件路径
+     * @param obsFilePath     OBS文件路径
      * @param accessKeyId     AccessKeyId
      * @param accessKeySecret AccessKeySecret
      * @param bucketName      BucketName
      * @param endPoint        Endpoint地域节点
-     * @param outFile         新文件对象, 为空时则文件名为OSS文件名
+     * @param outFile         新文件对象, 为空时则文件名为OBS文件名
      * @return File对象
+     * @throws IOException 文件流转文件失败|关闭 {@code obs} 连接异常
      */
-    public static File downloadToFile(String ossFilePath,
+    public static File downloadToFile(String obsFilePath,
                                       String accessKeyId, String accessKeySecret,
                                       String bucketName, String endPoint,
-                                      @Nullable File outFile) {
-        OSS ossClient = null;
-        try {
-            ossClient = new OSSClientBuilder().build(endPoint, accessKeyId, accessKeySecret);
-            ossFilePath = FileUriUtils.formatFilename(ossFilePath, true);
-            outFile = outFile != null ? outFile : new File(ossFilePath);
-            ossClient.getObject(new GetObjectRequest(bucketName, ossFilePath), outFile);
-            return outFile;
-        } finally {
-            if (ossClient != null) {
-                ossClient.shutdown();
+                                      @Nullable File outFile)
+            throws IOException {
+        try (ObsClient obsClient = new ObsClient(accessKeyId, accessKeySecret, endPoint)) {
+            obsFilePath = FileUriUtils.formatFilename(obsFilePath, true);
+            outFile = outFile != null ? outFile : new File(obsFilePath);
+            ObsObject obsObject = obsClient.getObject(bucketName, obsFilePath);
+            try(InputStream inputStream = obsObject.getObjectContent()) {
+                FileUtils.copyToFile(inputStream, outFile);
             }
+            return outFile;
         }
     }
 
@@ -519,81 +524,88 @@ public class AliYunOssUtils {
     /**
      * 删除文件
      *
-     * @param ossFilePath     OSS文件路径
+     * @param obsFilePath     OBS文件路径
      * @param accessKeyId     AccessKeyId
      * @param accessKeySecret AccessKeySecret
      * @param bucketName      BucketName
      * @param endPoint        Endpoint地域节点
+     * @throws IOException 文件流转文件失败|关闭 {@code obs} 连接异常
      */
-    public static void deleteObject(String ossFilePath,
+    public static void deleteObject(String obsFilePath,
                                     String accessKeyId, String accessKeySecret,
-                                    String bucketName, String endPoint) {
+                                    String bucketName, String endPoint)
+            throws IOException {
         String uuid = UUIDUtils.Local.get();
-        OSS ossClient = null;
-        try {
-            ossClient = new OSSClientBuilder().build(endPoint, accessKeyId, accessKeySecret);
-            ossClient.deleteObject(bucketName, FileUriUtils.formatFilename(ossFilePath, true));
-            LOGGER.info("[{}] 删除文件 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG, uuid, bucketName, ossFilePath);
-        } finally {
-            if (ossClient != null) {
-                ossClient.shutdown();
-            }
+        try (ObsClient obsClient = new ObsClient(accessKeyId, accessKeySecret, endPoint)) {
+            obsClient.deleteObject(bucketName, FileUriUtils.formatFilename(obsFilePath, true));
+            LOGGER.info("[{}] 删除文件 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG, uuid, bucketName, obsFilePath);
         }
     }
 
     /**
      * 批量删除文件
      *
-     * @param ossFilePaths    OSS文件路径集合
-     * @param endPoint        Endpoint地域节点
-     * @param accessKeyId     AccessKeyId
-     * @param accessKeySecret AccessKeySecret
-     * @param bucketName      BucketName
-     * @return 删除成功的文件路径集合
-     * @see #deleteObject(Collection, boolean, String, String, String, String)
-     */
-    public static List<String> deleteObject(Collection<String> ossFilePaths,
-                                            String accessKeyId, String accessKeySecret,
-                                            String bucketName, String endPoint) {
-        return deleteObject(ossFilePaths, false, accessKeyId, accessKeySecret, bucketName, endPoint);
-    }
-
-    /**
-     * 批量删除文件
-     *
-     * @param ossFilePaths    OSS文件路径集合
-     * @param quiet           返回模式
-     *                        [default: false-详细模式, {true: 简单模式(删除失败的文件路径集合), false: 详细模式(删除成功的文件路径集合)}]
+     * @param obsFilePaths    OBS文件路径集合
      * @param accessKeyId     AccessKeyId
      * @param accessKeySecret AccessKeySecret
      * @param bucketName      BucketName
      * @param endPoint        Endpoint地域节点
-     * @return 返回结果参考 {@code quiet} 形参注释
+     * @return 删除失败的文件路径集合
+     * @throws IOException 关闭 {@code obs} 连接异常
      */
-    public static List<String> deleteObject(Collection<String> ossFilePaths, boolean quiet,
-                                            String accessKeyId, String accessKeySecret,
-                                            String bucketName, String endPoint) {
+    public static List<DeleteObjectsResult.ErrorResult> deleteObjectResError(Collection<String> obsFilePaths,
+                                                                             String accessKeyId, String accessKeySecret,
+                                                                             String bucketName, String endPoint)
+            throws IOException {
         String uuid = UUIDUtils.Local.get();
-        if (ossFilePaths.isEmpty()) {
-            LOGGER.warn("[{}] 批量删除文件为空 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG,
-                    uuid, bucketName, ossFilePaths);
+        if (obsFilePaths.isEmpty()) {
+            LOGGER.warn("[{}] 批量删除文件为空 [uuid: {}, bucketName: {}]", LOG_TAG, uuid, bucketName);
             return new ArrayList<>();
         }
-        OSS ossClient = null;
-        try {
-            ossClient = new OSSClientBuilder().build(endPoint, accessKeyId, accessKeySecret);
-            List<String> formatOssFilePaths = ossFilePaths.stream().map(path ->
-                    FileUriUtils.formatFilename(path, true)).collect(Collectors.toList());
-            DeleteObjectsRequest deleteObjectsRequest = new DeleteObjectsRequest(bucketName).withKeys(formatOssFilePaths);
-            deleteObjectsRequest.setQuiet(quiet);
-            DeleteObjectsResult deleteObjectsResult = ossClient.deleteObjects(deleteObjectsRequest);
-            LOGGER.info("[{}] 批量删除文件 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG,
-                    uuid, bucketName, ossFilePaths);
-            return deleteObjectsResult.getDeletedObjects();
-        } finally {
-            if (ossClient != null) {
-                ossClient.shutdown();
-            }
+        try (ObsClient obsClient = new ObsClient(accessKeyId, accessKeySecret, endPoint)) {
+            DeleteObjectsRequest deleteObjectsRequest = new DeleteObjectsRequest(bucketName);
+            obsFilePaths.stream()
+                    .map(path -> FileUriUtils.formatFilename(path, true))
+                    .forEach(deleteObjectsRequest::addKeyAndVersion);
+            DeleteObjectsResult deleteObjectsResult = obsClient.deleteObjects(deleteObjectsRequest);
+            List<DeleteObjectsResult.ErrorResult> errorResults = deleteObjectsResult.getErrorResults();
+            LOGGER.info("[{}] 删除文件 [uuid: {}, bucketName: {}, errorResults: {}]", LOG_TAG,
+                    uuid, bucketName, JSONObject.toJSONString(errorResults));
+            return errorResults;
+        }
+    }
+
+    /**
+     * 批量删除文件
+     *
+     * @param obsFilePaths    OBS文件路径集合
+     * @param accessKeyId     AccessKeyId
+     * @param accessKeySecret AccessKeySecret
+     * @param bucketName      BucketName
+     * @param endPoint        Endpoint地域节点
+     * @return 删除成功的文件路径集合
+     * @throws IOException 关闭 {@code obs} 连接异常
+     */
+    public static List<DeleteObjectsResult.DeleteObjectResult> deleteObjectResSuccess(Collection<String> obsFilePaths,
+                                                                                      String accessKeyId, String accessKeySecret,
+                                                                                      String bucketName, String endPoint)
+            throws IOException {
+        String uuid = UUIDUtils.Local.get();
+        if (obsFilePaths.isEmpty()) {
+            LOGGER.warn("[{}] 批量删除文件为空 [uuid: {}, bucketName: {}]", LOG_TAG, uuid, bucketName);
+            return new ArrayList<>();
+        }
+        try (ObsClient obsClient = new ObsClient(accessKeyId, accessKeySecret, endPoint)) {
+            DeleteObjectsRequest deleteObjectsRequest = new DeleteObjectsRequest(bucketName);
+            obsFilePaths.stream()
+                    .map(path -> FileUriUtils.formatFilename(path, true))
+                    .forEach(deleteObjectsRequest::addKeyAndVersion);
+            DeleteObjectsResult deleteObjectsResult = obsClient.deleteObjects(deleteObjectsRequest);
+            List<DeleteObjectsResult.DeleteObjectResult> successResults = deleteObjectsResult.getDeletedObjectResults()
+                    .stream().filter(DeleteObjectsResult.DeleteObjectResult::isDeleteMarker).collect(Collectors.toList());
+            LOGGER.info("[{}] 批量删除文件 [uuid: {}, bucketName: {}, successResults: {}]", LOG_TAG,
+                    uuid, bucketName, JSONObject.toJSONString(successResults));
+            return successResults;
         }
     }
 
@@ -610,15 +622,15 @@ public class AliYunOssUtils {
      * @param uploadBasePath  上传主路径, 建议填写业务模块相关名称
      * @param uploadSubPath   上传子路径, 建议填写文件类型
      * @return 上传后的路径集合
-     * @throws AliYunOssUploadException 阿里云文件上传异常
-     * @throws IOException              获取文件流异常
+     * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
+     * @throws IOException                   获取文件流异常
      * @see #baseFileUploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String)
      */
     public static List<String> baseFileUploadByMultipart(Collection<MultipartFile> files,
                                                          String accessKeyId, String accessKeySecret,
                                                          String bucketName, String endPoint,
                                                          String uploadBasePath, String uploadSubPath)
-            throws AliYunOssUploadException, IOException {
+            throws HuaWeiCloudObsUploadException, IOException {
         return baseFileUploadByMultipart(new LinkedList<>(files), null,
                 accessKeyId, accessKeySecret, bucketName, endPoint, uploadBasePath, uploadSubPath);
     }
@@ -635,36 +647,30 @@ public class AliYunOssUtils {
      * @param uploadBasePath  上传主路径, 建议填写业务模块相关名称
      * @param uploadSubPath   上传子路径, 建议填写文件类型
      * @return 上传后的路径集合
-     * @throws AliYunOssUploadException 阿里云文件上传异常
-     * @throws IOException              获取文件流异常
+     * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
+     * @throws IOException                   获取文件流异常
      */
     public static List<String> baseFileUploadByMultipart(LinkedList<MultipartFile> uploadFiles,
                                                          @Nullable LinkedList<String> newFileNames,
                                                          String accessKeyId, String accessKeySecret,
                                                          String bucketName, String endPoint,
                                                          String uploadBasePath, String uploadSubPath)
-            throws AliYunOssUploadException, IOException {
+            throws HuaWeiCloudObsUploadException, IOException {
         if (uploadFiles.stream().anyMatch(item -> item == null || item.isEmpty())) {
-            throw new AliYunOssUploadException(AliYunOssUploadErrorEnum.NOT_EXISTS);
+            throw new HuaWeiCloudObsUploadException(HuaWeCloudObsUploadErrorEnum.NOT_EXISTS);
         }
         if (newFileNames != null && newFileNames.size() != uploadFiles.size()) {
-            throw new AliYunOssUploadException(AliYunOssUploadErrorEnum.ORIGIN_DATA_AND_FILE_NAME_SIZE_MISMATCH);
+            throw new HuaWeiCloudObsUploadException(HuaWeCloudObsUploadErrorEnum.ORIGIN_DATA_AND_FILE_NAME_SIZE_MISMATCH);
         }
         List<String> resultFilePaths = new ArrayList<>();
-        OSS ossClient = null;
-        try {
-            ossClient = new OSSClientBuilder().build(endPoint, accessKeyId, accessKeySecret);
+        try (ObsClient obsClient = new ObsClient(accessKeyId, accessKeySecret, endPoint)) {
             for (int i = 0; i < uploadFiles.size(); i++) {
                 String fileRelativeName = FileUriUtils.concatFilename(uploadFiles.get(i),
                         newFileNames != null ? newFileNames.get(i) : null, uploadBasePath, uploadSubPath);
-                ossClient.putObject(bucketName, fileRelativeName, uploadFiles.get(i).getInputStream());
+                obsClient.putObject(bucketName, fileRelativeName, uploadFiles.get(i).getInputStream());
                 String resultFilePath = FileUriUtils.formatFilename(FilenameUtils.concat("/", fileRelativeName),
                         false);
                 resultFilePaths.add(resultFilePath);
-            }
-        } finally {
-            if (ossClient != null) {
-                ossClient.shutdown();
             }
         }
         return resultFilePaths;
@@ -681,14 +687,15 @@ public class AliYunOssUtils {
      * @param uploadBasePath  上传主路径, 建议填写业务模块相关名称
      * @param uploadSubPath   上传子路径, 建议填写文件类型
      * @return 上传后的路径
-     * @throws AliYunOssUploadException 阿里云文件上传异常
+     * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
+     * @throws IOException                   关闭 {@code obs} 连接异常
      * @see #baseFileUploadByFile(LinkedList, LinkedList, String, String, String, String, String, String)
      */
-    private static List<String> baseFileUploadByFile(Collection<File> uploadFiles,
-                                                     String accessKeyId, String accessKeySecret,
-                                                     String bucketName, String endPoint,
-                                                     String uploadBasePath, String uploadSubPath)
-            throws AliYunOssUploadException {
+    public static List<String> baseFileUploadByFile(Collection<File> uploadFiles,
+                                                    String accessKeyId, String accessKeySecret,
+                                                    String bucketName, String endPoint,
+                                                    String uploadBasePath, String uploadSubPath)
+            throws HuaWeiCloudObsUploadException, IOException {
         return baseFileUploadByFile(new LinkedList<>(uploadFiles), null,
                 accessKeyId, accessKeySecret, bucketName, endPoint, uploadBasePath, uploadSubPath);
     }
@@ -705,41 +712,36 @@ public class AliYunOssUtils {
      * @param uploadBasePath  上传主路径, 建议填写业务模块相关名称
      * @param uploadSubPath   上传子路径, 建议填写文件类型
      * @return 上传后的路径
-     * @throws AliYunOssUploadException 阿里云文件上传异常
+     * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
+     * @throws IOException                   关闭 {@code obs} 连接异常
      */
-    private static List<String> baseFileUploadByFile(LinkedList<File> uploadFiles,
+    public static List<String> baseFileUploadByFile(LinkedList<File> uploadFiles,
                                                     @Nullable LinkedList<String> newFileNames,
                                                     String accessKeyId, String accessKeySecret,
                                                     String bucketName, String endPoint,
                                                     String uploadBasePath, String uploadSubPath)
-            throws AliYunOssUploadException {
+            throws HuaWeiCloudObsUploadException, IOException {
         if (uploadFiles.stream().anyMatch(item -> item == null || !item.exists())) {
-            throw new AliYunOssUploadException(AliYunOssUploadErrorEnum.NOT_EXISTS);
+            throw new HuaWeiCloudObsUploadException(HuaWeCloudObsUploadErrorEnum.NOT_EXISTS);
         }
         if (uploadFiles.stream().anyMatch(item -> !item.isFile())) {
-            throw new AliYunOssUploadException(AliYunOssUploadErrorEnum.NOT_FILE);
+            throw new HuaWeiCloudObsUploadException(HuaWeCloudObsUploadErrorEnum.NOT_FILE);
         }
         if (newFileNames != null && newFileNames.size() != uploadFiles.size()) {
-            throw new AliYunOssUploadException(AliYunOssUploadErrorEnum.ORIGIN_DATA_AND_FILE_NAME_SIZE_MISMATCH);
+            throw new HuaWeiCloudObsUploadException(HuaWeCloudObsUploadErrorEnum.ORIGIN_DATA_AND_FILE_NAME_SIZE_MISMATCH);
         }
         List<String> resultFilePaths = new ArrayList<>();
-        OSS ossClient = null;
-        try {
-            ossClient = new OSSClientBuilder().build(endPoint, accessKeyId, accessKeySecret);
+        try (ObsClient obsClient = new ObsClient(accessKeyId, accessKeySecret, endPoint)) {
             for (int i = 0; i < uploadFiles.size(); i++) {
                 String fileAbsolutePath = uploadFiles.get(i).getAbsolutePath();
                 String fileRelativeName = FileUriUtils.concatFilename(fileAbsolutePath,
                         newFileNames != null ? newFileNames.get(i) : null, uploadBasePath, uploadSubPath);
-                ossClient.putObject(bucketName, fileRelativeName, new File(fileAbsolutePath));
+                obsClient.putObject(bucketName, fileRelativeName, new File(fileAbsolutePath));
                 String resultFilePath = FileUriUtils.formatFilename(FilenameUtils.concat("/", fileRelativeName),
                         false);
                 resultFilePaths.add(resultFilePath);
             }
             return resultFilePaths;
-        } finally {
-            if (ossClient != null) {
-                ossClient.shutdown();
-            }
         }
     }
 }

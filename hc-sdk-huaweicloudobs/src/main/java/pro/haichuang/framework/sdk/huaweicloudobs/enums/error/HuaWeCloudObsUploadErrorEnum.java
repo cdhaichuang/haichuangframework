@@ -1,4 +1,4 @@
-package pro.haichuang.framework.sdk.aliyunoss.enums.error;
+package pro.haichuang.framework.sdk.huaweicloudobs.enums.error;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import pro.haichuang.framework.base.enums.BaseEnum;
@@ -12,42 +12,43 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * @version 1.0.0
  * @since 1.0.0
  */
-public enum AliYunOssUploadErrorEnum implements BaseEnum {
+public enum HuaWeCloudObsUploadErrorEnum implements BaseEnum {
 
     /**
      * 上传文件异常
      */
-    UPLOAD_FILE_ERROR("SA10200", "上传文件异常"),
+    UPLOAD_FILE_ERROR("H0200", "上传文件异常"),
 
     /**
      * 上传文件主路径为空
      */
-    UPLOAD_BASE_PATH_IS_NULL("SA10201", "上传文件主路径为空"),
+    UPLOAD_BASE_PATH_IS_NULL("H0201", "上传文件主路径为空"),
 
     /**
      * 上传文件子路径为空
      */
-    UPLOAD_SUB_PATH_IS_NULL("SA10202", "上传文件子路径为空"),
+    UPLOAD_SUB_PATH_IS_NULL("H0202", "上传文件子路径为空"),
+
 
     /**
      * 原始数据异常
      */
-    ORIGIN_DATA_ERROR("SA10210", "原始数据异常"),
+    ORIGIN_DATA_ERROR("H0210", "原始数据异常"),
 
     /**
      * 上传文件不存在
      */
-    NOT_EXISTS("SA10211", "上传文件不存在"),
+    NOT_EXISTS("H0211", "上传文件不存在"),
 
     /**
      * 必须为文件
      */
-    NOT_FILE("SA10212", "上传数据必须为文件"),
+    NOT_FILE("H0212", "上传数据必须为文件"),
 
     /**
      * 原始数据与文件名长度不匹配
      */
-    ORIGIN_DATA_AND_FILE_NAME_SIZE_MISMATCH("SA10213", "原始数据与文件名长度不匹配");
+    ORIGIN_DATA_AND_FILE_NAME_SIZE_MISMATCH("H0213", "原始数据与文件名长度不匹配");
 
     /**
      * 枚举值
@@ -65,7 +66,7 @@ public enum AliYunOssUploadErrorEnum implements BaseEnum {
      * @param value        枚举值
      * @param reasonPhrase 枚举信息
      */
-    AliYunOssUploadErrorEnum(String value, String reasonPhrase) {
+    HuaWeCloudObsUploadErrorEnum(String value, String reasonPhrase) {
         this.value = value;
         this.reasonPhrase = reasonPhrase;
     }
@@ -86,7 +87,7 @@ public enum AliYunOssUploadErrorEnum implements BaseEnum {
     }
 
     @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-    public static AliYunOssUploadErrorEnum resolve(String value) {
-        return BaseEnum.resolve(value, AliYunOssUploadErrorEnum.class);
+    public static HuaWeCloudObsUploadErrorEnum resolve(String value) {
+        return BaseEnum.resolve(value, HuaWeCloudObsUploadErrorEnum.class);
     }
 }

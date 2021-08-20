@@ -1,4 +1,4 @@
-package pro.haichuang.framework.sdk.aliyunoss.enums.upload;
+package pro.haichuang.framework.base.enums.upload;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import pro.haichuang.framework.base.enums.BaseEnum;
