@@ -68,7 +68,7 @@ public class FileUriUtils {
      * @return 格式化后的文件名
      */
     public static String formatFilename(String filename, boolean isReplaceFirstSeparator) {
-        filename = filename.replaceAll("\\\\", "/").replaceAll("//", "/");
+        filename = FilenameUtils.separatorsToUnix(filename);
         return isReplaceFirstSeparator && (StringUtils.equals(String.valueOf(filename.charAt(0)), "/"))
                 ? filename.substring(1) : filename;
     }

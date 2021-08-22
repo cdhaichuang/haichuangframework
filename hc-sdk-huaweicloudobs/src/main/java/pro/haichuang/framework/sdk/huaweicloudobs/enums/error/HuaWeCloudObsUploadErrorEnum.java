@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import pro.haichuang.framework.base.enums.BaseEnum;
 
 /**
- * 阿里云OSS上传异常枚举
+ * 华为云OBS上传异常枚举
  *
- * <p>该类为阿里云OSS上传异常枚举
+ * <p>该类为华为云OBS上传异常枚举
  *
  * @author JiYinchuan
  * @version 1.0.0

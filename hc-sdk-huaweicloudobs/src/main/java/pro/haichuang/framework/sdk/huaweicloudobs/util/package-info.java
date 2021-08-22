@@ -1,9 +1,9 @@
 /**
- * 阿里云OSS核心工具包
+ * 华为云OBS核心工具包
  */
 @NonNullApi
 @NonNullFields
-package pro.haichuang.framework.sdk.aliyunoss.util;
+package pro.haichuang.framework.sdk.huaweicloudobs.util;
 
 import org.springframework.lang.NonNullApi;
 import org.springframework.lang.NonNullFields;

@@ -4,7 +4,7 @@ import pro.haichuang.framework.base.exception.ApplicationException;
 import pro.haichuang.framework.sdk.huaweicloudobs.enums.error.HuaWeCloudObsConfigErrorEnum;
 
 /**
- * 阿里云OSS配置自定义异常
+ * 华为云OBS配置自定义异常
  *
  * @author JiYinchuan
  * @version 1.0.0
