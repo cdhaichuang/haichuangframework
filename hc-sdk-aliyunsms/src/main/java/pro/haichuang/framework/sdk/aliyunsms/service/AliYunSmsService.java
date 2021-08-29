@@ -5,9 +5,14 @@ import com.alibaba.fastjson.JSONObject;
 /**
  * AliYunSmsService
  *
+ * <p>该类为 {@code aliyunsms} 第三方操作核心接口, 项目中所有 {@code aliyunsms} 的操作均使用此接口
+ * <p>该类已默认注入到 {@code spring} 中, 默认实现为 {@link DefaultAliYunSmsServiceImpl}, 如需自定义实现请实现该接口并手动注入该接口
+ *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
  */
+@SuppressWarnings({"unused", "UnusedReturnValue"})
 public interface AliYunSmsService {
 
     /**
@@ -21,8 +26,7 @@ public interface AliYunSmsService {
      * @param templateParam 短信模板变量替换JSON串, 友情提示: 如果JSON中需要带换行符, 请参照标准的JSON协议
      * @return 执行结果
      */
-    boolean send(String signName, String templateCode,
-                 String phoneNumbers, JSONObject templateParam);
+    boolean send(String signName, String templateCode, String phoneNumbers, JSONObject templateParam);
 
     /**
      * 发送短信验证码

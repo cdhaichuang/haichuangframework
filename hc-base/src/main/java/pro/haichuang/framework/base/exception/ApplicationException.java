@@ -33,7 +33,7 @@ public class ApplicationException extends RuntimeException {
     protected String errorMessage;
 
     /**
-     * 提示信息
+     * 用户提示信息
      */
     protected String userTip;
 
@@ -59,7 +59,7 @@ public class ApplicationException extends RuntimeException {
      * 构造器
      *
      * @param baseEnum 枚举基类
-     * @param userTip  提示信息
+     * @param userTip  用户提示信息
      */
     public ApplicationException(BaseEnum baseEnum, @Nullable String userTip) {
         super("errorCode: " + baseEnum.value() + ", errorMessage: " + baseEnum.getReasonPhrase() + ", userTip: " + userTip);

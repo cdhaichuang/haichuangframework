@@ -10,16 +10,21 @@ import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pro.haichuang.framework.base.exception.ThirdPartyException;
+import pro.haichuang.framework.base.exception.EnumIllegalArgumentException;
 import pro.haichuang.framework.base.util.common.UUIDUtils;
+import pro.haichuang.framework.sdk.aliyunsms.enums.error.AliYunSmsSendErrorEnum;
+import pro.haichuang.framework.sdk.aliyunsms.exception.AliYunSmsSendException;
 
 import java.util.List;
 
 /**
  * 阿里云短信工具类
  *
+ * <p>该类为 {@code aliyunsms} 相关操作工具类, 提供了对 {@code aliyunsms} 相关操作的封装
+ *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
  */
 @SuppressWarnings("SpellCheckingInspection")
 public class AliYunSmsUtils {
@@ -56,27 +61,22 @@ public class AliYunSmsUtils {
      * @param templateCode    短信模板ID, 发送国际/港澳台消息时, 请使用国际/港澳台短信模版
      * @param phoneNumbers    短信接收号码, 支持以逗号分隔的形式进行批量调用
      *                        批量上限为1000个手机号码, 批量调用相对于单条调用及时性稍有延迟, 验证码类型的短信推荐使用单条调用的方式
-     *                        发送国际/港澳台消息时, 接收号码格式为: 国际区号+号码, 如"85200000000"。
+     *                        发送国际/港澳台消息时, 接收号码格式为: 国际区号+号码, 如"85200000000"
      * @param templateParam   短信模板变量替换JSON串, 友情提示: 如果JSON中需要带换行符, 请参照标准的JSON协议
      * @return 执行结果
+     * @throws AliYunSmsSendException 阿里云短信发送异常
      */
     public static boolean send(String accessKeyId, String accessKeySecret,
                                String signName, String templateCode,
-                               String phoneNumbers, JSONObject templateParam) {
+                               String phoneNumbers, JSONObject templateParam)
+            throws AliYunSmsSendException {
         String uuid = UUIDUtils.Local.get();
         CommonRequest request = createRequest();
         request.putQueryParameter("PhoneNumbers", phoneNumbers);
         request.putQueryParameter("SignName", signName);
         request.putQueryParameter("TemplateCode", templateCode);
         request.putQueryParameter("TemplateParam", templateParam.toJSONString());
-        try {
-            getClient(accessKeyId, accessKeySecret).getCommonResponse(request);
-            return true;
-        } catch (ClientException e) {
-            LOGGER.error("[{}] 发送验证码异常 [uuid: {}, errorCode: {}, errorMessage: {}]", LOG_TAG, uuid,
-                    e.getErrCode(), e.getErrMsg());
-            throw new ThirdPartyException(e.getErrCode(), e.getErrMsg());
-        }
+        return baseSend(accessKeyId, accessKeySecret, uuid, request);
     }
 
     /**
@@ -90,24 +90,19 @@ public class AliYunSmsUtils {
      *                        批量调用相对于单条调用及时性稍有延迟, 验证码类型的短信推荐使用单条调用的方式
      * @param templateParam   短信模板变量替换JSON串, 友情提示: 如果JSON中需要带换行符, 请参照标准的JSON协议
      * @return 执行结果
+     * @throws AliYunSmsSendException 阿里云短信发送异常
      */
     public static boolean sendBatch(String accessKeyId, String accessKeySecret,
                                     List<String> signNames, String templateCode,
-                                    List<String> phones, JSONArray templateParam) {
+                                    List<String> phones, JSONArray templateParam)
+            throws AliYunSmsSendException {
         String uuid = UUIDUtils.Local.get();
         CommonRequest request = createRequest();
         request.putQueryParameter("PhoneNumberJson", JSONObject.toJSONString(phones));
         request.putQueryParameter("SignNameJson", JSONObject.toJSONString(signNames));
         request.putQueryParameter("TemplateCode", templateCode);
         request.putQueryParameter("TemplateParamJson", templateParam.toJSONString());
-        try {
-            getClient(accessKeyId, accessKeySecret).getCommonResponse(request);
-            return true;
-        } catch (ClientException e) {
-            LOGGER.error("[{}] 批量发送验证码异常 [uuid: {}, errorCode: {}, errorMessage: {}]", LOG_TAG, uuid,
-                    e.getErrCode(), e.getErrMsg());
-            throw new ThirdPartyException(e.getErrCode(), e.getErrMsg());
-        }
+        return baseSend(accessKeyId, accessKeySecret, uuid, request);
     }
 
     /**
@@ -134,5 +129,31 @@ public class AliYunSmsUtils {
         request.setSysVersion(SYS_VERSION);
         request.setSysAction(SYS_ACTION);
         return request;
+    }
+
+    /**
+     * 发送短信
+     *
+     * @param accessKeyId     AccessKeyId
+     * @param accessKeySecret AccessKeySecret
+     * @param uuid            当前线程唯一UUID
+     * @param request         CommonRequest
+     * @return 执行结果
+     * @throws AliYunSmsSendException 阿里云短信发送异常
+     */
+    private static boolean baseSend(String accessKeyId, String accessKeySecret, String uuid, CommonRequest request)
+            throws AliYunSmsSendException {
+        try {
+            getClient(accessKeyId, accessKeySecret).getCommonResponse(request);
+            return true;
+        } catch (ClientException e) {
+            try {
+                LOGGER.error("[{}] 发送验证码异常 [uuid: {}, requestId: {}, errorCode: {}, errorMessage: {}, errorType: {}, errorDescription: {}]",
+                        LOG_TAG, uuid, e.getRequestId(), e.getErrCode(), e.getErrMsg(), e.getErrorType(), e.getErrorDescription());
+                throw new AliYunSmsSendException(AliYunSmsSendErrorEnum.resolve(e.getErrCode()));
+            } catch (EnumIllegalArgumentException e1) {
+                throw new AliYunSmsSendException(AliYunSmsSendErrorEnum.UNKONE_ERROR);
+            }
+        }
     }
 }

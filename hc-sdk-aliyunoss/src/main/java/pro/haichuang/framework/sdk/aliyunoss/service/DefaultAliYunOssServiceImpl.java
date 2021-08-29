@@ -4,11 +4,12 @@ import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.web.multipart.MultipartFile;
-import pro.haichuang.framework.base.util.common.ValidateUtils;
+import pro.haichuang.framework.base.enums.upload.UploadTypeEnum;
 import pro.haichuang.framework.sdk.aliyunoss.config.properties.AliYunOssProperties;
 import pro.haichuang.framework.sdk.aliyunoss.enums.error.AliYunOssConfigErrorEnum;
 import pro.haichuang.framework.sdk.aliyunoss.enums.error.AliYunOssUploadErrorEnum;
-import pro.haichuang.framework.base.enums.upload.UploadTypeEnum;
+import pro.haichuang.framework.sdk.aliyunoss.exception.AliYunOssConfigException;
+import pro.haichuang.framework.sdk.aliyunoss.exception.AliYunOssUploadException;
 import pro.haichuang.framework.sdk.aliyunoss.util.AliYunOssUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -243,14 +244,18 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
         String bucketName = aliYunOssProperties.getBucketName();
         String endpoint = aliYunOssProperties.getEndpoint();
 
-        ValidateUtils.validate(accessKeyId == null || accessKeyId.isEmpty(),
-                AliYunOssConfigErrorEnum.ACCESS_KEY_ID_NOT_CONFIGURED);
-        ValidateUtils.validate(accessKeySecret == null || accessKeySecret.isEmpty(),
-                AliYunOssConfigErrorEnum.ACCESS_KEY_SECRET_NOT_CONFIGURED);
-        ValidateUtils.validate(bucketName == null || bucketName.isEmpty(),
-                AliYunOssConfigErrorEnum.BUCKET_NAME_NOT_CONFIGURED);
-        ValidateUtils.validate(endpoint == null || endpoint.isEmpty(),
-                AliYunOssConfigErrorEnum.END_POINT_NOT_CONFIGURED);
+        if (accessKeyId == null || accessKeyId.isEmpty()) {
+            throw new AliYunOssConfigException(AliYunOssConfigErrorEnum.ACCESS_KEY_ID_NOT_CONFIGURED);
+        }
+        if (accessKeySecret == null || accessKeySecret.isEmpty()) {
+            throw new AliYunOssConfigException(AliYunOssConfigErrorEnum.ACCESS_KEY_SECRET_NOT_CONFIGURED);
+        }
+        if (bucketName == null || bucketName.isEmpty()) {
+            throw new AliYunOssConfigException(AliYunOssConfigErrorEnum.BUCKET_NAME_NOT_CONFIGURED);
+        }
+        if (endpoint == null || endpoint.isEmpty()) {
+            throw new AliYunOssConfigException(AliYunOssConfigErrorEnum.END_POINT_NOT_CONFIGURED);
+        }
     }
 
     /**
@@ -260,9 +265,11 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
      * @param uploadTypeEnum 上传子路径
      */
     private void validateParams(@Nullable String pathOfBizName, @Nullable UploadTypeEnum uploadTypeEnum) {
-        ValidateUtils.validate(pathOfBizName == null || pathOfBizName.isEmpty(),
-                AliYunOssUploadErrorEnum.UPLOAD_BASE_PATH_IS_NULL);
-        ValidateUtils.validate(uploadTypeEnum == null,
-                AliYunOssUploadErrorEnum.UPLOAD_SUB_PATH_IS_NULL);
+        if (pathOfBizName == null || pathOfBizName.isEmpty()) {
+            throw new AliYunOssUploadException(AliYunOssUploadErrorEnum.UPLOAD_BASE_PATH_IS_NULL);
+        }
+        if (uploadTypeEnum == null) {
+            throw new AliYunOssUploadException(AliYunOssUploadErrorEnum.UPLOAD_SUB_PATH_IS_NULL);
+        }
     }
 }

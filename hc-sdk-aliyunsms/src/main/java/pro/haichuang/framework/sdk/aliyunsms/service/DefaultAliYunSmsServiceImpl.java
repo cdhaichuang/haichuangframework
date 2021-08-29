@@ -3,16 +3,19 @@ package pro.haichuang.framework.sdk.aliyunsms.service;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
-import pro.haichuang.framework.base.enums.error.client.RequestParamErrorEnum;
-import pro.haichuang.framework.base.util.common.ValidateUtils;
 import pro.haichuang.framework.sdk.aliyunsms.config.properties.AliYunSmsProperties;
+import pro.haichuang.framework.sdk.aliyunsms.enums.error.AliYunSmsConfigErrorEnum;
+import pro.haichuang.framework.sdk.aliyunsms.exception.AliYunSmsConfigException;
 import pro.haichuang.framework.sdk.aliyunsms.util.AliYunSmsUtils;
 
 /**
  * AliYunSmsService默认实现
  *
+ * <p>该类为 {@link AliYunSmsService} 默认实现
+ *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
  */
 public class DefaultAliYunSmsServiceImpl implements AliYunSmsService {
 
@@ -22,20 +25,27 @@ public class DefaultAliYunSmsServiceImpl implements AliYunSmsService {
     @Override
     public boolean send(@Nullable String signName, @Nullable String templateCode,
                         String phoneNumbers, JSONObject templateParam) {
-        validateProperties(false, false);
-        ValidateUtils.validate(signName == null || signName.isEmpty(),
-                RequestParamErrorEnum.PARAMETER_EMPTY, "[短信签名] 不能为空");
-        ValidateUtils.validate(templateCode == null || templateCode.isEmpty(),
-                RequestParamErrorEnum.PARAMETER_EMPTY, "[短信模板ID] 不能为空");
+        validateProperties();
+        if (signName == null || signName.isEmpty()) {
+            throw new AliYunSmsConfigException(AliYunSmsConfigErrorEnum.SIGN_NAME_NOT_CONFIGURED);
+        }
+        if (templateCode == null || templateCode.isEmpty()) {
+            throw new AliYunSmsConfigException(AliYunSmsConfigErrorEnum.TEMPLATE_CODE_NOT_CONFIGURED);
+        }
         return AliYunSmsUtils.send(aliYunSmsProperties.getAccessKeyId(),
                 aliYunSmsProperties.getAccessKeySecret(), signName, templateCode, phoneNumbers, templateParam);
     }
 
     @Override
     public boolean send(@Nullable String templateCode, String phoneNumbers, JSONObject templateParam) {
-        validateProperties(true, false);
-        ValidateUtils.validate(templateCode == null || templateCode.isEmpty(),
-                RequestParamErrorEnum.PARAMETER_EMPTY, "[短信模板ID] 不能为空");
+        validateProperties();
+        String signName = aliYunSmsProperties.getSignName();
+        if (signName == null || signName.isEmpty()) {
+            throw new AliYunSmsConfigException(AliYunSmsConfigErrorEnum.SIGN_NAME_NOT_CONFIGURED);
+        }
+        if (templateCode == null || templateCode.isEmpty()) {
+            throw new AliYunSmsConfigException(AliYunSmsConfigErrorEnum.TEMPLATE_CODE_NOT_CONFIGURED);
+        }
         return AliYunSmsUtils.send(aliYunSmsProperties.getAccessKeyId(),
                 aliYunSmsProperties.getAccessKeySecret(), aliYunSmsProperties.getSignName(),
                 templateCode, phoneNumbers, templateParam);
@@ -43,28 +53,32 @@ public class DefaultAliYunSmsServiceImpl implements AliYunSmsService {
 
     @Override
     public boolean send(String phoneNumbers, JSONObject templateParam) {
-        validateProperties(true, true);
+        validateProperties();
+        String signName = aliYunSmsProperties.getSignName();
+        String defaultTemplateCode = aliYunSmsProperties.getDefaultTemplateCode();
+        if (signName == null || signName.isEmpty()) {
+            throw new AliYunSmsConfigException(AliYunSmsConfigErrorEnum.SIGN_NAME_NOT_CONFIGURED);
+        }
+        if (defaultTemplateCode == null || defaultTemplateCode.isEmpty()) {
+            throw new AliYunSmsConfigException(AliYunSmsConfigErrorEnum.TEMPLATE_CODE_NOT_CONFIGURED);
+        }
         return AliYunSmsUtils.send(aliYunSmsProperties.getAccessKeyId(),
                 aliYunSmsProperties.getAccessKeySecret(), aliYunSmsProperties.getSignName(),
-                aliYunSmsProperties.getTemplateCode(), phoneNumbers, templateParam);
+                aliYunSmsProperties.getDefaultTemplateCode(), phoneNumbers, templateParam);
     }
 
     /**
      * 验证配置文件
-     *
-     * @param isValidateSignName     是否验证短信签名
-     * @param isValidateTemplateCode 是否验证短信模版ID
      */
-    private void validateProperties(boolean isValidateSignName, boolean isValidateTemplateCode) {
-        ValidateUtils.validate(aliYunSmsProperties.getRegionId() == null,
-                RequestParamErrorEnum.PARAMETER_EMPTY, "[RegionId] 未在Yaml进行配置");
-        ValidateUtils.validate(aliYunSmsProperties.getAccessKeyId() == null,
-                RequestParamErrorEnum.PARAMETER_EMPTY, "[AccessKeyId] 未在Yaml进行配置");
-        ValidateUtils.validate(aliYunSmsProperties.getAccessKeySecret() == null,
-                RequestParamErrorEnum.PARAMETER_EMPTY, "[AccessKeySecret] 未在Yaml进行配置");
-        ValidateUtils.validate(isValidateSignName && aliYunSmsProperties.getSignName() == null,
-                RequestParamErrorEnum.PARAMETER_EMPTY, "[短信签名] 未在Yaml进行配置");
-        ValidateUtils.validate(isValidateTemplateCode && aliYunSmsProperties.getTemplateCode() == null,
-                RequestParamErrorEnum.PARAMETER_EMPTY, "[短信模板ID] 未在Yaml进行配置");
+    private void validateProperties() {
+        String accessKeyId = aliYunSmsProperties.getAccessKeyId();
+        String accessKeySecret = aliYunSmsProperties.getAccessKeySecret();
+
+        if (accessKeyId == null || accessKeyId.isEmpty()) {
+            throw new AliYunSmsConfigException(AliYunSmsConfigErrorEnum.ACCESS_KEY_ID_NOT_CONFIGURED);
+        }
+        if (accessKeySecret == null || accessKeySecret.isEmpty()) {
+            throw new AliYunSmsConfigException(AliYunSmsConfigErrorEnum.ACCESS_KEY_SECRET_NOT_CONFIGURED);
+        }
     }
 }

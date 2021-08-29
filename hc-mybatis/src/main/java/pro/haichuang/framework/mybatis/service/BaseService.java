@@ -272,7 +272,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * 验证ID获取是否存在
      *
      * @param id           ID
-     * @param errorUserTip 错误提示信息
+     * @param errorUserTip 用户提示信息
      * @return 是否存在 [true: 存在, false: 不存在]
      * @throws MybatisServiceApplication ID为空
      */
@@ -299,7 +299,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * 批量验证ID获取是否存在
      *
      * @param ids          IDs
-     * @param errorUserTip 错误提示信息
+     * @param errorUserTip 用户提示信息
      * @return 是否存在 [true: 存在, false: 不存在]
      * @throws MybatisServiceApplication ID为空
      */
@@ -326,7 +326,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * 验证ID获取数量
      *
      * @param id           ID
-     * @param errorUserTip 错误提示信息
+     * @param errorUserTip 用户提示信息
      * @return 数量
      * @throws MybatisServiceApplication ID为空
      */
@@ -352,7 +352,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * 批量验证ID获取数量
      *
      * @param ids          IDs
-     * @param errorUserTip 错误提示信息
+     * @param errorUserTip 用户提示信息
      * @return 数量
      * @throws MybatisServiceApplication ID为空
      */
@@ -379,7 +379,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * 验证ID并获取DO
      *
      * @param id           ID
-     * @param errorUserTip 错误提示信息
+     * @param errorUserTip 用户提示信息
      * @return DO
      * @throws MybatisServiceApplication ID为空|ID错误
      */
@@ -420,7 +420,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * 验证IDs并获取DOs
      *
      * @param ids          IDs
-     * @param errorUserTip 错误提示信息
+     * @param errorUserTip 用户提示信息
      * @return DOs
      * @throws MybatisServiceApplication ID为空|ID错误
      */
@@ -440,7 +440,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * 验证IDs并获取DOs
      *
      * @param wrapper      wrapper
-     * @param errorUserTip 错误提示信息
+     * @param errorUserTip 用户提示信息
      * @return DOs
      * @throws MybatisServiceApplication ID为空|ID错误
      */
@@ -470,7 +470,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * 默认根据 {@link BaseDO#MODIFY_TIME} 进行排序
      *
      * @param pageRequest  PageRequest
-     * @param errorUserTip 错误提示信息
+     * @param errorUserTip 用户提示信息
      * @return PageDTO
      * @throws MybatisServiceApplication ID为空|ID错误
      */
@@ -498,7 +498,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * 验证实体类ID并保存
      *
      * @param entity       实体类
-     * @param errorUserTip 错误提示信息
+     * @param errorUserTip 用户提示信息
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
      * @throws MybatisServiceApplication 参数为空|参数错误
      */
@@ -526,7 +526,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * 批量验证实体类ID并保存
      *
      * @param entities     实体对象集合
-     * @param errorUserTip 错误提示信息
+     * @param errorUserTip 用户提示信息
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
      * @throws MybatisServiceApplication 参数为空|参数错误
      */
@@ -552,7 +552,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      *
      * @param entities     实体对象集合
      * @param batchSize    插入批次数量
-     * @param errorUserTip 错误提示信息
+     * @param errorUserTip 用户提示信息
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
      * @throws MybatisServiceApplication 参数为空|参数错误
      */
@@ -588,7 +588,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * 批量验证实体类ID并更新
      *
      * @param entity       实体类
-     * @param errorUserTip 错误提示信息
+     * @param errorUserTip 用户提示信息
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
      * @throws MybatisServiceApplication 参数为空|参数错误
      */
@@ -620,7 +620,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * 批量验证实体类ID并更新
      *
      * @param entities     实体对象集合
-     * @param errorUserTip 错误提示信息
+     * @param errorUserTip 用户提示信息
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
      * @throws MybatisServiceApplication 参数为空|参数错误
      */
@@ -648,7 +648,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      *
      * @param entities     实体对象集合
      * @param batchSize    插入批次数量
-     * @param errorUserTip 错误提示信息
+     * @param errorUserTip 用户提示信息
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
      * @throws MybatisServiceApplication 参数为空|参数错误
      */
@@ -683,7 +683,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * 验证实体类ID并删除
      *
      * @param id           ID
-     * @param errorUserTip 错误提示信息
+     * @param errorUserTip 用户提示信息
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
      * @throws MybatisServiceApplication ID为空|ID错误
      */
@@ -710,7 +710,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * 批量验证实体类ID并删除
      *
      * @param ids          ID集合
-     * @param errorUserTip 错误提示信息
+     * @param errorUserTip 用户提示信息
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
      * @throws MybatisServiceApplication ID为空|ID错误
      */

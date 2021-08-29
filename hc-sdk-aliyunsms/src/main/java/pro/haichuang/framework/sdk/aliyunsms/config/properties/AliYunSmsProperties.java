@@ -5,8 +5,28 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * 阿里云SMS配置文件
  *
+ * <p>该类为 {@code hc-sdk-aliyunsms} SDK模块配置文件类
+ * <hr>
+ * Example:
+ * <pre>
+ *     # ========================= Haichuang Setting =========================
+ *     haichuang:
+ *       sdk:
+ *         aliyunsms:
+ *           // AccessKeyId
+ *           accessKeyId: xxx
+ *           // AccessKeySecret
+ *           accessKeySecret: xxx
+ *           // 短信签名
+ *           signName: xxx
+ *           // 短信模板ID
+ *           templateCode: xxx
+ * </pre>
+ * <hr>
+ *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
  */
 @ConfigurationProperties(prefix = "haichuang.sdk.aliyunsms")
 public class AliYunSmsProperties {
@@ -22,19 +42,14 @@ public class AliYunSmsProperties {
     private String accessKeySecret;
 
     /**
-     * RegionId
-     */
-    private String regionId;
-
-    /**
      * 短信签名
      */
     private String signName;
 
     /**
-     * 短信模板ID, 发送国际/港澳台消息时, 请使用国际/港澳台短信模版
+     * 默认短信模板ID, 发送国际/港澳台消息时, 请使用国际/港澳台短信模版
      */
-    private String templateCode;
+    private String defaultTemplateCode;
 
     public String getAccessKeyId() {
         return accessKeyId;
@@ -52,14 +67,6 @@ public class AliYunSmsProperties {
         this.accessKeySecret = accessKeySecret;
     }
 
-    public String getRegionId() {
-        return regionId;
-    }
-
-    public void setRegionId(String regionId) {
-        this.regionId = regionId;
-    }
-
     public String getSignName() {
         return signName;
     }
@@ -68,11 +75,11 @@ public class AliYunSmsProperties {
         this.signName = signName;
     }
 
-    public String getTemplateCode() {
-        return templateCode;
+    public String getDefaultTemplateCode() {
+        return defaultTemplateCode;
     }
 
-    public void setTemplateCode(String templateCode) {
-        this.templateCode = templateCode;
+    public void setDefaultTemplateCode(String defaultTemplateCode) {
+        this.defaultTemplateCode = defaultTemplateCode;
     }
 }

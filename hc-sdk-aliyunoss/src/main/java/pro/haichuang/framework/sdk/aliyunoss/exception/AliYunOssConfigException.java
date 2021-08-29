@@ -1,6 +1,6 @@
 package pro.haichuang.framework.sdk.aliyunoss.exception;
 
-import pro.haichuang.framework.base.exception.ApplicationException;
+import pro.haichuang.framework.base.exception.ThirdPartyException;
 import pro.haichuang.framework.sdk.aliyunoss.enums.error.AliYunOssConfigErrorEnum;
 
 /**
@@ -11,8 +11,8 @@ import pro.haichuang.framework.sdk.aliyunoss.enums.error.AliYunOssConfigErrorEnu
  * @see AliYunOssConfigErrorEnum
  * @since 1.0.0
  */
-public class AliYunOssConfigException extends ApplicationException {
-    private static final long serialVersionUID = -1180694591155280803L;
+public class AliYunOssConfigException extends ThirdPartyException {
+    private static final long serialVersionUID = 2036101395536151559L;
 
     public AliYunOssConfigException(AliYunOssConfigErrorEnum aliYunOssConfigErrorEnum) {
         super(aliYunOssConfigErrorEnum);
