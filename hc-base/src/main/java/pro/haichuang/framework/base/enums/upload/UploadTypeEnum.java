@@ -30,7 +30,12 @@ public enum UploadTypeEnum implements BaseEnum {
     /**
      * 音频类型
      */
-    AUDIO("audio", "音频类型");
+    AUDIO("audio", "音频类型"),
+
+    /**
+     * 其他类型
+     */
+    OTHER("other", "其他类型");
 
     /**
      * 枚举值
