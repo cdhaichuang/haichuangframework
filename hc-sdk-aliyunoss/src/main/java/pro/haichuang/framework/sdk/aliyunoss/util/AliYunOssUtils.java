@@ -53,20 +53,20 @@ public class AliYunOssUtils {
      * @param accessKeySecret AccessKeySecret
      * @param bucketName      BucketName
      * @param endPoint        Endpoint地域节点
-     * @param uploadBasePath  上传主路径, 建议填写业务模块相关名称
-     * @param uploadSubPath   上传子路径, 建议填写文件类型
-     * @return 上传后的路径
+     * @param fileType        上传文件类型
+     * @param uploadPath      上传路径
+     * @return 上传后的路径 [上传路径 + 文件类型 + 文件名]
      * @throws AliYunOssUploadException 阿里云文件上传异常
      * @throws IOException              获取文件流异常
-     * @see #uploadByMultipart(MultipartFile, String, String, String, String, String, String, String)
+     * @see #uploadByMultipart(MultipartFile, String, String, String, String, String, String, String...)
      */
     public static String uploadByMultipart(MultipartFile uploadFile,
                                            String accessKeyId, String accessKeySecret,
                                            String bucketName, String endPoint,
-                                           String uploadBasePath, String uploadSubPath)
+                                           String fileType, String... uploadPath)
             throws AliYunOssUploadException, IOException {
         return uploadByMultipart(uploadFile, null, accessKeyId, accessKeySecret,
-                bucketName, endPoint, uploadBasePath, uploadSubPath);
+                bucketName, endPoint, fileType, uploadPath);
     }
 
     /**
@@ -78,23 +78,23 @@ public class AliYunOssUtils {
      * @param accessKeySecret AccessKeySecret
      * @param bucketName      BucketName
      * @param endPoint        Endpoint地域节点
-     * @param uploadBasePath  上传主路径, 建议填写业务模块相关名称
-     * @param uploadSubPath   上传子路径, 建议填写文件类型
-     * @return 上传后的路径
+     * @param fileType        上传文件类型
+     * @param uploadPath      上传路径
+     * @return 上传后的路径 [上传路径 + 文件类型 + 文件名]
      * @throws AliYunOssUploadException 阿里云文件上传异常
      * @throws IOException              获取文件流异常
-     * @see #baseFileUploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String)
+     * @see #baseFileUploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String...)
      */
     public static String uploadByMultipart(MultipartFile uploadFile, @Nullable String newFileName,
                                            String accessKeyId, String accessKeySecret,
                                            String bucketName, String endPoint,
-                                           String uploadBasePath, String uploadSubPath)
+                                           String fileType, String... uploadPath)
             throws AliYunOssUploadException, IOException {
         String uuid = UUIDUtils.Local.get();
         String resultFilePath = baseFileUploadByMultipart(new LinkedList<>(Collections.singletonList(uploadFile)),
                 newFileName != null ? new LinkedList<>(Collections.singletonList(newFileName)) : null,
                 accessKeyId, accessKeySecret,
-                bucketName, endPoint, uploadBasePath, uploadSubPath).get(0);
+                bucketName, endPoint, fileType, uploadPath).get(0);
         LOGGER.info("[{}] 简单上传文件 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG,
                 uuid, bucketName, resultFilePath);
         return resultFilePath;
@@ -108,19 +108,19 @@ public class AliYunOssUtils {
      * @param accessKeySecret  AccessKeySecret
      * @param bucketName       BucketName
      * @param endPoint         Endpoint地域节点
-     * @param uploadBasePath   上传主路径, 建议填写业务模块相关名称
-     * @param uploadSubPath    上传子路径, 建议填写文件类型
-     * @return 上传后的路径
+     * @param fileType         上传文件类型
+     * @param uploadPath       上传路径
+     * @return 上传后的路径 [上传路径 + 文件类型 + 文件名]
      * @throws AliYunOssUploadException 阿里云文件上传异常
-     * @see #uploadByPath(String, String, String, String, String, String, String, String)
+     * @see #uploadByPath(String, String, String, String, String, String, String, String...)
      */
     public static String uploadByPath(String absoluteFilePath,
                                       String accessKeyId, String accessKeySecret,
                                       String bucketName, String endPoint,
-                                      String uploadBasePath, String uploadSubPath)
+                                      String fileType, String... uploadPath)
             throws AliYunOssUploadException {
         return uploadByPath(absoluteFilePath, null, accessKeyId, accessKeySecret,
-                bucketName, endPoint, uploadBasePath, uploadSubPath);
+                bucketName, endPoint, fileType, uploadPath);
     }
 
     /**
@@ -132,19 +132,19 @@ public class AliYunOssUtils {
      * @param accessKeySecret  AccessKeySecret
      * @param bucketName       BucketName
      * @param endPoint         Endpoint地域节点
-     * @param uploadBasePath   上传主路径, 建议填写业务模块相关名称
-     * @param uploadSubPath    上传子路径, 建议填写文件类型
-     * @return 上传后的路径
+     * @param fileType         上传文件类型
+     * @param uploadPath       上传路径
+     * @return 上传后的路径 [上传路径 + 文件类型 + 文件名]
      * @throws AliYunOssUploadException 阿里云文件上传异常
-     * @see #uploadByFile(File, String, String, String, String, String, String, String)
+     * @see #uploadByFile(File, String, String, String, String, String, String, String...)
      */
     public static String uploadByPath(String absoluteFilePath, @Nullable String newFileName,
                                       String accessKeyId, String accessKeySecret,
                                       String bucketName, String endPoint,
-                                      String uploadBasePath, String uploadSubPath)
+                                      String fileType, String... uploadPath)
             throws AliYunOssUploadException {
         return uploadByFile(new File(absoluteFilePath), newFileName, accessKeyId, accessKeySecret,
-                bucketName, endPoint, uploadBasePath, uploadSubPath);
+                bucketName, endPoint, fileType, uploadPath);
     }
 
     /**
@@ -155,19 +155,19 @@ public class AliYunOssUtils {
      * @param accessKeySecret AccessKeySecret
      * @param bucketName      BucketName
      * @param endPoint        Endpoint地域节点
-     * @param uploadBasePath  上传主路径, 建议填写业务模块相关名称
-     * @param uploadSubPath   上传子路径, 建议填写文件类型
-     * @return 上传后的路径
+     * @param fileType        上传文件类型
+     * @param uploadPath      上传路径
+     * @return 上传后的路径 [上传路径 + 文件类型 + 文件名]
      * @throws AliYunOssUploadException 阿里云文件上传异常
-     * @see #uploadByFile(File, String, String, String, String, String, String, String)
+     * @see #uploadByFile(File, String, String, String, String, String, String, String...)
      */
     public static String uploadByFile(File uploadFile,
                                       String accessKeyId, String accessKeySecret,
                                       String bucketName, String endPoint,
-                                      String uploadBasePath, String uploadSubPath)
+                                      String fileType, String... uploadPath)
             throws AliYunOssUploadException {
         return uploadByFile(uploadFile, null, accessKeyId, accessKeySecret,
-                bucketName, endPoint, uploadBasePath, uploadSubPath);
+                bucketName, endPoint, fileType, uploadPath);
     }
 
     /**
@@ -179,22 +179,22 @@ public class AliYunOssUtils {
      * @param accessKeySecret AccessKeySecret
      * @param bucketName      BucketName
      * @param endPoint        Endpoint地域节点
-     * @param uploadBasePath  上传主路径, 建议填写业务模块相关名称
-     * @param uploadSubPath   上传子路径, 建议填写文件类型
-     * @return 上传后的路径
+     * @param fileType        上传文件类型
+     * @param uploadPath      上传路径
+     * @return 上传后的路径 [上传路径 + 文件类型 + 文件名]
      * @throws AliYunOssUploadException 阿里云文件上传异常
-     * @see #baseFileUploadByFile(LinkedList, LinkedList, String, String, String, String, String, String)
+     * @see #baseFileUploadByFile(LinkedList, LinkedList, String, String, String, String, String, String...)
      */
     public static String uploadByFile(File uploadFile, @Nullable String newFileName,
                                       String accessKeyId, String accessKeySecret,
                                       String bucketName, String endPoint,
-                                      String uploadBasePath, String uploadSubPath)
+                                      String fileType, String... uploadPath)
             throws AliYunOssUploadException {
         String uuid = UUIDUtils.Local.get();
         String resultFilePath = baseFileUploadByFile(new LinkedList<>(Collections.singletonList(uploadFile)),
                 newFileName != null ? new LinkedList<>(Collections.singletonList(newFileName)) : null,
                 accessKeyId, accessKeySecret,
-                bucketName, endPoint, uploadBasePath, uploadSubPath).get(0);
+                bucketName, endPoint, fileType, uploadPath).get(0);
         LOGGER.info("[{}] 简单上传文件 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG,
                 uuid, bucketName, resultFilePath);
         return resultFilePath;
@@ -210,20 +210,20 @@ public class AliYunOssUtils {
      * @param accessKeySecret AccessKeySecret
      * @param bucketName      BucketName
      * @param endPoint        Endpoint地域节点
-     * @param uploadBasePath  上传主路径, 建议填写业务模块相关名称
-     * @param uploadSubPath   上传子路径, 建议填写文件类型
-     * @return 上传后的路径集合
+     * @param fileType        上传文件类型
+     * @param uploadPath      上传路径
+     * @return 上传后的路径集合 [上传路径 + 文件类型 + 文件名]
      * @throws AliYunOssUploadException 阿里云文件上传异常
      * @throws IOException              获取文件流异常
-     * @see #uploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String)
+     * @see #uploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String...)
      */
     public static List<String> uploadByMultipart(Collection<MultipartFile> uploadFiles,
                                                  String accessKeyId, String accessKeySecret,
                                                  String bucketName, String endPoint,
-                                                 String uploadBasePath, String uploadSubPath)
+                                                 String fileType, String... uploadPath)
             throws AliYunOssUploadException, IOException {
         return uploadByMultipart(new LinkedList<>(uploadFiles), null, accessKeyId, accessKeySecret,
-                bucketName, endPoint, uploadBasePath, uploadSubPath);
+                bucketName, endPoint, fileType, uploadPath);
     }
 
     /**
@@ -235,18 +235,18 @@ public class AliYunOssUtils {
      * @param accessKeySecret AccessKeySecret
      * @param bucketName      BucketName
      * @param endPoint        Endpoint地域节点
-     * @param uploadBasePath  上传主路径, 建议填写业务模块相关名称
-     * @param uploadSubPath   上传子路径, 建议填写文件类型
-     * @return 上传后的路径集合
+     * @param fileType        上传文件类型
+     * @param uploadPath      上传路径
+     * @return 上传后的路径集合 [上传路径 + 文件类型 + 文件名]
      * @throws AliYunOssUploadException 阿里云文件上传异常
      * @throws IOException              获取文件流异常
-     * @see #baseFileUploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String)
+     * @see #baseFileUploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String...)
      */
     public static List<String> uploadByMultipart(LinkedList<MultipartFile> uploadFiles,
                                                  @Nullable LinkedList<String> newFileNames,
                                                  String accessKeyId, String accessKeySecret,
                                                  String bucketName, String endPoint,
-                                                 String uploadBasePath, String uploadSubPath)
+                                                 String fileType, String... uploadPath)
             throws AliYunOssUploadException, IOException {
         String uuid = UUIDUtils.Local.get();
         if (uploadFiles.isEmpty()) {
@@ -255,7 +255,7 @@ public class AliYunOssUtils {
             return new ArrayList<>();
         }
         List<String> resultFilePaths = baseFileUploadByMultipart(uploadFiles, newFileNames, accessKeyId, accessKeySecret,
-                bucketName, endPoint, uploadBasePath, uploadSubPath);
+                bucketName, endPoint, fileType, uploadPath);
         LOGGER.info("[{}] 批量上传文件 [uuid: {}, bucketName: {}, resultPaths: {}]", LOG_TAG,
                 uuid, bucketName, resultFilePaths);
         return resultFilePaths;
@@ -269,19 +269,19 @@ public class AliYunOssUtils {
      * @param accessKeySecret   AccessKeySecret
      * @param bucketName        BucketName
      * @param endPoint          Endpoint地域节点
-     * @param uploadBasePath    上传主路径, 建议填写业务模块相关名称
-     * @param uploadSubPath     上传子路径, 建议填写文件类型
-     * @return 上传后的路径集合
+     * @param fileType          上传文件类型
+     * @param uploadPath        上传路径
+     * @return 上传后的路径集合 [上传路径 + 文件类型 + 文件名]
      * @throws AliYunOssUploadException 阿里云文件上传异常
-     * @see #uploadByPath(LinkedList, LinkedList, String, String, String, String, String, String)
+     * @see #uploadByPath(LinkedList, LinkedList, String, String, String, String, String, String...)
      */
     public static List<String> uploadByPath(Collection<String> absoluteFilePaths,
                                             String accessKeyId, String accessKeySecret,
                                             String bucketName, String endPoint,
-                                            String uploadBasePath, String uploadSubPath)
+                                            String fileType, String... uploadPath)
             throws AliYunOssUploadException {
         return uploadByPath(new LinkedList<>(absoluteFilePaths), null, accessKeyId, accessKeySecret,
-                bucketName, endPoint, uploadBasePath, uploadSubPath);
+                bucketName, endPoint, fileType, uploadPath);
     }
 
     /**
@@ -293,16 +293,16 @@ public class AliYunOssUtils {
      * @param accessKeySecret   AccessKeySecret
      * @param bucketName        BucketName
      * @param endPoint          Endpoint地域节点
-     * @param uploadBasePath    上传主路径, 建议填写业务模块相关名称
-     * @param uploadSubPath     上传子路径, 建议填写文件类型
-     * @return 上传后的路径集合
+     * @param fileType          上传文件类型
+     * @param uploadPath        上传路径
+     * @return 上传后的路径集合 [上传路径 + 文件类型 + 文件名]
      * @throws AliYunOssUploadException 阿里云文件上传异常
      */
     public static List<String> uploadByPath(LinkedList<String> absoluteFilePaths,
                                             @Nullable LinkedList<String> newFileNames,
                                             String accessKeyId, String accessKeySecret,
                                             String bucketName, String endPoint,
-                                            String uploadBasePath, String uploadSubPath)
+                                            String fileType, String... uploadPath)
             throws AliYunOssUploadException {
         String uuid = UUIDUtils.Local.get();
         if (absoluteFilePaths.isEmpty()) {
@@ -312,7 +312,7 @@ public class AliYunOssUtils {
         }
         List<String> resultFilePaths = uploadByFile(absoluteFilePaths.stream().map(File::new)
                         .collect(LinkedList::new, LinkedList::add, LinkedList::addAll), newFileNames,
-                accessKeyId, accessKeySecret, bucketName, endPoint, uploadBasePath, uploadSubPath);
+                accessKeyId, accessKeySecret, bucketName, endPoint, fileType, uploadPath);
         LOGGER.info("[{}] 批量上传文件 [uuid: {}, bucketName: {}, resultPaths: {}]", LOG_TAG,
                 uuid, bucketName, resultFilePaths);
         return resultFilePaths;
@@ -326,19 +326,19 @@ public class AliYunOssUtils {
      * @param accessKeySecret AccessKeySecret
      * @param bucketName      BucketName
      * @param endPoint        Endpoint地域节点
-     * @param uploadBasePath  上传主路径, 建议填写业务模块相关名称
-     * @param uploadSubPath   上传子路径, 建议填写文件类型
-     * @return 上传后的路径集合
+     * @param fileType        上传文件类型
+     * @param uploadPath      上传路径
+     * @return 上传后的路径集合 [上传路径 + 文件类型 + 文件名]
      * @throws AliYunOssUploadException 阿里云文件上传异常
-     * @see #uploadByFile(LinkedList, LinkedList, String, String, String, String, String, String)
+     * @see #uploadByFile(LinkedList, LinkedList, String, String, String, String, String, String...)
      */
     public static List<String> uploadByFile(Collection<File> uploadFiles,
                                             String accessKeyId, String accessKeySecret,
                                             String bucketName, String endPoint,
-                                            String uploadBasePath, String uploadSubPath)
+                                            String fileType, String... uploadPath)
             throws AliYunOssUploadException {
         return uploadByFile(new LinkedList<>(uploadFiles), null, accessKeyId, accessKeySecret,
-                bucketName, endPoint, uploadBasePath, uploadSubPath);
+                bucketName, endPoint, fileType, uploadPath);
     }
 
     /**
@@ -350,17 +350,17 @@ public class AliYunOssUtils {
      * @param accessKeySecret AccessKeySecret
      * @param bucketName      BucketName
      * @param endPoint        Endpoint地域节点
-     * @param uploadBasePath  上传主路径, 建议填写业务模块相关名称
-     * @param uploadSubPath   上传子路径, 建议填写文件类型
-     * @return 上传后的路径集合
+     * @param fileType        上传文件类型
+     * @param uploadPath      上传路径
+     * @return 上传后的路径集合 [上传路径 + 文件类型 + 文件名]
      * @throws AliYunOssUploadException 阿里云文件上传异常
-     * @see #baseFileUploadByFile(LinkedList, LinkedList, String, String, String, String, String, String)
+     * @see #baseFileUploadByFile(LinkedList, LinkedList, String, String, String, String, String, String...)
      */
     public static List<String> uploadByFile(LinkedList<File> uploadFiles,
                                             @Nullable LinkedList<String> newFileNames,
                                             String accessKeyId, String accessKeySecret,
                                             String bucketName, String endPoint,
-                                            String uploadBasePath, String uploadSubPath)
+                                            String fileType, String... uploadPath)
             throws AliYunOssUploadException {
         String uuid = UUIDUtils.Local.get();
         if (uploadFiles.isEmpty()) {
@@ -369,7 +369,7 @@ public class AliYunOssUtils {
             return new ArrayList<>();
         }
         List<String> resultFilePaths = baseFileUploadByFile(uploadFiles, newFileNames, accessKeyId, accessKeySecret,
-                bucketName, endPoint, uploadBasePath, uploadSubPath);
+                bucketName, endPoint, fileType, uploadPath);
         LOGGER.info("[{}] 批量上传文件 [uuid: {}, bucketName: {}, resultPaths: {}]", LOG_TAG,
                 uuid, bucketName, resultFilePaths);
         return resultFilePaths;
@@ -607,20 +607,20 @@ public class AliYunOssUtils {
      * @param accessKeySecret AccessKeySecret
      * @param bucketName      BucketName
      * @param endPoint        Endpoint地域节点
-     * @param uploadBasePath  上传主路径, 建议填写业务模块相关名称
-     * @param uploadSubPath   上传子路径, 建议填写文件类型
-     * @return 上传后的路径集合
+     * @param fileType        上传文件类型
+     * @param uploadPath      上传路径
+     * @return 上传后的路径集合 [上传路径 + 文件类型 + 文件名]
      * @throws AliYunOssUploadException 阿里云文件上传异常
      * @throws IOException              获取文件流异常
-     * @see #baseFileUploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String)
+     * @see #baseFileUploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String...)
      */
     public static List<String> baseFileUploadByMultipart(Collection<MultipartFile> files,
                                                          String accessKeyId, String accessKeySecret,
                                                          String bucketName, String endPoint,
-                                                         String uploadBasePath, String uploadSubPath)
+                                                         String fileType, String... uploadPath)
             throws AliYunOssUploadException, IOException {
         return baseFileUploadByMultipart(new LinkedList<>(files), null,
-                accessKeyId, accessKeySecret, bucketName, endPoint, uploadBasePath, uploadSubPath);
+                accessKeyId, accessKeySecret, bucketName, endPoint, fileType, uploadPath);
     }
 
     /**
@@ -632,9 +632,9 @@ public class AliYunOssUtils {
      * @param accessKeySecret AccessKeySecret
      * @param bucketName      BucketName
      * @param endPoint        Endpoint地域节点
-     * @param uploadBasePath  上传主路径, 建议填写业务模块相关名称
-     * @param uploadSubPath   上传子路径, 建议填写文件类型
-     * @return 上传后的路径集合
+     * @param fileType        上传文件类型
+     * @param uploadPath      上传路径
+     * @return 上传后的路径集合 [上传路径 + 文件类型 + 文件名]
      * @throws AliYunOssUploadException 阿里云文件上传异常
      * @throws IOException              获取文件流异常
      */
@@ -642,7 +642,7 @@ public class AliYunOssUtils {
                                                          @Nullable LinkedList<String> newFileNames,
                                                          String accessKeyId, String accessKeySecret,
                                                          String bucketName, String endPoint,
-                                                         String uploadBasePath, String uploadSubPath)
+                                                         String fileType, String... uploadPath)
             throws AliYunOssUploadException, IOException {
         if (uploadFiles.stream().anyMatch(item -> item == null || item.isEmpty())) {
             throw new AliYunOssUploadException(AliYunOssUploadErrorEnum.NOT_EXISTS);
@@ -656,7 +656,7 @@ public class AliYunOssUtils {
             ossClient = new OSSClientBuilder().build(endPoint, accessKeyId, accessKeySecret);
             for (int i = 0; i < uploadFiles.size(); i++) {
                 String fileRelativeName = FileUriUtils.concatFilename(uploadFiles.get(i),
-                        newFileNames != null ? newFileNames.get(i) : null, uploadBasePath, uploadSubPath);
+                        newFileNames != null ? newFileNames.get(i) : null, fileType, uploadPath);
                 ossClient.putObject(bucketName, fileRelativeName, uploadFiles.get(i).getInputStream());
                 String resultFilePath = FileUriUtils.formatFilename(FilenameUtils.concat("/", fileRelativeName),
                         false);
@@ -678,19 +678,19 @@ public class AliYunOssUtils {
      * @param accessKeySecret AccessKeySecret
      * @param bucketName      BucketName
      * @param endPoint        Endpoint地域节点
-     * @param uploadBasePath  上传主路径, 建议填写业务模块相关名称
-     * @param uploadSubPath   上传子路径, 建议填写文件类型
-     * @return 上传后的路径
+     * @param fileType        上传文件类型
+     * @param uploadPath      上传路径
+     * @return 上传后的路径 [上传路径 + 文件类型 + 文件名]
      * @throws AliYunOssUploadException 阿里云文件上传异常
-     * @see #baseFileUploadByFile(LinkedList, LinkedList, String, String, String, String, String, String)
+     * @see #baseFileUploadByFile(LinkedList, LinkedList, String, String, String, String, String, String...)
      */
     private static List<String> baseFileUploadByFile(Collection<File> uploadFiles,
                                                      String accessKeyId, String accessKeySecret,
                                                      String bucketName, String endPoint,
-                                                     String uploadBasePath, String uploadSubPath)
+                                                     String fileType, String... uploadPath)
             throws AliYunOssUploadException {
         return baseFileUploadByFile(new LinkedList<>(uploadFiles), null,
-                accessKeyId, accessKeySecret, bucketName, endPoint, uploadBasePath, uploadSubPath);
+                accessKeyId, accessKeySecret, bucketName, endPoint, fileType, uploadPath);
     }
 
     /**
@@ -702,16 +702,16 @@ public class AliYunOssUtils {
      * @param accessKeySecret AccessKeySecret
      * @param bucketName      BucketName
      * @param endPoint        Endpoint地域节点
-     * @param uploadBasePath  上传主路径, 建议填写业务模块相关名称
-     * @param uploadSubPath   上传子路径, 建议填写文件类型
-     * @return 上传后的路径
+     * @param fileType        上传文件类型
+     * @param uploadPath      上传路径
+     * @return 上传后的路径 [上传路径 + 文件类型 + 文件名]
      * @throws AliYunOssUploadException 阿里云文件上传异常
      */
     private static List<String> baseFileUploadByFile(LinkedList<File> uploadFiles,
-                                                    @Nullable LinkedList<String> newFileNames,
-                                                    String accessKeyId, String accessKeySecret,
-                                                    String bucketName, String endPoint,
-                                                    String uploadBasePath, String uploadSubPath)
+                                                     @Nullable LinkedList<String> newFileNames,
+                                                     String accessKeyId, String accessKeySecret,
+                                                     String bucketName, String endPoint,
+                                                     String fileType, String... uploadPath)
             throws AliYunOssUploadException {
         if (uploadFiles.stream().anyMatch(item -> item == null || !item.exists())) {
             throw new AliYunOssUploadException(AliYunOssUploadErrorEnum.NOT_EXISTS);
@@ -729,7 +729,7 @@ public class AliYunOssUtils {
             for (int i = 0; i < uploadFiles.size(); i++) {
                 String fileAbsolutePath = uploadFiles.get(i).getAbsolutePath();
                 String fileRelativeName = FileUriUtils.concatFilename(fileAbsolutePath,
-                        newFileNames != null ? newFileNames.get(i) : null, uploadBasePath, uploadSubPath);
+                        newFileNames != null ? newFileNames.get(i) : null, fileType, uploadPath);
                 ossClient.putObject(bucketName, fileRelativeName, new File(fileAbsolutePath));
                 String resultFilePath = FileUriUtils.formatFilename(FilenameUtils.concat("/", fileRelativeName),
                         false);

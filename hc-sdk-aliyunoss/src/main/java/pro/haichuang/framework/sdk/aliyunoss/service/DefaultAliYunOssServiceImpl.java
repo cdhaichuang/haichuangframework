@@ -35,133 +35,145 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
 
     @SneakyThrows
     @Override
-    public String uploadByMultipart(MultipartFile uploadFile, String pathOfBizName, UploadTypeEnum uploadTypeEnum) {
+    public String uploadByMultipart(MultipartFile uploadFile,
+                                    UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(pathOfBizName, uploadTypeEnum);
+        validateParams(uploadTypeEnum, pathOfBizName);
         return AliYunOssUtils.uploadByMultipart(uploadFile,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
                 aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
-                pathOfBizName, uploadTypeEnum.value());
+                uploadTypeEnum.value(), pathOfBizName);
     }
 
     @SneakyThrows
     @Override
-    public String uploadByMultipart(MultipartFile uploadFile, String newFileName, String pathOfBizName, UploadTypeEnum uploadTypeEnum) {
+    public String uploadByMultipart(MultipartFile uploadFile, String newFileName,
+                                    UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(pathOfBizName, uploadTypeEnum);
+        validateParams(uploadTypeEnum, pathOfBizName);
         return AliYunOssUtils.uploadByMultipart(uploadFile, newFileName,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
                 aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
-                pathOfBizName, uploadTypeEnum.value());
+                uploadTypeEnum.value(), pathOfBizName);
     }
 
     @SneakyThrows
     @Override
-    public List<String> uploadByMultipart(List<MultipartFile> uploadFiles, String pathOfBizName, UploadTypeEnum uploadTypeEnum) {
+    public List<String> uploadByMultipart(List<MultipartFile> uploadFiles,
+                                          UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(pathOfBizName, uploadTypeEnum);
+        validateParams(uploadTypeEnum, pathOfBizName);
         return AliYunOssUtils.uploadByMultipart(uploadFiles,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
                 aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
-                pathOfBizName, uploadTypeEnum.value());
+                uploadTypeEnum.value(), pathOfBizName);
     }
 
     @SneakyThrows
     @Override
-    public List<String> uploadByMultipart(LinkedList<MultipartFile> uploadFiles, LinkedList<String> newFileNames, String pathOfBizName, UploadTypeEnum uploadTypeEnum) {
+    public List<String> uploadByMultipart(LinkedList<MultipartFile> uploadFiles,
+                                          LinkedList<String> newFileNames, UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(pathOfBizName, uploadTypeEnum);
+        validateParams(uploadTypeEnum, pathOfBizName);
         return AliYunOssUtils.uploadByMultipart(uploadFiles, newFileNames,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
                 aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
-                pathOfBizName, uploadTypeEnum.value());
+                uploadTypeEnum.value(), pathOfBizName);
     }
 
     @SneakyThrows
     @Override
-    public String uploadByPath(String absoluteFilePath, String pathOfBizName, UploadTypeEnum uploadTypeEnum) {
+    public String uploadByPath(String absoluteFilePath,
+                               UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(pathOfBizName, uploadTypeEnum);
+        validateParams(uploadTypeEnum, pathOfBizName);
         return AliYunOssUtils.uploadByPath(absoluteFilePath,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
                 aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
-                pathOfBizName, uploadTypeEnum.value());
+                uploadTypeEnum.value(), pathOfBizName);
     }
 
     @SneakyThrows
     @Override
-    public String uploadByPath(String absoluteFilePath, String newFileName, String pathOfBizName, UploadTypeEnum uploadTypeEnum) {
+    public String uploadByPath(String absoluteFilePath, String newFileName,
+                               UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(pathOfBizName, uploadTypeEnum);
+        validateParams(uploadTypeEnum, pathOfBizName);
         return AliYunOssUtils.uploadByPath(absoluteFilePath, newFileName,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
                 aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
-                pathOfBizName, uploadTypeEnum.value());
+                uploadTypeEnum.value(), pathOfBizName);
     }
 
     @SneakyThrows
     @Override
-    public List<String> uploadByPath(List<String> absoluteFilePaths, String pathOfBizName, UploadTypeEnum uploadTypeEnum) {
+    public List<String> uploadByPath(List<String> absoluteFilePaths,
+                                     UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(pathOfBizName, uploadTypeEnum);
+        validateParams(uploadTypeEnum, pathOfBizName);
         return AliYunOssUtils.uploadByPath(absoluteFilePaths,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
                 aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
-                pathOfBizName, uploadTypeEnum.value());
+                uploadTypeEnum.value(), pathOfBizName);
     }
 
     @SneakyThrows
     @Override
-    public List<String> uploadByPath(LinkedList<String> absoluteFilePaths, LinkedList<String> newFileNames, String pathOfBizName, UploadTypeEnum uploadTypeEnum) {
+    public List<String> uploadByPath(LinkedList<String> absoluteFilePaths, LinkedList<String> newFileNames,
+                                     UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(pathOfBizName, uploadTypeEnum);
+        validateParams(uploadTypeEnum, pathOfBizName);
         return AliYunOssUtils.uploadByPath(absoluteFilePaths, newFileNames,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
                 aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
-                pathOfBizName, uploadTypeEnum.value());
+                uploadTypeEnum.value(), pathOfBizName);
     }
 
     @SneakyThrows
     @Override
-    public String uploadByFile(File absoluteFilePath, String pathOfBizName, UploadTypeEnum uploadTypeEnum) {
+    public String uploadByFile(File absoluteFilePath,
+                               UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(pathOfBizName, uploadTypeEnum);
+        validateParams(uploadTypeEnum, pathOfBizName);
         return AliYunOssUtils.uploadByFile(absoluteFilePath,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
                 aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
-                pathOfBizName, uploadTypeEnum.value());
+                uploadTypeEnum.value(), pathOfBizName);
     }
 
     @Override
-    public String uploadByFile(File absoluteFilePath, String newFileName, String pathOfBizName, UploadTypeEnum uploadTypeEnum) {
+    public String uploadByFile(File absoluteFilePath, String newFileName,
+                               UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(pathOfBizName, uploadTypeEnum);
+        validateParams(uploadTypeEnum, pathOfBizName);
         return AliYunOssUtils.uploadByFile(absoluteFilePath, newFileName,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
                 aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
-                pathOfBizName, uploadTypeEnum.value());
+                uploadTypeEnum.value(), pathOfBizName);
     }
 
     @SneakyThrows
     @Override
-    public List<String> uploadByFile(List<File> absoluteFilePaths, String pathOfBizName, UploadTypeEnum uploadTypeEnum) {
+    public List<String> uploadByFile(List<File> absoluteFilePaths,
+                                     UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(pathOfBizName, uploadTypeEnum);
+        validateParams(uploadTypeEnum, pathOfBizName);
         return AliYunOssUtils.uploadByFile(absoluteFilePaths,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
                 aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
-                pathOfBizName, uploadTypeEnum.value());
+                uploadTypeEnum.value(), pathOfBizName);
     }
 
     @SneakyThrows
     @Override
-    public List<String> uploadByFile(LinkedList<File> absoluteFilePaths, LinkedList<String> newFileNames, String pathOfBizName, UploadTypeEnum uploadTypeEnum) {
+    public List<String> uploadByFile(LinkedList<File> absoluteFilePaths, LinkedList<String> newFileNames,
+                                     UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(pathOfBizName, uploadTypeEnum);
+        validateParams(uploadTypeEnum, pathOfBizName);
         return AliYunOssUtils.uploadByFile(absoluteFilePaths, newFileNames,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
                 aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
-                pathOfBizName, uploadTypeEnum.value());
+                uploadTypeEnum.value(), pathOfBizName);
     }
 
     @SneakyThrows
@@ -262,14 +274,14 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
      * 验证参数
      *
      * @param pathOfBizName  上传主路径, 建议填写业务模块相关名称
-     * @param uploadTypeEnum 上传子路径
+     * @param uploadTypeEnum 文件类型
      */
-    private void validateParams(@Nullable String pathOfBizName, @Nullable UploadTypeEnum uploadTypeEnum) {
-        if (pathOfBizName == null || pathOfBizName.isEmpty()) {
-            throw new AliYunOssUploadException(AliYunOssUploadErrorEnum.UPLOAD_BASE_PATH_IS_NULL);
-        }
+    private void validateParams(@Nullable UploadTypeEnum uploadTypeEnum, @Nullable String... pathOfBizName) {
         if (uploadTypeEnum == null) {
-            throw new AliYunOssUploadException(AliYunOssUploadErrorEnum.UPLOAD_SUB_PATH_IS_NULL);
+            throw new AliYunOssUploadException(AliYunOssUploadErrorEnum.UPLOAD_FILE_TYPE_IS_NULL);
+        }
+        if (pathOfBizName == null || pathOfBizName.length == 0) {
+            throw new AliYunOssUploadException(AliYunOssUploadErrorEnum.UPLOAD_PATH_IS_NULL);
         }
     }
 }

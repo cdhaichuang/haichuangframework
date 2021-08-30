@@ -6,10 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.web.multipart.MultipartFile;
 import pro.haichuang.framework.base.enums.upload.UploadTypeEnum;
-import pro.haichuang.framework.base.util.common.ValidateUtils;
 import pro.haichuang.framework.sdk.huaweicloudobs.config.properties.HuaWeiCloudObsProperties;
 import pro.haichuang.framework.sdk.huaweicloudobs.enums.error.HuaWeCloudObsConfigErrorEnum;
 import pro.haichuang.framework.sdk.huaweicloudobs.enums.error.HuaWeCloudObsUploadErrorEnum;
+import pro.haichuang.framework.sdk.huaweicloudobs.exception.HuaWeiCloudObsConfigException;
+import pro.haichuang.framework.sdk.huaweicloudobs.exception.HuaWeiCloudObsUploadException;
 import pro.haichuang.framework.sdk.huaweicloudobs.util.HuaWeiCloudObsUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,134 +36,134 @@ public class DefaultHuaWeiCloudObsServiceImpl implements HuaWeiCloudObsService {
 
     @SneakyThrows
     @Override
-    public String uploadByMultipart(MultipartFile uploadFile, String pathOfBizName, UploadTypeEnum uploadTypeEnum) {
+    public String uploadByMultipart(MultipartFile uploadFile, UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(pathOfBizName, uploadTypeEnum);
+        validateParams(uploadTypeEnum, pathOfBizName);
         return HuaWeiCloudObsUtils.uploadByMultipart(uploadFile,
                 huaWeiCloudObsProperties.getAccessKeyId(), huaWeiCloudObsProperties.getAccessKeySecret(),
                 huaWeiCloudObsProperties.getBucketName(), huaWeiCloudObsProperties.getEndpoint(),
-                pathOfBizName, uploadTypeEnum.value());
+                uploadTypeEnum.value(), pathOfBizName);
     }
 
     @SneakyThrows
     @Override
-    public String uploadByMultipart(MultipartFile uploadFile, String newFileName, String pathOfBizName, UploadTypeEnum uploadTypeEnum) {
+    public String uploadByMultipart(MultipartFile uploadFile, String newFileName, UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(pathOfBizName, uploadTypeEnum);
+        validateParams(uploadTypeEnum, pathOfBizName);
         return HuaWeiCloudObsUtils.uploadByMultipart(uploadFile, newFileName,
                 huaWeiCloudObsProperties.getAccessKeyId(), huaWeiCloudObsProperties.getAccessKeySecret(),
                 huaWeiCloudObsProperties.getBucketName(), huaWeiCloudObsProperties.getEndpoint(),
-                pathOfBizName, uploadTypeEnum.value());
+                uploadTypeEnum.value(), pathOfBizName);
     }
 
     @SneakyThrows
     @Override
-    public List<String> uploadByMultipart(List<MultipartFile> uploadFiles, String pathOfBizName, UploadTypeEnum uploadTypeEnum) {
+    public List<String> uploadByMultipart(List<MultipartFile> uploadFiles, UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(pathOfBizName, uploadTypeEnum);
+        validateParams(uploadTypeEnum, pathOfBizName);
         return HuaWeiCloudObsUtils.uploadByMultipart(uploadFiles,
                 huaWeiCloudObsProperties.getAccessKeyId(), huaWeiCloudObsProperties.getAccessKeySecret(),
                 huaWeiCloudObsProperties.getBucketName(), huaWeiCloudObsProperties.getEndpoint(),
-                pathOfBizName, uploadTypeEnum.value());
+                uploadTypeEnum.value(), pathOfBizName);
     }
 
     @SneakyThrows
     @Override
-    public List<String> uploadByMultipart(LinkedList<MultipartFile> uploadFiles, LinkedList<String> newFileNames, String pathOfBizName, UploadTypeEnum uploadTypeEnum) {
+    public List<String> uploadByMultipart(LinkedList<MultipartFile> uploadFiles, LinkedList<String> newFileNames, UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(pathOfBizName, uploadTypeEnum);
+        validateParams(uploadTypeEnum, pathOfBizName);
         return HuaWeiCloudObsUtils.uploadByMultipart(uploadFiles, newFileNames,
                 huaWeiCloudObsProperties.getAccessKeyId(), huaWeiCloudObsProperties.getAccessKeySecret(),
                 huaWeiCloudObsProperties.getBucketName(), huaWeiCloudObsProperties.getEndpoint(),
-                pathOfBizName, uploadTypeEnum.value());
+                uploadTypeEnum.value(), pathOfBizName);
     }
 
     @SneakyThrows
     @Override
-    public String uploadByPath(String absoluteFilePath, String pathOfBizName, UploadTypeEnum uploadTypeEnum) {
+    public String uploadByPath(String absoluteFilePath, UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(pathOfBizName, uploadTypeEnum);
+        validateParams(uploadTypeEnum, pathOfBizName);
         return HuaWeiCloudObsUtils.uploadByPath(absoluteFilePath,
                 huaWeiCloudObsProperties.getAccessKeyId(), huaWeiCloudObsProperties.getAccessKeySecret(),
                 huaWeiCloudObsProperties.getBucketName(), huaWeiCloudObsProperties.getEndpoint(),
-                pathOfBizName, uploadTypeEnum.value());
+                uploadTypeEnum.value(), pathOfBizName);
     }
 
     @SneakyThrows
     @Override
-    public String uploadByPath(String absoluteFilePath, String newFileName, String pathOfBizName, UploadTypeEnum uploadTypeEnum) {
+    public String uploadByPath(String absoluteFilePath, String newFileName, UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(pathOfBizName, uploadTypeEnum);
+        validateParams(uploadTypeEnum, pathOfBizName);
         return HuaWeiCloudObsUtils.uploadByPath(absoluteFilePath, newFileName,
                 huaWeiCloudObsProperties.getAccessKeyId(), huaWeiCloudObsProperties.getAccessKeySecret(),
                 huaWeiCloudObsProperties.getBucketName(), huaWeiCloudObsProperties.getEndpoint(),
-                pathOfBizName, uploadTypeEnum.value());
+                uploadTypeEnum.value(), pathOfBizName);
     }
 
     @SneakyThrows
     @Override
-    public List<String> uploadByPath(List<String> absoluteFilePaths, String pathOfBizName, UploadTypeEnum uploadTypeEnum) {
+    public List<String> uploadByPath(List<String> absoluteFilePaths, UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(pathOfBizName, uploadTypeEnum);
+        validateParams(uploadTypeEnum, pathOfBizName);
         return HuaWeiCloudObsUtils.uploadByPath(absoluteFilePaths,
                 huaWeiCloudObsProperties.getAccessKeyId(), huaWeiCloudObsProperties.getAccessKeySecret(),
                 huaWeiCloudObsProperties.getBucketName(), huaWeiCloudObsProperties.getEndpoint(),
-                pathOfBizName, uploadTypeEnum.value());
+                uploadTypeEnum.value(), pathOfBizName);
     }
 
     @SneakyThrows
     @Override
-    public List<String> uploadByPath(LinkedList<String> absoluteFilePaths, LinkedList<String> newFileNames, String pathOfBizName, UploadTypeEnum uploadTypeEnum) {
+    public List<String> uploadByPath(LinkedList<String> absoluteFilePaths, LinkedList<String> newFileNames, UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(pathOfBizName, uploadTypeEnum);
+        validateParams(uploadTypeEnum, pathOfBizName);
         return HuaWeiCloudObsUtils.uploadByPath(absoluteFilePaths, newFileNames,
                 huaWeiCloudObsProperties.getAccessKeyId(), huaWeiCloudObsProperties.getAccessKeySecret(),
                 huaWeiCloudObsProperties.getBucketName(), huaWeiCloudObsProperties.getEndpoint(),
-                pathOfBizName, uploadTypeEnum.value());
+                uploadTypeEnum.value(), pathOfBizName);
     }
 
     @SneakyThrows
     @Override
-    public String uploadByFile(File absoluteFilePath, String pathOfBizName, UploadTypeEnum uploadTypeEnum) {
+    public String uploadByFile(File absoluteFilePath, UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(pathOfBizName, uploadTypeEnum);
+        validateParams(uploadTypeEnum, pathOfBizName);
         return HuaWeiCloudObsUtils.uploadByFile(absoluteFilePath,
                 huaWeiCloudObsProperties.getAccessKeyId(), huaWeiCloudObsProperties.getAccessKeySecret(),
                 huaWeiCloudObsProperties.getBucketName(), huaWeiCloudObsProperties.getEndpoint(),
-                pathOfBizName, uploadTypeEnum.value());
+                uploadTypeEnum.value(), pathOfBizName);
     }
 
     @SneakyThrows
     @Override
-    public String uploadByFile(File absoluteFilePath, String newFileName, String pathOfBizName, UploadTypeEnum uploadTypeEnum) {
+    public String uploadByFile(File absoluteFilePath, String newFileName, UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(pathOfBizName, uploadTypeEnum);
+        validateParams(uploadTypeEnum, pathOfBizName);
         return HuaWeiCloudObsUtils.uploadByFile(absoluteFilePath, newFileName,
                 huaWeiCloudObsProperties.getAccessKeyId(), huaWeiCloudObsProperties.getAccessKeySecret(),
                 huaWeiCloudObsProperties.getBucketName(), huaWeiCloudObsProperties.getEndpoint(),
-                pathOfBizName, uploadTypeEnum.value());
+                uploadTypeEnum.value(), pathOfBizName);
     }
 
     @SneakyThrows
     @Override
-    public List<String> uploadByFile(List<File> absoluteFilePaths, String pathOfBizName, UploadTypeEnum uploadTypeEnum) {
+    public List<String> uploadByFile(List<File> absoluteFilePaths, UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(pathOfBizName, uploadTypeEnum);
+        validateParams(uploadTypeEnum, pathOfBizName);
         return HuaWeiCloudObsUtils.uploadByFile(absoluteFilePaths,
                 huaWeiCloudObsProperties.getAccessKeyId(), huaWeiCloudObsProperties.getAccessKeySecret(),
                 huaWeiCloudObsProperties.getBucketName(), huaWeiCloudObsProperties.getEndpoint(),
-                pathOfBizName, uploadTypeEnum.value());
+                uploadTypeEnum.value(), pathOfBizName);
     }
 
     @SneakyThrows
     @Override
-    public List<String> uploadByFile(LinkedList<File> absoluteFilePaths, LinkedList<String> newFileNames, String pathOfBizName, UploadTypeEnum uploadTypeEnum) {
+    public List<String> uploadByFile(LinkedList<File> absoluteFilePaths, LinkedList<String> newFileNames, UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(pathOfBizName, uploadTypeEnum);
+        validateParams(uploadTypeEnum, pathOfBizName);
         return HuaWeiCloudObsUtils.uploadByFile(absoluteFilePaths, newFileNames,
                 huaWeiCloudObsProperties.getAccessKeyId(), huaWeiCloudObsProperties.getAccessKeySecret(),
                 huaWeiCloudObsProperties.getBucketName(), huaWeiCloudObsProperties.getEndpoint(),
-                pathOfBizName, uploadTypeEnum.value());
+                uploadTypeEnum.value(), pathOfBizName);
     }
 
     @SneakyThrows
@@ -251,26 +252,32 @@ public class DefaultHuaWeiCloudObsServiceImpl implements HuaWeiCloudObsService {
         String bucketName = huaWeiCloudObsProperties.getBucketName();
         String endpoint = huaWeiCloudObsProperties.getEndpoint();
 
-        ValidateUtils.validate(accessKeyId == null || accessKeyId.isEmpty(),
-                HuaWeCloudObsConfigErrorEnum.ACCESS_KEY_ID_NOT_CONFIGURED);
-        ValidateUtils.validate(accessKeySecret == null || accessKeySecret.isEmpty(),
-                HuaWeCloudObsConfigErrorEnum.ACCESS_KEY_SECRET_NOT_CONFIGURED);
-        ValidateUtils.validate(bucketName == null || bucketName.isEmpty(),
-                HuaWeCloudObsConfigErrorEnum.BUCKET_NAME_NOT_CONFIGURED);
-        ValidateUtils.validate(endpoint == null || endpoint.isEmpty(),
-                HuaWeCloudObsConfigErrorEnum.END_POINT_NOT_CONFIGURED);
+        if (accessKeyId == null || accessKeyId.isEmpty()) {
+            throw new HuaWeiCloudObsConfigException(HuaWeCloudObsConfigErrorEnum.ACCESS_KEY_ID_NOT_CONFIGURED);
+        }
+        if (accessKeySecret == null || accessKeySecret.isEmpty()) {
+            throw new HuaWeiCloudObsConfigException(HuaWeCloudObsConfigErrorEnum.ACCESS_KEY_SECRET_NOT_CONFIGURED);
+        }
+        if (bucketName == null || bucketName.isEmpty()) {
+            throw new HuaWeiCloudObsConfigException(HuaWeCloudObsConfigErrorEnum.BUCKET_NAME_NOT_CONFIGURED);
+        }
+        if (endpoint == null || endpoint.isEmpty()) {
+            throw new HuaWeiCloudObsConfigException(HuaWeCloudObsConfigErrorEnum.END_POINT_NOT_CONFIGURED);
+        }
     }
 
     /**
      * 验证参数
      *
-     * @param pathOfBizName  上传主路径, 建议填写业务模块相关名称
      * @param uploadTypeEnum 上传子路径
+     * @param pathOfBizName  上传主路径, 建议填写业务模块相关名称
      */
-    private void validateParams(@Nullable String pathOfBizName, @Nullable UploadTypeEnum uploadTypeEnum) {
-        ValidateUtils.validate(pathOfBizName == null || pathOfBizName.isEmpty(),
-                HuaWeCloudObsUploadErrorEnum.UPLOAD_BASE_PATH_IS_NULL);
-        ValidateUtils.validate(uploadTypeEnum == null,
-                HuaWeCloudObsUploadErrorEnum.UPLOAD_SUB_PATH_IS_NULL);
+    private void validateParams(@Nullable UploadTypeEnum uploadTypeEnum, @Nullable String... pathOfBizName) {
+        if (uploadTypeEnum == null) {
+            throw new HuaWeiCloudObsUploadException(HuaWeCloudObsUploadErrorEnum.UPLOAD_FILE_TYPE_IS_NULL);
+        }
+        if (pathOfBizName == null || pathOfBizName.length == 0) {
+            throw new HuaWeiCloudObsUploadException(HuaWeCloudObsUploadErrorEnum.UPLOAD_PATH_IS_NULL);
+        }
     }
 }

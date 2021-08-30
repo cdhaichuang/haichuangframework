@@ -20,14 +20,14 @@ public enum AliYunOssUploadErrorEnum implements BaseEnum {
     UPLOAD_FILE_ERROR("SA10200", "上传文件异常"),
 
     /**
-     * 上传文件主路径为空
+     * 上传文件路径为空
      */
-    UPLOAD_BASE_PATH_IS_NULL("SA10201", "上传文件主路径为空"),
+    UPLOAD_PATH_IS_NULL("SA10201", "上传文件路径为空"),
 
     /**
-     * 上传文件子路径为空
+     * 上传文件类型为空
      */
-    UPLOAD_SUB_PATH_IS_NULL("SA10202", "上传文件子路径为空"),
+    UPLOAD_FILE_TYPE_IS_NULL("SA10202", "上传文件类型为空"),
 
     /**
      * 原始数据异常

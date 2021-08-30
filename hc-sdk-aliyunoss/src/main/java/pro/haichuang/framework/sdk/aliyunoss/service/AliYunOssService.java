@@ -31,133 +31,138 @@ public interface AliYunOssService {
      * 上传文件
      *
      * @param uploadFile     源文件对象
-     * @param pathOfBizName  上传文件路径|业务模块路径
      * @param uploadTypeEnum 上传文件类型
+     * @param pathOfBizName  上传文件路径|业务模块路径
      * @return 上传后文件路径
      */
-    String uploadByMultipart(MultipartFile uploadFile, String pathOfBizName, UploadTypeEnum uploadTypeEnum);
+    String uploadByMultipart(MultipartFile uploadFile, UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
 
     /**
      * 上传文件
      *
      * @param uploadFile     源文件对象
      * @param newFileName    新文件名
-     * @param pathOfBizName  上传文件路径|业务模块路径
      * @param uploadTypeEnum 上传文件类型
+     * @param pathOfBizName  上传文件路径|业务模块路径
      * @return 上传后文件路径
      */
     String uploadByMultipart(MultipartFile uploadFile, String newFileName,
-                             String pathOfBizName, UploadTypeEnum uploadTypeEnum);
+                             UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
 
     /**
      * 上传文件
      *
      * @param uploadFiles    源文件对象
+     * @param uploadTypeEnum 上传文件类型
      * @param pathOfBizName  上传文件路径|业务模块路径
-     * @param uploadTypeEnum 上传主路径, 建议填写业务模块相关名称
      * @return 上传后文件路径
      */
-    List<String> uploadByMultipart(List<MultipartFile> uploadFiles, String pathOfBizName, UploadTypeEnum uploadTypeEnum);
+    List<String> uploadByMultipart(List<MultipartFile> uploadFiles,
+                                   UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
 
     /**
      * 上传文件
      *
      * @param uploadFiles    源文件对象
      * @param newFileNames   新文件名
+     * @param uploadTypeEnum 上传文件类型
      * @param pathOfBizName  上传文件路径|业务模块路径
-     * @param uploadTypeEnum 上传主路径, 建议填写业务模块相关名称
      * @return 上传后文件路径
      */
     List<String> uploadByMultipart(LinkedList<MultipartFile> uploadFiles, LinkedList<String> newFileNames,
-                                   String pathOfBizName, UploadTypeEnum uploadTypeEnum);
+                                   UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
 
     /**
      * 上传文件
      *
      * @param absoluteFilePath 源文件绝对路径
+     * @param uploadTypeEnum   上传文件类型
      * @param pathOfBizName    上传文件路径|业务模块路径
-     * @param uploadTypeEnum   上传主路径, 建议填写业务模块相关名称
      * @return 上传后文件路径
      */
-    String uploadByPath(String absoluteFilePath, String pathOfBizName, UploadTypeEnum uploadTypeEnum);
+    String uploadByPath(String absoluteFilePath,
+                        UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
 
     /**
      * 上传文件
      *
      * @param absoluteFilePath 源文件绝对路径
      * @param newFileName      新文件名
+     * @param uploadTypeEnum   上传文件类型
      * @param pathOfBizName    上传文件路径|业务模块路径
-     * @param uploadTypeEnum   上传主路径, 建议填写业务模块相关名称
      * @return 上传后文件路径
      */
     String uploadByPath(String absoluteFilePath, String newFileName,
-                        String pathOfBizName, UploadTypeEnum uploadTypeEnum);
+                        UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
 
     /**
      * 上传文件
      *
      * @param absoluteFilePaths 源文件绝对路径集合
+     * @param uploadTypeEnum    上传文件类型
      * @param pathOfBizName     上传文件路径|业务模块路径
-     * @param uploadTypeEnum    上传主路径, 建议填写业务模块相关名称
      * @return 上传后文件路径
      */
-    List<String> uploadByPath(List<String> absoluteFilePaths, String pathOfBizName, UploadTypeEnum uploadTypeEnum);
+    List<String> uploadByPath(List<String> absoluteFilePaths,
+                              UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
 
     /**
      * 上传文件
      *
      * @param absoluteFilePaths 源文件绝对路径集合
      * @param newFileNames      新文件名
+     * @param uploadTypeEnum    上传文件类型
      * @param pathOfBizName     上传文件路径|业务模块路径
-     * @param uploadTypeEnum    上传主路径, 建议填写业务模块相关名称
      * @return 上传后文件路径
      */
     List<String> uploadByPath(LinkedList<String> absoluteFilePaths, LinkedList<String> newFileNames,
-                              String pathOfBizName, UploadTypeEnum uploadTypeEnum);
+                              UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
 
     /**
      * 上传文件
      *
      * @param absoluteFilePath 源文件对象
+     * @param uploadTypeEnum   上传文件类型
      * @param pathOfBizName    上传文件路径|业务模块路径
-     * @param uploadTypeEnum   上传主路径, 建议填写业务模块相关名称
      * @return 上传后文件路径
      */
-    String uploadByFile(File absoluteFilePath, String pathOfBizName, UploadTypeEnum uploadTypeEnum);
+    String uploadByFile(File absoluteFilePath,
+                        UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
 
     /**
      * 上传文件
      *
      * @param absoluteFilePath 源文件对象
      * @param newFileName      新文件名
+     * @param uploadTypeEnum   上传文件类型
      * @param pathOfBizName    上传文件路径|业务模块路径
-     * @param uploadTypeEnum   上传主路径, 建议填写业务模块相关名称
      * @return 上传后文件路径
      */
     String uploadByFile(File absoluteFilePath, String newFileName,
-                        String pathOfBizName, UploadTypeEnum uploadTypeEnum);
+                        UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
 
     /**
      * 上传文件
      *
      * @param absoluteFilePaths 源文件对象
+     * @param uploadTypeEnum    上传文件类型
      * @param pathOfBizName     上传文件路径|业务模块路径
-     * @param uploadTypeEnum    上传主路径, 建议填写业务模块相关名称
      * @return 上传后文件路径
      */
-    List<String> uploadByFile(List<File> absoluteFilePaths, String pathOfBizName, UploadTypeEnum uploadTypeEnum);
+    List<String> uploadByFile(List<File> absoluteFilePaths,
+                              UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
 
     /**
      * 上传文件
      *
      * @param absoluteFilePaths 源文件对象
      * @param newFileNames      新文件名
+     * @param uploadTypeEnum    上传文件类型
      * @param pathOfBizName     上传文件路径|业务模块路径
-     * @param uploadTypeEnum    上传主路径, 建议填写业务模块相关名称
      * @return 上传后文件路径
      */
     List<String> uploadByFile(LinkedList<File> absoluteFilePaths, LinkedList<String> newFileNames,
-                              String pathOfBizName, UploadTypeEnum uploadTypeEnum);
+                              UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
 
     // ========================= Download =========================
 
