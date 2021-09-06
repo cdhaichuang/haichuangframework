@@ -15,13 +15,13 @@ import ${superControllerClassPackage};
 #end
 import ${package.Service}.${table.serviceName};
 import ${package.Entity}.${entity};
+import pro.haichuang.framework.base.request.PageRequest;
 import pro.haichuang.framework.redis.annotation.RepeatRequestValid;
 import pro.haichuang.framework.base.validate.Group;
-import pro.haichuang.framework.base.request.PageRequest;
-import pro.haichuang.framework.base.response.ResultVO;
 import pro.haichuang.framework.base.response.vo.BaseVO;
-import pro.haichuang.framework.base.response.vo.PageVO;
 import pro.haichuang.framework.base.response.vo.SingleVO;
+import pro.haichuang.framework.base.response.vo.PageVO;
+import pro.haichuang.framework.base.response.ResultVO;
 import java.util.List;
 
 #set($ignoreEnd="(PO$)|(AO$)|(DO$)|(DTO$)")
@@ -75,7 +75,6 @@ public class ${table.controllerName} {
     @ApiOperation("新增单条数据")
     @ApiOperationSupport(order = 3)
     @PostMapping
-    @ApiResponse(code = 500, message = "[A0500: 新增单条数据异常]")
     @RepeatRequestValid
     public BaseVO add(@RequestBody @Validated(Group.Insert.class) ${entity} $entityParseName){
         return ResultVO.ok(${serviceFullName}.saveAndValidate($entityParseName));
@@ -84,7 +83,6 @@ public class ${table.controllerName} {
     @ApiOperation("更新单条数据")
     @ApiOperationSupport(order = 4)
     @PutMapping
-    @ApiResponse(code = 500, message = "[A0500: 更新单条数据异常]")
     @RepeatRequestValid
     public BaseVO edit(@RequestBody @Validated(Group.Update.class) ${entity} $entityParseName){
         return ResultVO.ok(${serviceFullName}.updateByIdAndValidate($entityParseName));
@@ -93,7 +91,6 @@ public class ${table.controllerName} {
     @ApiOperation("批量删除数据")
     @ApiOperationSupport(order = 5)
     @DeleteMapping
-    @ApiResponse(code = 500, message = "[A0500: 批量删除数据异常]")
     @RepeatRequestValid
     public BaseVO del(@RequestBody List<Long> ids){
         return ResultVO.ok(${serviceFullName}.removeByIdAndValidate(ids));
