@@ -34,6 +34,7 @@ public class RequestUtils {
      * @param request HttpServletRequest
      * @param method  method
      * @return HttpServletRequestDTO
+     * @since 1.0.0
      */
     @NonNull
     public static HttpServletRequestDTO parseInfo(@NonNull HttpServletRequest request, @NotNull Method method) {
@@ -66,6 +67,7 @@ public class RequestUtils {
      *
      * @param request HttpServletRequest
      * @return {false: 否, true: 是}
+     * @since 1.0.0
      */
     public static boolean isJsonRequest(@NonNull HttpServletRequest request) {
         String contentTypeInHeaderValue = request.getHeader(HttpHeaders.CONTENT_TYPE);

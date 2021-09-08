@@ -22,6 +22,7 @@ public class ModelMapperUtils {
      * 默认匹配规则为 {@link MatchingStrategies#STANDARD}
      *
      * @return ModelMapper实例
+     * @since 1.0.0
      */
     @NonNull
     public static ModelMapper get() {
@@ -32,6 +33,7 @@ public class ModelMapperUtils {
      * 获取严格匹配模式的ModelMapper实例
      *
      * @return ModelMapper实例
+     * @since 1.0.0
      */
     @NonNull
     public static ModelMapper getStrictModelMapper() {

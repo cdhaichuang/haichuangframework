@@ -245,6 +245,8 @@ public class DefaultHuaWeiCloudObsServiceImpl implements HuaWeiCloudObsService {
 
     /**
      * 验证配置文件
+     *
+     * @since 1.0.0
      */
     private void validateProperties() {
         String accessKeyId = huaWeiCloudObsProperties.getAccessKeyId();
@@ -271,6 +273,7 @@ public class DefaultHuaWeiCloudObsServiceImpl implements HuaWeiCloudObsService {
      *
      * @param uploadTypeEnum 上传子路径
      * @param pathOfBizName  上传主路径, 建议填写业务模块相关名称
+     * @since 1.0.0
      */
     private void validateParams(@Nullable UploadTypeEnum uploadTypeEnum, @Nullable String... pathOfBizName) {
         if (uploadTypeEnum == null) {

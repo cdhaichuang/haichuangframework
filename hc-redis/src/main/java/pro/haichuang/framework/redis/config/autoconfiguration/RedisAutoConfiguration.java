@@ -1,10 +1,12 @@
 package pro.haichuang.framework.redis.config.autoconfiguration;
 
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import pro.haichuang.framework.base.config.autoconfiguration.BaseAutoConfiguration;
 import pro.haichuang.framework.redis.config.RedisConfig;
 import pro.haichuang.framework.redis.config.properties.RedisProperties;
 
@@ -23,6 +25,7 @@ import pro.haichuang.framework.redis.config.properties.RedisProperties;
  */
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureBefore(org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration.class)
+@AutoConfigureAfter(BaseAutoConfiguration.class)
 @EnableConfigurationProperties(RedisProperties.class)
 @ConditionalOnProperty(
         prefix = "haichuang.redis",

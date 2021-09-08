@@ -27,11 +27,24 @@ public class BaseConfigProperties {
      */
     private Boolean enable;
 
+    /**
+     * 项目代号
+     */
+    private String projectCode;
+
     public Boolean getEnable() {
         return enable;
     }
 
     public void setEnable(Boolean enable) {
         this.enable = enable;
+    }
+
+    public String getProjectCode() {
+        return projectCode;
+    }
+
+    public void setProjectCode(String projectCode) {
+        this.projectCode = projectCode;
     }
 }

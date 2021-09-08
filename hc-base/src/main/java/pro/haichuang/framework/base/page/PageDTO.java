@@ -43,6 +43,8 @@ public class PageDTO<T> implements Pageable, Serializable {
 
     /**
      * 构造器
+     *
+     * @since 1.0.0
      */
     public PageDTO() {
         this.pageNo = PageConstant.DEFAULT_PAGE_NO;
@@ -55,6 +57,7 @@ public class PageDTO<T> implements Pageable, Serializable {
      *
      * @param pageNo   页码
      * @param pageSize 每页数量
+     * @since 1.0.0
      */
     public PageDTO(int pageNo, int pageSize) {
         this();
@@ -70,6 +73,7 @@ public class PageDTO<T> implements Pageable, Serializable {
      * @param pageSize   每页数量
      * @param totalCount 总数
      * @param content    数据
+     * @since 1.0.0
      */
     public PageDTO(int pageNo, int pageSize, long totalCount, Collection<T> content) {
         this(pageNo, pageSize);
@@ -82,6 +86,7 @@ public class PageDTO<T> implements Pageable, Serializable {
      * 构造器
      *
      * @param pageRequest 分页参数
+     * @since 1.0.0
      */
     public PageDTO(PageRequest pageRequest) {
         this();
@@ -95,6 +100,7 @@ public class PageDTO<T> implements Pageable, Serializable {
      * @param pageRequest 分页参数
      * @param content     数据
      * @param totalCount  总数
+     * @since 1.0.0
      */
     public PageDTO(PageRequest pageRequest, long totalCount, Collection<T> content) {
         this(pageRequest);
@@ -107,6 +113,7 @@ public class PageDTO<T> implements Pageable, Serializable {
      *
      * @param pageDetailVO 分页详情
      * @param content      数据
+     * @since 1.0.0
      */
     public PageDTO(PageDetailVO pageDetailVO, Collection<T> content) {
         this(pageDetailVO.getPageNo(), pageDetailVO.getPageSize(), pageDetailVO.getTotalCount(), content);
@@ -118,6 +125,7 @@ public class PageDTO<T> implements Pageable, Serializable {
      *
      * @param <T> 分页数据类型
      * @return 空分页DTO
+     * @since 1.0.0
      */
     public static <T> PageDTO<T> empty() {
         return new PageDTO<>();
@@ -206,6 +214,8 @@ public class PageDTO<T> implements Pageable, Serializable {
 
     /**
      * 调整页码，使不超过最大页数
+     *
+     * @since 1.0.0
      */
     public void adjustPageNo() {
         if (pageNo == 1) {
@@ -221,6 +231,7 @@ public class PageDTO<T> implements Pageable, Serializable {
      * 获取分页详情VO
      *
      * @return 分页详情VO
+     * @since 1.0.0
      */
     public PageDetailVO convertToPageDetailVO() {
         return new PageDetailVO(getPageNo(), getPageSize(), getTotalCount());
@@ -233,6 +244,7 @@ public class PageDTO<T> implements Pageable, Serializable {
      * @param beginDateTime 开始时间
      * @param endDateTime   结束时间
      * @return 返回时间范围同一天结束时间
+     * @since 1.0.0
      */
     public static LocalDateTime formatEndDate(LocalDateTime beginDateTime, LocalDateTime endDateTime) {
         return endDateTime.plusDays(1);

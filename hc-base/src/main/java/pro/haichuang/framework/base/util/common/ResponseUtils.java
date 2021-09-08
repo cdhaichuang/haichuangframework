@@ -33,6 +33,7 @@ public class ResponseUtils {
      * @param response HttpServletResponse
      * @param data     响应数据
      * @throws IOException 获取输出流失败
+     * @since 1.0.0
      */
     public static void writeOfJson(@NonNull HttpServletResponse response, @NonNull Object data) throws IOException {
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
@@ -49,6 +50,7 @@ public class ResponseUtils {
      * @param response HttpServletResponse
      * @param data     响应数据
      * @throws IOException 获取输出流失败
+     * @since 1.0.0
      */
     public static void writeOfOriginal(@NonNull HttpServletResponse response, @NonNull Object data) throws IOException {
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
@@ -66,6 +68,7 @@ public class ResponseUtils {
      * @param response HttpServletResponse
      * @param file     文件
      * @throws IOException 获取输出流失败
+     * @since 1.0.0
      */
     public static void writeOfFile(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull File file) throws IOException {
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());

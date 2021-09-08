@@ -69,6 +69,8 @@ public class DefaultAliYunSmsServiceImpl implements AliYunSmsService {
 
     /**
      * 验证配置文件
+     *
+     * @since 1.0.0
      */
     private void validateProperties() {
         String accessKeyId = aliYunSmsProperties.getAccessKeyId();

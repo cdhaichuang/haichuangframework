@@ -21,3 +21,7 @@ spring:
     multipart:
       max-file-size: 100GB
       max-request-size: 100GB
+
+# ========================= Project Setting =========================
+haichuang:
+  project-code: ${hc.origin-lowercase-code-name}

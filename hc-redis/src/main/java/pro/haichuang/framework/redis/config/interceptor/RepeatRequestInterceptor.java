@@ -15,7 +15,7 @@ import pro.haichuang.framework.base.util.common.RequestUtils;
 import pro.haichuang.framework.base.util.common.ResponseUtils;
 import pro.haichuang.framework.base.util.common.UUIDUtils;
 import pro.haichuang.framework.redis.annotation.RepeatRequestValid;
-import pro.haichuang.framework.redis.constant.RedisKeyOfFramework;
+import pro.haichuang.framework.redis.component.RedisKeyComponent;
 import pro.haichuang.framework.redis.service.RedisService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -74,7 +74,7 @@ public class RepeatRequestInterceptor implements HandlerInterceptor {
                 }
 
                 // RedisKey
-                String repeatRedisKey = RedisKeyOfFramework.repeatRequest(repeatRequestValidAnnotation.preKey(),
+                String repeatRedisKey = RedisKeyComponent.repeatRequest(repeatRequestValidAnnotation.preKey(),
                         clientIp, String.valueOf(userId), request.getRequestURI());
                 String rdbParameterString = redisService.get(repeatRedisKey);
 

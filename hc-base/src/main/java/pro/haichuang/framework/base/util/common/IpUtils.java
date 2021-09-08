@@ -36,6 +36,7 @@ public class IpUtils {
      *
      * @param request HttpServletRequest
      * @return 客户端真实IP地址
+     * @since 1.0.0
      */
     @NonNull
     public static String getIpv4Address(@NonNull HttpServletRequest request) {

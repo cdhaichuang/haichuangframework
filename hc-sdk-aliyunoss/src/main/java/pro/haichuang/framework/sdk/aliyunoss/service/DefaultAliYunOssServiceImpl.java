@@ -249,6 +249,8 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
 
     /**
      * 验证配置文件
+     *
+     * @since 1.0.0
      */
     private void validateProperties() {
         String accessKeyId = aliYunOssProperties.getAccessKeyId();
@@ -275,6 +277,7 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
      *
      * @param pathOfBizName  上传主路径, 建议填写业务模块相关名称
      * @param uploadTypeEnum 文件类型
+     * @since 1.0.0
      */
     private void validateParams(@Nullable UploadTypeEnum uploadTypeEnum, @Nullable String... pathOfBizName) {
         if (uploadTypeEnum == null) {

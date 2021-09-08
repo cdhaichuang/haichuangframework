@@ -22,6 +22,7 @@ public class UUIDUtils {
      * UUID
      *
      * @return UUID
+     * @since 1.0.0
      */
     @NonNull
     public static String random() {
@@ -32,6 +33,7 @@ public class UUIDUtils {
      * UUID
      *
      * @return UUID
+     * @since 1.0.0
      */
     public static long randomOfLang() {
         return Long.parseLong(UUID.randomUUID().toString().replaceAll("-", ""));
@@ -42,6 +44,7 @@ public class UUIDUtils {
      *
      * @param length length
      * @return UUID
+     * @since 1.0.0
      */
     @NonNull
     public static String random(int length) {
@@ -54,6 +57,7 @@ public class UUIDUtils {
      *
      * @param length length
      * @return UUID
+     * @since 1.0.0
      */
     public static long randomOfLang(int length) {
         return Long.parseLong(random(length));
@@ -61,6 +65,8 @@ public class UUIDUtils {
 
     /**
      * 当前线程唯一UUID
+     *
+     * @since 1.0.0
      */
     public static class Local {
 
@@ -68,6 +74,8 @@ public class UUIDUtils {
 
         /**
          * 设置当前线程存储的UUID
+         *
+         * @since 1.0.0
          */
         public static void init() {
             if (LOCAL.get() == null || LOCAL.get().length() == 0) {
@@ -79,6 +87,7 @@ public class UUIDUtils {
          * 设置当前线程存储的UUID
          *
          * @param length length
+         * @since 1.0.0
          */
         public static void init(int length) {
             if (LOCAL.get() == null || LOCAL.get().length() == 0) {
@@ -90,6 +99,7 @@ public class UUIDUtils {
          * 获取当前线程存储的UUID, 未获取到当前线程的UUID时会创建一个新的UUID并设置到当前线程中
          *
          * @return UUID.Local
+         * @since 1.0.0
          */
         @NonNull
         public static String get() {
@@ -105,6 +115,8 @@ public class UUIDUtils {
          * <p>因为 {@link ThreadLocal} 底层使用的内部类 {@code ThreadLocalMap} 实现的, 生命周期为当前线程,
          * 所以不执行此方法当线程终止后 {@code ThreadLocalMap} 中的值会被JVM垃圾回收,
          * 但推荐在不需要使用的时候显性的执行此方法, 便于理解
+         *
+         * @since 1.0.0
          */
         public static void remove() {
             LOCAL.remove();

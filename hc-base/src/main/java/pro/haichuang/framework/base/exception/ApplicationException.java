@@ -46,6 +46,7 @@ public class ApplicationException extends RuntimeException {
      * 构造器
      *
      * @param baseEnum 枚举基类
+     * @since 1.0.0
      */
     public ApplicationException(BaseEnum baseEnum) {
         super("errorCode: " + baseEnum.value() + ", errorMessage: " + baseEnum.getReasonPhrase());
@@ -60,6 +61,7 @@ public class ApplicationException extends RuntimeException {
      *
      * @param baseEnum 枚举基类
      * @param userTip  用户提示信息
+     * @since 1.0.0
      */
     public ApplicationException(BaseEnum baseEnum, @Nullable String userTip) {
         super("errorCode: " + baseEnum.value() + ", errorMessage: " + baseEnum.getReasonPhrase() + ", userTip: " + userTip);

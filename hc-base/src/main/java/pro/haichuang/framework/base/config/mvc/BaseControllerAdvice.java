@@ -65,6 +65,7 @@ public class BaseControllerAdvice {
      * @param e       {@link pro.haichuang.framework.base.exception.ApplicationException}
      * @param request {@link javax.servlet.http.HttpServletRequest}
      * @return 结果响应
+     * @since 1.0.0
      */
     @ExceptionHandler(ApplicationException.class)
     public BaseVO generalErrorHandle(ApplicationException e, HttpServletRequest request) {
@@ -85,6 +86,7 @@ public class BaseControllerAdvice {
      * @param request  {@link javax.servlet.http.HttpServletRequest}
      * @param response {@link javax.servlet.http.HttpServletResponse}
      * @return 结果响应
+     * @since 1.0.0
      */
     @ExceptionHandler(StackTraceException.class)
     public BaseVO stackTracerErrorHandler(StackTraceException e, HttpServletRequest request, HttpServletResponse response) {
@@ -106,6 +108,7 @@ public class BaseControllerAdvice {
      * @param request  {@link javax.servlet.http.HttpServletRequest}
      * @param response {@link javax.servlet.http.HttpServletResponse}
      * @return 结果响应
+     * @since 1.0.0
      */
     @ExceptionHandler(ThirdPartyException.class)
     public JSONObject thirdPartyErrorHandler(ThirdPartyException e, HttpServletRequest request, HttpServletResponse response) {
@@ -130,6 +133,7 @@ public class BaseControllerAdvice {
      * @param request  {@link javax.servlet.http.HttpServletRequest}
      * @param response {@link javax.servlet.http.HttpServletResponse}
      * @return 结果响应
+     * @since 1.0.0
      */
     @ExceptionHandler(Exception.class)
     public BaseVO serverErrorHandler(Exception e, HttpServletRequest request, HttpServletResponse response) {
@@ -155,6 +159,7 @@ public class BaseControllerAdvice {
      * @param request  {@link javax.servlet.http.HttpServletRequest}
      * @param response {@link javax.servlet.http.HttpServletResponse}
      * @return 结果响应
+     * @since 1.0.0
      */
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public JSONObject validationExceptionHandler(MissingServletRequestParameterException e,
@@ -180,6 +185,7 @@ public class BaseControllerAdvice {
      * @param request  {@link javax.servlet.http.HttpServletRequest}
      * @param response {@link javax.servlet.http.HttpServletResponse}
      * @return 结果响应
+     * @since 1.0.0
      */
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public JSONObject validationExceptionHandler(MethodArgumentTypeMismatchException e,
@@ -208,6 +214,7 @@ public class BaseControllerAdvice {
      * @param request  {@link javax.servlet.http.HttpServletRequest}
      * @param response {@link javax.servlet.http.HttpServletResponse}
      * @return 结果响应
+     * @since 1.0.0
      */
     @ExceptionHandler(ValidationException.class)
     public JSONObject validationExceptionHandler(ValidationException e,
@@ -244,6 +251,7 @@ public class BaseControllerAdvice {
      * @return 结果响应
      * @see com.fasterxml.jackson.databind.DeserializationContext#weirdStringException(String, Class, String)
      * <p>Enum deserialize failed exception is unsolved
+     * @since 1.0.0
      */
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public JSONObject validationExceptionHandler(HttpMessageNotReadableException e,
@@ -274,6 +282,7 @@ public class BaseControllerAdvice {
      * @param request  {@link javax.servlet.http.HttpServletRequest}
      * @param response {@link javax.servlet.http.HttpServletResponse}
      * @return 结果响应
+     * @since 1.0.0
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public JSONObject validationExceptionHandler(MethodArgumentNotValidException e,
@@ -306,6 +315,7 @@ public class BaseControllerAdvice {
      * @param request  {@link javax.servlet.http.HttpServletRequest}
      * @param response {@link javax.servlet.http.HttpServletResponse}
      * @return 结果响应
+     * @since 1.0.0
      */
     @ExceptionHandler(BindException.class)
     public JSONObject validationExceptionHandler(BindException e, HttpServletRequest request, HttpServletResponse response) {
@@ -332,6 +342,7 @@ public class BaseControllerAdvice {
      * @param request  {@link javax.servlet.http.HttpServletRequest}
      * @param response {@link javax.servlet.http.HttpServletResponse}
      * @return 结果响应
+     * @since 1.0.0
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public JSONObject validationExceptionHandler(HttpRequestMethodNotSupportedException e,
@@ -367,6 +378,7 @@ public class BaseControllerAdvice {
      * @param tag                  输出标签
      * @param originalErrorMessage 原始错误信息
      * @return 格式化后的错误信息
+     * @since 1.0.0
      */
     @Nullable
     private String printStackTraceFormat(String requestUri, String requestMethod, Throwable tp, @Nullable Throwable t,

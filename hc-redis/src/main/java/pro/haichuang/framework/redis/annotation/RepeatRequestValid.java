@@ -28,6 +28,7 @@ public @interface RepeatRequestValid {
      * 默认 {@code "3s"}
      *
      * @return 间隔时间
+     * @since 1.0.0
      */
     int value() default 3;
 
@@ -36,6 +37,7 @@ public @interface RepeatRequestValid {
      * 默认 {@code "REPEAT"}
      *
      * @return Redis前缀
+     * @since 1.0.0
      */
     String preKey() default "REPEAT";
 }

@@ -38,6 +38,7 @@ public class HuaWeiCloudObsProperties {
      * 获取BucketDomain访问域名
      *
      * @return BucketDomain访问域名
+     * @since 1.0.0
      */
     public String getBucketDomain() {
         if (endpoint == null || endpoint.isEmpty()) {

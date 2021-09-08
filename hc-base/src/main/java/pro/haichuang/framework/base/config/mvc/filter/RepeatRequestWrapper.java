@@ -39,6 +39,7 @@ public class RepeatRequestWrapper extends HttpServletRequestWrapper {
      *
      * @param request The request to wrap
      * @throws IOException If the request is null
+     * @since 1.0.0
      */
     public RepeatRequestWrapper(HttpServletRequest request) throws IOException {
         super(request);

@@ -91,7 +91,7 @@ public class LogSaveAspect {
 
             fullMethodName = point.getTarget().getClass().getName() + "." + method.getName() + "()";
 
-            userId = SecurityUtils.getJwtPayload().getUserId();
+            userId = SecurityUtils.getJwtPayloadOrNewInstance().getUserId();
         }
 
         Object result = point.proceed();

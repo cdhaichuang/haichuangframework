@@ -5,8 +5,25 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * 微信公众号配置文件
  *
+ * <p>该类为 {@code hc-base} 核心的配置文件类
+ * <hr>
+ * Example:
+ * <pre>
+ *     # ========================= Haichuang Setting =========================
+ *     haichuang:
+ *       sdk:
+ *         wxmp:
+ *           // AppId
+ *           app-id:
+ *           // AppSecret
+ *           app-secret:
+ *           // Token
+ *           token:
+ * </pre>
+ *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
  */
 @ConfigurationProperties(prefix = "haichuang.sdk.wxmp")
 public class WxMpProperties {

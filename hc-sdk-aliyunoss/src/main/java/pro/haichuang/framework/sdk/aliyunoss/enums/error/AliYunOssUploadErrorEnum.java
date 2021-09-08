@@ -64,6 +64,7 @@ public enum AliYunOssUploadErrorEnum implements BaseEnum {
      *
      * @param value        枚举值
      * @param reasonPhrase 枚举信息
+     * @since 1.0.0
      */
     AliYunOssUploadErrorEnum(String value, String reasonPhrase) {
         this.value = value;

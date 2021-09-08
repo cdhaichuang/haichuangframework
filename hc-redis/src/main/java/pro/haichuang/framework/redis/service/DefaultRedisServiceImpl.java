@@ -30,6 +30,11 @@ public class DefaultRedisServiceImpl implements RedisService {
     // ============================= Common ============================
 
     @Override
+    public Set<String> keys(String pattern) {
+        return redisTemplate.keys(pattern);
+    }
+
+    @Override
     public boolean expire(String key, long expireTime) {
         if (expireTime > 0) {
             Boolean result = redisTemplate.expire(key, expireTime, TimeUnit.SECONDS);

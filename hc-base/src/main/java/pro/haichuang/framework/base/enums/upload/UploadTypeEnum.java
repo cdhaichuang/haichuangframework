@@ -52,6 +52,7 @@ public enum UploadTypeEnum implements BaseEnum {
      *
      * @param value        枚举值
      * @param reasonPhrase 枚举信息
+     * @since 1.0.0
      */
     UploadTypeEnum(String value, String reasonPhrase) {
         this.value = value;

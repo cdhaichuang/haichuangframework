@@ -31,6 +31,7 @@ public abstract class AbstractLogSave {
      * @param fullMethodName 完整方法名
      * @param userId         用户ID
      * @param executionTime  执行时间
+     * @since 1.0.0
      */
     public abstract void saveLog(LogSave logSave, Api api, ApiOperation apiOperation, String clientIp, String fullMethodName, Long userId, long executionTime);
 

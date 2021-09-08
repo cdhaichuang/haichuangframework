@@ -3,7 +3,7 @@
  */
 @NonNullApi
 @NonNullFields
-package pro.haichuang.framework.redis.constant;
+package pro.haichuang.framework.redis.component;
 
 import org.springframework.lang.NonNullApi;
 import org.springframework.lang.NonNullFields;

@@ -9,8 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * WxMpService
  *
+ * <p>该类为 {@code wxmp} 第三方操作核心接口, 项目中所有 {@code wxmp} 的操作均使用此接口
+ * <p>该类已默认注入到 {@code spring} 中, 默认实现为 {@link DefaultWxMpServiceImpl}, 如需自定义实现请实现该接口并手动注入该接口
+ *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
  */
 public interface WxMpService {
 
@@ -22,6 +26,7 @@ public interface WxMpService {
      * @param nonce     随机数
      * @param echoStr   请求响应值
      * @param response  HttpServletResponse
+     * @since 1.0.0
      */
     void verifyWxMessage(String signature, String timestamp, String nonce, String echoStr, HttpServletResponse response);
 
@@ -29,6 +34,7 @@ public interface WxMpService {
      * 获取基础AccessToken
      *
      * @return 基础AccessToken
+     * @since 1.0.0
      */
     String getBaseAccessToken();
 
@@ -38,6 +44,7 @@ public interface WxMpService {
      * @param openId OpenId
      * @return 网页AccessTokenDTO, 值为 {@code null} 时则视为未登录, 需要重新进行授权
      * @see pro.haichuang.framework.sdk.wxmp.service.WxMpService#getWebAccessTokenByCode(String)
+     * @since 1.0.0
      */
     @Nullable
     WxMpWebAccessTokenDTO getWebAccessTokenByOpenId(String openId);
@@ -48,6 +55,7 @@ public interface WxMpService {
      *
      * @param code Code
      * @return 网页AccessTokenDTO
+     * @since 1.0.0
      */
     WxMpWebAccessTokenDTO getWebAccessTokenByCode(String code);
 
@@ -55,6 +63,7 @@ public interface WxMpService {
      * 获取JsApiTicket
      *
      * @return JsApiTicket
+     * @since 1.0.0
      */
     String getJsApiTicket();
 
@@ -63,6 +72,7 @@ public interface WxMpService {
      *
      * @param openId OpenId
      * @return 用户信息DTO, 当用户未关注当前公众号时值为 {@code null}
+     * @since 1.0.0
      */
     @Nullable
     WxMpUserInfoDTO getUserInfo(String openId);

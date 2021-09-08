@@ -39,6 +39,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      *
      * @param id ID
      * @return 是否存在 [true: 存在, false: 不存在]
+     * @since 1.0.0
      */
     default boolean isExistsByIdAndIgnore(@Nullable Long id) {
         if (id == null) {
@@ -52,6 +53,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      *
      * @param ids IDs
      * @return 是否存在 [true: 存在, false: 不存在]
+     * @since 1.0.0
      */
     default boolean isExistsByIdAndIgnore(@Nullable Collection<Long> ids) {
         if (ids == null || ids.isEmpty()) {
@@ -65,6 +67,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      *
      * @param id ID
      * @return 数量
+     * @since 1.0.0
      */
     default int countByIdAndIgnore(@Nullable Long id) {
         if (id == null) {
@@ -78,6 +81,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      *
      * @param ids IDs
      * @return 数量
+     * @since 1.0.0
      */
     default int countByIdAndIgnore(@Nullable Collection<Long> ids) {
         if (ids == null || ids.isEmpty()) {
@@ -91,6 +95,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      *
      * @param id ID
      * @return DO
+     * @since 1.0.0
      */
     @Nullable
     default T getByIdAndIgnore(@Nullable Long id) {
@@ -105,6 +110,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      *
      * @param id ID
      * @return DO
+     * @since 1.0.0
      */
     default Optional<T> getByIdAndIgnoreOpt(@Nullable Long id) {
         return Optional.ofNullable(this.getByIdAndIgnore(id));
@@ -115,6 +121,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      *
      * @param ids IDs
      * @return DOs
+     * @since 1.0.0
      */
     default List<T> listByIdAndIgnore(@Nullable Collection<Long> ids) {
         if (ids == null || ids.isEmpty()) {
@@ -128,6 +135,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      *
      * @param wrapper wrapper
      * @return DOs
+     * @since 1.0.0
      */
     @Nullable
     default List<T> listAndIgnore(Wrapper<T> wrapper) {
@@ -144,6 +152,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      *
      * @param pageRequest PageRequest
      * @return PageDTO
+     * @since 1.0.0
      */
     default PageDTO<T> listPageAndIgnore(@Nullable PageRequest pageRequest) {
         if (pageRequest == null) {
@@ -158,6 +167,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      *
      * @param entity 实体类
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
+     * @since 1.0.0
      */
     default boolean saveAndIgnore(@Nullable T entity) {
         if (entity == null) {
@@ -172,6 +182,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      *
      * @param entities 实体对象集合
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
+     * @since 1.0.0
      */
     default boolean saveAndIgnore(@Nullable Collection<T> entities) {
         return this.saveAndIgnore(entities, 1000);
@@ -183,6 +194,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param entities  实体对象集合
      * @param batchSize 插入批次数量
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
+     * @since 1.0.0
      */
     default boolean saveAndIgnore(@Nullable Collection<T> entities, int batchSize) {
         if (entities == null || entities.isEmpty()) {
@@ -197,6 +209,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      *
      * @param entity 实体类
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
+     * @since 1.0.0
      */
     default boolean updateByIdAndIgnore(@Nullable T entity) {
         if (entity == null) {
@@ -210,6 +223,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      *
      * @param entities 实体对象集合
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
+     * @since 1.0.0
      */
     default boolean updateByIdAndIgnore(@Nullable Collection<T> entities) {
         return this.updateByIdAndIgnore(entities, 1000);
@@ -221,6 +235,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param entities  实体对象集合
      * @param batchSize 插入批次数量
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
+     * @since 1.0.0
      */
     default boolean updateByIdAndIgnore(@Nullable Collection<T> entities, int batchSize) {
         if (entities == null || entities.isEmpty()) {
@@ -234,6 +249,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      *
      * @param id ID
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
+     * @since 1.0.0
      */
     default boolean removeByIdAndIgnore(@Nullable Long id) {
         if (id == null) {
@@ -247,6 +263,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      *
      * @param ids ID集合
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
+     * @since 1.0.0
      */
     default boolean removeByIdAndIgnore(@Nullable Collection<Long> ids) {
         if (ids == null || ids.isEmpty()) {
@@ -263,6 +280,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param id ID
      * @return 是否存在 [true: 存在, false: 不存在]
      * @throws MybatisServiceApplication ID为空
+     * @since 1.0.0
      */
     default boolean isExistsByIdAndValidate(Long id) throws MybatisServiceApplication {
         return this.isExistsByIdAndValidate(id, ApplicationException.DEFAULT_ERROR_USER_TIP);
@@ -275,6 +293,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param errorUserTip 用户提示信息
      * @return 是否存在 [true: 存在, false: 不存在]
      * @throws MybatisServiceApplication ID为空
+     * @since 1.0.0
      */
     default boolean isExistsByIdAndValidate(@Nullable Long id, String errorUserTip)
             throws MybatisServiceApplication {
@@ -290,6 +309,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param ids IDs
      * @return 是否存在 [true: 存在, false: 不存在]
      * @throws MybatisServiceApplication ID为空
+     * @since 1.0.0
      */
     default boolean isExistsByIdAndValidate(@Nullable Collection<Long> ids) throws MybatisServiceApplication {
         return this.isExistsByIdAndValidate(ids, ApplicationException.DEFAULT_ERROR_USER_TIP);
@@ -302,6 +322,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param errorUserTip 用户提示信息
      * @return 是否存在 [true: 存在, false: 不存在]
      * @throws MybatisServiceApplication ID为空
+     * @since 1.0.0
      */
     default boolean isExistsByIdAndValidate(@Nullable Collection<Long> ids, String errorUserTip)
             throws MybatisServiceApplication {
@@ -317,6 +338,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param id ID
      * @return 数量
      * @throws MybatisServiceApplication ID为空
+     * @since 1.0.0
      */
     default int countByIdAndValidate(@Nullable Long id) throws MybatisServiceApplication {
         return this.countByIdAndValidate(id, null);
@@ -329,6 +351,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param errorUserTip 用户提示信息
      * @return 数量
      * @throws MybatisServiceApplication ID为空
+     * @since 1.0.0
      */
     default int countByIdAndValidate(@Nullable Long id, @Nullable String errorUserTip) throws MybatisServiceApplication {
         if (id == null) {
@@ -343,6 +366,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param ids IDs
      * @return 数量
      * @throws MybatisServiceApplication ID为空
+     * @since 1.0.0
      */
     default int countByIdAndValidate(@Nullable Collection<Long> ids) throws MybatisServiceApplication {
         return this.countByIdAndValidate(ids, null);
@@ -355,6 +379,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param errorUserTip 用户提示信息
      * @return 数量
      * @throws MybatisServiceApplication ID为空
+     * @since 1.0.0
      */
     default int countByIdAndValidate(@Nullable Collection<Long> ids, @Nullable String errorUserTip)
             throws MybatisServiceApplication {
@@ -370,6 +395,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param id ID
      * @return DO
      * @throws MybatisServiceApplication ID为空|ID错误
+     * @since 1.0.0
      */
     default T getByIdAndValidate(@Nullable Long id) throws MybatisServiceApplication {
         return this.getByIdAndValidate(id, null);
@@ -382,6 +408,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param errorUserTip 用户提示信息
      * @return DO
      * @throws MybatisServiceApplication ID为空|ID错误
+     * @since 1.0.0
      */
     default T getByIdAndValidate(@Nullable Long id, @Nullable String errorUserTip) throws MybatisServiceApplication {
         if (id == null) {
@@ -400,6 +427,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param ids IDs
      * @return DOs
      * @throws MybatisServiceApplication ID为空|ID错误
+     * @since 1.0.0
      */
     default List<T> listByIdAndValidate(@Nullable Collection<Long> ids) throws MybatisServiceApplication {
         return this.listByIdAndValidate(ids, null);
@@ -411,6 +439,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param wrapper wrapper
      * @return DOs
      * @throws MybatisServiceApplication ID为空|ID错误
+     * @since 1.0.0
      */
     default List<T> listByIdAndValidate(Wrapper<T> wrapper) throws MybatisServiceApplication {
         return this.listAndValidate(wrapper, null);
@@ -423,6 +452,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param errorUserTip 用户提示信息
      * @return DOs
      * @throws MybatisServiceApplication ID为空|ID错误
+     * @since 1.0.0
      */
     default List<T> listByIdAndValidate(@Nullable Collection<Long> ids, @Nullable String errorUserTip)
             throws MybatisServiceApplication {
@@ -443,6 +473,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param errorUserTip 用户提示信息
      * @return DOs
      * @throws MybatisServiceApplication ID为空|ID错误
+     * @since 1.0.0
      */
     default List<T> listAndValidate(Wrapper<T> wrapper, @Nullable String errorUserTip)
             throws MybatisServiceApplication {
@@ -460,6 +491,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param pageRequest PageRequest
      * @return PageDTO
      * @throws MybatisServiceApplication ID为空|ID错误
+     * @since 1.0.0
      */
     default PageDTO<T> listPageAndValidate(@Nullable PageRequest pageRequest) throws MybatisServiceApplication {
         return this.listPageAndValidate(pageRequest, null);
@@ -473,6 +505,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param errorUserTip 用户提示信息
      * @return PageDTO
      * @throws MybatisServiceApplication ID为空|ID错误
+     * @since 1.0.0
      */
     default PageDTO<T> listPageAndValidate(@Nullable PageRequest pageRequest, @Nullable String errorUserTip)
             throws MybatisServiceApplication {
@@ -489,6 +522,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param entity 实体类
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
      * @throws MybatisServiceApplication 参数为空|参数错误
+     * @since 1.0.0
      */
     default boolean saveAndValidate(@Nullable T entity) throws MybatisServiceApplication {
         return this.saveAndValidate(entity, null);
@@ -501,6 +535,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param errorUserTip 用户提示信息
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
      * @throws MybatisServiceApplication 参数为空|参数错误
+     * @since 1.0.0
      */
     default boolean saveAndValidate(@Nullable T entity, @Nullable String errorUserTip)
             throws MybatisServiceApplication {
@@ -517,6 +552,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param entities 实体对象集合
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
      * @throws MybatisServiceApplication 参数为空|参数错误
+     * @since 1.0.0
      */
     default boolean saveAndValidate(@Nullable Collection<T> entities) throws MybatisServiceApplication {
         return this.saveAndValidate(entities, 1000, null);
@@ -529,6 +565,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param errorUserTip 用户提示信息
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
      * @throws MybatisServiceApplication 参数为空|参数错误
+     * @since 1.0.0
      */
     default boolean saveAndValidate(@Nullable Collection<T> entities, @Nullable String errorUserTip)
             throws MybatisServiceApplication {
@@ -542,6 +579,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param batchSize 插入批次数量
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
      * @throws MybatisServiceApplication 参数为空|参数错误
+     * @since 1.0.0
      */
     default boolean saveAndValidate(@Nullable Collection<T> entities, int batchSize) throws MybatisServiceApplication {
         return this.saveAndValidate(entities, batchSize, null);
@@ -555,6 +593,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param errorUserTip 用户提示信息
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
      * @throws MybatisServiceApplication 参数为空|参数错误
+     * @since 1.0.0
      */
     default boolean saveAndValidate(@Nullable Collection<T> entities, int batchSize, @Nullable String errorUserTip)
             throws MybatisServiceApplication {
@@ -571,6 +610,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param entity 实体类
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
      * @throws MybatisServiceApplication 参数为空|参数错误
+     * @since 1.0.0
      */
     @SneakyThrows
     default boolean updateByIdAndValidate(@Nullable T entity) throws MybatisServiceApplication {
@@ -591,6 +631,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param errorUserTip 用户提示信息
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
      * @throws MybatisServiceApplication 参数为空|参数错误
+     * @since 1.0.0
      */
     @SneakyThrows
     default boolean updateByIdAndValidate(@Nullable T entity, @Nullable String errorUserTip)
@@ -611,6 +652,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param entities 实体对象集合
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
      * @throws MybatisServiceApplication 参数为空|参数错误
+     * @since 1.0.0
      */
     default boolean updateByIdAndValidate(@Nullable Collection<T> entities) throws MybatisServiceApplication {
         return this.updateByIdAndValidate(entities, 1000);
@@ -623,6 +665,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param errorUserTip 用户提示信息
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
      * @throws MybatisServiceApplication 参数为空|参数错误
+     * @since 1.0.0
      */
     default boolean updateByIdAndValidate(@Nullable Collection<T> entities, @Nullable String errorUserTip)
             throws MybatisServiceApplication {
@@ -636,6 +679,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param batchSize 插入批次数量
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
      * @throws MybatisServiceApplication 参数为空|参数错误
+     * @since 1.0.0
      */
     @SneakyThrows
     default boolean updateByIdAndValidate(@Nullable Collection<T> entities, int batchSize)
@@ -651,6 +695,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param errorUserTip 用户提示信息
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
      * @throws MybatisServiceApplication 参数为空|参数错误
+     * @since 1.0.0
      */
     @SneakyThrows
     default boolean updateByIdAndValidate(@Nullable Collection<T> entities, int batchSize, @Nullable String errorUserTip)
@@ -674,6 +719,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param id ID
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
      * @throws MybatisServiceApplication ID为空|ID错误
+     * @since 1.0.0
      */
     default boolean removeByIdAndValidate(@Nullable Long id) throws MybatisServiceApplication {
         return this.removeByIdAndValidate(id, null);
@@ -686,6 +732,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param errorUserTip 用户提示信息
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
      * @throws MybatisServiceApplication ID为空|ID错误
+     * @since 1.0.0
      */
     default boolean removeByIdAndValidate(@Nullable Long id, @Nullable String errorUserTip)
             throws MybatisServiceApplication {
@@ -701,6 +748,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param ids ID集合
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
      * @throws MybatisServiceApplication ID为空|ID错误
+     * @since 1.0.0
      */
     default boolean removeByIdAndValidate(@Nullable Collection<Long> ids) throws MybatisServiceApplication {
         return this.removeByIdAndValidate(ids, null);
@@ -713,6 +761,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param errorUserTip 用户提示信息
      * @return 操作是否成功 [null: 未执行, true: 成功, false: 失败]
      * @throws MybatisServiceApplication ID为空|ID错误
+     * @since 1.0.0
      */
     default boolean removeByIdAndValidate(@Nullable Collection<Long> ids, @Nullable String errorUserTip)
             throws MybatisServiceApplication {
@@ -730,6 +779,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param entity 实体类
      * @param <T>    实体类类型
      * @return 操作后的实体类
+     * @since 1.0.0
      */
     static <T extends BaseDO> T clearEntityDefaultParameterAndGet(T entity) {
         return BaseService.clearEntityDefaultParameterAndGet(entity,
@@ -742,6 +792,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param entities 实体对象集合
      * @param <T>      实体类类型
      * @return 操作后的实体类
+     * @since 1.0.0
      */
     static <T extends BaseDO> List<T> clearEntityDefaultParameterAndGet(Collection<T> entities) {
         return entities.stream().map(entity -> BaseService.clearEntityDefaultParameterAndGet(entity,
@@ -757,6 +808,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param isClearModifyTime 是否清除更新时间
      * @param <T>               实体类类型
      * @return 操作后的实体类
+     * @since 1.0.0
      */
     @SneakyThrows
     static <T extends BaseDO> T clearEntityDefaultParameterAndGet(
@@ -805,6 +857,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param isClearModifyTime 是否清除更新时间
      * @param <T>               实体类类型
      * @return 清除参数后的实体对象集合
+     * @since 1.0.0
      */
     static <T extends BaseDO> Collection<T> clearEntityDefaultParameterAndGet(
             Collection<T> entities, boolean isClearId, boolean isClearCreateTime, boolean isClearModifyTime) {
@@ -818,6 +871,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param entity 实体类
      * @param <T>    实体类类型
      * @return 获取ID方法
+     * @since 1.0.0
      */
     @SneakyThrows
     static <T extends BaseDO> Method validateIdExistsAndGetIdMethod(T entity) {
@@ -845,6 +899,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      * @param parameterTypes 方法参数Class
      * @param <T>            实体类类型
      * @return 方法
+     * @since 1.0.0
      */
     @Nullable
     static <T extends BaseDO> Method getDeepDeclareMethod(
@@ -867,6 +922,7 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
      *
      * @param value 驼峰字符串
      * @return 下划线字符串
+     * @since 1.0.0
      */
     static String toUnderlineCase(String value) {
         StringBuilder result = new StringBuilder();

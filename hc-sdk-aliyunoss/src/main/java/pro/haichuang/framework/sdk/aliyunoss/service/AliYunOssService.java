@@ -34,6 +34,7 @@ public interface AliYunOssService {
      * @param uploadTypeEnum 上传文件类型
      * @param pathOfBizName  上传文件路径|业务模块路径
      * @return 上传后文件路径
+     * @since 1.0.0
      */
     String uploadByMultipart(MultipartFile uploadFile, UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
 
@@ -45,6 +46,7 @@ public interface AliYunOssService {
      * @param uploadTypeEnum 上传文件类型
      * @param pathOfBizName  上传文件路径|业务模块路径
      * @return 上传后文件路径
+     * @since 1.0.0
      */
     String uploadByMultipart(MultipartFile uploadFile, String newFileName,
                              UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
@@ -56,6 +58,7 @@ public interface AliYunOssService {
      * @param uploadTypeEnum 上传文件类型
      * @param pathOfBizName  上传文件路径|业务模块路径
      * @return 上传后文件路径
+     * @since 1.0.0
      */
     List<String> uploadByMultipart(List<MultipartFile> uploadFiles,
                                    UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
@@ -68,6 +71,7 @@ public interface AliYunOssService {
      * @param uploadTypeEnum 上传文件类型
      * @param pathOfBizName  上传文件路径|业务模块路径
      * @return 上传后文件路径
+     * @since 1.0.0
      */
     List<String> uploadByMultipart(LinkedList<MultipartFile> uploadFiles, LinkedList<String> newFileNames,
                                    UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
@@ -79,6 +83,7 @@ public interface AliYunOssService {
      * @param uploadTypeEnum   上传文件类型
      * @param pathOfBizName    上传文件路径|业务模块路径
      * @return 上传后文件路径
+     * @since 1.0.0
      */
     String uploadByPath(String absoluteFilePath,
                         UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
@@ -91,6 +96,7 @@ public interface AliYunOssService {
      * @param uploadTypeEnum   上传文件类型
      * @param pathOfBizName    上传文件路径|业务模块路径
      * @return 上传后文件路径
+     * @since 1.0.0
      */
     String uploadByPath(String absoluteFilePath, String newFileName,
                         UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
@@ -102,6 +108,7 @@ public interface AliYunOssService {
      * @param uploadTypeEnum    上传文件类型
      * @param pathOfBizName     上传文件路径|业务模块路径
      * @return 上传后文件路径
+     * @since 1.0.0
      */
     List<String> uploadByPath(List<String> absoluteFilePaths,
                               UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
@@ -114,6 +121,7 @@ public interface AliYunOssService {
      * @param uploadTypeEnum    上传文件类型
      * @param pathOfBizName     上传文件路径|业务模块路径
      * @return 上传后文件路径
+     * @since 1.0.0
      */
     List<String> uploadByPath(LinkedList<String> absoluteFilePaths, LinkedList<String> newFileNames,
                               UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
@@ -125,6 +133,7 @@ public interface AliYunOssService {
      * @param uploadTypeEnum   上传文件类型
      * @param pathOfBizName    上传文件路径|业务模块路径
      * @return 上传后文件路径
+     * @since 1.0.0
      */
     String uploadByFile(File absoluteFilePath,
                         UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
@@ -137,6 +146,7 @@ public interface AliYunOssService {
      * @param uploadTypeEnum   上传文件类型
      * @param pathOfBizName    上传文件路径|业务模块路径
      * @return 上传后文件路径
+     * @since 1.0.0
      */
     String uploadByFile(File absoluteFilePath, String newFileName,
                         UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
@@ -148,6 +158,7 @@ public interface AliYunOssService {
      * @param uploadTypeEnum    上传文件类型
      * @param pathOfBizName     上传文件路径|业务模块路径
      * @return 上传后文件路径
+     * @since 1.0.0
      */
     List<String> uploadByFile(List<File> absoluteFilePaths,
                               UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
@@ -160,6 +171,7 @@ public interface AliYunOssService {
      * @param uploadTypeEnum    上传文件类型
      * @param pathOfBizName     上传文件路径|业务模块路径
      * @return 上传后文件路径
+     * @since 1.0.0
      */
     List<String> uploadByFile(LinkedList<File> absoluteFilePaths, LinkedList<String> newFileNames,
                               UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
@@ -172,6 +184,7 @@ public interface AliYunOssService {
      * @param ossFilePath OSS文件路径
      * @param request     {@link HttpServletRequest}
      * @param response    {@link HttpServletResponse}
+     * @since 1.0.0
      */
     void downloadToResponse(String ossFilePath, HttpServletRequest request, HttpServletResponse response);
 
@@ -182,6 +195,7 @@ public interface AliYunOssService {
      * @param fileName    新文件名称, 为空时则为OSS文件名
      * @param request     {@link HttpServletRequest}
      * @param response    {@link HttpServletResponse}
+     * @since 1.0.0
      */
     void downloadToResponse(String ossFilePath, @Nullable String fileName,
                             HttpServletRequest request, HttpServletResponse response);
@@ -191,6 +205,7 @@ public interface AliYunOssService {
      *
      * @param ossFilePath OSS文件路径
      * @return File对象
+     * @since 1.0.0
      */
     File downloadToFile(String ossFilePath);
 
@@ -200,6 +215,7 @@ public interface AliYunOssService {
      * @param ossFilePath OSS文件路径
      * @param fileName    新文件名称, 为空时则为OSS文件名
      * @return File对象
+     * @since 1.0.0
      */
     File downloadToFile(String ossFilePath, @Nullable String fileName);
 
@@ -209,6 +225,7 @@ public interface AliYunOssService {
      * @param ossFilePath OSS文件路径
      * @param file        新文件对象, 为空时则文件名为OSS文件名
      * @return File对象
+     * @since 1.0.0
      */
     File downloadToFile(String ossFilePath, @Nullable File file);
 
@@ -218,6 +235,7 @@ public interface AliYunOssService {
      * 删除文件
      *
      * @param ossFilePath OSS文件路径
+     * @since 1.0.0
      */
     void deleteObject(String ossFilePath);
 
@@ -226,6 +244,7 @@ public interface AliYunOssService {
      *
      * @param ossFilePaths OSS文件路径
      * @return 删除成功的文件路径集合
+     * @since 1.0.0
      */
     List<String> deleteObject(Collection<String> ossFilePaths);
 
@@ -236,6 +255,7 @@ public interface AliYunOssService {
      * @param quiet        返回模式
      *                     [default: false-详细模式, {true: 简单模式(删除失败的文件路径集合), false: 详细模式(删除成功的文件路径集合)}]
      * @return 返回结果参考 {@code quiet} 形参注释
+     * @since 1.0.0
      */
     List<String> deleteObject(Collection<String> ossFilePaths, boolean quiet);
 

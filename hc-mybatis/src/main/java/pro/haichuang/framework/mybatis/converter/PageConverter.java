@@ -28,6 +28,7 @@ public class PageConverter {
      * @param iPage Mybatis{@link IPage}
      * @param <T>   对象类型
      * @return PageDTO
+     * @since 1.0.0
      */
     public static <T> PageDTO<T> converter(IPage<T> iPage) {
         return new PageDTO<>((int) iPage.getCurrent(), (int) iPage.getSize(), iPage.getTotal(), iPage.getRecords());
@@ -43,6 +44,7 @@ public class PageConverter {
      * @param <T>     原始对象类型
      * @param <R>     转换对象类型
      * @return PageDTO
+     * @since 1.0.0
      */
     public static <T, R> PageDTO<R> converter(IPage<T> iPage, Class<R> toClass) {
         return new PageDTO<>((int) iPage.getCurrent(), (int) iPage.getSize(), iPage.getTotal(),
@@ -67,6 +69,7 @@ public class PageConverter {
      * @param <T>      原始对象类型
      * @param <R>      转换对象类型
      * @return PageDTO
+     * @since 1.0.0
      */
     public static <T, R> PageDTO<R> converter(IPage<T> iPage, Function<T, R> function) {
         return new PageDTO<>((int) iPage.getCurrent(), (int) iPage.getSize(), iPage.getTotal(),
@@ -83,6 +86,7 @@ public class PageConverter {
      * @param content     数据
      * @param <T>         对象类型
      * @return PageDTO
+     * @since 1.0.0
      */
     public static <T> PageDTO<T> converter(PageRequest pageRequest, int totalCount, Collection<T> content) {
         return new PageDTO<>(pageRequest, totalCount, content);

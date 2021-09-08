@@ -11,10 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotBlank;
 
 /**
- * SdkWxMpController
+ * 该类默认提供微信服务器验证模版接口, 用于自动验证服务器
  *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
  */
 @RequestMapping("/framework/sdk/wxmp")
 @RestController
@@ -32,6 +33,7 @@ public class SdkWxMpController {
      * @param nonce     随机数
      * @param echostr   请求响应值
      * @param response  HttpServletResponse
+     * @since 1.0.0
      */
     @GetMapping("/authorization")
     @SuppressWarnings("SpellCheckingInspection")

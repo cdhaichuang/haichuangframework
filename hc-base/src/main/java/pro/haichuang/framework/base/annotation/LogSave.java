@@ -28,6 +28,7 @@ public @interface LogSave {
      * 描述信息
      *
      * @return 描述信息
+     * @since 1.0.0
      */
     String message();
 

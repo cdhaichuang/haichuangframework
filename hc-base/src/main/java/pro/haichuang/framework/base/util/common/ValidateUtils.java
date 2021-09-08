@@ -38,6 +38,7 @@ public class ValidateUtils {
      * @param isThrow  是否抛出异常
      * @param baseEnum 自定义异常枚举
      * @throws ApplicationException 自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow, @NonNull BaseEnum baseEnum)
             throws ApplicationException {
@@ -53,6 +54,7 @@ public class ValidateUtils {
      * @param baseEnum 自定义异常枚举
      * @param userTip  用户提示
      * @throws ApplicationException 自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow,
                                 @NonNull BaseEnum baseEnum, @NonNull String userTip)
@@ -70,6 +72,7 @@ public class ValidateUtils {
      * @param isThrow            是否抛出异常
      * @param authorityErrorEnum 访问权限异常枚举
      * @throws AuthorityException 访问权限自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow,
                                 @NonNull AuthorityErrorEnum authorityErrorEnum)
@@ -86,6 +89,7 @@ public class ValidateUtils {
      * @param authorityErrorEnum 访问权限异常枚举
      * @param userTip            用户提示
      * @throws AuthorityException 访问权限自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow,
                                 @NonNull AuthorityErrorEnum authorityErrorEnum, @NonNull String userTip)
@@ -101,6 +105,7 @@ public class ValidateUtils {
      * @param isThrow        是否抛出异常
      * @param loginErrorEnum 用户登录异常枚举
      * @throws LoginException 用户登录自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow,
                                 @NonNull LoginErrorEnum loginErrorEnum)
@@ -117,6 +122,7 @@ public class ValidateUtils {
      * @param loginErrorEnum 用户登录异常枚举
      * @param userTip        用户提示
      * @throws LoginException 用户登录自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow,
                                 @NonNull LoginErrorEnum loginErrorEnum, @NonNull String userTip)
@@ -132,6 +138,7 @@ public class ValidateUtils {
      * @param isThrow           是否抛出异常
      * @param registerErrorEnum 用户注册异常枚举
      * @throws RegisterException 用户注册自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow,
                                 @NonNull RegisterErrorEnum registerErrorEnum)
@@ -148,6 +155,7 @@ public class ValidateUtils {
      * @param registerErrorEnum 用户注册异常枚举
      * @param userTip           用户提示
      * @throws RegisterException 用户注册自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow,
                                 @NonNull RegisterErrorEnum registerErrorEnum, @NonNull String userTip)
@@ -163,6 +171,7 @@ public class ValidateUtils {
      * @param isThrow               是否抛出异常
      * @param requestParamErrorEnum 请求参数异常枚举
      * @throws RequestParamException 请求参数自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow,
                                 @NonNull RequestParamErrorEnum requestParamErrorEnum)
@@ -179,6 +188,7 @@ public class ValidateUtils {
      * @param requestParamErrorEnum 请求参数异常枚举
      * @param userTip               用户提示
      * @throws RequestParamException 请求参数自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow,
                                 @NonNull RequestParamErrorEnum requestParamErrorEnum, @NonNull String userTip)
@@ -194,6 +204,7 @@ public class ValidateUtils {
      * @param isThrow                是否抛出异常
      * @param requestServerErrorEnum 请求服务异常枚举
      * @throws RequestServerException 请求服务自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow,
                                 @NonNull RequestServerErrorEnum requestServerErrorEnum)
@@ -210,6 +221,7 @@ public class ValidateUtils {
      * @param requestServerErrorEnum 请求服务异常枚举
      * @param userTip                用户提示
      * @throws RequestServerException 请求服务自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow,
                                 @NonNull RequestServerErrorEnum requestServerErrorEnum, @NonNull String userTip)
@@ -225,6 +237,7 @@ public class ValidateUtils {
      * @param isThrow           是否抛出异常
      * @param resourceErrorEnum 用户资源异常枚举
      * @throws pro.haichuang.framework.base.exception.client.ResourceException 用户资源自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow,
                                 @NonNull pro.haichuang.framework.base.enums.error.client.ResourceErrorEnum resourceErrorEnum)
@@ -241,6 +254,7 @@ public class ValidateUtils {
      * @param resourceErrorEnum 用户资源异常枚举
      * @param userTip           用户提示
      * @throws pro.haichuang.framework.base.exception.client.ResourceException 用户资源自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow,
                                 @NonNull pro.haichuang.framework.base.enums.error.client.ResourceErrorEnum resourceErrorEnum,
@@ -256,6 +270,7 @@ public class ValidateUtils {
      * @param isThrow             是否抛出异常
      * @param uploadFileErrorEnum 用户上传文件异常枚举
      * @throws UploadFileException 用户上传文件自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow,
                                 @NonNull UploadFileErrorEnum uploadFileErrorEnum)
@@ -272,6 +287,7 @@ public class ValidateUtils {
      * @param uploadFileErrorEnum 用户上传文件异常枚举
      * @param userTip             用户提示
      * @throws UploadFileException 用户上传文件自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow,
                                 @NonNull UploadFileErrorEnum uploadFileErrorEnum, @NonNull String userTip)
@@ -287,6 +303,7 @@ public class ValidateUtils {
      * @param isThrow          是否抛出异常
      * @param versionErrorEnum 用户当前版本异常枚举
      * @throws VersionException 用户当前版本自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow,
                                 @NonNull VersionErrorEnum versionErrorEnum)
@@ -303,6 +320,7 @@ public class ValidateUtils {
      * @param versionErrorEnum 用户当前版本异常枚举
      * @param userTip          用户提示
      * @throws VersionException 用户当前版本自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow,
                                 @NonNull VersionErrorEnum versionErrorEnum, @NonNull String userTip)
@@ -318,6 +336,7 @@ public class ValidateUtils {
      * @param isThrow          是否抛出异常
      * @param privacyErrorEnum 用户隐私未授权异常枚举
      * @throws PrivacyException 用户隐私未授权自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow,
                                 @NonNull PrivacyErrorEnum privacyErrorEnum)
@@ -334,6 +353,7 @@ public class ValidateUtils {
      * @param privacyErrorEnum 用户隐私未授权异常枚举
      * @param userTip          用户提示
      * @throws PrivacyException 用户隐私未授权自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow,
                                 @NonNull PrivacyErrorEnum privacyErrorEnum, @NonNull String userTip)
@@ -349,6 +369,7 @@ public class ValidateUtils {
      * @param isThrow         是否抛出异常
      * @param deviceErrorEnum 用户设备异常枚举
      * @throws DeviceException 用户设备自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow,
                                 @NonNull DeviceErrorEnum deviceErrorEnum)
@@ -365,6 +386,7 @@ public class ValidateUtils {
      * @param deviceErrorEnum 用户设备异常枚举
      * @param userTip         用户提示
      * @throws DeviceException 用户设备自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow,
                                 @NonNull DeviceErrorEnum deviceErrorEnum, @NonNull String userTip)
@@ -382,6 +404,7 @@ public class ValidateUtils {
      * @param isThrow            是否抛出异常
      * @param executionErrorEnum 系统执行超时异常枚举
      * @throws ExecutionException 系统执行超时自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow,
                                 @NonNull ExecutionErrorEnum executionErrorEnum)
@@ -398,6 +421,7 @@ public class ValidateUtils {
      * @param executionErrorEnum 系统执行超时异常枚举
      * @param userTip            用户提示
      * @throws ExecutionException 系统执行超时自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow,
                                 @NonNull ExecutionErrorEnum executionErrorEnum, @NonNull String userTip)
@@ -413,6 +437,7 @@ public class ValidateUtils {
      * @param isThrow                   是否抛出异常
      * @param disasterRecoveryErrorEnum 系统容灾功能被触发异常枚举
      * @throws DisasterRecoveryException 系统容灾功能被触发自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow,
                                 @NonNull DisasterRecoveryErrorEnum disasterRecoveryErrorEnum)
@@ -429,6 +454,7 @@ public class ValidateUtils {
      * @param disasterRecoveryErrorEnum 系统容灾功能被触发异常枚举
      * @param userTip                   用户提示
      * @throws DisasterRecoveryException 系统容灾功能被触发自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow,
                                 @NonNull DisasterRecoveryErrorEnum disasterRecoveryErrorEnum, @NonNull String userTip)
@@ -444,6 +470,7 @@ public class ValidateUtils {
      * @param isThrow           是否抛出异常
      * @param resourceErrorEnum 系统资源异常枚举
      * @throws pro.haichuang.framework.base.exception.server.ResourceException 系统资源自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow,
                                 @NonNull pro.haichuang.framework.base.enums.error.server.ResourceErrorEnum resourceErrorEnum)
@@ -460,6 +487,7 @@ public class ValidateUtils {
      * @param resourceErrorEnum 系统资源异常枚举
      * @param userTip           用户提示
      * @throws pro.haichuang.framework.base.exception.server.ResourceException 系统资源自定义异常
+     * @since 1.0.0
      */
     public static void validate(boolean isThrow,
                                 @NonNull pro.haichuang.framework.base.enums.error.server.ResourceErrorEnum resourceErrorEnum,

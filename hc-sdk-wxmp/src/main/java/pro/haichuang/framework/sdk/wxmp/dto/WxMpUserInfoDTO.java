@@ -7,29 +7,34 @@ import pro.haichuang.framework.base.enums.base.SexEnum;
 import java.util.List;
 
 /**
- * 微信用户信息
- * {
- * "subscribe": 1,
- * "openid": "o6_bmjrPTlm6_2sgVt7hMZOPfL2M",
- * "nickname": "Band",
- * "sex": 1,
- * "language": "zh_CN",
- * "city": "广州",
- * "province": "广东",
- * "country": "中国",
- * "headimgurl":"http://thirdwx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/0",
- * "subscribe_time": 1382694957,
- * "unionid": " o6_bmasdasdsad6_2sgVt7hMZOPfL"
- * "remark": "",
- * "groupid": 0,
- * "tagid_list":[128,2],
- * "subscribe_scene": "ADD_SCENE_QR_CODE",
- * "qr_scene": 98765,
- * "qr_scene_str": ""
- * }
+ * 微信用户信息DTO
+ * <hr>
+ * Example:
+ * <pre>
+ *     {
+ *         "subscribe": 1,
+ *         "openid": "o6_bmjrPTlm6_2sgVt7hMZOPfL2M",
+ *         "nickname": "Band",
+ *         "sex": 1,
+ *         "language": "zh_CN",
+ *         "city": "广州",
+ *         "province": "广东",
+ *         "country": "中国",
+ *         "headimgurl":"http://thirdwx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/0",
+ *         "subscribe_time": 1382694957,
+ *         "unionid": " o6_bmasdasdsad6_2sgVt7hMZOPfL"
+ *         "remark": "",
+ *         "groupid": 0,
+ *         "tagid_list":[128,2],
+ *         "subscribe_scene": "ADD_SCENE_QR_CODE",
+ *         "qr_scene": 98765,
+ *         "qr_scene_str": ""
+ *     }
+ * </pre>
  *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
  */
 public class WxMpUserInfoDTO {
 
@@ -128,6 +133,8 @@ public class WxMpUserInfoDTO {
 
     /**
      * 微信用户关注的渠道来源枚举
+     *
+     * @since 1.0.0
      */
     public enum SubscribeSceneEnum implements BaseEnum {
 
@@ -191,6 +198,7 @@ public class WxMpUserInfoDTO {
          *
          * @param value        枚举值
          * @param reasonPhrase 枚举信息
+         * @since 1.0.0
          */
         SubscribeSceneEnum(String value, String reasonPhrase) {
             this.value = value;

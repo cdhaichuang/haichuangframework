@@ -21,6 +21,7 @@ public class JwtUtils {
      * @param payload JWT 载荷
      * @param secret  密钥
      * @return JWT字符串
+     * @since 1.0.0
      */
     @NonNull
     public static String generateJwt(@NonNull JwtPayload payload, @NonNull String secret) {
@@ -47,6 +48,7 @@ public class JwtUtils {
      * @throws ExpiredJwtException   JWT过期异常
      * @throws MalformedJwtException JWT解析失败异常
      * @throws SignatureException    JWT格式错误异常
+     * @since 1.0.0
      */
     @NonNull
     public static JwtPayload parseJwtToken(@NonNull String token, @NonNull String secret)

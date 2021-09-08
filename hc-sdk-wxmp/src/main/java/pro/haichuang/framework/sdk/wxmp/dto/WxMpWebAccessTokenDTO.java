@@ -8,9 +8,10 @@ import java.time.Duration;
  *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
  */
 public class WxMpWebAccessTokenDTO implements Serializable {
-    private static final long serialVersionUID = -9121624711237083374L;
+    private static final long serialVersionUID = 8306079216182441177L;
 
     /**
      * WebAccessToken
@@ -26,6 +27,11 @@ public class WxMpWebAccessTokenDTO implements Serializable {
      * WebRefreshToken
      */
     private String webRefreshToken;
+
+    /**
+     * WebRefreshToken过期时间
+     */
+    private Duration webRefreshTokenExpireTime;
 
     /**
      * OpenId
@@ -59,6 +65,15 @@ public class WxMpWebAccessTokenDTO implements Serializable {
         return this;
     }
 
+    public Duration getWebRefreshTokenExpireTime() {
+        return webRefreshTokenExpireTime;
+    }
+
+    public WxMpWebAccessTokenDTO setWebRefreshTokenExpireTime(Duration webRefreshTokenExpireTime) {
+        this.webRefreshTokenExpireTime = webRefreshTokenExpireTime;
+        return this;
+    }
+
     public String getOpenId() {
         return openId;
     }
@@ -74,6 +89,7 @@ public class WxMpWebAccessTokenDTO implements Serializable {
                 "webAccessToken='" + webAccessToken + '\'' +
                 ", webAccessTokenExpireTime=" + webAccessTokenExpireTime +
                 ", webRefreshToken='" + webRefreshToken + '\'' +
+                ", webRefreshTokenExpireTime=" + webRefreshTokenExpireTime +
                 ", openId='" + openId + '\'' +
                 '}';
     }

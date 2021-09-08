@@ -58,6 +58,7 @@ public class HuaWeiCloudObsUtils {
      * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
      * @throws IOException                   获取文件流异常
      * @see #uploadByMultipart(MultipartFile, String, String, String, String, String, String, String...)
+     * @since 1.0.0
      */
     public static String uploadByMultipart(MultipartFile uploadFile,
                                            String accessKeyId, String accessKeySecret,
@@ -83,6 +84,7 @@ public class HuaWeiCloudObsUtils {
      * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
      * @throws IOException                   获取文件流异常
      * @see #baseFileUploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String...)
+     * @since 1.0.0
      */
     public static String uploadByMultipart(MultipartFile uploadFile, @Nullable String newFileName,
                                            String accessKeyId, String accessKeySecret,
@@ -113,6 +115,7 @@ public class HuaWeiCloudObsUtils {
      * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
      * @throws IOException                   关闭 {@code obs} 连接异常
      * @see #uploadByPath(String, String, String, String, String, String, String, String...)
+     * @since 1.0.0
      */
     public static String uploadByPath(String absoluteFilePath,
                                       String accessKeyId, String accessKeySecret,
@@ -138,6 +141,7 @@ public class HuaWeiCloudObsUtils {
      * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
      * @throws IOException                   关闭 {@code obs} 连接异常
      * @see #uploadByFile(File, String, String, String, String, String, String, String...)
+     * @since 1.0.0
      */
     public static String uploadByPath(String absoluteFilePath, @Nullable String newFileName,
                                       String accessKeyId, String accessKeySecret,
@@ -162,6 +166,7 @@ public class HuaWeiCloudObsUtils {
      * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
      * @throws IOException                   关闭 {@code obs} 连接异常
      * @see #uploadByFile(File, String, String, String, String, String, String, String...)
+     * @since 1.0.0
      */
     public static String uploadByFile(File uploadFile,
                                       String accessKeyId, String accessKeySecret,
@@ -187,6 +192,7 @@ public class HuaWeiCloudObsUtils {
      * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
      * @throws IOException                   关闭 {@code obs} 连接异常
      * @see #baseFileUploadByFile(LinkedList, LinkedList, String, String, String, String, String, String...)
+     * @since 1.0.0
      */
     public static String uploadByFile(File uploadFile, @Nullable String newFileName,
                                       String accessKeyId, String accessKeySecret,
@@ -219,6 +225,7 @@ public class HuaWeiCloudObsUtils {
      * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
      * @throws IOException                   获取文件流异常
      * @see #uploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String...)
+     * @since 1.0.0
      */
     public static List<String> uploadByMultipart(Collection<MultipartFile> uploadFiles,
                                                  String accessKeyId, String accessKeySecret,
@@ -244,6 +251,7 @@ public class HuaWeiCloudObsUtils {
      * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
      * @throws IOException                   获取文件流异常
      * @see #baseFileUploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String...)
+     * @since 1.0.0
      */
     public static List<String> uploadByMultipart(LinkedList<MultipartFile> uploadFiles,
                                                  @Nullable LinkedList<String> newFileNames,
@@ -277,6 +285,7 @@ public class HuaWeiCloudObsUtils {
      * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
      * @throws IOException                   关闭 {@code obs} 连接异常
      * @see #uploadByPath(LinkedList, LinkedList, String, String, String, String, String, String...)
+     * @since 1.0.0
      */
     public static List<String> uploadByPath(Collection<String> absoluteFilePaths,
                                             String accessKeyId, String accessKeySecret,
@@ -302,6 +311,7 @@ public class HuaWeiCloudObsUtils {
      * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
      * @throws IOException                   关闭 {@code obs} 连接异常
      * @see #uploadByFile(LinkedList, LinkedList, String, String, String, String, String, String...)
+     * @since 1.0.0
      */
     public static List<String> uploadByPath(LinkedList<String> absoluteFilePaths,
                                             @Nullable LinkedList<String> newFileNames,
@@ -336,6 +346,7 @@ public class HuaWeiCloudObsUtils {
      * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
      * @throws IOException                   关闭 {@code obs} 连接异常
      * @see #uploadByFile(LinkedList, LinkedList, String, String, String, String, String, String...)
+     * @since 1.0.0
      */
     public static List<String> uploadByFile(Collection<File> uploadFiles,
                                             String accessKeyId, String accessKeySecret,
@@ -361,6 +372,7 @@ public class HuaWeiCloudObsUtils {
      * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
      * @throws IOException                   关闭 {@code obs} 连接异常
      * @see #baseFileUploadByFile(LinkedList, LinkedList, String, String, String, String, String, String...)
+     * @since 1.0.0
      */
     public static List<String> uploadByFile(LinkedList<File> uploadFiles,
                                             @Nullable LinkedList<String> newFileNames,
@@ -394,6 +406,7 @@ public class HuaWeiCloudObsUtils {
      * @param response        {@link HttpServletResponse}
      * @throws IOException 文件流转文件失败
      * @see #downloadToResponse(String, String, String, String, String, String, HttpServletRequest, HttpServletResponse)
+     * @since 1.0.0
      */
     public static void downloadToResponse(String obsFilePath,
                                           String accessKeyId, String accessKeySecret,
@@ -415,6 +428,7 @@ public class HuaWeiCloudObsUtils {
      * @param request         {@link HttpServletRequest}
      * @param response        {@link HttpServletResponse}
      * @throws IOException 文件流转文件失败
+     * @since 1.0.0
      */
     public static void downloadToResponse(String obsFilePath,
                                           String accessKeyId, String accessKeySecret,
@@ -453,6 +467,7 @@ public class HuaWeiCloudObsUtils {
      * @return File对象
      * @throws IOException 文件流转文件失败|关闭 {@code obs} 连接异常
      * @see #downloadToFile(String, String, String, String, String, String)
+     * @since 1.0.0
      */
     public static File downloadToFile(String obsFilePath,
                                       String accessKeyId, String accessKeySecret,
@@ -472,6 +487,7 @@ public class HuaWeiCloudObsUtils {
      * @param outFileName     新文件名, 为空时则为OBS文件名
      * @return File对象
      * @throws IOException 文件流转文件失败|关闭 {@code obs} 连接异常
+     * @since 1.0.0
      */
     public static File downloadToFile(String obsFilePath,
                                       String accessKeyId, String accessKeySecret,
@@ -502,6 +518,7 @@ public class HuaWeiCloudObsUtils {
      * @param outFile         新文件对象, 为空时则文件名为OBS文件名
      * @return File对象
      * @throws IOException 文件流转文件失败|关闭 {@code obs} 连接异常
+     * @since 1.0.0
      */
     public static File downloadToFile(String obsFilePath,
                                       String accessKeyId, String accessKeySecret,
@@ -530,6 +547,7 @@ public class HuaWeiCloudObsUtils {
      * @param bucketName      BucketName
      * @param endPoint        Endpoint地域节点
      * @throws IOException 文件流转文件失败|关闭 {@code obs} 连接异常
+     * @since 1.0.0
      */
     public static void deleteObject(String obsFilePath,
                                     String accessKeyId, String accessKeySecret,
@@ -552,6 +570,7 @@ public class HuaWeiCloudObsUtils {
      * @param endPoint        Endpoint地域节点
      * @return 删除失败的文件路径集合
      * @throws IOException 关闭 {@code obs} 连接异常
+     * @since 1.0.0
      */
     public static List<DeleteObjectsResult.ErrorResult> deleteObjectResError(Collection<String> obsFilePaths,
                                                                              String accessKeyId, String accessKeySecret,
@@ -585,6 +604,7 @@ public class HuaWeiCloudObsUtils {
      * @param endPoint        Endpoint地域节点
      * @return 删除成功的文件路径集合
      * @throws IOException 关闭 {@code obs} 连接异常
+     * @since 1.0.0
      */
     public static List<DeleteObjectsResult.DeleteObjectResult> deleteObjectResSuccess(Collection<String> obsFilePaths,
                                                                                       String accessKeyId, String accessKeySecret,
@@ -625,6 +645,7 @@ public class HuaWeiCloudObsUtils {
      * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
      * @throws IOException                   获取文件流异常
      * @see #baseFileUploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String...)
+     * @since 1.0.0
      */
     public static List<String> baseFileUploadByMultipart(Collection<MultipartFile> files,
                                                          String accessKeyId, String accessKeySecret,
@@ -649,6 +670,7 @@ public class HuaWeiCloudObsUtils {
      * @return 上传后的路径集合 [上传路径 + 文件类型 + 文件名]
      * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
      * @throws IOException                   获取文件流异常
+     * @since 1.0.0
      */
     public static List<String> baseFileUploadByMultipart(LinkedList<MultipartFile> uploadFiles,
                                                          @Nullable LinkedList<String> newFileNames,
@@ -690,6 +712,7 @@ public class HuaWeiCloudObsUtils {
      * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
      * @throws IOException                   关闭 {@code obs} 连接异常
      * @see #baseFileUploadByFile(LinkedList, LinkedList, String, String, String, String, String, String...)
+     * @since 1.0.0
      */
     public static List<String> baseFileUploadByFile(Collection<File> uploadFiles,
                                                     String accessKeyId, String accessKeySecret,
@@ -714,6 +737,7 @@ public class HuaWeiCloudObsUtils {
      * @return 上传后的路径 [上传路径 + 文件类型 + 文件名]
      * @throws HuaWeiCloudObsUploadException 华为云文件上传异常
      * @throws IOException                   关闭 {@code obs} 连接异常
+     * @since 1.0.0
      */
     public static List<String> baseFileUploadByFile(LinkedList<File> uploadFiles,
                                                     @Nullable LinkedList<String> newFileNames,

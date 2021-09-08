@@ -1,8 +1,10 @@
 package pro.haichuang.framework.mybatis.config.autoconfiguration;
 
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.*;
+import pro.haichuang.framework.base.config.autoconfiguration.BaseAutoConfiguration;
 import pro.haichuang.framework.mybatis.config.MybatisPlusConfig;
 import pro.haichuang.framework.mybatis.config.PageHelperConfig;
 import pro.haichuang.framework.mybatis.config.druid.advert.DruidAdvertConfig;
@@ -20,6 +22,7 @@ import pro.haichuang.framework.mybatis.generate.MybatisGenerateCodeService;
  * @since 1.0.0
  */
 @Configuration(proxyBeanMethods = false)
+@AutoConfigureAfter(BaseAutoConfiguration.class)
 @EnableConfigurationProperties(MybatisProperties.class)
 @ConditionalOnProperty(
         prefix = "haichuang.mybatis",

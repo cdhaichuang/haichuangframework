@@ -18,6 +18,8 @@ public class Group {
 
     /**
      * 分组-查询
+     *
+     * @since 1.0.0
      */
     public interface Query {
 
@@ -25,6 +27,8 @@ public class Group {
 
     /**
      * 分组-新增
+     *
+     * @since 1.0.0
      */
     public interface Insert {
 
@@ -32,6 +36,8 @@ public class Group {
 
     /**
      * 分组-更新
+     *
+     * @since 1.0.0
      */
     public interface Update {
 
@@ -39,6 +45,8 @@ public class Group {
 
     /**
      * 分组-删除
+     *
+     * @since 1.0.0
      */
     public interface Delete {
 

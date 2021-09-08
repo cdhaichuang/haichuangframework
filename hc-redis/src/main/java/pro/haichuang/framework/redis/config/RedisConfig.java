@@ -92,6 +92,7 @@ public class RedisConfig extends CachingConfigurerSupport {
      * RedisKey序列化规则
      *
      * @return RedisSerializer
+     * @since 1.0.0
      */
     private RedisSerializer<String> keySerializer() {
         return new StringRedisSerializer();
@@ -101,6 +102,7 @@ public class RedisConfig extends CachingConfigurerSupport {
      * RedisValue序列化规则
      *
      * @return RedisSerializer
+     * @since 1.0.0
      */
     private RedisSerializer<Object> valueSerializer() {
         return new GenericJackson2JsonRedisSerializer(new ObjectMapper()

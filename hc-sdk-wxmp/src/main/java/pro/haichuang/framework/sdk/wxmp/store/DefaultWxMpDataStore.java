@@ -21,6 +21,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author JiYinchuan
  * @version 1.0.0
+ * @since 1.0.0
  */
 public class DefaultWxMpDataStore implements WxMpDataStore {
 
@@ -91,9 +92,6 @@ public class DefaultWxMpDataStore implements WxMpDataStore {
         return JS_API_TICKET_MAP.get(key);
     }
 
-    /**
-     * 日志打印所有数据
-     */
     @Override
     public void printAllData() {
         validateDelayError();
@@ -130,6 +128,8 @@ public class DefaultWxMpDataStore implements WxMpDataStore {
 
     /**
      * 验证延时队列是否存在异常
+     *
+     * @since 1.0.0
      */
     private void validateDelayError() {
         if (DELAY_IS_ERROR) {
@@ -143,6 +143,7 @@ public class DefaultWxMpDataStore implements WxMpDataStore {
      *
      * @author JiYinchuan
      * @version 1.0.0
+     * @since 1.0.0
      */
     @SuppressWarnings("InfiniteLoopStatement")
     public static class DelayQueueManager implements CommandLineRunner {
@@ -184,6 +185,7 @@ public class DefaultWxMpDataStore implements WxMpDataStore {
      *
      * @author JiYinchuan
      * @version 1.0.0
+     * @since 1.0.0
      */
     static class DelayBase implements Delayed {
 
@@ -207,6 +209,7 @@ public class DefaultWxMpDataStore implements WxMpDataStore {
          * @param dataType 延时数据类型
          * @param key      延时对应Key
          * @param duration 过期时间, 单位 [毫秒]
+         * @since 1.0.0
          */
         public DelayBase(DelayDataType dataType, String key, Duration duration) {
             this.dataType = dataType;
@@ -228,8 +231,7 @@ public class DefaultWxMpDataStore implements WxMpDataStore {
     /**
      * 延时数据类型
      *
-     * @author JiYinchuan
-     * @version 1.0.0
+     * @since 1.0.0
      */
     enum DelayDataType {
 
@@ -252,5 +254,6 @@ public class DefaultWxMpDataStore implements WxMpDataStore {
          * JsApiTicket
          */
         JS_API_TICKET
+
     }
 }
