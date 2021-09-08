@@ -2,8 +2,8 @@ package ${package.Mapper};
 
 import ${package.Entity}.${entity};
 import ${superMapperClassPackage};
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * $!{table.comment} Mapper
@@ -12,8 +12,8 @@ import org.springframework.stereotype.Repository;
  * @version ${cfg.version}
  * @since ${cfg.version}
  */
-@Mapper
 @Repository
+@Mapper
 #if(${kotlin})
 interface ${table.mapperName} : ${superMapperClass}<${entity}>
 #else

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Doc: http://logging.apache.org/log4j/2.x/manual/appenders.html -->
+<Appenders>
+    <!-- Console Level -->
+    <Console name="Console" target="SYSTEM_OUT">
+        <PatternLayout pattern="${CONSOLE_LOG_PATTERN}"/>
+        <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+    </Console>
+
+    <!-- Debug File Level -->
+    <RollingFile name="DEBUG_FILE"
+                 fileName="${LOG_HOME}/log_debug.log"
+                 filePattern="${LOG_HOME}/%d{yyyy-MM-dd}/debug/log_debug-%i.log">
+        <PatternLayout pattern="${FILE_LOG_PATTERN}"/>
+        <Filters>
+            <ThresholdFilter level="INFO" onMatch="DENY" onMismatch="NEUTRAL"/>
+            <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+        </Filters>
+        <Policies>
+            <!--
+                设置当重新启动时是否滚动文件(当日志文件比当前JVM启动时间早时)
+                minSize: 日志文件滚动的最小大小, 为 [0] 时不管文件大小为多大都会滚动, 为 [1] 时将阻止对空文件进行滚动
+            -->
+            <OnStartupTriggeringPolicy minSize="1"/>
+            <!--
+                设置文件滚动大小策略
+                size: 设置文件滚动大小
+           -->
+            <SizeBasedTriggeringPolicy size="${MAX_DEBUG_LOG_FILE_SIZE}"/>
+            <!--
+                设置文件滚动时间策略
+                interval: 滚动间隔小时
+                modulate: 开始滚动边界(从0点开始重新计算间隔时间)
+                modulate: 滚动操作随机延时最长秒数, 用于避免某一个时刻由于滚动日志造成高I/O压力
+            -->
+            <TimeBasedTriggeringPolicy interval="${ROLLING_INTERVAL}" modulate="true"
+                                       maxRandomDelay="${MAX_RANDOM_DELAY}"/>
+        </Policies>
+        <DefaultRolloverStrategy>
+            <!--
+                设置删除策略
+                basePath: 基准目录
+                maxDepth: 扫描深度, 默认为 [1], 扫描基准目录下的文件, 为 [0] 时则仅能访问基准目录
+            -->
+            <Delete basePath="${LOG_HOME}" maxDepth="3">
+                <IfFileName glob="**/**/log_debug-*.log"/>
+                <IfAny>
+                    <!--
+                        设置日志保留的时间
+                        age: 允许日志保留的时间
+                    -->
+                    <IfLastModified age="${MAX_HISTORY_DAY}"/>
+                    <!--
+                        设置日志保留的大小
+                        exceeds: 允许日志保留的累计大小, 累计大小超过该值则删除早期文件
+                    -->
+                    <IfAccumulatedFileSize exceeds="${MAX_LOG_SIZE}"/>
+                </IfAny>
+            </Delete>
+        </DefaultRolloverStrategy>
+    </RollingFile>
+
+    <!-- Info File Level -->
+    <RollingFile name="INFO_FILE"
+                 fileName="${LOG_HOME}/log_info.log"
+                 filePattern="${LOG_HOME}/%d{yyyy-MM-dd}/info/log_info-%i.log">
+        <PatternLayout pattern="${FILE_LOG_PATTERN}"/>
+        <Filters>
+            <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="NEUTRAL"/>
+            <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+        </Filters>
+        <Policies>
+            <OnStartupTriggeringPolicy minSize="1"/>
+            <SizeBasedTriggeringPolicy size="${MAX_INFO_LOG_FILE_SIZE}"/>
+            <TimeBasedTriggeringPolicy interval="${ROLLING_INTERVAL}" modulate="true"
+                                       maxRandomDelay="${MAX_RANDOM_DELAY}"/>
+        </Policies>
+        <DefaultRolloverStrategy>
+            <Delete basePath="${LOG_HOME}" maxDepth="3">
+                <IfFileName glob="**/**/log_info-*.log"/>
+                <IfLastModified age="${MAX_HISTORY_DAY}"/>
+            </Delete>
+        </DefaultRolloverStrategy>
+    </RollingFile>
+
+    <!-- Warn File Level -->
+    <RollingFile name="WARN_FILE"
+                 fileName="${LOG_HOME}/log_warn.log"
+                 filePattern="${LOG_HOME}/%d{yyyy-MM-dd}/warn/log_warn-%i.log">
+        <PatternLayout pattern="${FILE_LOG_PATTERN}"/>
+        <Filters>
+            <ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="NEUTRAL"/>
+            <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
+        </Filters>
+        <Policies>
+            <OnStartupTriggeringPolicy minSize="1"/>
+            <SizeBasedTriggeringPolicy size="${MAX_WARNING_LOG_FILE_SIZE}"/>
+            <TimeBasedTriggeringPolicy interval="${ROLLING_INTERVAL}" modulate="true"
+                                       maxRandomDelay="${MAX_RANDOM_DELAY}"/>
+        </Policies>
+        <DefaultRolloverStrategy>
+            <Delete basePath="${LOG_HOME}" maxDepth="3">
+                <IfFileName glob="**/**/log_warn-*.log"/>
+                <IfLastModified age="${MAX_HISTORY_DAY}"/>
+            </Delete>
+        </DefaultRolloverStrategy>
+    </RollingFile>
+
+    <!-- Error File Level -->
+    <RollingFile name="ERROR_FILE"
+                 fileName="${LOG_HOME}/log_error.log"
+                 filePattern="${LOG_HOME}/%d{yyyy-MM-dd}/error/log_error-%i.log">
+        <PatternLayout pattern="${FILE_LOG_PATTERN}"/>
+        <Filters>
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+        </Filters>
+        <Policies>
+            <OnStartupTriggeringPolicy minSize="1"/>
+            <SizeBasedTriggeringPolicy size="${MAX_ERROR_LOG_FILE_SIZE}"/>
+            <TimeBasedTriggeringPolicy interval="${ROLLING_INTERVAL}" modulate="true"
+                                       maxRandomDelay="${MAX_RANDOM_DELAY}"/>
+        </Policies>
+        <DefaultRolloverStrategy>
+            <Delete basePath="${LOG_HOME}" maxDepth="3">
+                <IfFileName glob="**/**/log_error-*.log"/>
+                <IfLastModified age="${MAX_HISTORY_DAY}"/>
+            </Delete>
+        </DefaultRolloverStrategy>
+    </RollingFile>
+</Appenders>

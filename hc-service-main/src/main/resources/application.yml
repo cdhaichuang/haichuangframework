@@ -5,10 +5,12 @@ server:
 # ========================= Spring Setting =========================
 spring:
   profiles:
+    group:
+      dev: log4j2-dev
+      prod: log4j2-prod
     include:
       - common
       - knife4j
-      - logback
       - jackson
       - mybatis
       - scheduling

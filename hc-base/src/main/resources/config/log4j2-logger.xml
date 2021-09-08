@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Loggers>
+    <Logger name="pro.haichuang" level="ALL"/>
+    <Root level="INFO">
+        <AppenderRef ref="Console"/>
+        <AppenderRef ref="DEBUG_FILE"/>
+        <AppenderRef ref="INFO_FILE"/>
+        <AppenderRef ref="WARN_FILE"/>
+        <AppenderRef ref="ERROR_FILE"/>
+    </Root>
+</Loggers>

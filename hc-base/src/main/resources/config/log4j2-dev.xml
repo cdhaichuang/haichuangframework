@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Doc: http://logging.apache.org/log4j/2.x/manual/configuration.html -->
+<!--
+    status: 设置记录到控制台的内部Log4j日志的级别
+            日志级别从低到高分为 [TRACE < DEBUG < INFO < WARN < ERROR < FATAL], 如果设置为WARN, 则低于WARN的信息都不会输出
+            设置系统属性 [log4j2.debug] 也会将Log4j2的内部日志打印到控制台, 包括在找到配置文件之前发生的内部日志
+-->
+<!-- monitorInterval: 检查文件配置是否有变化的间隔时间, 单位为 [秒] -->
+<!-- name: 配置的名称 -->
+<!-- shutdownHook: 设置当JVM关闭后Log4j是否也自动关闭. 默认为启用, 需要禁用则设置为 [disable] -->
+<!--
+    shutdownTimeout: 指定当JVM关闭时, Appender和后台任务超时多久时间来关闭
+                     时间类型请参见 [LoggerContext.stop(long, java.util.concurrent.TimeUnit)]
+                     默认值为0, 不等待后台任务, 并非能应用到所有的应用程序, 设置的时间太短, 会增加丢失最后日志记录的风险
+                     注意: 只有当 [shutdownHook] 启用时该参数才生效
+-->
+<Configuration status="WARN" name="log4j2" monitorInterval="60" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <Properties>
+        <!-- 日志文件根路径 -->
+        <Property name="LOG_HOME">logs</Property>
+        <!-- DEBUG日志最大大小 -->
+        <property name="MAX_DEBUG_LOG_FILE_SIZE" value="12MB"/>
+        <!-- INFO日志最大大小 -->
+        <property name="MAX_INFO_LOG_FILE_SIZE" value="2MB"/>
+        <!-- WARN日志最大大小 -->
+        <property name="MAX_WARNING_LOG_FILE_SIZE" value="2MB"/>
+        <!-- ERROR日志最大大小 -->
+        <property name="MAX_ERROR_LOG_FILE_SIZE" value="2MB"/>
+        <!-- 日志保留天数 -->
+        <property name="MAX_HISTORY_DAY" value="35d"/>
+        <!-- 日志保留最大大小 -->
+        <property name="MAX_LOG_SIZE" value="100kb"/>
+        <!-- 日志滚动间隔小时 -->
+        <property name="ROLLING_INTERVAL" value="1"/>
+        <!-- 日志滚动随机最大延迟秒 -->
+        <property name="MAX_RANDOM_DELAY" value="5"/>
+        <!-- 控制台日志正则表达式 -->
+        <Property name="CONSOLE_LOG_PATTERN">%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{%pid}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%xwEx</Property>
+        <!-- 日志文件正则表达式 -->
+        <Property name="FILE_LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} %5p %pid --- [%t] %-40.40c{1.} : %m%n%xwEx</Property>
+    </Properties>
+
+    <xi:include href="log4j2-appender.xml"/>
+    <xi:include href="log4j2-logger.xml"/>
+
+</Configuration>

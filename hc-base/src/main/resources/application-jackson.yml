@@ -10,7 +10,7 @@ spring:
     # 设置全局时区
     time-zone: GMT+8
     # 全局设置pojo或被@JsonInclude注解的属性的序列化方式
-    default-property-inclusion: NON_NULL
+    default-property-inclusion: always
     # 常规默认,枚举类SerializationFeature中的枚举属性为key，值为boolean设置jackson序列化特性,具体key在SerializationFeature
     serialization:
       # 返回的java.util.date转换成timestamp
