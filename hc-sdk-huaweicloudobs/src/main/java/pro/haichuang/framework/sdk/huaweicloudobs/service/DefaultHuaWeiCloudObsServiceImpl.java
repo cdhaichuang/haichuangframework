@@ -7,8 +7,8 @@ import org.springframework.lang.Nullable;
 import org.springframework.web.multipart.MultipartFile;
 import pro.haichuang.framework.base.enums.upload.UploadTypeEnum;
 import pro.haichuang.framework.sdk.huaweicloudobs.config.properties.HuaWeiCloudObsProperties;
-import pro.haichuang.framework.sdk.huaweicloudobs.enums.error.HuaWeCloudObsConfigErrorEnum;
-import pro.haichuang.framework.sdk.huaweicloudobs.enums.error.HuaWeCloudObsUploadErrorEnum;
+import pro.haichuang.framework.sdk.huaweicloudobs.enums.error.HuaWeiCloudObsConfigErrorEnum;
+import pro.haichuang.framework.sdk.huaweicloudobs.enums.error.HuaWeiCloudObsUploadErrorEnum;
 import pro.haichuang.framework.sdk.huaweicloudobs.exception.HuaWeiCloudObsConfigException;
 import pro.haichuang.framework.sdk.huaweicloudobs.exception.HuaWeiCloudObsUploadException;
 import pro.haichuang.framework.sdk.huaweicloudobs.util.HuaWeiCloudObsUtils;
@@ -36,7 +36,8 @@ public class DefaultHuaWeiCloudObsServiceImpl implements HuaWeiCloudObsService {
 
     @SneakyThrows
     @Override
-    public String uploadByMultipart(MultipartFile uploadFile, UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
+    public String uploadByMultipart(MultipartFile uploadFile,
+                                    UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
         validateParams(uploadTypeEnum, pathOfBizName);
         return HuaWeiCloudObsUtils.uploadByMultipart(uploadFile,
@@ -47,7 +48,8 @@ public class DefaultHuaWeiCloudObsServiceImpl implements HuaWeiCloudObsService {
 
     @SneakyThrows
     @Override
-    public String uploadByMultipart(MultipartFile uploadFile, String newFileName, UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
+    public String uploadByMultipart(MultipartFile uploadFile, String newFileName,
+                                    UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
         validateParams(uploadTypeEnum, pathOfBizName);
         return HuaWeiCloudObsUtils.uploadByMultipart(uploadFile, newFileName,
@@ -58,7 +60,8 @@ public class DefaultHuaWeiCloudObsServiceImpl implements HuaWeiCloudObsService {
 
     @SneakyThrows
     @Override
-    public List<String> uploadByMultipart(List<MultipartFile> uploadFiles, UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
+    public List<String> uploadByMultipart(List<MultipartFile> uploadFiles,
+                                          UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
         validateParams(uploadTypeEnum, pathOfBizName);
         return HuaWeiCloudObsUtils.uploadByMultipart(uploadFiles,
@@ -69,7 +72,8 @@ public class DefaultHuaWeiCloudObsServiceImpl implements HuaWeiCloudObsService {
 
     @SneakyThrows
     @Override
-    public List<String> uploadByMultipart(LinkedList<MultipartFile> uploadFiles, LinkedList<String> newFileNames, UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
+    public List<String> uploadByMultipart(LinkedList<MultipartFile> uploadFiles, LinkedList<String> newFileNames,
+                                          UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
         validateParams(uploadTypeEnum, pathOfBizName);
         return HuaWeiCloudObsUtils.uploadByMultipart(uploadFiles, newFileNames,
@@ -80,7 +84,8 @@ public class DefaultHuaWeiCloudObsServiceImpl implements HuaWeiCloudObsService {
 
     @SneakyThrows
     @Override
-    public String uploadByPath(String absoluteFilePath, UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
+    public String uploadByPath(String absoluteFilePath,
+                               UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
         validateParams(uploadTypeEnum, pathOfBizName);
         return HuaWeiCloudObsUtils.uploadByPath(absoluteFilePath,
@@ -91,7 +96,8 @@ public class DefaultHuaWeiCloudObsServiceImpl implements HuaWeiCloudObsService {
 
     @SneakyThrows
     @Override
-    public String uploadByPath(String absoluteFilePath, String newFileName, UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
+    public String uploadByPath(String absoluteFilePath, String newFileName,
+                               UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
         validateParams(uploadTypeEnum, pathOfBizName);
         return HuaWeiCloudObsUtils.uploadByPath(absoluteFilePath, newFileName,
@@ -102,7 +108,8 @@ public class DefaultHuaWeiCloudObsServiceImpl implements HuaWeiCloudObsService {
 
     @SneakyThrows
     @Override
-    public List<String> uploadByPath(List<String> absoluteFilePaths, UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
+    public List<String> uploadByPath(List<String> absoluteFilePaths,
+                                     UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
         validateParams(uploadTypeEnum, pathOfBizName);
         return HuaWeiCloudObsUtils.uploadByPath(absoluteFilePaths,
@@ -113,7 +120,8 @@ public class DefaultHuaWeiCloudObsServiceImpl implements HuaWeiCloudObsService {
 
     @SneakyThrows
     @Override
-    public List<String> uploadByPath(LinkedList<String> absoluteFilePaths, LinkedList<String> newFileNames, UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
+    public List<String> uploadByPath(LinkedList<String> absoluteFilePaths, LinkedList<String> newFileNames,
+                                     UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
         validateParams(uploadTypeEnum, pathOfBizName);
         return HuaWeiCloudObsUtils.uploadByPath(absoluteFilePaths, newFileNames,
@@ -124,7 +132,8 @@ public class DefaultHuaWeiCloudObsServiceImpl implements HuaWeiCloudObsService {
 
     @SneakyThrows
     @Override
-    public String uploadByFile(File absoluteFilePath, UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
+    public String uploadByFile(File absoluteFilePath,
+                               UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
         validateParams(uploadTypeEnum, pathOfBizName);
         return HuaWeiCloudObsUtils.uploadByFile(absoluteFilePath,
@@ -135,7 +144,8 @@ public class DefaultHuaWeiCloudObsServiceImpl implements HuaWeiCloudObsService {
 
     @SneakyThrows
     @Override
-    public String uploadByFile(File absoluteFilePath, String newFileName, UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
+    public String uploadByFile(File absoluteFilePath, String newFileName,
+                               UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
         validateParams(uploadTypeEnum, pathOfBizName);
         return HuaWeiCloudObsUtils.uploadByFile(absoluteFilePath, newFileName,
@@ -146,7 +156,8 @@ public class DefaultHuaWeiCloudObsServiceImpl implements HuaWeiCloudObsService {
 
     @SneakyThrows
     @Override
-    public List<String> uploadByFile(List<File> absoluteFilePaths, UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
+    public List<String> uploadByFile(List<File> absoluteFilePaths,
+                                     UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
         validateParams(uploadTypeEnum, pathOfBizName);
         return HuaWeiCloudObsUtils.uploadByFile(absoluteFilePaths,
@@ -157,7 +168,8 @@ public class DefaultHuaWeiCloudObsServiceImpl implements HuaWeiCloudObsService {
 
     @SneakyThrows
     @Override
-    public List<String> uploadByFile(LinkedList<File> absoluteFilePaths, LinkedList<String> newFileNames, UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
+    public List<String> uploadByFile(LinkedList<File> absoluteFilePaths, LinkedList<String> newFileNames,
+                                     UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
         validateParams(uploadTypeEnum, pathOfBizName);
         return HuaWeiCloudObsUtils.uploadByFile(absoluteFilePaths, newFileNames,
@@ -168,7 +180,8 @@ public class DefaultHuaWeiCloudObsServiceImpl implements HuaWeiCloudObsService {
 
     @SneakyThrows
     @Override
-    public void downloadToResponse(String ossFilePath, HttpServletRequest request, HttpServletResponse response) {
+    public void downloadToResponse(String ossFilePath,
+                                   HttpServletRequest request, HttpServletResponse response) {
         validateProperties();
         HuaWeiCloudObsUtils.downloadToResponse(ossFilePath,
                 huaWeiCloudObsProperties.getAccessKeyId(), huaWeiCloudObsProperties.getAccessKeySecret(),
@@ -255,16 +268,16 @@ public class DefaultHuaWeiCloudObsServiceImpl implements HuaWeiCloudObsService {
         String endpoint = huaWeiCloudObsProperties.getEndpoint();
 
         if (accessKeyId == null || accessKeyId.isEmpty()) {
-            throw new HuaWeiCloudObsConfigException(HuaWeCloudObsConfigErrorEnum.ACCESS_KEY_ID_NOT_CONFIGURED);
+            throw new HuaWeiCloudObsConfigException(HuaWeiCloudObsConfigErrorEnum.ACCESS_KEY_ID_NOT_CONFIGURED);
         }
         if (accessKeySecret == null || accessKeySecret.isEmpty()) {
-            throw new HuaWeiCloudObsConfigException(HuaWeCloudObsConfigErrorEnum.ACCESS_KEY_SECRET_NOT_CONFIGURED);
+            throw new HuaWeiCloudObsConfigException(HuaWeiCloudObsConfigErrorEnum.ACCESS_KEY_SECRET_NOT_CONFIGURED);
         }
         if (bucketName == null || bucketName.isEmpty()) {
-            throw new HuaWeiCloudObsConfigException(HuaWeCloudObsConfigErrorEnum.BUCKET_NAME_NOT_CONFIGURED);
+            throw new HuaWeiCloudObsConfigException(HuaWeiCloudObsConfigErrorEnum.BUCKET_NAME_NOT_CONFIGURED);
         }
         if (endpoint == null || endpoint.isEmpty()) {
-            throw new HuaWeiCloudObsConfigException(HuaWeCloudObsConfigErrorEnum.END_POINT_NOT_CONFIGURED);
+            throw new HuaWeiCloudObsConfigException(HuaWeiCloudObsConfigErrorEnum.END_POINT_NOT_CONFIGURED);
         }
     }
 
@@ -277,10 +290,10 @@ public class DefaultHuaWeiCloudObsServiceImpl implements HuaWeiCloudObsService {
      */
     private void validateParams(@Nullable UploadTypeEnum uploadTypeEnum, @Nullable String... pathOfBizName) {
         if (uploadTypeEnum == null) {
-            throw new HuaWeiCloudObsUploadException(HuaWeCloudObsUploadErrorEnum.UPLOAD_FILE_TYPE_IS_NULL);
+            throw new HuaWeiCloudObsUploadException(HuaWeiCloudObsUploadErrorEnum.UPLOAD_FILE_TYPE_IS_NULL);
         }
         if (pathOfBizName == null || pathOfBizName.length == 0) {
-            throw new HuaWeiCloudObsUploadException(HuaWeCloudObsUploadErrorEnum.UPLOAD_PATH_IS_NULL);
+            throw new HuaWeiCloudObsUploadException(HuaWeiCloudObsUploadErrorEnum.UPLOAD_PATH_IS_NULL);
         }
     }
 }

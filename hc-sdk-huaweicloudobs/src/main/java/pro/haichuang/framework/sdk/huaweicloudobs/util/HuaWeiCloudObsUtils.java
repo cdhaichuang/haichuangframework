@@ -16,7 +16,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.web.multipart.MultipartFile;
 import pro.haichuang.framework.base.util.common.FileUriUtils;
 import pro.haichuang.framework.base.util.common.UUIDUtils;
-import pro.haichuang.framework.sdk.huaweicloudobs.enums.error.HuaWeCloudObsUploadErrorEnum;
+import pro.haichuang.framework.sdk.huaweicloudobs.enums.error.HuaWeiCloudObsUploadErrorEnum;
 import pro.haichuang.framework.sdk.huaweicloudobs.exception.HuaWeiCloudObsUploadException;
 
 import javax.servlet.ServletContext;
@@ -679,10 +679,10 @@ public class HuaWeiCloudObsUtils {
                                                          String fileType, String... uploadPath)
             throws HuaWeiCloudObsUploadException, IOException {
         if (uploadFiles.stream().anyMatch(item -> item == null || item.isEmpty())) {
-            throw new HuaWeiCloudObsUploadException(HuaWeCloudObsUploadErrorEnum.NOT_EXISTS);
+            throw new HuaWeiCloudObsUploadException(HuaWeiCloudObsUploadErrorEnum.NOT_EXISTS);
         }
         if (newFileNames != null && newFileNames.size() != uploadFiles.size()) {
-            throw new HuaWeiCloudObsUploadException(HuaWeCloudObsUploadErrorEnum.ORIGIN_DATA_AND_FILE_NAME_SIZE_MISMATCH);
+            throw new HuaWeiCloudObsUploadException(HuaWeiCloudObsUploadErrorEnum.ORIGIN_DATA_AND_FILE_NAME_SIZE_MISMATCH);
         }
         List<String> resultFilePaths = new ArrayList<>();
         try (ObsClient obsClient = new ObsClient(accessKeyId, accessKeySecret, endPoint)) {
@@ -746,13 +746,13 @@ public class HuaWeiCloudObsUtils {
                                                     String fileType, String... uploadPath)
             throws HuaWeiCloudObsUploadException, IOException {
         if (uploadFiles.stream().anyMatch(item -> item == null || !item.exists())) {
-            throw new HuaWeiCloudObsUploadException(HuaWeCloudObsUploadErrorEnum.NOT_EXISTS);
+            throw new HuaWeiCloudObsUploadException(HuaWeiCloudObsUploadErrorEnum.NOT_EXISTS);
         }
         if (uploadFiles.stream().anyMatch(item -> !item.isFile())) {
-            throw new HuaWeiCloudObsUploadException(HuaWeCloudObsUploadErrorEnum.NOT_FILE);
+            throw new HuaWeiCloudObsUploadException(HuaWeiCloudObsUploadErrorEnum.NOT_FILE);
         }
         if (newFileNames != null && newFileNames.size() != uploadFiles.size()) {
-            throw new HuaWeiCloudObsUploadException(HuaWeCloudObsUploadErrorEnum.ORIGIN_DATA_AND_FILE_NAME_SIZE_MISMATCH);
+            throw new HuaWeiCloudObsUploadException(HuaWeiCloudObsUploadErrorEnum.ORIGIN_DATA_AND_FILE_NAME_SIZE_MISMATCH);
         }
         List<String> resultFilePaths = new ArrayList<>();
         try (ObsClient obsClient = new ObsClient(accessKeyId, accessKeySecret, endPoint)) {

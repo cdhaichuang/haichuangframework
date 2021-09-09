@@ -1,43 +1,38 @@
-package pro.haichuang.framework.sdk.aliyunsms.enums.error;
+package pro.haichuang.framework.sdk.wxmp.enums.error;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import pro.haichuang.framework.base.enums.BaseEnum;
 
 /**
- * 阿里云SMS配置异常枚举
+ * 微信公众号配置异常枚举
  *
- * <p>该类为阿里云SMS配置异常枚举
+ * <p>该类为微信公众号配置异常枚举
  *
  * @author JiYinchuan
  * @version 1.0.0
  * @since 1.0.0
  */
-public enum AliYunSmsConfigErrorEnum implements BaseEnum {
+public enum WxMpConfigErrorEnum implements BaseEnum {
 
     /**
-     * 阿里云SMS配置异常
+     * 微信公众号配置异常
      */
-    CONFIG_ERROR("SA20100", "阿里云SMS配置异常"),
+    WX_MP_CONFIG_ERROR("SC10100", "微信公众号配置异常"),
 
     /**
-     * AccessKeyId未配置
+     * AppId未配置
      */
-    ACCESS_KEY_ID_NOT_CONFIGURED("SA20101", "AccessKeyId未配置"),
+    ACCESS_ID_NOT_CONFIGURED("SC10101", "AppId未配置"),
 
     /**
-     * AccessKeySecret未配置
+     * AppSecret未配置
      */
-    ACCESS_KEY_SECRET_NOT_CONFIGURED("SA20102", "AccessKeySecret未配置"),
+    ACCESS_SECRET_NOT_CONFIGURED("SC10102", "AppSecret未配置"),
 
     /**
-     * SignName未配置
+     * Token未配置
      */
-    SIGN_NAME_NOT_CONFIGURED("SA20103", "SignName未配置"),
-
-    /**
-     * TemplateCode未配置
-     */
-    TEMPLATE_CODE_NOT_CONFIGURED("SA20104", "TemplateCode未配置");
+    Token_NOT_CONFIGURED("SC10103", "Token未配置");
 
     /**
      * 枚举值
@@ -56,7 +51,7 @@ public enum AliYunSmsConfigErrorEnum implements BaseEnum {
      * @param reasonPhrase 枚举信息
      * @since 1.0.0
      */
-    AliYunSmsConfigErrorEnum(String value, String reasonPhrase) {
+    WxMpConfigErrorEnum(String value, String reasonPhrase) {
         this.value = value;
         this.reasonPhrase = reasonPhrase;
     }
@@ -77,7 +72,7 @@ public enum AliYunSmsConfigErrorEnum implements BaseEnum {
     }
 
     @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-    public static AliYunSmsConfigErrorEnum resolve(String value) {
-        return BaseEnum.resolve(value, AliYunSmsConfigErrorEnum.class);
+    public static WxMpConfigErrorEnum resolve(String value) {
+        return BaseEnum.resolve(value, WxMpConfigErrorEnum.class);
     }
 }

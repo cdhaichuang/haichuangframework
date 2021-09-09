@@ -12,43 +12,42 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * @version 1.0.0
  * @since 1.0.0
  */
-public enum HuaWeCloudObsUploadErrorEnum implements BaseEnum {
+public enum HuaWeiCloudObsUploadErrorEnum implements BaseEnum {
 
     /**
-     * 上传文件异常
+     * 华为云OBS上传异常
      */
-    UPLOAD_FILE_ERROR("H0200", "上传文件异常"),
+    UPLOAD_FILE_ERROR("SB10200", "华为云OBS上传异常"),
 
     /**
      * 上传文件路径为空
      */
-    UPLOAD_PATH_IS_NULL("H0201", "上传文件路径为空"),
+    UPLOAD_PATH_IS_NULL("SB10201", "上传文件路径为空"),
 
     /**
      * 上传文件类型为空
      */
-    UPLOAD_FILE_TYPE_IS_NULL("H0202", "上传文件类型为空"),
-
+    UPLOAD_FILE_TYPE_IS_NULL("SB10202", "上传文件类型为空"),
 
     /**
      * 原始数据异常
      */
-    ORIGIN_DATA_ERROR("H0210", "原始数据异常"),
+    ORIGIN_DATA_ERROR("SB10210", "原始数据异常"),
 
     /**
      * 上传文件不存在
      */
-    NOT_EXISTS("H0211", "上传文件不存在"),
+    NOT_EXISTS("SB10211", "上传文件不存在"),
 
     /**
      * 必须为文件
      */
-    NOT_FILE("H0212", "上传数据必须为文件"),
+    NOT_FILE("SB10212", "上传数据必须为文件"),
 
     /**
      * 原始数据与文件名长度不匹配
      */
-    ORIGIN_DATA_AND_FILE_NAME_SIZE_MISMATCH("H0213", "原始数据与文件名长度不匹配");
+    ORIGIN_DATA_AND_FILE_NAME_SIZE_MISMATCH("SB10213", "原始数据与文件名长度不匹配");
 
     /**
      * 枚举值
@@ -67,7 +66,7 @@ public enum HuaWeCloudObsUploadErrorEnum implements BaseEnum {
      * @param reasonPhrase 枚举信息
      * @since 1.0.0
      */
-    HuaWeCloudObsUploadErrorEnum(String value, String reasonPhrase) {
+    HuaWeiCloudObsUploadErrorEnum(String value, String reasonPhrase) {
         this.value = value;
         this.reasonPhrase = reasonPhrase;
     }
@@ -88,7 +87,7 @@ public enum HuaWeCloudObsUploadErrorEnum implements BaseEnum {
     }
 
     @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-    public static HuaWeCloudObsUploadErrorEnum resolve(String value) {
-        return BaseEnum.resolve(value, HuaWeCloudObsUploadErrorEnum.class);
+    public static HuaWeiCloudObsUploadErrorEnum resolve(String value) {
+        return BaseEnum.resolve(value, HuaWeiCloudObsUploadErrorEnum.class);
     }
 }

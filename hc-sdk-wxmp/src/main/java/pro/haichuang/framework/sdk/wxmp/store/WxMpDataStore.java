@@ -8,7 +8,7 @@ import java.time.Duration;
 /**
  * 微信公众号数据存储
  *
- * <p>默认实现为 {@link DefaultWxMpDataStore}, 底层采用延迟队列实现, 效率较低
+ * <p>默认实现为 {@link DefaultWxMpDataStore}, 底层采用延时队列实现, 效率较低
  * <p>建议手动注入该接口, 实现为 {@link WxMpRedisDataStore}, 底层采用 {@code Redis} 实现
  *
  * @author JiYinchuan

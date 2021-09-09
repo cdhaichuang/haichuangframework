@@ -1,24 +1,24 @@
 package pro.haichuang.framework.sdk.huaweicloudobs.exception;
 
 import pro.haichuang.framework.base.exception.ApplicationException;
-import pro.haichuang.framework.sdk.huaweicloudobs.enums.error.HuaWeCloudObsUploadErrorEnum;
+import pro.haichuang.framework.sdk.huaweicloudobs.enums.error.HuaWeiCloudObsUploadErrorEnum;
 
 /**
  * 华为云OBS上传自定义异常
  *
  * @author JiYinchuan
  * @version 1.0.0
- * @see HuaWeCloudObsUploadErrorEnum
+ * @see HuaWeiCloudObsUploadErrorEnum
  * @since 1.0.0
  */
 public class HuaWeiCloudObsUploadException extends ApplicationException {
     private static final long serialVersionUID = 8577734487637960381L;
 
-    public HuaWeiCloudObsUploadException(HuaWeCloudObsUploadErrorEnum huaWeCloudObsUploadErrorEnum) {
-        super(huaWeCloudObsUploadErrorEnum);
+    public HuaWeiCloudObsUploadException(HuaWeiCloudObsUploadErrorEnum huaWeiCloudObsUploadErrorEnum) {
+        super(huaWeiCloudObsUploadErrorEnum);
     }
 
-    public HuaWeiCloudObsUploadException(HuaWeCloudObsUploadErrorEnum huaWeCloudObsUploadErrorEnum, String userTip) {
-        super(huaWeCloudObsUploadErrorEnum, userTip);
+    public HuaWeiCloudObsUploadException(HuaWeiCloudObsUploadErrorEnum huaWeiCloudObsUploadErrorEnum, String userTip) {
+        super(huaWeiCloudObsUploadErrorEnum, userTip);
     }
 }

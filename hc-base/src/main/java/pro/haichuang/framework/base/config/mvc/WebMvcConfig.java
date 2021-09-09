@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import pro.haichuang.framework.base.config.mvc.enums.ParamEnumConverterFactory;
+import pro.haichuang.framework.base.config.mvc.enums.EnumConverterFactory;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addConverterFactory(new ParamEnumConverterFactory());
+        registry.addConverterFactory(new EnumConverterFactory());
         registry.addConverter(new JacksonConfig.LocalDateTimeConverter());
         registry.addConverter(new JacksonConfig.LocalDateConverter());
         registry.addConverter(new JacksonConfig.LocalTimeConverter());

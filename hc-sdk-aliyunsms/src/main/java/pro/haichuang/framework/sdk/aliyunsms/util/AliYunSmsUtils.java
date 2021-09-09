@@ -155,7 +155,7 @@ public class AliYunSmsUtils {
             try {
                 LOGGER.error("[{}] 发送验证码异常 [uuid: {}, requestId: {}, errorCode: {}, errorMessage: {}, errorType: {}, errorDescription: {}]",
                         LOG_TAG, uuid, e.getRequestId(), e.getErrCode(), e.getErrMsg(), e.getErrorType(), e.getErrorDescription());
-                throw new AliYunSmsSendException(AliYunSmsSendErrorEnum.resolve(e.getErrCode()));
+                throw new AliYunSmsSendException(AliYunSmsSendErrorEnum.parseCode(e.getErrCode()));
             } catch (EnumIllegalArgumentException e1) {
                 throw new AliYunSmsSendException(AliYunSmsSendErrorEnum.UNKONE_ERROR);
             }

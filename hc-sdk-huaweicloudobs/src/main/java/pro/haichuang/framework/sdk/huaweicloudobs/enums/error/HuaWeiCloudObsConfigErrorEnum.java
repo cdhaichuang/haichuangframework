@@ -12,32 +12,32 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * @version 1.0.0
  * @since 1.0.0
  */
-public enum HuaWeCloudObsConfigErrorEnum implements BaseEnum {
+public enum HuaWeiCloudObsConfigErrorEnum implements BaseEnum {
 
     /**
      * 华为云OBS配置异常
      */
-    ALI_YUN_OSS_CONFIG_ERROR("I0100", "华为云OBS配置异常"),
+    HUA_WEI_CLOUD_OBS_CONFIG_ERROR("SB10100", "华为云OBS配置异常"),
 
     /**
      * AccessKeyId未配置
      */
-    ACCESS_KEY_ID_NOT_CONFIGURED("H0101", "AccessKeyId未配置"),
+    ACCESS_KEY_ID_NOT_CONFIGURED("SB10101", "AccessKeyId未配置"),
 
     /**
      * AccessKeySecret未配置
      */
-    ACCESS_KEY_SECRET_NOT_CONFIGURED("H0102", "AccessKeySecret未配置"),
+    ACCESS_KEY_SECRET_NOT_CONFIGURED("SB10102", "AccessKeySecret未配置"),
 
     /**
      * BucketName未配置
      */
-    BUCKET_NAME_NOT_CONFIGURED("H0103", "BucketName未配置"),
+    BUCKET_NAME_NOT_CONFIGURED("SB10103", "BucketName未配置"),
 
     /**
      * EndPoint未配置
      */
-    END_POINT_NOT_CONFIGURED("H0104", "EndPoint未配置");
+    END_POINT_NOT_CONFIGURED("SB10104", "EndPoint未配置");
 
     /**
      * 枚举值
@@ -56,7 +56,7 @@ public enum HuaWeCloudObsConfigErrorEnum implements BaseEnum {
      * @param reasonPhrase 枚举信息
      * @since 1.0.0
      */
-    HuaWeCloudObsConfigErrorEnum(String value, String reasonPhrase) {
+    HuaWeiCloudObsConfigErrorEnum(String value, String reasonPhrase) {
         this.value = value;
         this.reasonPhrase = reasonPhrase;
     }
@@ -77,7 +77,7 @@ public enum HuaWeCloudObsConfigErrorEnum implements BaseEnum {
     }
 
     @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-    public static HuaWeCloudObsConfigErrorEnum resolve(String value) {
-        return BaseEnum.resolve(value, HuaWeCloudObsConfigErrorEnum.class);
+    public static HuaWeiCloudObsConfigErrorEnum resolve(String value) {
+        return BaseEnum.resolve(value, HuaWeiCloudObsConfigErrorEnum.class);
     }
 }

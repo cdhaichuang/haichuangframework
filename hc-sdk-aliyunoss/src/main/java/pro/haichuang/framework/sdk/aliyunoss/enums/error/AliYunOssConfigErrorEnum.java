@@ -17,7 +17,7 @@ public enum AliYunOssConfigErrorEnum implements BaseEnum {
     /**
      * 阿里云OSS配置异常
      */
-    ALI_YUN_OSS_CONFIG_ERROR("SA10100", "阿里云OSS配置异常"),
+    CONFIG_ERROR("SA10100", "阿里云OSS配置异常"),
 
     /**
      * AccessKeyId未配置

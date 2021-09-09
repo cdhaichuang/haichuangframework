@@ -3,9 +3,8 @@ package pro.haichuang.framework.sdk.wxmp.store;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
-import pro.haichuang.framework.base.enums.error.client.RequestServerErrorEnum;
-import pro.haichuang.framework.base.exception.StackTraceException;
-import pro.haichuang.framework.base.exception.client.RequestServerException;
+import pro.haichuang.framework.sdk.wxmp.enums.error.WxMpDelayQueueErrorEnum;
+import pro.haichuang.framework.sdk.wxmp.exception.WxMpDelayQueueException;
 
 import java.time.Duration;
 import java.util.Map;
@@ -133,8 +132,7 @@ public class DefaultWxMpDataStore implements WxMpDataStore {
      */
     private void validateDelayError() {
         if (DELAY_IS_ERROR) {
-            throw new RequestServerException(RequestServerErrorEnum.SERVICE_ERROR,
-                    "[hc-sdk-wxmp] 模块微信相关Token延时队列执行异常, 无法正常运行该模块");
+            throw new WxMpDelayQueueException(WxMpDelayQueueErrorEnum.TERMINATION_ERROR);
         }
     }
 
@@ -175,7 +173,8 @@ public class DefaultWxMpDataStore implements WxMpDataStore {
                 }
             } catch (Exception e) {
                 DELAY_IS_ERROR = true;
-                throw new StackTraceException("[hc-sdk-wxmp] 模块微信相关Token延时队列执行异常");
+                LOGGER.error("[{}] 执行延时队列失败", LOG_TAG, e);
+                throw new WxMpDelayQueueException(WxMpDelayQueueErrorEnum.UNKNOWN_ERROR);
             }
         }
     }

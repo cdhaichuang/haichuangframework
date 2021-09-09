@@ -3,16 +3,16 @@ package pro.haichuang.framework.sdk.wxmp.service;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import pro.haichuang.framework.base.enums.error.client.AuthorityErrorEnum;
-import pro.haichuang.framework.base.enums.error.client.RequestParamErrorEnum;
 import pro.haichuang.framework.base.response.ResultVO;
 import pro.haichuang.framework.base.util.common.ResponseUtils;
-import pro.haichuang.framework.base.util.common.ValidateUtils;
 import pro.haichuang.framework.sdk.wxmp.component.WxMpKeyComponent;
 import pro.haichuang.framework.sdk.wxmp.config.properties.WxMpProperties;
 import pro.haichuang.framework.sdk.wxmp.dto.WxMpBaseAccessTokenDTO;
 import pro.haichuang.framework.sdk.wxmp.dto.WxMpJsApiTicketDTO;
 import pro.haichuang.framework.sdk.wxmp.dto.WxMpUserInfoDTO;
 import pro.haichuang.framework.sdk.wxmp.dto.WxMpWebAccessTokenDTO;
+import pro.haichuang.framework.sdk.wxmp.enums.error.WxMpConfigErrorEnum;
+import pro.haichuang.framework.sdk.wxmp.exception.WxMpConfigException;
 import pro.haichuang.framework.sdk.wxmp.store.WxMpDataStore;
 import pro.haichuang.framework.sdk.wxmp.util.WxMpUtils;
 
@@ -37,8 +37,10 @@ public class DefaultWxMpServiceImpl implements WxMpService {
     public void verifyWxMessage(String signature, String timestamp, String nonce,
                                 String echoStr, HttpServletResponse response) {
         validateProperties();
-        ValidateUtils.validate(wxMpProperties.getToken() == null,
-                RequestParamErrorEnum.PARAMETER_EMPTY, "[Token] 未在Yaml进行配置");
+        String token = wxMpProperties.getToken();
+        if (token == null || token.isEmpty()) {
+            throw new WxMpConfigException(WxMpConfigErrorEnum.Token_NOT_CONFIGURED);
+        }
         if (WxMpUtils.checkSignature(wxMpProperties.getToken(), signature, timestamp, nonce)) {
             ResponseUtils.writeOfOriginal(response, echoStr);
         } else {
@@ -115,11 +117,18 @@ public class DefaultWxMpServiceImpl implements WxMpService {
 
     /**
      * 验证配置文件
+     *
+     * @since 1.0.0
      */
     private void validateProperties() {
-        ValidateUtils.validate(wxMpProperties.getAppId() == null,
-                RequestParamErrorEnum.PARAMETER_EMPTY, "[AppId] 未在Yaml进行配置");
-        ValidateUtils.validate(wxMpProperties.getAppSecret() == null,
-                RequestParamErrorEnum.PARAMETER_EMPTY, "[AppSecret] 未在Yaml进行配置");
+        String appId = wxMpProperties.getAppId();
+        String appSecret = wxMpProperties.getAppSecret();
+
+        if (appId == null) {
+            throw new WxMpConfigException(WxMpConfigErrorEnum.ACCESS_ID_NOT_CONFIGURED);
+        }
+        if (appSecret == null) {
+            throw new WxMpConfigException(WxMpConfigErrorEnum.ACCESS_ID_NOT_CONFIGURED);
+        }
     }
 }

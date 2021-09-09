@@ -53,7 +53,7 @@ public enum MybatisGenerateErrorEnum implements BaseEnum {
     /**
      * 父包模块名为空
      */
-    PACKAGE_PARENT_MODEL_NAME_IS_BLANK("M0207", "包配置异常");
+    PACKAGE_PARENT_MODEL_NAME_IS_BLANK("M0207", "父包模块名为空");
 
 
     /**

@@ -9,7 +9,7 @@ import pro.haichuang.framework.base.exception.EnumIllegalArgumentException;
  * <p>该类为全局枚举父接口, 为避免部分功能失效, 项目中所有的自定义枚举原则上都必须实现该接口
  * 目前该类主要关联说明:
  * <ul>
- *     <li>请求参数枚举转换: {@link pro.haichuang.framework.base.config.mvc.enums.ParamEnumConverterFactory}</li>
+ *     <li>请求参数枚举转换: {@link pro.haichuang.framework.base.config.mvc.enums.EnumConverterFactory}</li>
  *     <li>FastJson枚举序列化: {@link pro.haichuang.framework.base.config.mvc.FastJsonConfig}</li>
  *     <li>自定义异常封装: {@link pro.haichuang.framework.base.exception.ApplicationException}</li>
  *     <li>全局统一响应: {@link pro.haichuang.framework.base.response.ResultVO}</li>
@@ -50,7 +50,7 @@ public interface BaseEnum {
      */
     static <E extends BaseEnum> E resolve(String value, Class<E> enumClass) throws EnumIllegalArgumentException {
         if (!enumClass.isEnum()) {
-            throw new EnumIllegalArgumentException(enumClass.getPackage().getName() + " is not a Enum");
+            throw new EnumIllegalArgumentException(enumClass.getPackage().getName() + " is not an Enum");
         }
         E enumValue = null;
         E[] enumConstants = enumClass.getEnumConstants();

@@ -11,10 +11,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 import javax.annotation.Resource;
 
 /**
- * SwaggerConfig
+ * Swagger配置
  *
  * @author JiYinchuan
  * @version 1.0.0
+ * @see SwaggerFactory
  * @since 1.0.0
  */
 @SpringBootConfiguration
