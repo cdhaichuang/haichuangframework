@@ -32,8 +32,6 @@ public class WxMpKeyComponent {
 
     /**
      * JsApiTicket
-     *
-     * @since 1.0.0
      */
     private static final String JS_API_TICKET = "FRAMEWORK:WXMP:JS_API_TICKET";
 
@@ -61,6 +59,7 @@ public class WxMpKeyComponent {
      * 获取BaseAccessTokenKey
      *
      * @return BaseAccessTokenKey
+     * @since 1.0.0
      */
     public static String baseAccessToken() {
         return PROJECT_CODE.concat(BASE_ACCESS_TOKEN);
@@ -71,6 +70,7 @@ public class WxMpKeyComponent {
      *
      * @param key Key
      * @return WebAccessTokenKey
+     * @since 1.0.0
      */
     public static String webAccessToken(String key) {
         return PROJECT_CODE.concat(WEB_ACCESS_TOKEN.concat(key));
@@ -81,6 +81,7 @@ public class WxMpKeyComponent {
      *
      * @param key Key
      * @return WebRefreshAccessTokenKey
+     * @since 1.0.0
      */
     public static String webRefreshAccessToken(String key) {
         return PROJECT_CODE.concat(WEB_REFRESH_ACCESS_TOKEN.concat(key));
@@ -90,6 +91,7 @@ public class WxMpKeyComponent {
      * 获取JsApiTicket
      *
      * @return JsApiTicket
+     * @since 1.0.0
      */
     public static String jsApiTicket() {
         return PROJECT_CODE.concat(JS_API_TICKET);
