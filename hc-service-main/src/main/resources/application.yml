@@ -24,4 +24,4 @@ spring:
 
 # ========================= Project Setting =========================
 haichuang:
-  project-code: ${hc.origin-lowercase-code-name}
+  project-code: ${hc.origin-code-name}
