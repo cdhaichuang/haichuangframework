@@ -83,6 +83,11 @@
             <artifactId>transmittable-thread-local</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>log4j2-ttl-thread-context-map</artifactId>
+            <version>${log4j2-ttl-thread-context-map.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>
         </dependency>

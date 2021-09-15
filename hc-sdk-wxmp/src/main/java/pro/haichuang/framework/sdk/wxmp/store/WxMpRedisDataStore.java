@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import pro.haichuang.framework.redis.service.RedisService;
-import pro.haichuang.framework.sdk.wxmp.component.WxMpKeyComponent;
+import pro.haichuang.framework.sdk.wxmp.key.WxMpKey;
 
 import java.time.Duration;
 import java.util.Set;
@@ -68,7 +68,7 @@ public class WxMpRedisDataStore implements WxMpDataStore {
     public void printAllData() {
         LOGGER.info("[{}] ==================== 开始进行数据打印 ====================", LOG_TAG);
         int baseAccessTokenIndex = 0;
-        Set<String> baseAccessTokenRedisKeys = redisService.keys(WxMpKeyComponent.baseAccessToken());
+        Set<String> baseAccessTokenRedisKeys = redisService.keys(WxMpKey.baseAccessToken());
         if (baseAccessTokenRedisKeys != null) {
             for (String baseAccessTokenRedisKey : baseAccessTokenRedisKeys) {
                 String baseAccessToken = redisService.get(baseAccessTokenRedisKey);
@@ -78,7 +78,7 @@ public class WxMpRedisDataStore implements WxMpDataStore {
             }
         }
         int webAccessTokenIndex = 0;
-        Set<String> webAccessTokenRedisKeys = redisService.keys(WxMpKeyComponent.webAccessToken(""));
+        Set<String> webAccessTokenRedisKeys = redisService.keys(WxMpKey.webAccessToken(""));
         if (webAccessTokenRedisKeys != null) {
             for (String webAccessTokenRedisKey : webAccessTokenRedisKeys) {
                 String webAccessToken = redisService.get(webAccessTokenRedisKey);
@@ -88,7 +88,7 @@ public class WxMpRedisDataStore implements WxMpDataStore {
             }
         }
         int webRefreshAccessTokenIndex = 0;
-        Set<String> webRefreshAccessTokenRedisKeys = redisService.keys(WxMpKeyComponent.webRefreshAccessToken(""));
+        Set<String> webRefreshAccessTokenRedisKeys = redisService.keys(WxMpKey.webRefreshAccessToken(""));
         if (webRefreshAccessTokenRedisKeys != null) {
             for (String webRefreshAccessTokenRedisKey : webRefreshAccessTokenRedisKeys) {
                 String webRefreshAccessToken = redisService.get(webRefreshAccessTokenRedisKey);
@@ -98,7 +98,7 @@ public class WxMpRedisDataStore implements WxMpDataStore {
             }
         }
         int jsApiTicketIndex = 0;
-        Set<String> jsApiTicketRedisKeys = redisService.keys(WxMpKeyComponent.jsApiTicket());
+        Set<String> jsApiTicketRedisKeys = redisService.keys(WxMpKey.jsApiTicket());
         if (jsApiTicketRedisKeys != null) {
             for (String jsApiTicketRedisKey : jsApiTicketRedisKeys) {
                 String jsApiTicket = redisService.get(jsApiTicketRedisKey);

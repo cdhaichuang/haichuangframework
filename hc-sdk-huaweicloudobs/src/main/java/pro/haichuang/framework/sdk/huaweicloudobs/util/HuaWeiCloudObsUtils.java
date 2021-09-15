@@ -91,13 +91,11 @@ public class HuaWeiCloudObsUtils {
                                            String bucketName, String endPoint,
                                            String fileType, String... uploadPath)
             throws HuaWeiCloudObsUploadException, IOException {
-        String uuid = UUIDUtils.Local.get();
         String resultFilePath = baseFileUploadByMultipart(new LinkedList<>(Collections.singletonList(uploadFile)),
                 newFileName != null ? new LinkedList<>(Collections.singletonList(newFileName)) : null,
                 accessKeyId, accessKeySecret,
                 bucketName, endPoint, fileType, uploadPath).get(0);
-        LOGGER.info("[{}] 简单上传文件 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG,
-                uuid, bucketName, resultFilePath);
+        LOGGER.info("[{}] 简单上传文件 [bucketName: {}, resultPath: {}]", LOG_TAG, bucketName, resultFilePath);
         return resultFilePath;
     }
 
@@ -199,13 +197,11 @@ public class HuaWeiCloudObsUtils {
                                       String bucketName, String endPoint,
                                       String fileType, String... uploadPath)
             throws HuaWeiCloudObsUploadException, IOException {
-        String uuid = UUIDUtils.Local.get();
         String resultFilePath = baseFileUploadByFile(new LinkedList<>(Collections.singletonList(uploadFile)),
                 newFileName != null ? new LinkedList<>(Collections.singletonList(newFileName)) : null,
                 accessKeyId, accessKeySecret,
                 bucketName, endPoint, fileType, uploadPath).get(0);
-        LOGGER.info("[{}] 简单上传文件 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG,
-                uuid, bucketName, resultFilePath);
+        LOGGER.info("[{}] 简单上传文件 [bucketName: {}, resultPath: {}]", LOG_TAG, bucketName, resultFilePath);
         return resultFilePath;
     }
 
@@ -259,15 +255,13 @@ public class HuaWeiCloudObsUtils {
                                                  String bucketName, String endPoint,
                                                  String fileType, String... uploadPath)
             throws HuaWeiCloudObsUploadException, IOException {
-        String uuid = UUIDUtils.Local.get();
         if (uploadFiles.isEmpty()) {
-            LOGGER.warn("[{}] 批量上传文件为空 [uuid: {}, bucketName: {}]", LOG_TAG, uuid, bucketName);
+            LOGGER.warn("[{}] 批量上传文件为空 [bucketName: {}]", LOG_TAG, bucketName);
             return new ArrayList<>();
         }
         List<String> resultFilePaths = baseFileUploadByMultipart(uploadFiles, newFileNames, accessKeyId, accessKeySecret,
                 bucketName, endPoint, fileType, uploadPath);
-        LOGGER.info("[{}] 批量上传文件 [uuid: {}, bucketName: {}, resultPaths: {}]", LOG_TAG,
-                uuid, bucketName, resultFilePaths);
+        LOGGER.info("[{}] 批量上传文件 [bucketName: {}, resultPaths: {}]", LOG_TAG, bucketName, resultFilePaths);
         return resultFilePaths;
     }
 
@@ -319,16 +313,14 @@ public class HuaWeiCloudObsUtils {
                                             String bucketName, String endPoint,
                                             String fileType, String... uploadPath)
             throws HuaWeiCloudObsUploadException, IOException {
-        String uuid = UUIDUtils.Local.get();
         if (absoluteFilePaths.isEmpty()) {
-            LOGGER.warn("[{}] 批量上传文件为空 [uuid: {}, bucketName: {}]", LOG_TAG, uuid, bucketName);
+            LOGGER.warn("[{}] 批量上传文件为空 [bucketName: {}]", LOG_TAG, bucketName);
             return new ArrayList<>();
         }
         List<String> resultFilePaths = uploadByFile(absoluteFilePaths.stream().map(File::new)
                         .collect(LinkedList::new, LinkedList::add, LinkedList::addAll), newFileNames,
                 accessKeyId, accessKeySecret, bucketName, endPoint, fileType, uploadPath);
-        LOGGER.info("[{}] 批量上传文件 [uuid: {}, bucketName: {}, resultPaths: {}]", LOG_TAG,
-                uuid, bucketName, resultFilePaths);
+        LOGGER.info("[{}] 批量上传文件 [bucketName: {}, resultPaths: {}]", LOG_TAG, bucketName, resultFilePaths);
         return resultFilePaths;
     }
 
@@ -380,15 +372,13 @@ public class HuaWeiCloudObsUtils {
                                             String bucketName, String endPoint,
                                             String fileType, String... uploadPath)
             throws HuaWeiCloudObsUploadException, IOException {
-        String uuid = UUIDUtils.Local.get();
         if (uploadFiles.isEmpty()) {
-            LOGGER.warn("[{}] 批量上传文件为空 [uuid: {}, bucketName: {}]", LOG_TAG, uuid, bucketName);
+            LOGGER.warn("[{}] 批量上传文件为空 [bucketName: {}]", LOG_TAG, bucketName);
             return new ArrayList<>();
         }
         List<String> resultFilePaths = baseFileUploadByFile(uploadFiles, newFileNames, accessKeyId, accessKeySecret,
                 bucketName, endPoint, fileType, uploadPath);
-        LOGGER.info("[{}] 批量上传文件 [uuid: {}, bucketName: {}, resultPaths: {}]", LOG_TAG,
-                uuid, bucketName, resultFilePaths);
+        LOGGER.info("[{}] 批量上传文件 [bucketName: {}, resultPaths: {}]", LOG_TAG, bucketName, resultFilePaths);
         return resultFilePaths;
     }
 
@@ -553,10 +543,9 @@ public class HuaWeiCloudObsUtils {
                                     String accessKeyId, String accessKeySecret,
                                     String bucketName, String endPoint)
             throws IOException {
-        String uuid = UUIDUtils.Local.get();
         try (ObsClient obsClient = new ObsClient(accessKeyId, accessKeySecret, endPoint)) {
             obsClient.deleteObject(bucketName, FileUriUtils.formatFilename(obsFilePath, true));
-            LOGGER.info("[{}] 删除文件 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG, uuid, bucketName, obsFilePath);
+            LOGGER.info("[{}] 删除文件 [bucketName: {}, resultPath: {}]", LOG_TAG, bucketName, obsFilePath);
         }
     }
 
@@ -576,9 +565,8 @@ public class HuaWeiCloudObsUtils {
                                                                              String accessKeyId, String accessKeySecret,
                                                                              String bucketName, String endPoint)
             throws IOException {
-        String uuid = UUIDUtils.Local.get();
         if (obsFilePaths.isEmpty()) {
-            LOGGER.warn("[{}] 批量删除文件为空 [uuid: {}, bucketName: {}]", LOG_TAG, uuid, bucketName);
+            LOGGER.warn("[{}] 批量删除文件为空 [bucketName: {}]", LOG_TAG, bucketName);
             return new ArrayList<>();
         }
         try (ObsClient obsClient = new ObsClient(accessKeyId, accessKeySecret, endPoint)) {
@@ -588,8 +576,7 @@ public class HuaWeiCloudObsUtils {
                     .forEach(deleteObjectsRequest::addKeyAndVersion);
             DeleteObjectsResult deleteObjectsResult = obsClient.deleteObjects(deleteObjectsRequest);
             List<DeleteObjectsResult.ErrorResult> errorResults = deleteObjectsResult.getErrorResults();
-            LOGGER.info("[{}] 删除文件 [uuid: {}, bucketName: {}, errorResults: {}]", LOG_TAG,
-                    uuid, bucketName, JSONObject.toJSONString(errorResults));
+            LOGGER.info("[{}] 删除文件 [bucketName: {}, errorResults: {}]", LOG_TAG, bucketName, JSONObject.toJSONString(errorResults));
             return errorResults;
         }
     }
@@ -610,9 +597,8 @@ public class HuaWeiCloudObsUtils {
                                                                                       String accessKeyId, String accessKeySecret,
                                                                                       String bucketName, String endPoint)
             throws IOException {
-        String uuid = UUIDUtils.Local.get();
         if (obsFilePaths.isEmpty()) {
-            LOGGER.warn("[{}] 批量删除文件为空 [uuid: {}, bucketName: {}]", LOG_TAG, uuid, bucketName);
+            LOGGER.warn("[{}] 批量删除文件为空 [bucketName: {}]", LOG_TAG, bucketName);
             return new ArrayList<>();
         }
         try (ObsClient obsClient = new ObsClient(accessKeyId, accessKeySecret, endPoint)) {
@@ -623,8 +609,7 @@ public class HuaWeiCloudObsUtils {
             DeleteObjectsResult deleteObjectsResult = obsClient.deleteObjects(deleteObjectsRequest);
             List<DeleteObjectsResult.DeleteObjectResult> successResults = deleteObjectsResult.getDeletedObjectResults()
                     .stream().filter(DeleteObjectsResult.DeleteObjectResult::isDeleteMarker).collect(Collectors.toList());
-            LOGGER.info("[{}] 批量删除文件 [uuid: {}, bucketName: {}, successResults: {}]", LOG_TAG,
-                    uuid, bucketName, JSONObject.toJSONString(successResults));
+            LOGGER.info("[{}] 批量删除文件 [bucketName: {}, successResults: {}]", LOG_TAG, bucketName, JSONObject.toJSONString(successResults));
             return successResults;
         }
     }

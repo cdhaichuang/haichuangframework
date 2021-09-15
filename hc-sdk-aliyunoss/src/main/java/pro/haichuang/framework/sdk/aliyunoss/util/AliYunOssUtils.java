@@ -15,7 +15,6 @@ import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
 import org.springframework.web.multipart.MultipartFile;
 import pro.haichuang.framework.base.util.common.FileUriUtils;
-import pro.haichuang.framework.base.util.common.UUIDUtils;
 import pro.haichuang.framework.sdk.aliyunoss.enums.error.AliYunOssUploadErrorEnum;
 import pro.haichuang.framework.sdk.aliyunoss.exception.AliYunOssUploadException;
 
@@ -92,13 +91,12 @@ public class AliYunOssUtils {
                                            String bucketName, String endPoint,
                                            String fileType, String... uploadPath)
             throws AliYunOssUploadException, IOException {
-        String uuid = UUIDUtils.Local.get();
         String resultFilePath = baseFileUploadByMultipart(new LinkedList<>(Collections.singletonList(uploadFile)),
                 newFileName != null ? new LinkedList<>(Collections.singletonList(newFileName)) : null,
                 accessKeyId, accessKeySecret,
                 bucketName, endPoint, fileType, uploadPath).get(0);
-        LOGGER.info("[{}] 简单上传文件 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG,
-                uuid, bucketName, resultFilePath);
+        LOGGER.info("[{}] 简单上传文件 [bucketName: {}, resultPath: {}]", LOG_TAG,
+                bucketName, resultFilePath);
         return resultFilePath;
     }
 
@@ -196,13 +194,12 @@ public class AliYunOssUtils {
                                       String bucketName, String endPoint,
                                       String fileType, String... uploadPath)
             throws AliYunOssUploadException {
-        String uuid = UUIDUtils.Local.get();
         String resultFilePath = baseFileUploadByFile(new LinkedList<>(Collections.singletonList(uploadFile)),
                 newFileName != null ? new LinkedList<>(Collections.singletonList(newFileName)) : null,
                 accessKeyId, accessKeySecret,
                 bucketName, endPoint, fileType, uploadPath).get(0);
-        LOGGER.info("[{}] 简单上传文件 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG,
-                uuid, bucketName, resultFilePath);
+        LOGGER.info("[{}] 简单上传文件 [bucketName: {}, resultPath: {}]", LOG_TAG,
+                bucketName, resultFilePath);
         return resultFilePath;
     }
 
@@ -256,16 +253,15 @@ public class AliYunOssUtils {
                                                  String bucketName, String endPoint,
                                                  String fileType, String... uploadPath)
             throws AliYunOssUploadException, IOException {
-        String uuid = UUIDUtils.Local.get();
         if (uploadFiles.isEmpty()) {
-            LOGGER.warn("[{}] 批量上传文件为空 [uuid: {}, bucketName: {}, uploadFiles: {}]", LOG_TAG,
-                    uuid, bucketName, uploadFiles);
+            LOGGER.warn("[{}] 批量上传文件为空 [bucketName: {}, uploadFiles: {}]", LOG_TAG,
+                    bucketName, uploadFiles);
             return new ArrayList<>();
         }
         List<String> resultFilePaths = baseFileUploadByMultipart(uploadFiles, newFileNames, accessKeyId, accessKeySecret,
                 bucketName, endPoint, fileType, uploadPath);
-        LOGGER.info("[{}] 批量上传文件 [uuid: {}, bucketName: {}, resultPaths: {}]", LOG_TAG,
-                uuid, bucketName, resultFilePaths);
+        LOGGER.info("[{}] 批量上传文件 [bucketName: {}, resultPaths: {}]", LOG_TAG,
+                bucketName, resultFilePaths);
         return resultFilePaths;
     }
 
@@ -314,17 +310,16 @@ public class AliYunOssUtils {
                                             String bucketName, String endPoint,
                                             String fileType, String... uploadPath)
             throws AliYunOssUploadException {
-        String uuid = UUIDUtils.Local.get();
         if (absoluteFilePaths.isEmpty()) {
-            LOGGER.warn("[{}] 批量上传文件为空 [uuid: {}, bucketName: {}, absoluteFilePaths: {}]", LOG_TAG,
-                    uuid, bucketName, absoluteFilePaths);
+            LOGGER.warn("[{}] 批量上传文件为空 [bucketName: {}, absoluteFilePaths: {}]", LOG_TAG,
+                    bucketName, absoluteFilePaths);
             return new ArrayList<>();
         }
         List<String> resultFilePaths = uploadByFile(absoluteFilePaths.stream().map(File::new)
                         .collect(LinkedList::new, LinkedList::add, LinkedList::addAll), newFileNames,
                 accessKeyId, accessKeySecret, bucketName, endPoint, fileType, uploadPath);
-        LOGGER.info("[{}] 批量上传文件 [uuid: {}, bucketName: {}, resultPaths: {}]", LOG_TAG,
-                uuid, bucketName, resultFilePaths);
+        LOGGER.info("[{}] 批量上传文件 [bucketName: {}, resultPaths: {}]", LOG_TAG,
+                bucketName, resultFilePaths);
         return resultFilePaths;
     }
 
@@ -374,16 +369,15 @@ public class AliYunOssUtils {
                                             String bucketName, String endPoint,
                                             String fileType, String... uploadPath)
             throws AliYunOssUploadException {
-        String uuid = UUIDUtils.Local.get();
         if (uploadFiles.isEmpty()) {
-            LOGGER.warn("[{}] 批量上传文件为空 [uuid: {}, bucketName: {}, uploadFiles: {}]", LOG_TAG,
-                    uuid, bucketName, uploadFiles);
+            LOGGER.warn("[{}] 批量上传文件为空 [bucketName: {}, uploadFiles: {}]", LOG_TAG,
+                    bucketName, uploadFiles);
             return new ArrayList<>();
         }
         List<String> resultFilePaths = baseFileUploadByFile(uploadFiles, newFileNames, accessKeyId, accessKeySecret,
                 bucketName, endPoint, fileType, uploadPath);
-        LOGGER.info("[{}] 批量上传文件 [uuid: {}, bucketName: {}, resultPaths: {}]", LOG_TAG,
-                uuid, bucketName, resultFilePaths);
+        LOGGER.info("[{}] 批量上传文件 [bucketName: {}, resultPaths: {}]", LOG_TAG,
+                bucketName, resultFilePaths);
         return resultFilePaths;
     }
 
@@ -546,12 +540,11 @@ public class AliYunOssUtils {
     public static void deleteObject(String ossFilePath,
                                     String accessKeyId, String accessKeySecret,
                                     String bucketName, String endPoint) {
-        String uuid = UUIDUtils.Local.get();
         OSS ossClient = null;
         try {
             ossClient = new OSSClientBuilder().build(endPoint, accessKeyId, accessKeySecret);
             ossClient.deleteObject(bucketName, FileUriUtils.formatFilename(ossFilePath, true));
-            LOGGER.info("[{}] 删除文件 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG, uuid, bucketName, ossFilePath);
+            LOGGER.info("[{}] 删除文件 [bucketName: {}, resultPath: {}]", LOG_TAG, bucketName, ossFilePath);
         } finally {
             if (ossClient != null) {
                 ossClient.shutdown();
@@ -593,10 +586,9 @@ public class AliYunOssUtils {
     public static List<String> deleteObject(Collection<String> ossFilePaths, boolean quiet,
                                             String accessKeyId, String accessKeySecret,
                                             String bucketName, String endPoint) {
-        String uuid = UUIDUtils.Local.get();
         if (ossFilePaths.isEmpty()) {
-            LOGGER.warn("[{}] 批量删除文件为空 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG,
-                    uuid, bucketName, ossFilePaths);
+            LOGGER.warn("[{}] 批量删除文件为空 [bucketName: {}, resultPath: {}]", LOG_TAG,
+                    bucketName, ossFilePaths);
             return new ArrayList<>();
         }
         OSS ossClient = null;
@@ -607,8 +599,8 @@ public class AliYunOssUtils {
             DeleteObjectsRequest deleteObjectsRequest = new DeleteObjectsRequest(bucketName).withKeys(formatOssFilePaths);
             deleteObjectsRequest.setQuiet(quiet);
             DeleteObjectsResult deleteObjectsResult = ossClient.deleteObjects(deleteObjectsRequest);
-            LOGGER.info("[{}] 批量删除文件 [uuid: {}, bucketName: {}, resultPath: {}]", LOG_TAG,
-                    uuid, bucketName, ossFilePaths);
+            LOGGER.info("[{}] 批量删除文件 [bucketName: {}, resultPath: {}]", LOG_TAG,
+                    bucketName, ossFilePaths);
             return deleteObjectsResult.getDeletedObjects();
         } finally {
             if (ossClient != null) {

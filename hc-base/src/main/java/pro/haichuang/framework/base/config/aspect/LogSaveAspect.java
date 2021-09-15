@@ -16,7 +16,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import pro.haichuang.framework.base.annotation.LogSave;
 import pro.haichuang.framework.base.config.interceptor.AbstractLogSave;
 import pro.haichuang.framework.base.util.common.IpUtils;
-import pro.haichuang.framework.base.util.common.UUIDUtils;
 import pro.haichuang.framework.base.util.jwt.SecurityUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -57,8 +56,6 @@ public class LogSaveAspect {
 
     @Around("logPointCut()")
     public Object around(ProceedingJoinPoint point) throws Throwable {
-        // UUID
-        String uuid = UUIDUtils.random();
         // 开始执行时间
         long beginTime = System.currentTimeMillis();
         // 请求

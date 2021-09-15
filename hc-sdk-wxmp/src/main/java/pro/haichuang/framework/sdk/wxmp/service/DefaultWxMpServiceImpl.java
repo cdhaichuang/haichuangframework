@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pro.haichuang.framework.base.enums.error.client.AuthorityErrorEnum;
 import pro.haichuang.framework.base.response.ResultVO;
 import pro.haichuang.framework.base.util.common.ResponseUtils;
-import pro.haichuang.framework.sdk.wxmp.component.WxMpKeyComponent;
+import pro.haichuang.framework.sdk.wxmp.key.WxMpKey;
 import pro.haichuang.framework.sdk.wxmp.config.properties.WxMpProperties;
 import pro.haichuang.framework.sdk.wxmp.dto.WxMpBaseAccessTokenDTO;
 import pro.haichuang.framework.sdk.wxmp.dto.WxMpJsApiTicketDTO;
@@ -51,13 +51,13 @@ public class DefaultWxMpServiceImpl implements WxMpService {
     @Override
     public String getBaseAccessToken() {
         validateProperties();
-        String baseAccessToken = wxMpDataStore.getBaseAccessToken(WxMpKeyComponent.baseAccessToken());
+        String baseAccessToken = wxMpDataStore.getBaseAccessToken(WxMpKey.baseAccessToken());
         // 当缓存中 [WxMpBaseAccessTokenDTO] 为空时则向微信发起请求获取 [WxMpBaseAccessTokenDTO] 并存入缓存中
         if (baseAccessToken == null || baseAccessToken.isEmpty()) {
             WxMpBaseAccessTokenDTO wxMpBaseAccessTokenDTO = WxMpUtils.getBaseAccessToken(
                     wxMpProperties.getAppId(), wxMpProperties.getAppSecret());
             baseAccessToken = wxMpBaseAccessTokenDTO.getAccessToken();
-            wxMpDataStore.setBaseAccessToken(WxMpKeyComponent.baseAccessToken(),
+            wxMpDataStore.setBaseAccessToken(WxMpKey.baseAccessToken(),
                     wxMpBaseAccessTokenDTO.getAccessToken(), wxMpBaseAccessTokenDTO.getAccessTokenExpireTime());
         }
         return baseAccessToken;
@@ -67,8 +67,8 @@ public class DefaultWxMpServiceImpl implements WxMpService {
     public WxMpWebAccessTokenDTO getWebAccessTokenByOpenId(String openId) {
         validateProperties();
         WxMpWebAccessTokenDTO wxMpWebAccessTokenDTO = null;
-        String webAccessToken = wxMpDataStore.getWebAccessToken(WxMpKeyComponent.webAccessToken(openId));
-        String webRefreshAccessToken = wxMpDataStore.getWebRefreshAccessToken(WxMpKeyComponent.webRefreshAccessToken(openId));
+        String webAccessToken = wxMpDataStore.getWebAccessToken(WxMpKey.webAccessToken(openId));
+        String webRefreshAccessToken = wxMpDataStore.getWebRefreshAccessToken(WxMpKey.webRefreshAccessToken(openId));
         // 当 [WebAccessToken] 不为空时则设置结果为缓存中的数据
         if (webAccessToken != null && !webAccessToken.isEmpty()) {
             wxMpWebAccessTokenDTO = new WxMpWebAccessTokenDTO();
@@ -77,9 +77,9 @@ public class DefaultWxMpServiceImpl implements WxMpService {
         // 当 [WebRefreshAccessToken] 存在时则刷新 [WebAccessToken] 与 [WebRefreshAccessToken]
         if (webRefreshAccessToken != null && !webRefreshAccessToken.isEmpty()) {
             wxMpWebAccessTokenDTO = WxMpUtils.refreshWebAccessToken(wxMpProperties.getAppId(), webRefreshAccessToken);
-            wxMpDataStore.setWebAccessToken(WxMpKeyComponent.webAccessToken(openId),
+            wxMpDataStore.setWebAccessToken(WxMpKey.webAccessToken(openId),
                     wxMpWebAccessTokenDTO.getWebAccessToken(), wxMpWebAccessTokenDTO.getWebAccessTokenExpireTime());
-            wxMpDataStore.setWebRefreshAccessToken(WxMpKeyComponent.webRefreshAccessToken(openId),
+            wxMpDataStore.setWebRefreshAccessToken(WxMpKey.webRefreshAccessToken(openId),
                     wxMpWebAccessTokenDTO.getWebRefreshToken(), wxMpWebAccessTokenDTO.getWebRefreshTokenExpireTime());
         }
         return wxMpWebAccessTokenDTO;
@@ -90,9 +90,9 @@ public class DefaultWxMpServiceImpl implements WxMpService {
         validateProperties();
         WxMpWebAccessTokenDTO wxMpWebAccessTokenDTO = WxMpUtils.getWebAccessToken(wxMpProperties.getAppId(),
                 wxMpProperties.getAppSecret(), code);
-        wxMpDataStore.setWebAccessToken(WxMpKeyComponent.webAccessToken(wxMpWebAccessTokenDTO.getOpenId()),
+        wxMpDataStore.setWebAccessToken(WxMpKey.webAccessToken(wxMpWebAccessTokenDTO.getOpenId()),
                 wxMpWebAccessTokenDTO.getWebAccessToken(), wxMpWebAccessTokenDTO.getWebAccessTokenExpireTime());
-        wxMpDataStore.setWebRefreshAccessToken(WxMpKeyComponent.webRefreshAccessToken(wxMpWebAccessTokenDTO.getOpenId()),
+        wxMpDataStore.setWebRefreshAccessToken(WxMpKey.webRefreshAccessToken(wxMpWebAccessTokenDTO.getOpenId()),
                 wxMpWebAccessTokenDTO.getWebRefreshToken(), wxMpWebAccessTokenDTO.getWebRefreshTokenExpireTime());
         return wxMpWebAccessTokenDTO;
     }
@@ -100,11 +100,11 @@ public class DefaultWxMpServiceImpl implements WxMpService {
     @Override
     public String getJsApiTicket() {
         validateProperties();
-        String wxMpJsApiTicket = wxMpDataStore.getJsApiTicket(WxMpKeyComponent.jsApiTicket());
+        String wxMpJsApiTicket = wxMpDataStore.getJsApiTicket(WxMpKey.jsApiTicket());
         if (wxMpJsApiTicket == null || !wxMpJsApiTicket.isEmpty()) {
             WxMpJsApiTicketDTO wxMpJsApiTicketDTO = WxMpUtils.getJsApiTicket(getBaseAccessToken());
             wxMpJsApiTicket = wxMpJsApiTicketDTO.getTicket();
-            wxMpDataStore.setJsApiTicket(WxMpKeyComponent.jsApiTicket(), wxMpJsApiTicket,
+            wxMpDataStore.setJsApiTicket(WxMpKey.jsApiTicket(), wxMpJsApiTicket,
                     wxMpJsApiTicketDTO.getEffectiveTime());
         }
         return wxMpJsApiTicket;

@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Lazy;
 import pro.haichuang.framework.base.config.autoconfiguration.BaseAutoConfiguration;
-import pro.haichuang.framework.sdk.wxmp.component.WxMpKeyComponent;
+import pro.haichuang.framework.sdk.wxmp.key.WxMpKey;
 import pro.haichuang.framework.sdk.wxmp.store.DefaultWxMpDataStore;
 import pro.haichuang.framework.sdk.wxmp.store.WxMpDataStore;
 
@@ -36,7 +36,7 @@ public class WxMpStoreAutoConfiguration {
 
     @Bean
     @Lazy
-    public WxMpKeyComponent wxMpKeyComponent() {
-        return new WxMpKeyComponent();
+    public WxMpKey wxMpKeyComponent() {
+        return new WxMpKey();
     }
 }

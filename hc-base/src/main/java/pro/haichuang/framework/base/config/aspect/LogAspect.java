@@ -17,7 +17,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import pro.haichuang.framework.base.dto.HttpServletRequestDTO;
 import pro.haichuang.framework.base.exception.ApplicationException;
 import pro.haichuang.framework.base.util.common.RequestUtils;
-import pro.haichuang.framework.base.util.common.UUIDUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
@@ -49,7 +48,6 @@ public class LogAspect {
 
     @Around("logPointCut()")
     public Object around(ProceedingJoinPoint point) throws Throwable {
-        String uuid = UUIDUtils.Local.get();
         // 开始执行时间
         long beginTime = System.currentTimeMillis();
 
@@ -70,20 +68,20 @@ public class LogAspect {
         // 完整请求方法
         String fullMethodName = httpServletRequestDTO.getFullMethodName();
 
-        LOGGER.info("[{}] [Begin] 检测到请求 [uuid: {}, apiMessage: {}, requestUri: {}, method: {}, " +
+        LOGGER.info("[{}] [Begin] 检测到请求 [apiMessage: {}, requestUri: {}, method: {}, " +
                         "clientIp: {}, userId: {}, params: {}]",
-                LOG_TAG, uuid, apiMessage, request.getRequestURI(), fullMethodName,
+                LOG_TAG, apiMessage, request.getRequestURI(), fullMethodName,
                 clientIp, userId, point.getArgs());
 
         Object result = point.proceed();
         long executionTime = System.currentTimeMillis() - beginTime;
 
-        LOGGER.info("[{}] [ End ] 检测到请求 [uuid: {}, apiMessage: {}, requestUri: {}, method: {}, " +
+        LOGGER.info("[{}] [ End ] 检测到请求 [apiMessage: {}, requestUri: {}, method: {}, " +
                         "clientIp: {}, userId: {}, executionTime: {}]",
-                LOG_TAG, uuid, apiMessage, request.getRequestURI(), fullMethodName, clientIp, userId, executionTime);
-        LOGGER.debug("[{}] 检测到请求 [uuid: {}, apiMessage: {}, requestUri: {}, method: {}, " +
+                LOG_TAG, apiMessage, request.getRequestURI(), fullMethodName, clientIp, userId, executionTime);
+        LOGGER.debug("[{}] 检测到请求 [apiMessage: {}, requestUri: {}, method: {}, " +
                         "clientIp: {}, userId: {}, executionTime: {}, params: {}, result: {}]",
-                LOG_TAG, uuid, apiMessage, request.getRequestURI(), fullMethodName, clientIp, userId, executionTime,
+                LOG_TAG, apiMessage, request.getRequestURI(), fullMethodName, clientIp, userId, executionTime,
                 point.getArgs(), objectMapper.writeValueAsString(result));
 
         return result;

@@ -1,4 +1,4 @@
-package pro.haichuang.framework.sdk.wxmp.component;
+package pro.haichuang.framework.sdk.wxmp.key;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import pro.haichuang.framework.base.config.properties.BaseConfigProperties;
@@ -13,7 +13,7 @@ import javax.annotation.PostConstruct;
  * @see pro.haichuang.framework.sdk.wxmp.service.DefaultWxMpServiceImpl
  * @since 1.0.0
  */
-public class WxMpKeyComponent {
+public class WxMpKey {
 
     /**
      * BaseAccessToken
@@ -51,7 +51,7 @@ public class WxMpKeyComponent {
     public void setProjectCode() {
         String projectCode = baseConfigProperties.getProjectCode();
         if (projectCode != null && !projectCode.isEmpty()) {
-            WxMpKeyComponent.PROJECT_CODE = projectCode;
+            WxMpKey.PROJECT_CODE = projectCode;
         }
     }
 

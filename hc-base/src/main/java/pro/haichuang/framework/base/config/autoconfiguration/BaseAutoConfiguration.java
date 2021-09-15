@@ -4,7 +4,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import pro.haichuang.framework.base.config.mvc.filter.UUIDOfLocalFilter;
+import pro.haichuang.framework.base.config.mvc.filter.RepeatAndMdcFilter;
 import pro.haichuang.framework.base.config.mvc.FastJsonConfig;
 import pro.haichuang.framework.base.config.mvc.JacksonConfig;
 import pro.haichuang.framework.base.config.mvc.WebMvcConfig;
@@ -32,7 +32,7 @@ import pro.haichuang.framework.base.config.properties.BaseConfigProperties;
         matchIfMissing = true
 )
 @Import({
-        UUIDOfLocalFilter.class,
+        RepeatAndMdcFilter.class,
         WebMvcConfig.class,
         JacksonConfig.class,
         FastJsonConfig.class

@@ -24,7 +24,6 @@ import pro.haichuang.framework.base.exception.ThirdPartyException;
 import pro.haichuang.framework.base.response.ResultVO;
 import pro.haichuang.framework.base.response.vo.BaseVO;
 import pro.haichuang.framework.base.util.common.IpUtils;
-import pro.haichuang.framework.base.util.common.UUIDUtils;
 import pro.haichuang.framework.base.util.jwt.SecurityUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -69,13 +68,11 @@ public class BaseControllerAdvice {
      */
     @ExceptionHandler(ApplicationException.class)
     public BaseVO generalErrorHandle(ApplicationException e, HttpServletRequest request) {
-        String uuid = UUIDUtils.Local.get();
         String clientIp = IpUtils.getIpv4Address(request);
         Long userId = SecurityUtils.getJwtPayloadOrNewInstance().getUserId();
-        LOGGER.warn("[{}] ------------------------- 自定义异常信息 ------------------------- [Begin - {}]", LOG_TAG, uuid);
-        printStackTraceFormat(request.getRequestURI(), request.getMethod(), e, e.getCause(),
-                uuid, "自定义异常信息", clientIp, userId, null);
-        LOGGER.warn("[{}] ------------------------- 自定义异常信息 ------------------------- [ End - {} ]", LOG_TAG, uuid);
+        LOGGER.warn("[{}] ------------------------- 自定义异常信息 ------------------------- [Begin]", LOG_TAG);
+        printStackTraceFormat(request.getRequestURI(), request.getMethod(), e, e.getCause(), "自定义异常信息", clientIp, userId, null);
+        LOGGER.warn("[{}] ------------------------- 自定义异常信息 ------------------------- [ End ]", LOG_TAG);
         return ResultVO.other(e.getBaseEnum(), e.getUserTip());
     }
 
@@ -90,13 +87,12 @@ public class BaseControllerAdvice {
      */
     @ExceptionHandler(StackTraceException.class)
     public BaseVO stackTracerErrorHandler(StackTraceException e, HttpServletRequest request, HttpServletResponse response) {
-        String uuid = UUIDUtils.Local.get();
         String clientIp = IpUtils.getIpv4Address(request);
         Long userId = SecurityUtils.getJwtPayloadOrNewInstance().getUserId();
-        LOGGER.error("[{}] ------------------------- 堆栈异常信息 ------------------------- [Begin - {}]", LOG_TAG, uuid);
-        LOGGER.error("[{}] 堆栈异常信息 [uuid: {}, requestUri: {}, requestMethod: {}, clientIp: {}, userId: {}, errorMessage: {}]",
-                LOG_TAG, uuid, request.getRequestURI(), request.getMethod(), clientIp, userId, e.getLocalizedMessage(), e);
-        LOGGER.error("[{}] ------------------------- 堆栈异常信息 ------------------------- [ End - {}]", LOG_TAG, uuid);
+        LOGGER.error("[{}] ------------------------- 堆栈异常信息 ------------------------- [Begin]", LOG_TAG);
+        LOGGER.error("[{}] 堆栈异常信息 [requestUri: {}, requestMethod: {}, clientIp: {}, userId: {}, errorMessage: {}]",
+                LOG_TAG, request.getRequestURI(), request.getMethod(), clientIp, userId, e.getLocalizedMessage(), e);
+        LOGGER.error("[{}] ------------------------- 堆栈异常信息 ------------------------- [ End ]", LOG_TAG);
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         return ResultVO.other(RequestServerErrorEnum.SERVICE_ERROR, ApplicationException.DEFAULT_ERROR_USER_TIP);
     }
@@ -112,13 +108,12 @@ public class BaseControllerAdvice {
      */
     @ExceptionHandler(ThirdPartyException.class)
     public JSONObject thirdPartyErrorHandler(ThirdPartyException e, HttpServletRequest request, HttpServletResponse response) {
-        String uuid = UUIDUtils.Local.get();
         String clientIp = IpUtils.getIpv4Address(request);
         Long userId = SecurityUtils.getJwtPayloadOrNewInstance().getUserId();
-        LOGGER.error("[{}] ------------------------- 第三方异常信息 ------------------------- [Begin - {}]", LOG_TAG, uuid);
-        LOGGER.error("[{}] 第三方异常信息 [uuid: {}, requestUri: {}, requestMethod: {}, clientIp: {}, userId: {}, errorCode: {}, errorMessage: {}]",
-                LOG_TAG, uuid, request.getRequestURI(), request.getMethod(), clientIp, userId, e.getErrorCode(), e.getErrorMessage(), e);
-        LOGGER.error("[{}] ------------------------- 第三方异常信息 ------------------------- [ End - {}]", LOG_TAG, uuid);
+        LOGGER.error("[{}] ------------------------- 第三方异常信息 ------------------------- [Begin]", LOG_TAG);
+        LOGGER.error("[{}] 第三方异常信息 [requestUri: {}, requestMethod: {}, clientIp: {}, userId: {}, errorCode: {}, errorMessage: {}]",
+                LOG_TAG, request.getRequestURI(), request.getMethod(), clientIp, userId, e.getErrorCode(), e.getErrorMessage(), e);
+        LOGGER.error("[{}] ------------------------- 第三方异常信息 ------------------------- [ End ]", LOG_TAG);
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         return new JSONObject()
                 .fluentPut(BaseVO.ERROR_CODE, RequestServerErrorEnum.SERVICE_ERROR.value())
@@ -137,13 +132,12 @@ public class BaseControllerAdvice {
      */
     @ExceptionHandler(Exception.class)
     public BaseVO serverErrorHandler(Exception e, HttpServletRequest request, HttpServletResponse response) {
-        String uuid = UUIDUtils.Local.get();
         String clientIp = IpUtils.getIpv4Address(request);
         Long userId = SecurityUtils.getJwtPayloadOrNewInstance().getUserId();
-        LOGGER.error("[{}] ------------------------- 系统异常信息 ------------------------- [Begin - {}]", LOG_TAG, uuid);
-        LOGGER.error("[{}] 系统异常信息 [uuid: {}, requestUri: {}, requestMethod: {}, clientIp: {}, userId: {}, errorMessage: {}]",
-                LOG_TAG, uuid, request.getRequestURI(), request.getMethod(), clientIp, userId, e.getLocalizedMessage(), e);
-        LOGGER.error("[{}] ------------------------- 系统异常信息 ------------------------- [ End - {}]", LOG_TAG, uuid);
+        LOGGER.error("[{}] ------------------------- 系统异常信息 ------------------------- [Begin]", LOG_TAG);
+        LOGGER.error("[{}] 系统异常信息 [requestUri: {}, requestMethod: {}, clientIp: {}, userId: {}, errorMessage: {}]",
+                LOG_TAG, request.getRequestURI(), request.getMethod(), clientIp, userId, e.getLocalizedMessage(), e);
+        LOGGER.error("[{}] ------------------------- 系统异常信息 ------------------------- [ End ]", LOG_TAG);
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         return ResultVO.other(RequestServerErrorEnum.SERVICE_ERROR, ApplicationException.DEFAULT_ERROR_USER_TIP);
     }
@@ -164,13 +158,12 @@ public class BaseControllerAdvice {
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public JSONObject validationExceptionHandler(MissingServletRequestParameterException e,
                                                  HttpServletRequest request, HttpServletResponse response) {
-        String uuid = UUIDUtils.Local.get();
         String clientIp = IpUtils.getIpv4Address(request);
         Long userId = SecurityUtils.getJwtPayloadOrNewInstance().getUserId();
-        LOGGER.warn("[{}] ------------------------- 参数为空 ------------------------- [Begin - {}]", LOG_TAG, uuid);
-        LOGGER.warn("[{}] 参数为空 [uuid: {}, requestUri: {}, requestMethod: {}, clientIp: {}, userId: {}, errorMessage: {}]",
-                LOG_TAG, uuid, request.getRequestURI(), request.getMethod(), clientIp, userId, e.getLocalizedMessage());
-        LOGGER.warn("[{}] ------------------------- 参数为空 ------------------------- [ End - {}]", LOG_TAG, uuid);
+        LOGGER.warn("[{}] ------------------------- 参数为空 ------------------------- [Begin]", LOG_TAG);
+        LOGGER.warn("[{}] 参数为空 [requestUri: {}, requestMethod: {}, clientIp: {}, userId: {}, errorMessage: {}]",
+                LOG_TAG, request.getRequestURI(), request.getMethod(), clientIp, userId, e.getLocalizedMessage());
+        LOGGER.warn("[{}] ------------------------- 参数为空 ------------------------- [ End ]", LOG_TAG);
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         return new JSONObject()
                 .fluentPut(BaseVO.ERROR_CODE, RequestParamErrorEnum.PARAMETER_EMPTY.value())
@@ -190,13 +183,11 @@ public class BaseControllerAdvice {
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public JSONObject validationExceptionHandler(MethodArgumentTypeMismatchException e,
                                                  HttpServletRequest request, HttpServletResponse response) {
-        String uuid = UUIDUtils.Local.get();
         String clientIp = IpUtils.getIpv4Address(request);
         Long userId = SecurityUtils.getJwtPayloadOrNewInstance().getUserId();
-        LOGGER.warn("[{}] ------------------------- 参数转换异常 ------------------------- [Begin - {}]", LOG_TAG, uuid);
-        String errorMessage = this.printStackTraceFormat(request.getRequestURI(), request.getMethod(), e, e.getCause(),
-                uuid, "参数转换异常", clientIp, userId, e.getLocalizedMessage());
-        LOGGER.warn("[{}] ------------------------- 参数转换异常 ------------------------- [ End - {}]", LOG_TAG, uuid);
+        LOGGER.warn("[{}] ------------------------- 参数转换异常 ------------------------- [Begin]", LOG_TAG);
+        String errorMessage = this.printStackTraceFormat(request.getRequestURI(), request.getMethod(), e, e.getCause(), "参数转换异常", clientIp, userId, e.getLocalizedMessage());
+        LOGGER.warn("[{}] ------------------------- 参数转换异常 ------------------------- [ End ]", LOG_TAG);
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         return new JSONObject()
                 .fluentPut(BaseVO.ERROR_CODE, RequestParamErrorEnum.PARAMETER_EMPTY.value())
@@ -219,20 +210,19 @@ public class BaseControllerAdvice {
     @ExceptionHandler(ValidationException.class)
     public JSONObject validationExceptionHandler(ValidationException e,
                                                  HttpServletRequest request, HttpServletResponse response) {
-        String uuid = UUIDUtils.Local.get();
         String clientIp = IpUtils.getIpv4Address(request);
         Long userId = SecurityUtils.getJwtPayloadOrNewInstance().getUserId();
-        LOGGER.warn("[{}] ------------------------- 验证异常 ------------------------- [Begin - {}]", LOG_TAG, uuid);
-        LOGGER.warn("[{}] 验证异常 [uuid: {}, requestUri: {}, requestMethod: {}, clientIp: {}, userId: {}, errorMessage: {}]",
-                LOG_TAG, uuid, request.getRequestURI(), request.getMethod(), clientIp, userId, e.getLocalizedMessage());
+        LOGGER.warn("[{}] ------------------------- 验证异常 ------------------------- [Begin]", LOG_TAG);
+        LOGGER.warn("[{}] 验证异常 [requestUri: {}, requestMethod: {}, clientIp: {}, userId: {}, errorMessage: {}]",
+                LOG_TAG, request.getRequestURI(), request.getMethod(), clientIp, userId, e.getLocalizedMessage());
         List<String> userTipMessages = new ArrayList<>();
         Set<ConstraintViolation<?>> constraintViolations = ((ConstraintViolationException) e).getConstraintViolations();
         for (ConstraintViolation<?> constraintViolation : constraintViolations) {
             userTipMessages.add(constraintViolation.getMessage());
         }
         this.printStackTraceFormat(request.getRequestURI(), request.getMethod(), e, e.getCause(),
-                uuid, "验证异常", clientIp, userId, null);
-        LOGGER.warn("[{}] ------------------------- 验证异常 ------------------------- [ End - {}]", LOG_TAG, uuid);
+                "验证异常", clientIp, userId, null);
+        LOGGER.warn("[{}] ------------------------- 验证异常 ------------------------- [ End ]", LOG_TAG);
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         return new JSONObject()
                 .fluentPut(BaseVO.ERROR_CODE, RequestParamErrorEnum.INVALID_INPUT.value())
@@ -256,15 +246,14 @@ public class BaseControllerAdvice {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public JSONObject validationExceptionHandler(HttpMessageNotReadableException e,
                                                  HttpServletRequest request, HttpServletResponse response) {
-        String uuid = UUIDUtils.Local.get();
         String clientIp = IpUtils.getIpv4Address(request);
         Long userId = SecurityUtils.getJwtPayloadOrNewInstance().getUserId();
-        LOGGER.warn("[{}] ------------------------- 请求体异常 ------------------------- [Begin - {}]", LOG_TAG, uuid);
+        LOGGER.warn("[{}] ------------------------- 请求体异常 ------------------------- [Begin]", LOG_TAG);
         String errorMessage = this.printStackTraceFormat(request.getRequestURI(), request.getMethod(), e, e.getCause(),
-                uuid, "请求体异常", clientIp, userId, e.getLocalizedMessage());
-        LOGGER.warn("[{}] 请求体异常 [uuid: {}, requestUri: {}, requestMethod: {}, clientIp: {}, userId: {}, errorMessage: {}]",
-                LOG_TAG, uuid, request.getRequestURI(), request.getMethod(), clientIp, userId, errorMessage);
-        LOGGER.warn("[{}] ------------------------- 请求体异常 ------------------------- [ End - {}]", LOG_TAG, uuid);
+                "请求体异常", clientIp, userId, e.getLocalizedMessage());
+        LOGGER.warn("[{}] 请求体异常 [requestUri: {}, requestMethod: {}, clientIp: {}, userId: {}, errorMessage: {}]",
+                LOG_TAG, request.getRequestURI(), request.getMethod(), clientIp, userId, errorMessage);
+        LOGGER.warn("[{}] ------------------------- 请求体异常 ------------------------- [ End ]", LOG_TAG);
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         return new JSONObject()
                 .fluentPut(BaseVO.ERROR_CODE, RequestParamErrorEnum.PARAMETER_EMPTY.value())
@@ -287,20 +276,19 @@ public class BaseControllerAdvice {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public JSONObject validationExceptionHandler(MethodArgumentNotValidException e,
                                                  HttpServletRequest request, HttpServletResponse response) {
-        String uuid = UUIDUtils.Local.get();
         String clientIp = IpUtils.getIpv4Address(request);
         Long userId = SecurityUtils.getJwtPayloadOrNewInstance().getUserId();
-        LOGGER.warn("[{}] ------------------------- 请求体验证异常 ------------------------- [Begin - {}]", LOG_TAG, uuid);
+        LOGGER.warn("[{}] ------------------------- 请求体验证异常 ------------------------- [Begin]", LOG_TAG);
         List<String> errorMessages = new ArrayList<>();
         List<String> userTipMessages = new ArrayList<>();
         for (FieldError fieldError : e.getFieldErrors()) {
             errorMessages.add(String.format("%s: %s", fieldError.getField(), fieldError.getDefaultMessage()));
             userTipMessages.add(fieldError.getDefaultMessage());
-            LOGGER.warn("[{}] 请求体验证异常 [uuid: {}, requestUri: {}, requestMethod: {}, clientIp: {}, userId: {}, errorType: @{}, errorMessage: {}, field: {}#{}={}]",
-                    LOG_TAG, uuid, request.getRequestURI(), request.getMethod(), clientIp, userId, fieldError.getCode(), fieldError.getDefaultMessage(),
+            LOGGER.warn("[{}] 请求体验证异常 [requestUri: {}, requestMethod: {}, clientIp: {}, userId: {}, errorType: @{}, errorMessage: {}, field: {}#{}={}]",
+                    LOG_TAG, request.getRequestURI(), request.getMethod(), clientIp, userId, fieldError.getCode(), fieldError.getDefaultMessage(),
                     e.getParameter().getParameterType().getName(), fieldError.getField(), fieldError.getRejectedValue());
         }
-        LOGGER.warn("[{}] ------------------------- 请求体验证异常 ------------------------- [ End - {}]", LOG_TAG, uuid);
+        LOGGER.warn("[{}] ------------------------- 请求体验证异常 ------------------------- [ End ]", LOG_TAG);
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         return new JSONObject()
                 .fluentPut(BaseVO.ERROR_CODE, RequestParamErrorEnum.INVALID_INPUT.value())
@@ -319,15 +307,14 @@ public class BaseControllerAdvice {
      */
     @ExceptionHandler(BindException.class)
     public JSONObject validationExceptionHandler(BindException e, HttpServletRequest request, HttpServletResponse response) {
-        String uuid = UUIDUtils.Local.get();
         String clientIp = IpUtils.getIpv4Address(request);
         Long userId = SecurityUtils.getJwtPayloadOrNewInstance().getUserId();
-        LOGGER.warn("[{}] ------------------------- 绑定异常 ------------------------- [Begin - {}]", LOG_TAG, uuid);
-        LOGGER.warn("[{}] 绑定异常 [uuid: {}, requestUri: {}, requestMethod: {}, clientIp: {}, userId: {}, errorMessage: {}]",
-                LOG_TAG, uuid, request.getRequestURI(), request.getMethod(), clientIp, userId, e.getAllErrors().get(0).getDefaultMessage());
+        LOGGER.warn("[{}] ------------------------- 绑定异常 ------------------------- [Begin]", LOG_TAG);
+        LOGGER.warn("[{}] 绑定异常 [requestUri: {}, requestMethod: {}, clientIp: {}, userId: {}, errorMessage: {}]",
+                LOG_TAG, request.getRequestURI(), request.getMethod(), clientIp, userId, e.getAllErrors().get(0).getDefaultMessage());
         this.printStackTraceFormat(request.getRequestURI(), request.getMethod(), e, e.getCause(),
-                uuid, "绑定异常", clientIp, userId, null);
-        LOGGER.warn("[{}] ------------------------- 绑定异常 ------------------------- [ End - {}]", LOG_TAG, uuid);
+                "绑定异常", clientIp, userId, null);
+        LOGGER.warn("[{}] ------------------------- 绑定异常 ------------------------- [ End ]", LOG_TAG);
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         return new JSONObject()
                 .fluentPut(BaseVO.ERROR_CODE, RequestParamErrorEnum.INVALID_INPUT.value())
@@ -347,15 +334,14 @@ public class BaseControllerAdvice {
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public JSONObject validationExceptionHandler(HttpRequestMethodNotSupportedException e,
                                                  HttpServletRequest request, HttpServletResponse response) {
-        String uuid = UUIDUtils.Local.get();
         String clientIp = IpUtils.getIpv4Address(request);
         Long userId = SecurityUtils.getJwtPayloadOrNewInstance().getUserId();
-        LOGGER.warn("[{}] ------------------------- 方法不被允许 ------------------------- [Begin - {}]", LOG_TAG, uuid);
-        LOGGER.warn("[{}] 方法不被允许 [uuid: {}, requestUri: {}, requestMethod: {}, clientIp: {}, userId: {}, errorMessage: {}]",
-                LOG_TAG, uuid, request.getRequestURI(), request.getMethod(), clientIp, userId, e.getLocalizedMessage());
+        LOGGER.warn("[{}] ------------------------- 方法不被允许 ------------------------- [Begin]", LOG_TAG);
+        LOGGER.warn("[{}] 方法不被允许 [requestUri: {}, requestMethod: {}, clientIp: {}, userId: {}, errorMessage: {}]",
+                LOG_TAG, request.getRequestURI(), request.getMethod(), clientIp, userId, e.getLocalizedMessage());
         this.printStackTraceFormat(request.getRequestURI(), request.getMethod(), e, e.getCause(),
-                uuid, "方法不被允许", clientIp, userId, null);
-        LOGGER.warn("[{}] ------------------------- 方法不被允许 ------------------------- [ End - {}]", LOG_TAG, uuid);
+                "方法不被允许", clientIp, userId, null);
+        LOGGER.warn("[{}] ------------------------- 方法不被允许 ------------------------- [ End ]", LOG_TAG);
         response.setStatus(HttpStatus.METHOD_NOT_ALLOWED.value());
         return new JSONObject()
                 .fluentPut(BaseVO.ERROR_CODE, RequestParamErrorEnum.INVALID_INPUT.value())
@@ -374,7 +360,6 @@ public class BaseControllerAdvice {
      * @param requestMethod        请求方法
      * @param tp                   {@code t} 父节点
      * @param t                    Throwable
-     * @param uuid                 唯一标识
      * @param tag                  输出标签
      * @param originalErrorMessage 原始错误信息
      * @return 格式化后的错误信息
@@ -382,7 +367,7 @@ public class BaseControllerAdvice {
      */
     @Nullable
     private String printStackTraceFormat(String requestUri, String requestMethod, Throwable tp, @Nullable Throwable t,
-                                         String uuid, String tag, String clientIp, @Nullable Long userId,
+                                         String tag, String clientIp, @Nullable Long userId,
                                          @Nullable String originalErrorMessage) {
         if (t == null) {
             if (tp instanceof EnumIllegalArgumentException) {
@@ -391,14 +376,14 @@ public class BaseControllerAdvice {
                 if (matcher.find()) {
                     originalErrorMessage = originalErrorMessage.replace(matcher.group(), "");
                 }
-                LOGGER.warn("[{}] {} [uuid: {}, requestUri: {}, requestMethod: {}, clientIp, {}, userId: {}, errorMessage: {}]",
-                        LOG_TAG, tag, uuid, requestUri, requestMethod, clientIp, userId, tp.getLocalizedMessage());
+                LOGGER.warn("[{}] {} [requestUri: {}, requestMethod: {}, clientIp, {}, userId: {}, errorMessage: {}]",
+                        LOG_TAG, tag, requestUri, requestMethod, clientIp, userId, tp.getLocalizedMessage());
             } else {
                 boolean isPrintStack = false;
                 for (StackTraceElement stackTraceElement : tp.getStackTrace()) {
                     if (stackTraceElement.getClassName().contains("pro.haichuang")) {
-                        LOGGER.warn("[{}] {} [uuid: {}, requestUri: {}, requestMethod: {}, clientIp, {}, userId: {}, stackTrace: {}]",
-                                LOG_TAG, tag, uuid, requestUri, requestMethod, clientIp, userId, stackTraceElement);
+                        LOGGER.warn("[{}] {} [requestUri: {}, requestMethod: {}, clientIp, {}, userId: {}, stackTrace: {}]",
+                                LOG_TAG, tag, requestUri, requestMethod, clientIp, userId, stackTraceElement);
                         isPrintStack = true;
                     }
                 }
@@ -408,7 +393,7 @@ public class BaseControllerAdvice {
             }
             return originalErrorMessage;
         } else {
-            return this.printStackTraceFormat(requestUri, requestMethod, t, t.getCause(), uuid, tag, clientIp, userId, originalErrorMessage);
+            return this.printStackTraceFormat(requestUri, requestMethod, t, t.getCause(), tag, clientIp, userId, originalErrorMessage);
         }
     }
 }

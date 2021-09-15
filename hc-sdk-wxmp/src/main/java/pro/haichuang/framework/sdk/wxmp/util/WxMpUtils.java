@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.lang.Nullable;
 import pro.haichuang.framework.base.enums.base.SexEnum;
 import pro.haichuang.framework.base.exception.ThirdPartyException;
-import pro.haichuang.framework.base.util.common.UUIDUtils;
 import pro.haichuang.framework.sdk.wxmp.dto.WxMpBaseAccessTokenDTO;
 import pro.haichuang.framework.sdk.wxmp.dto.WxMpJsApiTicketDTO;
 import pro.haichuang.framework.sdk.wxmp.dto.WxMpUserInfoDTO;
@@ -96,7 +95,6 @@ public class WxMpUtils {
      * @since 1.0.0
      */
     public static WxMpBaseAccessTokenDTO getBaseAccessToken(String appId, String appSecret, int timout) {
-        String uuid = UUIDUtils.Local.get();
         String baseUrl = "https://api.weixin.qq.com/cgi-bin/token";
         Map<String, Object> params = new HashMap<>(3);
         params.put("appid", appId);
@@ -104,10 +102,10 @@ public class WxMpUtils {
         params.put("grant_type", "client_credential");
         JSONObject resultJson = JSONObject.parseObject(HttpUtil.get(baseUrl, params, timout));
         if (validateFailResult(resultJson)) {
-            LOGGER.error("[{}] 获取基础AccessToken异常 [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
+            LOGGER.error("[{}] 获取基础AccessToken异常 [response: {}]", LOG_TAG, resultJson.toJSONString());
             throw new ThirdPartyException(resultJson.getString(ERROR_CODE_NAME), resultJson.getString(ERROR_MESSAGE_NAME));
         }
-        LOGGER.info("[{}] 成功获取基础AccessToken [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
+        LOGGER.info("[{}] 成功获取基础AccessToken [response: {}]", LOG_TAG, resultJson.toJSONString());
         Duration expiresIn = Duration.ofSeconds(resultJson.getLongValue("expires_in"));
         // 考虑到系统容错能力, 此处在过期时间基础上提前 [5] 分钟过期, 避免正在处理时三方微信内部过期, 导致不可用
         expiresIn = expiresIn.minusMinutes(5);
@@ -140,7 +138,6 @@ public class WxMpUtils {
      * @since 1.0.0
      */
     public static WxMpWebAccessTokenDTO getWebAccessToken(String appId, String appSecret, String code, int timout) {
-        String uuid = UUIDUtils.Local.get();
         String baseUrl = "https://api.weixin.qq.com/sns/oauth2/access_token";
         Map<String, Object> params = new HashMap<>(4);
         params.put("appid", appId);
@@ -149,10 +146,10 @@ public class WxMpUtils {
         params.put("grant_type", "authorization_code");
         JSONObject resultJson = JSONObject.parseObject(HttpUtil.get(baseUrl, params, timout));
         if (validateFailResult(resultJson)) {
-            LOGGER.error("[{}] 获取网页AccessToken异常 [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
+            LOGGER.error("[{}] 获取网页AccessToken异常 [response: {}]", LOG_TAG, resultJson.toJSONString());
             throw new ThirdPartyException(resultJson.getString(ERROR_CODE_NAME), resultJson.getString(ERROR_MESSAGE_NAME));
         }
-        LOGGER.info("[{}] 成功获取网页AccessToken [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
+        LOGGER.info("[{}] 成功获取网页AccessToken [response: {}]", LOG_TAG, resultJson.toJSONString());
         Duration expiresIn = Duration.ofSeconds(resultJson.getLongValue("expires_in"));
         // 考虑到系统容错能力, 此处在过期时间基础上提前 [5] 分钟过期, 避免正在处理时三方微信内部过期, 导致不可用
         expiresIn = expiresIn.minusMinutes(5);
@@ -186,7 +183,6 @@ public class WxMpUtils {
      * @since 1.0.0
      */
     public static WxMpWebAccessTokenDTO refreshWebAccessToken(String appId, String refreshToken, int timout) {
-        String uuid = UUIDUtils.Local.get();
         String baseUrl = "https://api.weixin.qq.com/sns/oauth2/refresh_token";
         Map<String, Object> params = new HashMap<>(3);
         params.put("appid", appId);
@@ -194,10 +190,10 @@ public class WxMpUtils {
         params.put("refresh_token", refreshToken);
         JSONObject resultJson = JSONObject.parseObject(HttpUtil.get(baseUrl, params, timout));
         if (validateFailResult(resultJson)) {
-            LOGGER.error("[{}] 刷新网页AccessToken异常 [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
+            LOGGER.error("[{}] 刷新网页AccessToken异常 [response: {}]", LOG_TAG, resultJson.toJSONString());
             throw new ThirdPartyException(resultJson.getString(ERROR_CODE_NAME), resultJson.getString(ERROR_MESSAGE_NAME));
         }
-        LOGGER.info("[{}] 成功刷新网页AccessToken [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
+        LOGGER.info("[{}] 成功刷新网页AccessToken [response: {}]", LOG_TAG, resultJson.toJSONString());
         Duration expiresIn = Duration.ofSeconds(resultJson.getLongValue("expires_in"));
         // 考虑到系统容错能力, 此处在过期时间基础上提前 [5] 分钟过期, 避免正在处理时三方微信内部过期, 导致不可用
         expiresIn = expiresIn.minusMinutes(5);
@@ -229,17 +225,16 @@ public class WxMpUtils {
      * @since 1.0.0
      */
     public static WxMpJsApiTicketDTO getJsApiTicket(String accessToken, int timout) {
-        String uuid = UUIDUtils.Local.get();
         String baseUrl = "https://api.weixin.qq.com/cgi-bin/ticket/getticket";
         Map<String, Object> params = new HashMap<>(2);
         params.put("access_token", accessToken);
         params.put("type", "jsapi");
         JSONObject resultJson = JSONObject.parseObject(HttpUtil.get(baseUrl, params, timout));
         if (validateFailResult(resultJson)) {
-            LOGGER.error("[{}] 获取jsApi_ticket异常 [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
+            LOGGER.error("[{}] 获取jsApi_ticket异常 [response: {}]", LOG_TAG, resultJson.toJSONString());
             throw new ThirdPartyException(resultJson.getString(ERROR_CODE_NAME), resultJson.getString(ERROR_MESSAGE_NAME));
         }
-        LOGGER.info("[{}] 成功获取jsApi_ticket [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
+        LOGGER.info("[{}] 成功获取jsApi_ticket [response: {}]", LOG_TAG, resultJson.toJSONString());
         Duration expiresIn = Duration.ofSeconds(resultJson.getLongValue("expires_in"));
         // 考虑到系统容错能力, 此处在过期时间基础上提前 [5] 分钟过期, 避免正在处理时三方微信内部过期, 导致不可用
         expiresIn = expiresIn.minusMinutes(5);
@@ -259,7 +254,6 @@ public class WxMpUtils {
     @Nullable
     @SuppressWarnings("AlibabaUndefineMagicConstant")
     public static WxMpUserInfoDTO getUserInfo(String accessToken, String openId) {
-        String uuid = UUIDUtils.Local.get();
         String baseUrl = "https://api.weixin.qq.com/cgi-bin/user/info";
         Map<String, Object> params = new HashMap<>(3);
         params.put("access_token", accessToken);
@@ -267,12 +261,12 @@ public class WxMpUtils {
         params.put("lang", "zh_CN");
         JSONObject resultJson = JSONObject.parseObject(HttpUtil.get(baseUrl, params));
         if (validateFailResult(resultJson)) {
-            LOGGER.error("[{}] 获取用户信息异常 [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
+            LOGGER.error("[{}] 获取用户信息异常 [response: {}]", LOG_TAG, resultJson.toJSONString());
             throw new ThirdPartyException(resultJson.getString(ERROR_CODE_NAME), resultJson.getString(ERROR_MESSAGE_NAME));
         }
-        LOGGER.info("[{}] 成功获取获取用户信息 [uuid: {}, response: {}]", LOG_TAG, uuid, resultJson.toJSONString());
+        LOGGER.info("[{}] 成功获取获取用户信息 [response: {}]", LOG_TAG, resultJson.toJSONString());
         if (resultJson.getIntValue("subscribe") == 0) {
-            LOGGER.warn("[{}] 获取用户信息失败-该用户未关注此公众号 [uuid: {}, openId: {}, response: {}]", LOG_TAG, uuid, openId, resultJson.toJSONString());
+            LOGGER.warn("[{}] 获取用户信息失败-该用户未关注此公众号 [openId: {}, response: {}]", LOG_TAG, openId, resultJson.toJSONString());
             return null;
         }
         return new WxMpUserInfoDTO()

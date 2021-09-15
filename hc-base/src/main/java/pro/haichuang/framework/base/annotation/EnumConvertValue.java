@@ -13,8 +13,8 @@ import java.lang.annotation.*;
  *
  * @author JiYinchuan
  * @version 1.0.0
- * @since 1.0.0
  * @see EnumConverterFactory
+ * @since 1.0.0
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})

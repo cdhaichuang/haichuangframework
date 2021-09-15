@@ -1,3 +1,5 @@
 # ========================= Logging Setting =========================
 logging:
   config: classpath:config/log4j2-prod.xml
+log4j2:
+  threadContextMap: com.alibaba.ttl.log4j2.TtlThreadContextMap

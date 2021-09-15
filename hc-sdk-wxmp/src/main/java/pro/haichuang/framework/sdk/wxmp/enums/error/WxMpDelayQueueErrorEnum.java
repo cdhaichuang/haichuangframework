@@ -28,7 +28,6 @@ public enum WxMpDelayQueueErrorEnum implements BaseEnum {
      * 未知异常
      */
     UNKNOWN_ERROR("SC10202", "未知异常");
-    
 
     /**
      * 枚举值

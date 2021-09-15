@@ -11,7 +11,6 @@ import com.aliyuncs.profile.DefaultProfile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pro.haichuang.framework.base.exception.EnumIllegalArgumentException;
-import pro.haichuang.framework.base.util.common.UUIDUtils;
 import pro.haichuang.framework.sdk.aliyunsms.enums.error.AliYunSmsSendErrorEnum;
 import pro.haichuang.framework.sdk.aliyunsms.exception.AliYunSmsSendException;
 
@@ -71,13 +70,12 @@ public class AliYunSmsUtils {
                                String signName, String templateCode,
                                String phoneNumbers, JSONObject templateParam)
             throws AliYunSmsSendException {
-        String uuid = UUIDUtils.Local.get();
         CommonRequest request = createRequest();
         request.putQueryParameter("PhoneNumbers", phoneNumbers);
         request.putQueryParameter("SignName", signName);
         request.putQueryParameter("TemplateCode", templateCode);
         request.putQueryParameter("TemplateParam", templateParam.toJSONString());
-        return baseSend(accessKeyId, accessKeySecret, uuid, request);
+        return baseSend(accessKeyId, accessKeySecret, request);
     }
 
     /**
@@ -98,13 +96,12 @@ public class AliYunSmsUtils {
                                     List<String> signNames, String templateCode,
                                     List<String> phones, JSONArray templateParam)
             throws AliYunSmsSendException {
-        String uuid = UUIDUtils.Local.get();
         CommonRequest request = createRequest();
         request.putQueryParameter("PhoneNumberJson", JSONObject.toJSONString(phones));
         request.putQueryParameter("SignNameJson", JSONObject.toJSONString(signNames));
         request.putQueryParameter("TemplateCode", templateCode);
         request.putQueryParameter("TemplateParamJson", templateParam.toJSONString());
-        return baseSend(accessKeyId, accessKeySecret, uuid, request);
+        return baseSend(accessKeyId, accessKeySecret, request);
     }
 
     /**
@@ -140,21 +137,20 @@ public class AliYunSmsUtils {
      *
      * @param accessKeyId     AccessKeyId
      * @param accessKeySecret AccessKeySecret
-     * @param uuid            当前线程唯一UUID
      * @param request         CommonRequest
      * @return 执行结果
      * @throws AliYunSmsSendException 阿里云短信发送异常
      * @since 1.0.0
      */
-    private static boolean baseSend(String accessKeyId, String accessKeySecret, String uuid, CommonRequest request)
+    private static boolean baseSend(String accessKeyId, String accessKeySecret, CommonRequest request)
             throws AliYunSmsSendException {
         try {
             getClient(accessKeyId, accessKeySecret).getCommonResponse(request);
             return true;
         } catch (ClientException e) {
             try {
-                LOGGER.error("[{}] 发送验证码异常 [uuid: {}, requestId: {}, errorCode: {}, errorMessage: {}, errorType: {}, errorDescription: {}]",
-                        LOG_TAG, uuid, e.getRequestId(), e.getErrCode(), e.getErrMsg(), e.getErrorType(), e.getErrorDescription());
+                LOGGER.error("[{}] 发送验证码异常 [requestId: {}, errorCode: {}, errorMessage: {}, errorType: {}, errorDescription: {}]",
+                        LOG_TAG, e.getRequestId(), e.getErrCode(), e.getErrMsg(), e.getErrorType(), e.getErrorDescription());
                 throw new AliYunSmsSendException(AliYunSmsSendErrorEnum.parseCode(e.getErrCode()));
             } catch (EnumIllegalArgumentException e1) {
                 throw new AliYunSmsSendException(AliYunSmsSendErrorEnum.UNKONE_ERROR);

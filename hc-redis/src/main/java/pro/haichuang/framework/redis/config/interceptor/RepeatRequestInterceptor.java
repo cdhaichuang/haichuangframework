@@ -13,9 +13,8 @@ import pro.haichuang.framework.base.enums.error.client.RequestServerErrorEnum;
 import pro.haichuang.framework.base.response.ResultVO;
 import pro.haichuang.framework.base.util.common.RequestUtils;
 import pro.haichuang.framework.base.util.common.ResponseUtils;
-import pro.haichuang.framework.base.util.common.UUIDUtils;
 import pro.haichuang.framework.redis.annotation.RepeatRequestValid;
-import pro.haichuang.framework.redis.component.RedisKeyComponent;
+import pro.haichuang.framework.redis.key.RedisKey;
 import pro.haichuang.framework.redis.service.RedisService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -51,7 +50,6 @@ public class RepeatRequestInterceptor implements HandlerInterceptor {
             Method method = handlerMethod.getMethod();
             RepeatRequestValid repeatRequestValidAnnotation = method.getAnnotation(RepeatRequestValid.class);
             if (repeatRequestValidAnnotation != null) {
-                String uuid = UUIDUtils.Local.get();
                 HttpServletRequestDTO httpServletRequestDTO = RequestUtils.parseInfo(request, method);
                 // 客户端真实请求IP地址
                 String clientIp = httpServletRequestDTO.getClientIp();
@@ -74,16 +72,16 @@ public class RepeatRequestInterceptor implements HandlerInterceptor {
                 }
 
                 // RedisKey
-                String repeatRedisKey = RedisKeyComponent.repeatRequest(repeatRequestValidAnnotation.preKey(),
+                String repeatRedisKey = RedisKey.repeatRequest(repeatRequestValidAnnotation.preKey(),
                         clientIp, String.valueOf(userId), request.getRequestURI());
                 String rdbParameterString = redisService.get(repeatRedisKey);
 
                 if (rdbParameterString == null) {
                     redisService.set(repeatRedisKey, parameterString, repeatRequestValidAnnotation.value());
                 } else {
-                    LOGGER.warn("[{}] 拦截请求 [uuid: {}, apiMessage: {}, requestUri: {}, method: {}, " +
+                    LOGGER.warn("[{}] 拦截请求 [apiMessage: {}, requestUri: {}, method: {}, " +
                                     "clientIp: {}, userId: {}, params: {}]",
-                            LOG_TAG, uuid, apiMessage, request.getRequestURI(), fullMethodName, clientIp, userId, parameterString);
+                            LOG_TAG, apiMessage, request.getRequestURI(), fullMethodName, clientIp, userId, parameterString);
                     ResponseUtils.writeOfJson(response, ResultVO.other(RequestServerErrorEnum.REPEAT_REQUEST,
                             "请求速度过快, 请稍后重试"));
                     return false;
