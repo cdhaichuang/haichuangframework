@@ -36,9 +36,9 @@
         <!-- 日志滚动随机最大延迟秒 -->
         <property name="MAX_RANDOM_DELAY" value="5"/>
         <!-- 控制台日志正则表达式 -->
-        <Property name="CONSOLE_LOG_PATTERN">%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{%pid}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %notEmpty{%X{LoggerKey}} %clr{%-40.40c{1.}:%L}{cyan} %clr{:}{faint} %m%n%xwEx</Property>
+        <Property name="CONSOLE_LOG_PATTERN">%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{%pid}{magenta} %clr{---}{faint}%notEmpty{ [%X{LoggerKey}]} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}.%L}{cyan}%clr{:}{faint} %m%n%xwEx</Property>
         <!-- 日志文件正则表达式 -->
-        <Property name="FILE_LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} %5p %pid --- [%t] %notEmpty{%X{LoggerKey}} %-40.40c{1.}:%L : %m%n%xwEx</Property>
+        <Property name="FILE_LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} %5p %pid ---%notEmpty{ [%X{LoggerKey}]} [%t] %-40.40c{1.}.%L: %m%n%xwEx</Property>
     </Properties>
 
     <xi:include href="log4j2-appender.xml"/>

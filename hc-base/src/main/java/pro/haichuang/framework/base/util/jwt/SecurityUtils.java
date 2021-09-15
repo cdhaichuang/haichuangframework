@@ -1,5 +1,6 @@
 package pro.haichuang.framework.base.util.jwt;
 
+import com.alibaba.ttl.TransmittableThreadLocal;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
@@ -18,7 +19,8 @@ import pro.haichuang.framework.base.exception.client.AuthorityException;
  * @since 1.0.0
  */
 public class SecurityUtils {
-    private static final ThreadLocal<JwtPayload> CONTEXT_HOLDER = new ThreadLocal<>();
+
+    private static final ThreadLocal<JwtPayload> CONTEXT_HOLDER = new TransmittableThreadLocal<>();
 
     /**
      * 设置Context
