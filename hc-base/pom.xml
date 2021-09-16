@@ -92,5 +92,4 @@
             <artifactId>modelmapper</artifactId>
         </dependency>
     </dependencies>
-
 </project>

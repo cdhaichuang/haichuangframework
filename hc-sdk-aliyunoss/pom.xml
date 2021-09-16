@@ -32,5 +32,4 @@
             <artifactId>aliyun-sdk-oss</artifactId>
         </dependency>
     </dependencies>
-
 </project>

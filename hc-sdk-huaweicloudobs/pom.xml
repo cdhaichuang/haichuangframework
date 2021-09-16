@@ -28,5 +28,4 @@
             <artifactId>esdk-obs-java</artifactId>
         </dependency>
     </dependencies>
-
 </project>

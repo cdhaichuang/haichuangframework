@@ -28,5 +28,4 @@
             <artifactId>aliyun-java-sdk-core</artifactId>
         </dependency>
     </dependencies>
-
 </project>
