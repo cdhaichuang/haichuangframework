@@ -12,6 +12,7 @@
         <module>hc-sdk-huaweicloudobs</module>
         <module>hc-sdk-wxmp</module>
         <module>hc-service-main</module>
+        <module>hc-service-test</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -22,10 +23,11 @@
 
     <groupId>pro.haichuang.framework</groupId>
     <artifactId>haichuangframework</artifactId>
-    <version>1.0.0-RELEASE</version>
+    <version>1.0.0-SNAPSHOT</version>
     <name>haichuangframework</name>
     <description>This is HaiChuang's self-developed simple framework</description>
-    <url>https://www.cdhaichuang.com</url>
+    <url>https://github.com/cdhaichuang/haichuangframework</url>
+    <inceptionYear>2021</inceptionYear>
 
     <organization>
         <name>HaiChuang Inc.</name>
@@ -36,8 +38,12 @@
         <developer>
             <name>JiYinchuan</name>
             <email>jiyinchuan@haichuang.pro</email>
+            <roles>
+                <role>Project Manager</role>
+            </roles>
             <organization>HaiChuang Inc.</organization>
             <organizationUrl>https://www.cdhaichuang.com</organizationUrl>
+            <timezone>+8</timezone>
         </developer>
     </developers>
 
@@ -49,6 +55,13 @@
             <comments>A business-friendly OSS license</comments>
         </license>
     </licenses>
+
+    <scm>
+        <tag>master</tag>
+        <connection>scm:git:git@github.com:cdhaichuang/haichuangframework.git</connection>
+        <developerConnection>scm:git:git@github.com:cdhaichuang/haichuangframework.git</developerConnection>
+        <url>https://github.com/cdhaichuang/haichuangframework</url>
+    </scm>
 
     <properties>
         <java.version>1.8</java.version>
@@ -276,7 +289,7 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>attach-javadocs</id>
+                        <phase>package</phase>
                         <goals>
                             <goal>jar</goal>
                         </goals>
@@ -292,12 +305,34 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>attach-source</id>
+                        <phase>package</phase>
                         <goals>
                             <goal>jar-no-fork</goal>
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <tagNameFormat>release-${version}</tagNameFormat>
+                    <arguments>-DskipTests</arguments>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

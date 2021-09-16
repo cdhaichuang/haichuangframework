@@ -5,7 +5,7 @@
     <parent>
         <artifactId>haichuangframework</artifactId>
         <groupId>pro.haichuang.framework</groupId>
-        <version>1.0.0-RELEASE</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -21,17 +21,17 @@
         <dependency>
             <groupId>pro.haichuang.framework</groupId>
             <artifactId>hc-base</artifactId>
-            <version>1.0.0-RELEASE</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>pro.haichuang.framework</groupId>
             <artifactId>hc-mybatis</artifactId>
-            <version>1.0.0-RELEASE</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>pro.haichuang.framework</groupId>
             <artifactId>hc-redis</artifactId>
-            <version>1.0.0-RELEASE</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
