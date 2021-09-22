@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 /**
  * Jackson自动配置
@@ -27,7 +28,7 @@ import java.time.format.DateTimeFormatter;
  * <ul>
  *     <li>{@link BigInteger} 自动序列化为 {@link String} 字符串</li>
  *     <li>{@link Long} 自动序列化为 {@link String} 字符串</li>
- *     <li>{@link javax.xml.crypto.Data} 自动序列化为 {@code yyyy-MM-dd HH:mm:ss} 字符串</li>
+ *     <li>{@link Date} 自动序列化为 {@code yyyy-MM-dd HH:mm:ss} 字符串</li>
  *     <li>{@link LocalDateTime} 自动序列化为 {@code yyyy-MM-dd HH:mm:ss} 字符串</li>
  *     <li>{@link LocalDate} 自动序列化为 {@code yyyy-MM-dd} 字符串</li>
  *     <li>{@link LocalTime} 自动序列化为 {@code HH:mm:ss} 字符串</li>
