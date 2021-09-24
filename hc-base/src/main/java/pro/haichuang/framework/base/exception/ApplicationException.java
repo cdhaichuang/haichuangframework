@@ -20,7 +20,7 @@ import pro.haichuang.framework.base.enums.BaseEnum;
 public class ApplicationException extends RuntimeException {
     private static final long serialVersionUID = 6539659393927269036L;
 
-    public static String DEFAULT_ERROR_USER_TIP = "网络开小差了, 请稍后再试 (╯﹏╰)";
+    public static final String DEFAULT_ERROR_USER_TIP = "网络开小差了, 请稍后再试 (╯﹏╰)";
 
     /**
      * 错误码
@@ -75,31 +75,15 @@ public class ApplicationException extends RuntimeException {
         return errorCode;
     }
 
-    public void setErrorCode(String errorCode) {
-        this.errorCode = errorCode;
-    }
-
     public String getErrorMessage() {
         return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
     }
 
     public String getUserTip() {
         return userTip;
     }
 
-    public void setUserTip(String userTip) {
-        this.userTip = userTip;
-    }
-
     public BaseEnum getBaseEnum() {
         return baseEnum;
-    }
-
-    public void setBaseEnum(BaseEnum baseEnum) {
-        this.baseEnum = baseEnum;
     }
 }

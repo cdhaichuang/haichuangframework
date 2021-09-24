@@ -55,7 +55,7 @@ public interface RedisService {
      * 判断key是否存在
      *
      * @param key 键
-     * @return 是否存在 [false: 不存在, true: 存在]
+     * @return 是否存在 [true: 存在, false: 不存在]
      * @since 1.0.0
      */
     boolean hasKey(String key);
@@ -198,7 +198,7 @@ public interface RedisService {
      *
      * @param key  键
      * @param item 项
-     * @return 是否存在 [false: 不存在, true: 存在]
+     * @return 是否存在 [true: 存在, false: 不存在]
      * @since 1.0.0
      */
     boolean hHasKey(String key, String item);
@@ -273,7 +273,7 @@ public interface RedisService {
      *
      * @param key   键
      * @param value 值
-     * @return 是否存在 [false: 不存在, true: 存在]
+     * @return 是否存在 [true: 存在, false: 不存在]
      * @since 1.0.0
      */
     boolean sHasKey(String key, Object value);

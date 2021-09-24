@@ -66,7 +66,7 @@ public class RequestUtils {
      * 判断是否为JSON请求
      *
      * @param request HttpServletRequest
-     * @return {false: 否, true: 是}
+     * @return 是否为JSON请求 [true: 是, false: 否]
      * @since 1.0.0
      */
     public static boolean isJsonRequest(@NonNull HttpServletRequest request) {
