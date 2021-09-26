@@ -23,7 +23,7 @@
 
     <groupId>pro.haichuang.framework</groupId>
     <artifactId>haichuangframework</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0.210926</version>
     <name>haichuangframework</name>
     <description>This is HaiChuang's self-developed simple framework</description>
     <url>https://github.com/cdhaichuang/haichuangframework</url>
@@ -137,37 +137,37 @@
             <dependency>
                 <groupId>pro.haichuang.framework</groupId>
                 <artifactId>hc-base</artifactId>
-                <version>1.0.0</version>
+                <version>1.0.0.210926</version>
             </dependency>
             <dependency>
                 <groupId>pro.haichuang.framework</groupId>
                 <artifactId>hc-mybatis</artifactId>
-                <version>1.0.0</version>
+                <version>1.0.0.210926</version>
             </dependency>
             <dependency>
                 <groupId>pro.haichuang.framework</groupId>
                 <artifactId>hc-redis</artifactId>
-                <version>1.0.0</version>
+                <version>1.0.0.210926</version>
             </dependency>
             <dependency>
                 <groupId>pro.haichuang.framework</groupId>
                 <artifactId>hc-sdk-aliyunoss</artifactId>
-                <version>1.0.0</version>
+                <version>1.0.0.210926</version>
             </dependency>
             <dependency>
                 <groupId>pro.haichuang.framework</groupId>
                 <artifactId>hc-sdk-aliyunsms</artifactId>
-                <version>1.0.0</version>
+                <version>1.0.0.210926</version>
             </dependency>
             <dependency>
                 <groupId>pro.haichuang.framework</groupId>
                 <artifactId>hc-sdk-huaweicloudobs</artifactId>
-                <version>1.0.0</version>
+                <version>1.0.0.210926</version>
             </dependency>
             <dependency>
                 <groupId>pro.haichuang.framework</groupId>
                 <artifactId>hc-sdk-wxmp</artifactId>
-                <version>1.0.0</version>
+                <version>1.0.0.210926</version>
             </dependency>
 
             <!-- Log4j2 AsyncLogger -->
@@ -346,6 +346,15 @@
                 </executions>
             </plugin>
         </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>3.0.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
     <profiles>
@@ -356,7 +365,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>3.0.1</version>
                         <executions>
                             <execution>
                                 <phase>verify</phase>
