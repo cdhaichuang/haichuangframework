@@ -10,7 +10,7 @@ spring:
       # 连接池中最小空闲连接数，当连接数少于此值时，连接池会创建连接来补充到该值的数量
       min-idle: 1
       # 连接池中最大的可活跃的连接池数量
-      max-active: 200
+      max-active: 20
       stat-view-servlet:
         enabled: true
         # 添加IP白名单, 不进行配置默认只允许本机

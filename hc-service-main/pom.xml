@@ -22,17 +22,14 @@
         <dependency>
             <groupId>pro.haichuang.framework</groupId>
             <artifactId>hc-base</artifactId>
-            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>pro.haichuang.framework</groupId>
             <artifactId>hc-mybatis</artifactId>
-            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>pro.haichuang.framework</groupId>
             <artifactId>hc-redis</artifactId>
-            <version>1.0.0</version>
         </dependency>
     </dependencies>
 
@@ -49,13 +46,6 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
                 </configuration>
             </plugin>
         </plugins>

@@ -21,7 +21,6 @@
         <dependency>
             <groupId>pro.haichuang.framework</groupId>
             <artifactId>hc-base</artifactId>
-            <version>1.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

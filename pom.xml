@@ -57,22 +57,10 @@
     </licenses>
 
     <scm>
-        <tag>master</tag>
+        <url>https://github.com/cdhaichuang/haichuangframework</url>
         <connection>scm:git:git@github.com:cdhaichuang/haichuangframework.git</connection>
         <developerConnection>scm:git:git@github.com:cdhaichuang/haichuangframework.git</developerConnection>
-        <url>https://github.com/cdhaichuang/haichuangframework</url>
     </scm>
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>sonatype</id>
-            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>sonatype</id>
-            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2</url>
-        </repository>
-    </distributionManagement>
 
     <properties>
         <java.version>1.8</java.version>
@@ -145,6 +133,43 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- Modules -->
+            <dependency>
+                <groupId>pro.haichuang.framework</groupId>
+                <artifactId>hc-base</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>pro.haichuang.framework</groupId>
+                <artifactId>hc-mybatis</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>pro.haichuang.framework</groupId>
+                <artifactId>hc-redis</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>pro.haichuang.framework</groupId>
+                <artifactId>hc-sdk-aliyunoss</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>pro.haichuang.framework</groupId>
+                <artifactId>hc-sdk-aliyunsms</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>pro.haichuang.framework</groupId>
+                <artifactId>hc-sdk-huaweicloudobs</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>pro.haichuang.framework</groupId>
+                <artifactId>hc-sdk-wxmp</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+
             <!-- Log4j2 AsyncLogger -->
             <dependency>
                 <groupId>com.lmax</groupId>
@@ -320,32 +345,53 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>3.0.1</version>
-                <executions>
-                    <execution>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>${maven-deploy-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>deploy</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>sonatype</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>3.0.1</version>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-deploy-plugin</artifactId>
+                        <version>${maven-deploy-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>deploy</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>sonatype</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>sonatype</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+    </distributionManagement>
 </project>
