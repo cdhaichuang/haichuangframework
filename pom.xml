@@ -56,6 +56,11 @@
         </license>
     </licenses>
 
+    <issueManagement>
+        <system>GitHub Issue Management</system>
+        <url>https://github.com/cdhaichuang/haichuangframework/issues</url>
+    </issueManagement>
+
     <scm>
         <url>https://github.com/cdhaichuang/haichuangframework</url>
         <connection>scm:git:git@github.com:cdhaichuang/haichuangframework.git</connection>

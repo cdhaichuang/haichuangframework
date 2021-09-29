@@ -11,6 +11,43 @@
 
     <artifactId>hc-sdk-aliyunsms</artifactId>
     <version>1.0.0.210926</version>
+    <packaging>jar</packaging>
+
+    <description>This is HaiChuang's self-developed simple framework</description>
+    <url>https://github.com/cdhaichuang/haichuangframework</url>
+    <inceptionYear>2021</inceptionYear>
+
+    <organization>
+        <name>HaiChuang Inc.</name>
+        <url>https://www.cdhaichuang.com</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <name>JiYinchuan</name>
+            <email>jiyinchuan@haichuang.pro</email>
+            <roles>
+                <role>Project Manager</role>
+            </roles>
+            <organization>HaiChuang Inc.</organization>
+            <organizationUrl>https://www.cdhaichuang.com</organizationUrl>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+
+    <issueManagement>
+        <system>GitHub Issue Management</system>
+        <url>https://github.com/cdhaichuang/haichuangframework/issues</url>
+    </issueManagement>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
