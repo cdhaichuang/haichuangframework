@@ -2,6 +2,10 @@ package pro.haichuang.framework.base.page;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import pro.haichuang.framework.base.response.vo.PageDetailVO;
+
+import java.time.LocalDateTime;
+import java.util.Collection;
 
 /**
  * 分页接口
@@ -14,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * @see PageDTO
  * @since 1.0.0
  */
-public interface Pageable {
+public interface Pageable<T> {
 
     /**
      * 页码
@@ -100,5 +104,35 @@ public interface Pageable {
     @JSONField(serialize = false, deserialize = false)
     default int offsetPageNo() {
         return getPageNo() > 0 ? (getPageNo() - 1) * getPageSize() : 0;
+    }
+
+    /**
+     * 获取分页数据
+     *
+     * @return 分页数据
+     * @since 1.0.0
+     */
+    Collection<T> getContent();
+
+    /**
+     * 获取分页详情VO
+     *
+     * @return 分页详情VO
+     * @since 1.0.0
+     */
+    default PageDetailVO convertToPageDetailVO() {
+        return new PageDetailVO(getPageNo(), getPageSize(), getTotalCount());
+    }
+
+    /**
+     * 计算时间范围同一天结束时间
+     * 主要用于数据库日期范围查询
+     *
+     * @param endDateTime 结束时间
+     * @return 返回时间范围同一天结束时间
+     * @since 1.0.0
+     */
+    static LocalDateTime formatEndDate(LocalDateTime endDateTime) {
+        return endDateTime.plusDays(1);
     }
 }

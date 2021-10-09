@@ -4,13 +4,13 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.convert.converter.ConverterFactory;
 import org.springframework.lang.NonNull;
 import pro.haichuang.framework.base.annotation.EnumConvertValue;
+import pro.haichuang.framework.base.config.mvc.WebMvcConfig;
 import pro.haichuang.framework.base.enums.BaseEnum;
 import pro.haichuang.framework.base.exception.EnumIllegalArgumentException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -20,29 +20,29 @@ import java.util.concurrent.ConcurrentHashMap;
  * 请求枚举转换工厂
  *
  * <p>该类为处理请求参数中的枚举对应值和枚举对象进行相互转换而存在
- * <p>对于请求参数接收类型的枚举静态方法上标注了 {@link EnumConvertValue @EnumConvertValue} 注解或者类实现了 {@link BaseEnum} 的对象,
- * 可以自动将该对象属性名称与请求参数进行匹配, 请求参数值值将优先使用带有 {@link EnumConvertValue @EnumConvertValue} 注解的静态方法,
- * 如果枚举中没有 {@link EnumConvertValue @EnumConvertValue} 注解标注则使用 {@link BaseEnum#value()} 的值作为自动转换为对应的枚举对象,
- * 底层通过 {@link ConverterFactory} 进行实现时必须指定请求参数数据类型与转换的数据类型,
- * 因此需要用到请求参数自定转换为枚举时必须保证请求参数值类型为 {@link String},
- * 转换的枚举必须在方法上标注 {@link EnumConvertValue @EnumConvertValue} 注解或者实现 {@link BaseEnum} 接口
- * <p>{@link EnumConvertValue @EnumConvertValue} 注解使用方法请参见该注解类文档
  * <hr>
- * <p>推荐自定义枚举类继承 {@link BaseEnum} 而不是使用 {@link EnumConvertValue @EnumConvertValue} 注解
+ * <p>当请求参数为枚举时, 且枚举中存在标注了 {@link EnumConvertValue @EnumConvertValue} 注解的静态方法或者类实现了 {@link BaseEnum} 的枚举
+ * (两者同时存在时标注了 {@code @EnumConvertValue} 注解的静态方法优先级为最高), 可以自动将该对象属性名称与请求参数进行匹配,
+ * <p>Warning: 底层通过 {@link ConverterFactory} 进行实现时必须指定请求参数数据类型与转换的数据类型,
+ * 因此当请求参数为枚举时, 请求参数的类型必须为 {@link String},
+ * 转换的枚举必须在方法上标注 {@code @EnumConvertValue} 注解或者实现 {@link BaseEnum} 接口
+ * <p>{@code @EnumConvertValue} 注解使用方法请参见该注解类文档
+ * <p>推荐自定义枚举类实现 {@link BaseEnum} 接口而不是使用 {@code @EnumConvertValue} 注解
  * <hr>
- * <p>对于请求体自动解析需要在枚举对象中加上下列代码实现, 代码示例:
+ * <p>当请求参数为请求体时需要在枚举类中加上下列代码实现, 代码示例:
  * <pre>
  *     &#064;JsonCreator(mode = JsonCreator.Mode.DELEGATING)
- *     public static [枚举类名] resolve(String value) {
- *         return BaseEnum.resolve(value, [枚举类名].class);
+ *     public static [枚举类] resolve(String value) {
+ *         return BaseEnum.resolve(value, [枚举类].class);
  *     }
  * </pre>
+ * <hr>
  *
  * @author JiYinchuan
  * @version 1.0.0
- * @see pro.haichuang.framework.base.config.mvc.WebMvcConfig
  * @see EnumConvertValue @EnumConvertValue
  * @see BaseEnum
+ * @see WebMvcConfig
  * @since 1.0.0
  */
 public class EnumConverterFactory implements ConverterFactory<String, Enum<?>> {
@@ -69,31 +69,27 @@ public class EnumConverterFactory implements ConverterFactory<String, Enum<?>> {
 
         @SuppressWarnings("unchecked")
         private static EnumConverterHolder create(Class<?> targetType) {
-            final List<Method> hasEnumConvertValueMethods = new ArrayList<>();
+            final List<Method> enumConvertValueMethods = new ArrayList<>();
             final Method[] allDeclaredMethods = targetType.getDeclaredMethods();
             for (Method declaredMethod : allDeclaredMethods) {
                 if (declaredMethod.getAnnotation(EnumConvertValue.class) != null) {
-                    hasEnumConvertValueMethods.add(declaredMethod);
+                    enumConvertValueMethods.add(declaredMethod);
                 }
             }
-            if (hasEnumConvertValueMethods.isEmpty()) {
+            if (enumConvertValueMethods.isEmpty()) {
                 if (BaseEnum.class.isAssignableFrom(targetType)) {
                     return instance((Class<BaseEnum>) targetType);
                 } else {
                     return new EnumConverterHolder(null, null);
                 }
             }
-            if (hasEnumConvertValueMethods.size() != 1) {
+            if (enumConvertValueMethods.size() != 1) {
                 throw new EnumIllegalArgumentException("@EnumConvertValue can only be marked on one method");
             }
-            Method enumConvertValueMethod = hasEnumConvertValueMethods.get(0);
+            Method enumConvertValueMethod = enumConvertValueMethods.get(0);
             boolean isStatic = Modifier.isStatic(enumConvertValueMethod.getModifiers());
             if (!isStatic) {
                 throw new EnumIllegalArgumentException("@EnumConvertValue can only be marked on static method");
-            }
-            Parameter[] parameters = enumConvertValueMethod.getParameters();
-            if (parameters.length != 1 || !String.class.isAssignableFrom(parameters[0].getType())) {
-                throw new EnumIllegalArgumentException("@EnumConvertValue mark method can only have one formal parameter and the type must be String");
             }
             return new EnumConverterHolder(new StringToAnnotationEnumConverter<>(enumConvertValueMethod), null);
         }

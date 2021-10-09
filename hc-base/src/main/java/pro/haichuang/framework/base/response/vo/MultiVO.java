@@ -19,7 +19,7 @@ import java.util.Collections;
  * @since 1.0.0
  */
 @ApiModel("MultiVO")
-public class MultiVO<T> extends BaseVO implements Serializable {
+public final class MultiVO<T> extends BaseVO implements Serializable {
     private static final long serialVersionUID = -9191522053300516216L;
 
     /**

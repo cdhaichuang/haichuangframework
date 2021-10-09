@@ -288,6 +288,7 @@ public enum AliYunSmsSendErrorEnum implements BaseEnum {
      * 构造器
      *
      * @param value        枚举值
+     * @param code         枚举码
      * @param reasonPhrase 枚举信息
      * @since 1.0.0
      */

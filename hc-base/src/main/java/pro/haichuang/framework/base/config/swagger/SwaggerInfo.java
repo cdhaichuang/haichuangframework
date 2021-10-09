@@ -18,7 +18,7 @@ import java.util.List;
  * @see pro.haichuang.framework.base.config.swagger.factory.SwaggerFactory
  * @since 1.0.0
  */
-public class SwaggerInfo {
+public final class SwaggerInfo {
 
     /**
      * 分组名称

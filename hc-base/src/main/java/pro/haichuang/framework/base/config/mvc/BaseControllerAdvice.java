@@ -361,6 +361,8 @@ public class BaseControllerAdvice {
      * @param tp                   {@code t} 父节点
      * @param t                    Throwable
      * @param tag                  输出标签
+     * @param clientIp             客户端IP
+     * @param userId               用户ID
      * @param originalErrorMessage 原始错误信息
      * @return 格式化后的错误信息
      * @since 1.0.0

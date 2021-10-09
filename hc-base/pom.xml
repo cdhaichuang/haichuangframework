@@ -5,12 +5,12 @@
     <parent>
         <artifactId>haichuangframework</artifactId>
         <groupId>pro.haichuang.framework</groupId>
-        <version>1.0.0.210929</version>
+        <version>1.0.0.211009</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>hc-base</artifactId>
-    <version>1.0.0.210929</version>
+    <version>1.0.0.211009</version>
     <packaging>jar</packaging>
 
     <description>This is HaiChuang's self-developed simple framework</description>

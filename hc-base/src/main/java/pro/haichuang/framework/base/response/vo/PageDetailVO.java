@@ -18,7 +18,7 @@ import java.io.Serializable;
  * @since 1.0.0
  */
 @ApiModel("PageDetailVO")
-public class PageDetailVO implements Serializable {
+public final class PageDetailVO implements Serializable {
     private static final long serialVersionUID = -7159067619657396947L;
 
     /**

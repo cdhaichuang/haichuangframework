@@ -2,7 +2,7 @@ package pro.haichuang.framework.base.response;
 
 import pro.haichuang.framework.base.enums.BaseEnum;
 import pro.haichuang.framework.base.enums.success.SuccessEnum;
-import pro.haichuang.framework.base.page.PageDTO;
+import pro.haichuang.framework.base.page.Pageable;
 import pro.haichuang.framework.base.response.vo.BaseVO;
 import pro.haichuang.framework.base.response.vo.MultiVO;
 import pro.haichuang.framework.base.response.vo.PageVO;
@@ -24,7 +24,8 @@ import java.util.Collection;
  * @see PageVO
  * @since 1.0.0
  */
-public class ResultVO implements Serializable {
+@SuppressWarnings("unused")
+public final class ResultVO implements Serializable {
     private static final long serialVersionUID = -7437022394115877815L;
 
     // ------------------------- OK -------------------------
@@ -57,11 +58,11 @@ public class ResultVO implements Serializable {
         return new MultiVO<>(SuccessEnum.OK, data, userTip);
     }
 
-    public static <T> PageVO<T> okOfPage(PageDTO<T> simplePage) {
+    public static <T> PageVO<T> okOfPage(Pageable<T> simplePage) {
         return new PageVO<>(SuccessEnum.OK, simplePage.convertToPageDetailVO(), simplePage.getContent());
     }
 
-    public static <T> PageVO<T> okOfPage(PageDTO<T> simplePage, String userTip) {
+    public static <T> PageVO<T> okOfPage(Pageable<T> simplePage, String userTip) {
         return new PageVO<>(SuccessEnum.OK, simplePage.convertToPageDetailVO(), simplePage.getContent(), userTip);
     }
 
@@ -91,11 +92,11 @@ public class ResultVO implements Serializable {
         return new MultiVO<>(baseEnum, data, userTip);
     }
 
-    public static <T> PageVO<T> otherOfPage(BaseEnum baseEnum, PageDTO<T> simplePage) {
+    public static <T> PageVO<T> otherOfPage(BaseEnum baseEnum, Pageable<T> simplePage) {
         return new PageVO<>(baseEnum, simplePage.convertToPageDetailVO(), simplePage.getContent());
     }
 
-    public static <T> PageVO<T> otherOfPage(BaseEnum baseEnum, PageDTO<T> simplePage, String userTip) {
+    public static <T> PageVO<T> otherOfPage(BaseEnum baseEnum, Pageable<T> simplePage, String userTip) {
         return new PageVO<>(baseEnum, simplePage.convertToPageDetailVO(), simplePage.getContent(), userTip);
     }
 

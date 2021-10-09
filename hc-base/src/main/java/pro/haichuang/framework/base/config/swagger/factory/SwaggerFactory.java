@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
  * @see SwaggerInfo
  * @since 1.0.0
  */
-public class SwaggerFactory {
+public final class SwaggerFactory {
 
     /**
      * 默认分组名

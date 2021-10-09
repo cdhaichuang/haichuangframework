@@ -17,7 +17,7 @@ import java.io.Serializable;
  * @since 1.0.0
  */
 @ApiModel("SingleVO")
-public class SingleVO<T> extends BaseVO implements Serializable {
+public final class SingleVO<T> extends BaseVO implements Serializable {
     private static final long serialVersionUID = -3162181461276163016L;
 
     /**

@@ -5,20 +5,19 @@ import pro.haichuang.framework.base.request.PageRequest;
 import pro.haichuang.framework.base.response.vo.PageDetailVO;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Collection;
 
 /**
  * 分页DTO
  *
- * <p>该类为分页DTO, 用于项目中所有分页相关功能数据传输, 原则上所有分页相关功能均使用此类
+ * <p>该类为分页DTO, {@link Pageable} 的默认实现, 用于项目中所有分页相关功能数据传输, 原则上所有分页相关功能均使用此类
  *
  * @author JiYinchuan
  * @version 1.0.0
  * @see Pageable
  * @since 1.0.0
  */
-public class PageDTO<T> implements Pageable, Serializable {
+public class PageDTO<T> implements Pageable<T>, Serializable {
     private static final long serialVersionUID = -4773020592878421576L;
 
     /**
@@ -203,6 +202,7 @@ public class PageDTO<T> implements Pageable, Serializable {
         return this;
     }
 
+    @Override
     public Collection<T> getContent() {
         return content;
     }
@@ -225,29 +225,6 @@ public class PageDTO<T> implements Pageable, Serializable {
         if (pageNo > totalPage) {
             pageNo = totalPage;
         }
-    }
-
-    /**
-     * 获取分页详情VO
-     *
-     * @return 分页详情VO
-     * @since 1.0.0
-     */
-    public PageDetailVO convertToPageDetailVO() {
-        return new PageDetailVO(getPageNo(), getPageSize(), getTotalCount());
-    }
-
-    /**
-     * 计算时间范围同一天结束时间
-     * 主要用于数据库日期范围查询
-     *
-     * @param beginDateTime 开始时间
-     * @param endDateTime   结束时间
-     * @return 返回时间范围同一天结束时间
-     * @since 1.0.0
-     */
-    public static LocalDateTime formatEndDate(LocalDateTime beginDateTime, LocalDateTime endDateTime) {
-        return endDateTime.plusDays(1);
     }
 
     @Override

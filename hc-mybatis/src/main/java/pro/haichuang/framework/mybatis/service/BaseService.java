@@ -10,6 +10,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
 import pro.haichuang.framework.base.exception.ApplicationException;
 import pro.haichuang.framework.base.page.PageDTO;
+import pro.haichuang.framework.base.page.Pageable;
 import pro.haichuang.framework.base.request.PageRequest;
 import pro.haichuang.framework.mybatis.domain.BaseDO;
 import pro.haichuang.framework.mybatis.enums.error.MybatisServiceErrorEnum;
@@ -147,14 +148,14 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
     }
 
     /**
-     * 忽略PageRequest并获取PageDTO
+     * 忽略PageRequest并获取Pageable
      * 默认根据 {@link BaseDO#MODIFY_TIME} 进行排序
      *
      * @param pageRequest PageRequest
-     * @return PageDTO
+     * @return Pageable
      * @since 1.0.0
      */
-    default PageDTO<T> listPageAndIgnore(@Nullable PageRequest pageRequest) {
+    default Pageable<T> listPageAndIgnore(@Nullable PageRequest pageRequest) {
         if (pageRequest == null) {
             return new PageDTO<>(new PageRequest());
         }
@@ -485,29 +486,29 @@ public interface BaseService<T extends BaseDO> extends IService<T> {
     }
 
     /**
-     * 验证PageRequest并获取PageDTO
+     * 验证PageRequest并获取Pageable
      * 默认根据 {@link BaseDO#MODIFY_TIME} 进行排序
      *
      * @param pageRequest PageRequest
-     * @return PageDTO
+     * @return Pageable
      * @throws MybatisServiceApplication ID为空|ID错误
      * @since 1.0.0
      */
-    default PageDTO<T> listPageAndValidate(@Nullable PageRequest pageRequest) throws MybatisServiceApplication {
+    default Pageable<T> listPageAndValidate(@Nullable PageRequest pageRequest) throws MybatisServiceApplication {
         return this.listPageAndValidate(pageRequest, null);
     }
 
     /**
-     * 验证PageRequest并获取PageDTO
+     * 验证PageRequest并获取Pageable
      * 默认根据 {@link BaseDO#MODIFY_TIME} 进行排序
      *
      * @param pageRequest  PageRequest
      * @param errorUserTip 用户提示信息
-     * @return PageDTO
+     * @return Pageable
      * @throws MybatisServiceApplication ID为空|ID错误
      * @since 1.0.0
      */
-    default PageDTO<T> listPageAndValidate(@Nullable PageRequest pageRequest, @Nullable String errorUserTip)
+    default Pageable<T> listPageAndValidate(@Nullable PageRequest pageRequest, @Nullable String errorUserTip)
             throws MybatisServiceApplication {
         if (pageRequest == null) {
             throw new MybatisServiceApplication(MybatisServiceErrorEnum.ID_IS_NULL, errorUserTip);

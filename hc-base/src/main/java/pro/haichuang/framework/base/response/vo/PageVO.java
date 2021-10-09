@@ -22,7 +22,7 @@ import java.util.Collections;
  * @since 1.0.0
  */
 @ApiModel("PageVO")
-public class PageVO<T> extends BaseVO implements Serializable {
+public final class PageVO<T> extends BaseVO implements Serializable {
     private static final long serialVersionUID = 2207315013077490485L;
 
     /**
