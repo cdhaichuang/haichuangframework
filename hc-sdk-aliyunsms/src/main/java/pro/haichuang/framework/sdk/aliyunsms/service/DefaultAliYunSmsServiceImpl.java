@@ -14,8 +14,8 @@ import pro.haichuang.framework.sdk.aliyunsms.util.AliYunSmsUtils;
  * <p>该类为 {@link AliYunSmsService} 默认实现
  *
  * @author JiYinchuan
- * @version 1.0.0
- * @since 1.0.0
+ * @version 1.0.0.211009
+ * @since 1.0.0.211009
  */
 public class DefaultAliYunSmsServiceImpl implements AliYunSmsService {
 
@@ -70,7 +70,7 @@ public class DefaultAliYunSmsServiceImpl implements AliYunSmsService {
     /**
      * 验证配置文件
      *
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     private void validateProperties() {
         String accessKeyId = aliYunSmsProperties.getAccessKeyId();

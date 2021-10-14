@@ -8,8 +8,8 @@ import pro.haichuang.framework.base.exception.client.RequestParamException;
  * 华为云OBS配置文件
  *
  * @author JiYinchuan
- * @version 1.0.0
- * @since 1.0.0
+ * @version 1.0.0.211009
+ * @since 1.0.0.211009
  */
 @ConfigurationProperties(prefix = "haichuang.sdk.huaweicloudobs")
 public class HuaWeiCloudObsProperties {
@@ -38,7 +38,7 @@ public class HuaWeiCloudObsProperties {
      * 获取BucketDomain访问域名
      *
      * @return BucketDomain访问域名
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     public String getBucketDomain() {
         if (endpoint == null || endpoint.isEmpty()) {

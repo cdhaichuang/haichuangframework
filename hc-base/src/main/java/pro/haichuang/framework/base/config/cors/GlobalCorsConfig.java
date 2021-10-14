@@ -22,9 +22,9 @@ import java.util.Map;
  * {@link pro.haichuang.framework.base.annotation.EnableGlobalCorsConfig @EnableGlobalCorsConfig} 注解
  *
  * @author JiYinchuan
- * @version 1.0.0
+ * @version 1.0.0.211009
  * @see pro.haichuang.framework.base.annotation.EnableGlobalCorsConfig
- * @since 1.0.0
+ * @since 1.0.0.211009
  */
 public class GlobalCorsConfig {
 

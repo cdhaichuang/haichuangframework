@@ -7,8 +7,8 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * 性别枚举
  *
  * @author JiYinchuan
- * @version 1.0.0
- * @since 1.0.0
+ * @version 1.0.0.211009
+ * @since 1.0.0.211009
  */
 public enum SexEnum implements BaseEnum {
 
@@ -42,7 +42,7 @@ public enum SexEnum implements BaseEnum {
      *
      * @param value        枚举值
      * @param reasonPhrase 枚举信息
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     SexEnum(String value, String reasonPhrase) {
         this.value = value;

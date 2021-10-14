@@ -14,10 +14,10 @@ import pro.haichuang.framework.base.annotation.LogSave;
  * {@link LogSave @LogSave} 注解才会生效
  *
  * @author JiYinchuan
- * @version 1.0.0
+ * @version 1.0.0.211009
  * @see pro.haichuang.framework.base.annotation.EnableLogSave
  * @see LogSave
- * @since 1.0.0
+ * @since 1.0.0.211009
  */
 public abstract class AbstractLogSave {
 
@@ -31,7 +31,7 @@ public abstract class AbstractLogSave {
      * @param fullMethodName 完整方法名
      * @param userId         用户ID
      * @param executionTime  执行时间
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     public abstract void saveLog(LogSave logSave, Api api, ApiOperation apiOperation, String clientIp, String fullMethodName, Long userId, long executionTime);
 

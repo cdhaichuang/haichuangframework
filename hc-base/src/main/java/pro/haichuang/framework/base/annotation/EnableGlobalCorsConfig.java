@@ -13,9 +13,9 @@ import java.lang.annotation.*;
  * <p>具体实现请参阅 {@link GlobalCorsConfig}
  *
  * @author JiYinchuan
- * @version 1.0.0
+ * @version 1.0.0.211009
  * @see GlobalCorsConfig
- * @since 1.0.0
+ * @since 1.0.0.211009
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})

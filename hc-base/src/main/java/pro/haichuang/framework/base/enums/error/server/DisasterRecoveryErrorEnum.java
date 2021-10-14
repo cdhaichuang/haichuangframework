@@ -7,9 +7,9 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * 系统容灾功能被触发异常枚举
  *
  * @author JiYinchuan
- * @version 1.0.0
+ * @version 1.0.0.211009
  * @see pro.haichuang.framework.base.exception.server.DisasterRecoveryException
- * @since 1.0.0
+ * @since 1.0.0.211009
  */
 public enum DisasterRecoveryErrorEnum implements BaseEnum {
 
@@ -43,7 +43,7 @@ public enum DisasterRecoveryErrorEnum implements BaseEnum {
      *
      * @param value        枚举值
      * @param reasonPhrase 枚举信息
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     DisasterRecoveryErrorEnum(String value, String reasonPhrase) {
         this.value = value;

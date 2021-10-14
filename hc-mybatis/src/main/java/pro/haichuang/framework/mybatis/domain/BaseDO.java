@@ -21,8 +21,8 @@ import java.time.LocalDateTime;
  * <p>该类中指定了映射到数据库中每张表的 {@code id ID} / {@code createTime 创建时间} / {@code modifyTime 最后修改时间}
  *
  * @author JiYinchuan
- * @version 1.0.0
- * @since 1.0.0
+ * @version 1.0.0.211009
+ * @since 1.0.0.211009
  */
 @ApiModel("BaseDO")
 public class BaseDO implements Serializable {
@@ -38,16 +38,20 @@ public class BaseDO implements Serializable {
     public static final Class<Boolean> LOGIC_DELETE_CLASS = Boolean.class;
 
     /**
-     * ID
+     * 唯一ID
+     *
+     * <p>默认使用雪花ID, 默认带上Validate的 {@code Group.Update} 类型验证
      */
     @ApiModelProperty("ID")
-    @TableId(type = IdType.ASSIGN_ID)
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
     @JsonSerialize(using = ToStringSerializer.class)
     @NotNull(message = "ID不能为空", groups = Group.Update.class)
     private Long id;
 
     /**
      * 创建时间
+     *
+     * <p>新增时将自动填充当前时间
      */
     @ApiModelProperty(value = "创建时间", hidden = true)
     @TableField(value = "create_time", fill = FieldFill.INSERT)
@@ -55,6 +59,8 @@ public class BaseDO implements Serializable {
 
     /**
      * 最后修改时间
+     *
+     * <p>新增与修改时自动填充当前时间
      */
     @ApiModelProperty(value = "最后修改时间", hidden = true)
     @TableField(value = "modify_time", fill = FieldFill.INSERT_UPDATE)

@@ -9,9 +9,9 @@ import org.springframework.lang.NonNull;
  * <p>该类为JWT工具类, 对于JWT的操作一律使用此类
  *
  * @author JiYinchuan
- * @version 1.0.0
+ * @version 1.0.0.211009
  * @see JwtPayload
- * @since 1.0.0
+ * @since 1.0.0.211009
  */
 public class JwtUtils {
 
@@ -21,7 +21,7 @@ public class JwtUtils {
      * @param payload JWT 载荷
      * @param secret  密钥
      * @return JWT字符串
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     @NonNull
     public static String generateJwt(@NonNull JwtPayload payload, @NonNull String secret) {
@@ -48,7 +48,7 @@ public class JwtUtils {
      * @throws ExpiredJwtException   JWT过期异常
      * @throws MalformedJwtException JWT解析失败异常
      * @throws SignatureException    JWT格式错误异常
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     @NonNull
     public static JwtPayload parseJwtToken(@NonNull String token, @NonNull String secret)

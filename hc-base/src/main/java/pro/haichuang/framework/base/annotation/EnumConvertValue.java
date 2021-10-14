@@ -20,9 +20,9 @@ import java.lang.annotation.*;
  * </pre>
  *
  * @author JiYinchuan
- * @version 1.0.0
+ * @version 1.0.0.211009
  * @see EnumConverterFactory
- * @since 1.0.0
+ * @since 1.0.0.211009
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})

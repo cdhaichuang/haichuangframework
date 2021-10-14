@@ -39,11 +39,11 @@ import java.util.concurrent.ConcurrentHashMap;
  * <hr>
  *
  * @author JiYinchuan
- * @version 1.0.0
+ * @version 1.0.0.211009
  * @see EnumConvertValue @EnumConvertValue
  * @see BaseEnum
  * @see WebMvcConfig
- * @since 1.0.0
+ * @since 1.0.0.211009
  */
 public class EnumConverterFactory implements ConverterFactory<String, Enum<?>> {
 

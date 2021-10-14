@@ -25,8 +25,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * <hr>
  *
  * @author JiYinchuan
- * @version 1.0.0
- * @since 1.0.0
+ * @version 1.0.0.211009
+ * @since 1.0.0.211009
  */
 @ConfigurationProperties(prefix = "haichuang.sdk.aliyunsms")
 public class AliYunSmsProperties {

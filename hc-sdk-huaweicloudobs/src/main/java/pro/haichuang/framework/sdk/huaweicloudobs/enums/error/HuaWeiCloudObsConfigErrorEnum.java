@@ -9,8 +9,8 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * <p>该类为华为云OBS配置异常枚举
  *
  * @author JiYinchuan
- * @version 1.0.0
- * @since 1.0.0
+ * @version 1.0.0.211009
+ * @since 1.0.0.211009
  */
 public enum HuaWeiCloudObsConfigErrorEnum implements BaseEnum {
 
@@ -54,7 +54,7 @@ public enum HuaWeiCloudObsConfigErrorEnum implements BaseEnum {
      *
      * @param value        枚举值
      * @param reasonPhrase 枚举信息
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     HuaWeiCloudObsConfigErrorEnum(String value, String reasonPhrase) {
         this.value = value;

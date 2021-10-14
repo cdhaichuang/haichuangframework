@@ -19,8 +19,8 @@ import java.util.concurrent.TimeUnit;
  * 数据自动过期采用 {@link java.util.concurrent.DelayQueue} 延时队列实现
  *
  * @author JiYinchuan
- * @version 1.0.0
- * @since 1.0.0
+ * @version 1.0.0.211009
+ * @since 1.0.0.211009
  */
 public class DefaultWxMpDataStore implements WxMpDataStore {
 
@@ -128,7 +128,7 @@ public class DefaultWxMpDataStore implements WxMpDataStore {
     /**
      * 验证延时队列是否存在异常
      *
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     private void validateDelayError() {
         if (DELAY_IS_ERROR) {
@@ -140,8 +140,8 @@ public class DefaultWxMpDataStore implements WxMpDataStore {
      * 延时队列管理, 用于处理相关数据过期自动删除功能
      *
      * @author JiYinchuan
-     * @version 1.0.0
-     * @since 1.0.0
+     * @version 1.0.0.211009
+     * @since 1.0.0.211009
      */
     @SuppressWarnings("InfiniteLoopStatement")
     public static class DelayQueueManager implements CommandLineRunner {
@@ -183,8 +183,8 @@ public class DefaultWxMpDataStore implements WxMpDataStore {
      * 延时实体, 用户存放每条数据相关信息
      *
      * @author JiYinchuan
-     * @version 1.0.0
-     * @since 1.0.0
+     * @version 1.0.0.211009
+     * @since 1.0.0.211009
      */
     static class DelayBase implements Delayed {
 
@@ -208,7 +208,7 @@ public class DefaultWxMpDataStore implements WxMpDataStore {
          * @param dataType 延时数据类型
          * @param key      延时对应Key
          * @param duration 过期时间, 单位 [毫秒]
-         * @since 1.0.0
+         * @since 1.0.0.211009
          */
         public DelayBase(DelayDataType dataType, String key, Duration duration) {
             this.dataType = dataType;
@@ -230,7 +230,7 @@ public class DefaultWxMpDataStore implements WxMpDataStore {
     /**
      * 延时数据类型
      *
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     enum DelayDataType {
 

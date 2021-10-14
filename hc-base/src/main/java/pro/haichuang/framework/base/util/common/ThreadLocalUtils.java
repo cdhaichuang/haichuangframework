@@ -11,8 +11,8 @@ import java.util.Map;
  * 当前线程唯一变量储存
  *
  * @author JiYinchuan
- * @version 1.0.0
- * @since 1.0.0
+ * @version 1.0.0.211009
+ * @since 1.0.0.211009
  */
 public class ThreadLocalUtils {
 
@@ -34,7 +34,7 @@ public class ThreadLocalUtils {
      * @param value Value
      * @param <T>   Value
      * @return Value
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     public static <T> T set(String key, T value) {
         Map<String, Object> map = LOCAL.get();
@@ -50,7 +50,7 @@ public class ThreadLocalUtils {
      * @param key Key
      * @param <T> Value
      * @return Value
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     @SuppressWarnings({"unchecked"})
     public static <T> T get(final String key) {
@@ -63,7 +63,7 @@ public class ThreadLocalUtils {
      *
      * @param key Key
      * @return 是否包含Key
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     public boolean containsKey(final String key) {
         final Map<String, Object> map = LOCAL.get();
@@ -87,7 +87,7 @@ public class ThreadLocalUtils {
      * 所以不执行此方法当线程终止后 {@code ThreadLocalMap} 中的值会被JVM垃圾回收,
      * 但推荐在不需要使用的时候显性的执行此方法, 便于理解
      *
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     public static void clear() {
         LOCAL.remove();

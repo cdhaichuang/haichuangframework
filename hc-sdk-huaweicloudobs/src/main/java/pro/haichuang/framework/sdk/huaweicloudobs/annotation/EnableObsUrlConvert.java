@@ -12,10 +12,10 @@ import java.lang.annotation.*;
  * 在形参上或实体内标注 {@link ObsUrl @ObsUrl} 注解, 将会在请求时自动去掉OBS请求前缀, 在响应时自动添加OBS请求前缀
  *
  * @author JiYinchuan
- * @version 1.0.0
+ * @version 1.0.0.211009
  * @see ObsUrl @ObsUrl
  * @see ObsUrlAspect
- * @since 1.0.0
+ * @since 1.0.0.211009
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)

@@ -13,9 +13,9 @@ import java.util.Date;
  * </ul>
  *
  * @author JiYinchuan
- * @version 1.0.0
+ * @version 1.0.0.211009
  * @see JwtUtils
- * @since 1.0.0
+ * @since 1.0.0.211009
  */
 public class JwtPayload implements Serializable {
     private static final long serialVersionUID = -3034724392253728198L;

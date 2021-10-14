@@ -15,7 +15,7 @@ import pro.haichuang.framework.mybatis.generate.config.CodePackageConfig;
  * ps: 如只需要生成部分表请修改 {@link CodeGenerateTest#DATASOURCE_TABLE_INCLUDE} 字段
  *
  * @author JiYinchuan
- * @version 1.0.0
+ * @version 1.0.0.211009
  */
 @SpringBootTest(classes = ServiceApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CodeGenerateTest {

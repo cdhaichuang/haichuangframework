@@ -8,9 +8,9 @@ import pro.haichuang.framework.base.exception.ApplicationException;
  * 用户注册自定义异常
  *
  * @author JiYinchuan
- * @version 1.0.0
+ * @version 1.0.0.211009
  * @see RegisterErrorEnum
- * @since 1.0.0
+ * @since 1.0.0.211009
  */
 public class RegisterException extends ApplicationException {
     private static final long serialVersionUID = 1376920858643859913L;

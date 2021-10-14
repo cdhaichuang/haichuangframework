@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
  * <p>该类提供了获取客户端IP的方法
  *
  * @author JiYinchuan
- * @version 1.0.0
+ * @version 1.0.0.211009
  */
 public class IpUtils {
 
@@ -36,7 +36,7 @@ public class IpUtils {
      *
      * @param request HttpServletRequest
      * @return 客户端真实IP地址
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     @NonNull
     public static String getIpv4Address(@NonNull HttpServletRequest request) {

@@ -21,8 +21,8 @@ import java.util.List;
  * <p>该类主要用于处理请求相关数据
  *
  * @author JiYinchuan
- * @version 1.0.0
- * @since 1.0.0
+ * @version 1.0.0.211009
+ * @since 1.0.0.211009
  */
 public class RequestUtils {
 
@@ -34,7 +34,7 @@ public class RequestUtils {
      * @param request HttpServletRequest
      * @param method  method
      * @return HttpServletRequestDTO
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     @NonNull
     public static HttpServletRequestDTO parseInfo(@NonNull HttpServletRequest request, @NotNull Method method) {
@@ -67,7 +67,7 @@ public class RequestUtils {
      *
      * @param request HttpServletRequest
      * @return 是否为JSON请求 [true: 是, false: 否]
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     public static boolean isJsonRequest(@NonNull HttpServletRequest request) {
         String contentTypeInHeaderValue = request.getHeader(HttpHeaders.CONTENT_TYPE);

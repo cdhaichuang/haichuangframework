@@ -12,10 +12,10 @@ import java.lang.annotation.*;
  * <p>具体实现请参阅 {@link RepeatRequestInterceptor}
  *
  * @author JiYinchuan
- * @version 1.0.0
+ * @version 1.0.0.211009
  * @see EnableRequestRepeatValidate
  * @see RepeatRequestInterceptor
- * @since 1.0.0
+ * @since 1.0.0.211009
  */
 @Inherited
 @Target(ElementType.METHOD)
@@ -28,7 +28,7 @@ public @interface RepeatRequestValid {
      * 默认 {@code "3s"}
      *
      * @return 间隔时间
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     int value() default 3;
 
@@ -37,7 +37,7 @@ public @interface RepeatRequestValid {
      * 默认 {@code "REPEAT"}
      *
      * @return Redis前缀
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     String preKey() default "REPEAT";
 }

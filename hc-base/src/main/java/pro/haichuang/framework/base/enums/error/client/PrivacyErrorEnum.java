@@ -7,9 +7,9 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * 用户隐私未授权异常枚举
  *
  * @author JiYinchuan
- * @version 1.0.0
+ * @version 1.0.0.211009
  * @see pro.haichuang.framework.base.exception.client.PrivacyException
- * @since 1.0.0
+ * @since 1.0.0.211009
  */
 public enum PrivacyErrorEnum implements BaseEnum {
 
@@ -68,7 +68,7 @@ public enum PrivacyErrorEnum implements BaseEnum {
      *
      * @param value        枚举值
      * @param reasonPhrase 枚举信息
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     PrivacyErrorEnum(String value, String reasonPhrase) {
         this.value = value;

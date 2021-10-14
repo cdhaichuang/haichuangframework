@@ -7,8 +7,8 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * 上传类型枚举
  *
  * @author JiYinchuan
- * @version 1.0.0
- * @since 1.0.0
+ * @version 1.0.0.211009
+ * @since 1.0.0.211009
  */
 public enum UploadTypeEnum implements BaseEnum {
 
@@ -52,7 +52,7 @@ public enum UploadTypeEnum implements BaseEnum {
      *
      * @param value        枚举值
      * @param reasonPhrase 枚举信息
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     UploadTypeEnum(String value, String reasonPhrase) {
         this.value = value;

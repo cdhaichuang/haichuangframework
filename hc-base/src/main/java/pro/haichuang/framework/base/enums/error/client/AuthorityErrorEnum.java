@@ -7,9 +7,9 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * 访问权限异常枚举
  *
  * @author JiYinchuan
- * @version 1.0.0
+ * @version 1.0.0.211009
  * @see pro.haichuang.framework.base.exception.client.AuthorityException
- * @since 1.0.0
+ * @since 1.0.0.211009
  */
 public enum AuthorityErrorEnum implements BaseEnum {
 
@@ -108,7 +108,7 @@ public enum AuthorityErrorEnum implements BaseEnum {
      *
      * @param value        枚举值
      * @param reasonPhrase 枚举信息
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     AuthorityErrorEnum(String value, String reasonPhrase) {
         this.value = value;

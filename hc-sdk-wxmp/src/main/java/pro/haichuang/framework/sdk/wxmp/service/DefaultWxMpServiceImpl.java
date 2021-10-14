@@ -22,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  * WxMpService默认实现
  *
  * @author JiYinchuan
- * @version 1.0.0
- * @since 1.0.0
+ * @version 1.0.0.211009
+ * @since 1.0.0.211009
  */
 public class DefaultWxMpServiceImpl implements WxMpService {
 
@@ -118,7 +118,7 @@ public class DefaultWxMpServiceImpl implements WxMpService {
     /**
      * 验证配置文件
      *
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     private void validateProperties() {
         String appId = wxMpProperties.getAppId();

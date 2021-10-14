@@ -27,8 +27,8 @@ import java.io.InputStreamReader;
  * (建议提前使用 {@link RequestUtils#isJsonRequest(HttpServletRequest)}) 判断该请求是否为 {@code json} 请求
  *
  * @author JiYinchuan
- * @version 1.0.0
- * @since 1.0.0
+ * @version 1.0.0.211009
+ * @since 1.0.0.211009
  */
 public class RepeatRequestWrapper extends HttpServletRequestWrapper {
 
@@ -39,7 +39,7 @@ public class RepeatRequestWrapper extends HttpServletRequestWrapper {
      *
      * @param request The request to wrap
      * @throws IOException If the request is null
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     public RepeatRequestWrapper(HttpServletRequest request) throws IOException {
         super(request);

@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
  * <p>该类主要用于将各类参数转换为 {@link Pageable}
  *
  * @author JiYinchuan
- * @version 1.0.0
- * @since 1.0.0
+ * @version 1.0.0.211009
+ * @since 1.0.0.211009
  */
 public class PageConverter {
 
@@ -29,7 +29,7 @@ public class PageConverter {
      * @param iPage Mybatis{@link IPage}
      * @param <T>   对象类型
      * @return Pageable
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     public static <T> Pageable<T> converter(IPage<T> iPage) {
         return new PageDTO<>((int) iPage.getCurrent(), (int) iPage.getSize(), iPage.getTotal(), iPage.getRecords());
@@ -45,7 +45,7 @@ public class PageConverter {
      * @param <T>     原始对象类型
      * @param <R>     转换对象类型
      * @return Pageable
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     public static <T, R> Pageable<R> converter(IPage<T> iPage, Class<R> toClass) {
         return new PageDTO<>((int) iPage.getCurrent(), (int) iPage.getSize(), iPage.getTotal(),
@@ -70,7 +70,7 @@ public class PageConverter {
      * @param <T>      原始对象类型
      * @param <R>      转换对象类型
      * @return Pageable
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     public static <T, R> Pageable<R> converter(IPage<T> iPage, Function<T, R> function) {
         return new PageDTO<>((int) iPage.getCurrent(), (int) iPage.getSize(), iPage.getTotal(),
@@ -87,7 +87,7 @@ public class PageConverter {
      * @param content     数据
      * @param <T>         对象类型
      * @return Pageable
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     public static <T> Pageable<T> converter(PageRequest pageRequest, int totalCount, Collection<T> content) {
         return new PageDTO<>(pageRequest, totalCount, content);

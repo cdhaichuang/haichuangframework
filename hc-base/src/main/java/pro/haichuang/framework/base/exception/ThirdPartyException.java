@@ -6,8 +6,8 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * 第三方自定义异常
  *
  * @author JiYinchuan
- * @version 1.0.0
- * @since 1.0.0
+ * @version 1.0.0.211009
+ * @since 1.0.0.211009
  */
 public class ThirdPartyException extends RuntimeException {
     private static final long serialVersionUID = -2738349034577951728L;

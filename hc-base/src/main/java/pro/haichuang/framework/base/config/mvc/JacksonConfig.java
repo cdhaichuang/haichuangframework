@@ -37,9 +37,9 @@ import java.util.Date;
  * 通过此种方式可以实现在不修改默认配置的情况下插入我们自定义的配置
  *
  * @author JiYinchuan
- * @version 1.0.0
+ * @version 1.0.0.211009
  * @see WebMvcConfig
- * @since 1.0.0
+ * @since 1.0.0.211009
  */
 @Configuration(proxyBeanMethods = false)
 public class JacksonConfig {
@@ -70,8 +70,8 @@ public class JacksonConfig {
      * LocalDateTime自定义转换器
      *
      * @author JiYinchuan
-     * @version 1.0.0
-     * @since 1.0.0
+     * @version 1.0.0.211009
+     * @since 1.0.0.211009
      */
     public static class LocalDateTimeConverter implements Converter<String, LocalDateTime> {
 
@@ -85,8 +85,8 @@ public class JacksonConfig {
      * LocalDate自定义转换器
      *
      * @author JiYinchuan
-     * @version 1.0.0
-     * @since 1.0.0
+     * @version 1.0.0.211009
+     * @since 1.0.0.211009
      */
     public static class LocalDateConverter implements Converter<String, LocalDate> {
 
@@ -100,8 +100,8 @@ public class JacksonConfig {
      * LocalTime自定义转换器
      *
      * @author JiYinchuan
-     * @version 1.0.0
-     * @since 1.0.0
+     * @version 1.0.0.211009
+     * @since 1.0.0.211009
      */
     public static class LocalTimeConverter implements Converter<String, LocalTime> {
 

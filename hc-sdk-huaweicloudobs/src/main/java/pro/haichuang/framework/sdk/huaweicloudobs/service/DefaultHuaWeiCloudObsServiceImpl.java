@@ -26,8 +26,8 @@ import java.util.List;
  * <p>该类为 {@link HuaWeiCloudObsService} 默认实现
  *
  * @author JiYinchuan
- * @version 1.0.0
- * @since 1.0.0
+ * @version 1.0.0.211009
+ * @since 1.0.0.211009
  */
 public class DefaultHuaWeiCloudObsServiceImpl implements HuaWeiCloudObsService {
 
@@ -259,7 +259,7 @@ public class DefaultHuaWeiCloudObsServiceImpl implements HuaWeiCloudObsService {
     /**
      * 验证配置文件
      *
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     private void validateProperties() {
         String accessKeyId = huaWeiCloudObsProperties.getAccessKeyId();
@@ -286,7 +286,7 @@ public class DefaultHuaWeiCloudObsServiceImpl implements HuaWeiCloudObsService {
      *
      * @param uploadTypeEnum 上传子路径
      * @param pathOfBizName  上传主路径, 建议填写业务模块相关名称
-     * @since 1.0.0
+     * @since 1.0.0.211009
      */
     private void validateParams(@Nullable UploadTypeEnum uploadTypeEnum, @Nullable String... pathOfBizName) {
         if (uploadTypeEnum == null) {
