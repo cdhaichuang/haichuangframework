@@ -13,7 +13,6 @@
         <module>hc-sdk-wxmp</module>
         <module>hc-service-main</module>
         <module>hc-service-test</module>
-        <module>hc-sdk-huaweicloudsms</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
