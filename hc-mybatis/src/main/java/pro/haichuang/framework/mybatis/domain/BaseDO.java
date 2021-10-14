@@ -21,8 +21,8 @@ import java.time.LocalDateTime;
  * <p>该类中指定了映射到数据库中每张表的 {@code id ID} / {@code createTime 创建时间} / {@code modifyTime 最后修改时间}
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
- * @since 1.0.0.211009
+ * @version 1.0.0.211014
+ * @since 1.0.0.211014
  */
 @ApiModel("BaseDO")
 public class BaseDO implements Serializable {

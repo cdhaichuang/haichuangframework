@@ -7,9 +7,9 @@ import pro.haichuang.framework.sdk.wxmp.enums.error.WxMpConfigErrorEnum;
  * 微信公众号配置自定义异常
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
+ * @version 1.0.0.211014
  * @see WxMpConfigErrorEnum
- * @since 1.0.0.211009
+ * @since 1.0.0.211014
  */
 public class WxMpConfigException extends ApplicationException {
     private static final long serialVersionUID = 8611376846892616632L;

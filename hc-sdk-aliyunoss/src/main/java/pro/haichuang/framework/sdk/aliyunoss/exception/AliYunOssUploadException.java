@@ -7,9 +7,9 @@ import pro.haichuang.framework.sdk.aliyunoss.enums.error.AliYunOssUploadErrorEnu
  * 阿里云OSS上传自定义异常
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
+ * @version 1.0.0.211014
  * @see AliYunOssUploadErrorEnum
- * @since 1.0.0.211009
+ * @since 1.0.0.211014
  */
 public class AliYunOssUploadException extends ApplicationException {
     private static final long serialVersionUID = 8577734487637960381L;

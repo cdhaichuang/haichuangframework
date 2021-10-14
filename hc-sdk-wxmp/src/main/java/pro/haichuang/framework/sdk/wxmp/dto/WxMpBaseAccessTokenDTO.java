@@ -7,8 +7,8 @@ import java.time.Duration;
  * WxMpBaseAccessTokenDTO
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
- * @since 1.0.0.211009
+ * @version 1.0.0.211014
+ * @since 1.0.0.211014
  */
 public class WxMpBaseAccessTokenDTO implements Serializable {
     private static final long serialVersionUID = -5327256358321392255L;

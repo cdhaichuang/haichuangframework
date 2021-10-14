@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
  * MyBatisPlus包配置
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
+ * @version 1.0.0.211014
  * @see pro.haichuang.framework.mybatis.generate.MybatisGenerateCodeService
- * @since 1.0.0.211009
+ * @since 1.0.0.211014
  */
 @Component
 public class CodePackageConfig {

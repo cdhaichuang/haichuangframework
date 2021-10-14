@@ -17,8 +17,8 @@ import pro.haichuang.framework.sdk.wxmp.store.WxMpDataStore;
  * <p>该类为 {@code hc-sdk-huaweicloudobs} SDK模块数据储存自动配置
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
- * @since 1.0.0.211009
+ * @version 1.0.0.211014
+ * @since 1.0.0.211014
  */
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureAfter(BaseAutoConfiguration.class)

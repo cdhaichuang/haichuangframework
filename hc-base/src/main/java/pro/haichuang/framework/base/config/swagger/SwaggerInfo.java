@@ -14,9 +14,9 @@ import java.util.List;
  * {@link springfox.documentation.spring.web.plugins.Docket} 对象, 创建相关接口文档数据
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
+ * @version 1.0.0.211014
  * @see pro.haichuang.framework.base.config.swagger.factory.SwaggerFactory
- * @since 1.0.0.211009
+ * @since 1.0.0.211014
  */
 public final class SwaggerInfo {
 

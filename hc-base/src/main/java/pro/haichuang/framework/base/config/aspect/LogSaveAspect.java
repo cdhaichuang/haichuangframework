@@ -32,10 +32,10 @@ import java.util.concurrent.TimeUnit;
  * <p>注意: 该类启用的前置条件为标注了 {@link pro.haichuang.framework.base.annotation.EnableLogSave @EnableLogSave} 注解
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
+ * @version 1.0.0.211014
  * @see pro.haichuang.framework.base.annotation.EnableLogSave
  * @see AbstractLogSave
- * @since 1.0.0.211009
+ * @since 1.0.0.211014
  */
 @Aspect
 @Order(3)

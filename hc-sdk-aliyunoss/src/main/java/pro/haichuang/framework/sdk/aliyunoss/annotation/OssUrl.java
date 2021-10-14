@@ -11,10 +11,10 @@ import java.lang.annotation.*;
  * <p>将该类标注在实体字段上或 {@code Controller} 层方法形参上, 将在请求时自动去掉OSS请求前缀, 在响应时自动加上OSS请求前缀
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
+ * @version 1.0.0.211014
  * @see EnableOssUrlConvert @EnableOssUrlConvert
  * @see OssUrlAspect
- * @since 1.0.0.211009
+ * @since 1.0.0.211014
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.PARAMETER})

@@ -6,8 +6,8 @@ package pro.haichuang.framework.base.exception;
  * <p>主要用于自定义枚举转换时发生的异常
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
- * @since 1.0.0.211009
+ * @version 1.0.0.211014
+ * @since 1.0.0.211014
  */
 public class EnumIllegalArgumentException extends IllegalArgumentException {
     private static final long serialVersionUID = -6738594844611626333L;

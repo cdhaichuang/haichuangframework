@@ -7,9 +7,9 @@ import pro.haichuang.framework.sdk.huaweicloudobs.enums.error.HuaWeiCloudObsConf
  * 华为云OBS配置自定义异常
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
+ * @version 1.0.0.211014
  * @see HuaWeiCloudObsConfigErrorEnum
- * @since 1.0.0.211009
+ * @since 1.0.0.211014
  */
 public class HuaWeiCloudObsConfigException extends ApplicationException {
     private static final long serialVersionUID = -1180694591155280803L;

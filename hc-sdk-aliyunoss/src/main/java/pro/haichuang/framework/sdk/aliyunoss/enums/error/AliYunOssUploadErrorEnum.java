@@ -9,8 +9,8 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * <p>该类为阿里云OSS上传异常枚举
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
- * @since 1.0.0.211009
+ * @version 1.0.0.211014
+ * @since 1.0.0.211014
  */
 public enum AliYunOssUploadErrorEnum implements BaseEnum {
 
@@ -64,7 +64,7 @@ public enum AliYunOssUploadErrorEnum implements BaseEnum {
      *
      * @param value        枚举值
      * @param reasonPhrase 枚举信息
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     AliYunOssUploadErrorEnum(String value, String reasonPhrase) {
         this.value = value;

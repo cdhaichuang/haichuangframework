@@ -31,11 +31,11 @@ import java.util.Map;
  * 如只需自动生成指定表则设置 {@link CodeDataSourceConfig#setInclude(String...)} 即可
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
+ * @version 1.0.0.211014
  * @see CodeBasicConfig
  * @see CodeDataSourceConfig
  * @see CodePackageConfig
- * @since 1.0.0.211009
+ * @since 1.0.0.211014
  */
 @Service
 @SuppressWarnings("SpellCheckingInspection")
@@ -52,7 +52,7 @@ public class MybatisGenerateCodeService {
      * @param codeDataSourceConfig 数据源配置
      * @param codePackageConfig    包配置
      * @throws MybatisGenerateErrorApplication 代码生成异常
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     public void generate(CodeBasicConfig codeBasicConfig, CodeDataSourceConfig codeDataSourceConfig,
                          CodePackageConfig codePackageConfig) throws MybatisGenerateErrorApplication {
@@ -116,7 +116,7 @@ public class MybatisGenerateCodeService {
      * @param codeBasicConfig   基本配置
      * @param codePackageConfig 包配置
      * @return 全局配置
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     private GlobalConfig initGlobalConfig(CodeBasicConfig codeBasicConfig, CodePackageConfig codePackageConfig) {
         GlobalConfig gc = new GlobalConfig();
@@ -161,7 +161,7 @@ public class MybatisGenerateCodeService {
      *
      * @param codeDataSourceConfig 数据源配置
      * @return 数据源配置
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     private DataSourceConfig initDataSourceConfig(CodeDataSourceConfig codeDataSourceConfig) {
         DataSourceConfig dsc = new DataSourceConfig();
@@ -191,7 +191,7 @@ public class MybatisGenerateCodeService {
      *
      * @param codeDataSourceConfig 数据源配置
      * @return 策略配置
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     private StrategyConfig initStrategyConfig(CodeDataSourceConfig codeDataSourceConfig) {
         StrategyConfig sc = new StrategyConfig();
@@ -262,7 +262,7 @@ public class MybatisGenerateCodeService {
      *
      * @param codePackageConfig 包配置
      * @return 包配置
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     private PackageConfig initPackageConfig(CodePackageConfig codePackageConfig) {
         PackageConfig pc = new PackageConfig();

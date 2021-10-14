@@ -14,9 +14,9 @@ import java.lang.annotation.*;
  * <p>具体实现请参阅 {@link LogAspect}
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
+ * @version 1.0.0.211014
  * @see LogAspect
- * @since 1.0.0.211009
+ * @since 1.0.0.211014
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})

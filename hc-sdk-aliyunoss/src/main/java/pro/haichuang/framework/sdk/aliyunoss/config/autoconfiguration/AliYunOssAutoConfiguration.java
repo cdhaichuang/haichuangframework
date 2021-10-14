@@ -20,9 +20,9 @@ import pro.haichuang.framework.sdk.aliyunoss.service.DefaultAliYunOssServiceImpl
  * <p>使用该模块前须在 {@code yaml} 中配置相关参数, 配置参考 {@link AliYunOssProperties} 中相关的属性
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
+ * @version 1.0.0.211014
  * @see AliYunOssProperties
- * @since 1.0.0.211009
+ * @since 1.0.0.211014
  */
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureAfter(BaseAutoConfiguration.class)

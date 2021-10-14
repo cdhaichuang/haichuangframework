@@ -22,8 +22,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * </pre>
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
- * @since 1.0.0.211009
+ * @version 1.0.0.211014
+ * @since 1.0.0.211014
  */
 @ConfigurationProperties(prefix = "haichuang.sdk.wxmp")
 public class WxMpProperties {

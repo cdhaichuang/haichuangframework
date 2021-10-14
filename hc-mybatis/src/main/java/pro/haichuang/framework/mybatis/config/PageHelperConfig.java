@@ -12,8 +12,8 @@ import org.springframework.context.annotation.Configuration;
  * <p>该类为 [PageHelper] 分页插件核心配置
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
- * @since 1.0.0.211009
+ * @version 1.0.0.211014
+ * @since 1.0.0.211014
  */
 @Configuration(proxyBeanMethods = false)
 public class PageHelperConfig {

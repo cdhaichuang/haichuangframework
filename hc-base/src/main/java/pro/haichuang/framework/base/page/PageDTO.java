@@ -13,9 +13,9 @@ import java.util.Collection;
  * <p>该类为分页DTO, {@link Pageable} 的默认实现, 用于项目中所有分页相关功能数据传输, 原则上所有分页相关功能均使用此类
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
+ * @version 1.0.0.211014
  * @see Pageable
- * @since 1.0.0.211009
+ * @since 1.0.0.211014
  */
 public class PageDTO<T> implements Pageable<T>, Serializable {
     private static final long serialVersionUID = -4773020592878421576L;
@@ -43,7 +43,7 @@ public class PageDTO<T> implements Pageable<T>, Serializable {
     /**
      * 构造器
      *
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     public PageDTO() {
         this.pageNo = PageConstant.DEFAULT_PAGE_NO;
@@ -56,7 +56,7 @@ public class PageDTO<T> implements Pageable<T>, Serializable {
      *
      * @param pageNo   页码
      * @param pageSize 每页数量
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     public PageDTO(int pageNo, int pageSize) {
         this();
@@ -72,7 +72,7 @@ public class PageDTO<T> implements Pageable<T>, Serializable {
      * @param pageSize   每页数量
      * @param totalCount 总数
      * @param content    数据
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     public PageDTO(int pageNo, int pageSize, long totalCount, Collection<T> content) {
         this(pageNo, pageSize);
@@ -85,7 +85,7 @@ public class PageDTO<T> implements Pageable<T>, Serializable {
      * 构造器
      *
      * @param pageRequest 分页参数
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     public PageDTO(PageRequest pageRequest) {
         this();
@@ -99,7 +99,7 @@ public class PageDTO<T> implements Pageable<T>, Serializable {
      * @param pageRequest 分页参数
      * @param content     数据
      * @param totalCount  总数
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     public PageDTO(PageRequest pageRequest, long totalCount, Collection<T> content) {
         this(pageRequest);
@@ -112,7 +112,7 @@ public class PageDTO<T> implements Pageable<T>, Serializable {
      *
      * @param pageDetailVO 分页详情
      * @param content      数据
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     public PageDTO(PageDetailVO pageDetailVO, Collection<T> content) {
         this(pageDetailVO.getPageNo(), pageDetailVO.getPageSize(), pageDetailVO.getTotalCount(), content);
@@ -124,7 +124,7 @@ public class PageDTO<T> implements Pageable<T>, Serializable {
      *
      * @param <T> 分页数据类型
      * @return 空分页DTO
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     public static <T> PageDTO<T> empty() {
         return new PageDTO<>();
@@ -215,7 +215,7 @@ public class PageDTO<T> implements Pageable<T>, Serializable {
     /**
      * 调整页码，使不超过最大页数
      *
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     public void adjustPageNo() {
         if (pageNo == 1) {

@@ -22,8 +22,8 @@ import java.util.List;
  * <p>该类为 {@code aliyunsms} 相关操作工具类, 提供了对 {@code aliyunsms} 相关操作的封装
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
- * @since 1.0.0.211009
+ * @version 1.0.0.211014
+ * @since 1.0.0.211014
  */
 @SuppressWarnings("SpellCheckingInspection")
 public class AliYunSmsUtils {
@@ -64,7 +64,7 @@ public class AliYunSmsUtils {
      * @param templateParam   短信模板变量替换JSON串, 友情提示: 如果JSON中需要带换行符, 请参照标准的JSON协议
      * @return 执行结果
      * @throws AliYunSmsSendException 阿里云短信发送异常
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     public static boolean send(String accessKeyId, String accessKeySecret,
                                String signName, String templateCode,
@@ -90,7 +90,7 @@ public class AliYunSmsUtils {
      * @param templateParam   短信模板变量替换JSON串, 友情提示: 如果JSON中需要带换行符, 请参照标准的JSON协议
      * @return 执行结果
      * @throws AliYunSmsSendException 阿里云短信发送异常
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     public static boolean sendBatch(String accessKeyId, String accessKeySecret,
                                     List<String> signNames, String templateCode,
@@ -110,7 +110,7 @@ public class AliYunSmsUtils {
      * @param accessKeyId     AccessKeyId
      * @param accessKeySecret AccessKeySecret
      * @return IAcsClient
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     private static IAcsClient getClient(String accessKeyId, String accessKeySecret) {
         DefaultProfile profile = DefaultProfile.getProfile(REGION_ID, accessKeyId, accessKeySecret);
@@ -121,7 +121,7 @@ public class AliYunSmsUtils {
      * 创建公共请求
      *
      * @return 公共请求
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     private static CommonRequest createRequest() {
         CommonRequest request = new CommonRequest();
@@ -140,7 +140,7 @@ public class AliYunSmsUtils {
      * @param request         CommonRequest
      * @return 执行结果
      * @throws AliYunSmsSendException 阿里云短信发送异常
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     private static boolean baseSend(String accessKeyId, String accessKeySecret, CommonRequest request)
             throws AliYunSmsSendException {

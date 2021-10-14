@@ -8,9 +8,9 @@ import pro.haichuang.framework.base.exception.ApplicationException;
  * 请求参数自定义异常
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
+ * @version 1.0.0.211014
  * @see RequestParamErrorEnum
- * @since 1.0.0.211009
+ * @since 1.0.0.211014
  */
 public class RequestParamException extends ApplicationException {
     private static final long serialVersionUID = 4612740762019763844L;

@@ -17,9 +17,9 @@ import pro.haichuang.framework.mybatis.config.druid.advert.filter.DruidAdvertFil
  * <p>该过滤器主要用于去掉 [druid] 网页中的底部广告内容
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
+ * @version 1.0.0.211014
  * @see DruidAdvertFilter
- * @since 1.0.0.211009
+ * @since 1.0.0.211014
  */
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnWebApplication

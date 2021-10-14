@@ -15,9 +15,9 @@ import java.io.Serializable;
  * <p>已默认提供一个基础分页查询实体 {@link SimplePageRequest}
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
+ * @version 1.0.0.211014
  * @see PageConstant
- * @since 1.0.0.211009
+ * @since 1.0.0.211014
  */
 @ApiModel("分页查询基类")
 public class PageRequest implements Serializable {
@@ -38,7 +38,7 @@ public class PageRequest implements Serializable {
     /**
      * 构造器
      *
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     public PageRequest() {
         this.setPageNo(PageConstant.DEFAULT_PAGE_NO);
@@ -50,7 +50,7 @@ public class PageRequest implements Serializable {
      *
      * @param pageNo   页码
      * @param pageSize 每页展示数量
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     public PageRequest(int pageNo, int pageSize) {
         this.setPageNo(pageNo);
@@ -61,7 +61,7 @@ public class PageRequest implements Serializable {
      * 设置页码
      *
      * @param pageNo 页码
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     public void setPageNo(int pageNo) {
         this.pageNo = Math.max(pageNo, 1);
@@ -71,7 +71,7 @@ public class PageRequest implements Serializable {
      * 设置每页展示数量
      *
      * @param pageSize 每页展示数量
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     public void setPageSize(int pageSize) {
         this.pageSize = Math.max(pageSize, 0);
@@ -81,7 +81,7 @@ public class PageRequest implements Serializable {
      * 返回数据库查询起始索引位置
      *
      * @return 数据库查询起始索引位置
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     @ApiModelProperty(hidden = true)
     @JsonIgnore

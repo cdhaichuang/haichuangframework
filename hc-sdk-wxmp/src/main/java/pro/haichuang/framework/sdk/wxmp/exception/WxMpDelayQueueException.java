@@ -7,9 +7,9 @@ import pro.haichuang.framework.sdk.wxmp.enums.error.WxMpDelayQueueErrorEnum;
  * 微信公众号延时队列自定义异常
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
+ * @version 1.0.0.211014
  * @see WxMpDelayQueueErrorEnum
- * @since 1.0.0.211009
+ * @since 1.0.0.211014
  */
 public class WxMpDelayQueueException extends ApplicationException {
     private static final long serialVersionUID = -1644404103831134880L;

@@ -14,8 +14,8 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * </ul>
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
- * @since 1.0.0.211009
+ * @version 1.0.0.211014
+ * @since 1.0.0.211014
  */
 public class ApplicationException extends RuntimeException {
     private static final long serialVersionUID = 6539659393927269036L;
@@ -46,7 +46,7 @@ public class ApplicationException extends RuntimeException {
      * 构造器
      *
      * @param baseEnum 枚举基类
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     public ApplicationException(BaseEnum baseEnum) {
         super("errorCode: " + baseEnum.value() + ", errorMessage: " + baseEnum.getReasonPhrase());
@@ -61,7 +61,7 @@ public class ApplicationException extends RuntimeException {
      *
      * @param baseEnum 枚举基类
      * @param userTip  用户提示信息
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     public ApplicationException(BaseEnum baseEnum, @Nullable String userTip) {
         super("errorCode: " + baseEnum.value() + ", errorMessage: " + baseEnum.getReasonPhrase() + ", userTip: " + userTip);

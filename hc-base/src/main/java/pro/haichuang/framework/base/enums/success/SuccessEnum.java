@@ -7,9 +7,9 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * 成功枚举
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
+ * @version 1.0.0.211014
  * @see pro.haichuang.framework.base.response.ResultVO
- * @since 1.0.0.211009
+ * @since 1.0.0.211014
  */
 public enum SuccessEnum implements BaseEnum {
 
@@ -33,7 +33,7 @@ public enum SuccessEnum implements BaseEnum {
      *
      * @param value        枚举值
      * @param reasonPhrase 枚举信息
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     SuccessEnum(String value, String reasonPhrase) {
         this.value = value;

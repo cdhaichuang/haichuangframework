@@ -7,8 +7,8 @@ import java.time.Duration;
  * WxMpJsApiTicketDTO
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
- * @since 1.0.0.211009
+ * @version 1.0.0.211014
+ * @since 1.0.0.211014
  */
 public class WxMpJsApiTicketDTO implements Serializable {
     private static final long serialVersionUID = 8067673354928705952L;

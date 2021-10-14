@@ -7,9 +7,9 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * 系统执行超时异常枚举
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
+ * @version 1.0.0.211014
  * @see pro.haichuang.framework.base.exception.server.ExecutionException
- * @since 1.0.0.211009
+ * @since 1.0.0.211014
  */
 public enum ExecutionErrorEnum implements BaseEnum {
 
@@ -38,7 +38,7 @@ public enum ExecutionErrorEnum implements BaseEnum {
      *
      * @param value        枚举值
      * @param reasonPhrase 枚举信息
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     ExecutionErrorEnum(String value, String reasonPhrase) {
         this.value = value;

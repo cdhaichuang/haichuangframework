@@ -8,9 +8,9 @@ import pro.haichuang.framework.base.exception.ApplicationException;
  * 用户当前版本自定义异常
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
+ * @version 1.0.0.211014
  * @see VersionErrorEnum
- * @since 1.0.0.211009
+ * @since 1.0.0.211014
  */
 public class VersionException extends ApplicationException {
     private static final long serialVersionUID = 4058423515389560860L;

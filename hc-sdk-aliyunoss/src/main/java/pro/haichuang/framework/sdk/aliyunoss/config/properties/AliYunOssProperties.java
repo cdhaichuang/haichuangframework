@@ -28,8 +28,8 @@ import pro.haichuang.framework.base.exception.client.RequestParamException;
  * <p>参数配置完毕后可通过 {@link #getBucketDomain()} 方法获取访问 {@code Bucket域名} 地址
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
- * @since 1.0.0.211009
+ * @version 1.0.0.211014
+ * @since 1.0.0.211014
  */
 @ConfigurationProperties(prefix = "haichuang.sdk.aliyunoss")
 public class AliYunOssProperties {
@@ -58,7 +58,7 @@ public class AliYunOssProperties {
      * 获取BucketDomain访问域名
      *
      * @return BucketDomain访问域名
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     public String getBucketDomain() {
         if (endpoint == null || endpoint.isEmpty()) {

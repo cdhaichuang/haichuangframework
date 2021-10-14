@@ -8,9 +8,9 @@ import pro.haichuang.framework.mybatis.enums.error.MybatisServiceErrorEnum;
  * MybatisService自定义异常
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
+ * @version 1.0.0.211014
  * @see MybatisServiceErrorEnum
- * @since 1.0.0.211009
+ * @since 1.0.0.211014
  */
 public class MybatisServiceApplication extends ApplicationException {
     private static final long serialVersionUID = 8447830148015276778L;

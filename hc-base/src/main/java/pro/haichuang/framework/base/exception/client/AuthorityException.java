@@ -8,9 +8,9 @@ import pro.haichuang.framework.base.exception.ApplicationException;
  * 访问权限自定义异常
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
+ * @version 1.0.0.211014
  * @see AuthorityErrorEnum
- * @since 1.0.0.211009
+ * @since 1.0.0.211014
  */
 public class AuthorityException extends ApplicationException {
     private static final long serialVersionUID = -8157596811164270886L;

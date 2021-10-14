@@ -14,9 +14,9 @@ import javax.annotation.Resource;
  * Swagger配置
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
+ * @version 1.0.0.211014
  * @see SwaggerFactory
- * @since 1.0.0.211009
+ * @since 1.0.0.211014
  */
 @SpringBootConfiguration
 @EnableSwagger2WebMvc

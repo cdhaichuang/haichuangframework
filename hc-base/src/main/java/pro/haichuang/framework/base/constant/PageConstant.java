@@ -6,8 +6,8 @@ package pro.haichuang.framework.base.constant;
  * <p>该类主要用于存储分页的常量信息
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
- * @since 1.0.0.211009
+ * @version 1.0.0.211014
+ * @since 1.0.0.211014
  */
 public class PageConstant {
 

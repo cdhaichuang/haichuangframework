@@ -25,8 +25,8 @@ import java.util.List;
  * <p>该类为 {@link AliYunOssService} 默认实现
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
- * @since 1.0.0.211009
+ * @version 1.0.0.211014
+ * @since 1.0.0.211014
  */
 public class DefaultAliYunOssServiceImpl implements AliYunOssService {
 
@@ -250,7 +250,7 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
     /**
      * 验证配置文件
      *
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     private void validateProperties() {
         String accessKeyId = aliYunOssProperties.getAccessKeyId();
@@ -277,7 +277,7 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
      *
      * @param pathOfBizName  上传主路径, 建议填写业务模块相关名称
      * @param uploadTypeEnum 文件类型
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     private void validateParams(@Nullable UploadTypeEnum uploadTypeEnum, @Nullable String... pathOfBizName) {
         if (uploadTypeEnum == null) {

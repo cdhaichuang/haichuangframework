@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  * 手机号验证
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
+ * @version 1.0.0.211014
  */
 public class PhoneValidator implements ConstraintValidator<Phone, CharSequence> {
 

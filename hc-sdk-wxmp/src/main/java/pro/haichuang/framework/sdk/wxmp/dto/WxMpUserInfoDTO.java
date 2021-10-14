@@ -33,8 +33,8 @@ import java.util.List;
  * </pre>
  *
  * @author JiYinchuan
- * @version 1.0.0.211009
- * @since 1.0.0.211009
+ * @version 1.0.0.211014
+ * @since 1.0.0.211014
  */
 public class WxMpUserInfoDTO {
 
@@ -134,7 +134,7 @@ public class WxMpUserInfoDTO {
     /**
      * 微信用户关注的渠道来源枚举
      *
-     * @since 1.0.0.211009
+     * @since 1.0.0.211014
      */
     public enum SubscribeSceneEnum implements BaseEnum {
 
@@ -198,7 +198,7 @@ public class WxMpUserInfoDTO {
          *
          * @param value        枚举值
          * @param reasonPhrase 枚举信息
-         * @since 1.0.0.211009
+         * @since 1.0.0.211014
          */
         SubscribeSceneEnum(String value, String reasonPhrase) {
             this.value = value;
