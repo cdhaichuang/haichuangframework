@@ -14,19 +14,18 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *       sdk:
  *         aliyunsms:
  *           // AccessKeyId
- *           accessKeyId: xxx
+ *           access-key-id: xxx
  *           // AccessKeySecret
- *           accessKeySecret: xxx
+ *           access-key-secret: xxx
  *           // 短信签名
- *           signName: xxx
+ *           sign-name: xxx
  *           // 短信模板ID
- *           templateCode: xxx
+ *           template-code: xxx
  * </pre>
  * <hr>
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 @ConfigurationProperties(prefix = "haichuang.sdk.aliyunsms")
 public class AliYunSmsProperties {

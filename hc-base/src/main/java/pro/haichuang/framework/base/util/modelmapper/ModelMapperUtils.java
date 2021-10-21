@@ -10,10 +10,9 @@ import org.springframework.lang.NonNull;
  * <p>该类用于创建 {@link ModelMapper} 对象
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
  * @see ModelMapper
  * @see MatchingStrategies
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 public class ModelMapperUtils {
 
@@ -22,7 +21,7 @@ public class ModelMapperUtils {
      * 默认匹配规则为 {@link MatchingStrategies#STANDARD}
      *
      * @return ModelMapper实例
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     @NonNull
     public static ModelMapper get() {
@@ -33,7 +32,7 @@ public class ModelMapperUtils {
      * 获取严格匹配模式的ModelMapper实例
      *
      * @return ModelMapper实例
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     @NonNull
     public static ModelMapper getStrictModelMapper() {

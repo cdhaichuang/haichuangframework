@@ -1,5 +1,5 @@
 /**
- * 阿里云OSS核心工具包
+ * 阿里云OSS核心工具类
  */
 @NonNullApi
 @NonNullFields

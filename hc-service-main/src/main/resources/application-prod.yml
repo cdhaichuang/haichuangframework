@@ -2,15 +2,15 @@
 spring:
   datasource:
     druid:
-      url: jdbc:mysql://127.0.0.1:3306/data_demo?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowMultiQueries=true
+      url: jdbc:mysql://127.0.0.1:13306/data_demo?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowMultiQueries=true
       username: root
       password: 123456
       # 初始化时池中建立的物理连接个数
-      initial-size: 10
+      initial-size: 20
       # 连接池中最小空闲连接数，当连接数少于此值时，连接池会创建连接来补充到该值的数量
-      min-idle: 10
+      min-idle: 60
       # 连接池中最大的可活跃的连接池数量
-      max-active: 200
+      max-active: 300
       stat-view-servlet:
         enabled: true
         # 添加IP白名单, 不进行配置默认只允许本机
@@ -24,7 +24,7 @@ spring:
         enabled: true
   redis:
     host: 127.0.0.1
-    port: 6379
+    port: 16379
     # 数据库索引, 默认为 [0]
     database: 0
     password:
@@ -33,9 +33,9 @@ spring:
         # 连接池中最小空闲连接, 默认为 [0]
         min-idle: 20
         # 连接池中最大空闲连接, 默认为 [8]
-        max-idle: 100
+        max-idle: 200
         # 连接池最大连接数, 默认为 [8]
-        max-active: 100
+        max-active: 200
         # 连接池最大阻塞等待时间, 默认为 [-1] 无限制
         max-wait: 10s
     # 连接超时时间

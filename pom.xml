@@ -10,6 +10,7 @@
         <module>hc-sdk-aliyunoss</module>
         <module>hc-sdk-aliyunsms</module>
         <module>hc-sdk-huaweicloudobs</module>
+        <module>hc-sdk-huaweicloudsms</module>
         <module>hc-sdk-wxmp</module>
         <module>hc-service-main</module>
         <module>hc-service-test</module>
@@ -17,13 +18,13 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.4</version>
+        <version>2.5.5</version>
         <relativePath/>
     </parent>
 
     <groupId>pro.haichuang.framework</groupId>
     <artifactId>haichuangframework</artifactId>
-    <version>1.0.0.211014</version>
+    <version>1.1.0.211021</version>
     <name>haichuangframework</name>
     <description>This is HaiChuang's self-developed simple framework</description>
     <url>https://github.com/cdhaichuang/haichuangframework</url>
@@ -73,28 +74,29 @@
         <maven.compiler.target>8</maven.compiler.target>
         <!-- Log4j2 AsyncLogger -->
         <disruptor.version>3.4.4</disruptor.version>
-        <!-- knife4j -->
+        <!-- swagger-knife4j -->
         <knife4j.version>2.0.9</knife4j.version>
-        <!-- Mysql + MybatisPlus -->
-        <druid.version>1.2.6</druid.version>
-        <mybatis-plus.version>3.4.1</mybatis-plus.version>
+        <!-- ORM -->
+        <druid.version>1.2.8</druid.version>
+        <mybatis-plus.version>3.4.3.4</mybatis-plus.version>
+        <mybatis-plus-generator.version>3.5.1</mybatis-plus-generator.version>
         <velocity-engine-core.version>2.3</velocity-engine-core.version>
-        <pagehelper.version>1.3.0</pagehelper.version>
+        <pagehelper.version>1.4.0</pagehelper.version>
         <!-- Commons -->
-        <common-io.version>2.8.0</common-io.version>
+        <common-io.version>2.11.0</common-io.version>
         <commons-fileupload.version>1.4</commons-fileupload.version>
         <commons-validator.version>1.7</commons-validator.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <!-- Utils -->
         <jjwt.version>0.9.1</jjwt.version>
-        <hutool-all.version>5.6.4</hutool-all.version>
+        <hutool-all.version>5.7.14</hutool-all.version>
         <fastjson.version>1.2.76</fastjson.version>
         <transmittable-thread-local.version>2.13.0-Beta1</transmittable-thread-local.version>
         <log4j2-ttl-thread-context-map.version>1.3.3</log4j2-ttl-thread-context-map.version>
-        <modelmapper.version>2.4.2</modelmapper.version>
+        <modelmapper.version>2.4.4</modelmapper.version>
         <!-- AliYun SDK-->
         <aliyun-sdk-core.version>4.5.3</aliyun-sdk-core.version>
-        <aliyun-sdk-oss.version>3.12.0</aliyun-sdk-oss.version>
+        <aliyun-sdk-oss.version>3.13.1</aliyun-sdk-oss.version>
         <alipay-easysdk.version>2.2.0</alipay-easysdk.version>
         <!-- HuaWeiCloud SDK -->
         <esdk-obs-java.version>3.21.4.1</esdk-obs-java.version>
@@ -142,37 +144,37 @@
             <dependency>
                 <groupId>pro.haichuang.framework</groupId>
                 <artifactId>hc-base</artifactId>
-                <version>1.0.0.211014</version>
+                <version>1.1.0.211021</version>
             </dependency>
             <dependency>
                 <groupId>pro.haichuang.framework</groupId>
                 <artifactId>hc-mybatis</artifactId>
-                <version>1.0.0.211014</version>
+                <version>1.1.0.211021</version>
             </dependency>
             <dependency>
                 <groupId>pro.haichuang.framework</groupId>
                 <artifactId>hc-redis</artifactId>
-                <version>1.0.0.211014</version>
+                <version>1.1.0.211021</version>
             </dependency>
             <dependency>
                 <groupId>pro.haichuang.framework</groupId>
                 <artifactId>hc-sdk-aliyunoss</artifactId>
-                <version>1.0.0.211014</version>
+                <version>1.1.0.211021</version>
             </dependency>
             <dependency>
                 <groupId>pro.haichuang.framework</groupId>
                 <artifactId>hc-sdk-aliyunsms</artifactId>
-                <version>1.0.0.211014</version>
+                <version>1.1.0.211021</version>
             </dependency>
             <dependency>
                 <groupId>pro.haichuang.framework</groupId>
                 <artifactId>hc-sdk-huaweicloudobs</artifactId>
-                <version>1.0.0.211014</version>
+                <version>1.1.0.211021</version>
             </dependency>
             <dependency>
                 <groupId>pro.haichuang.framework</groupId>
                 <artifactId>hc-sdk-wxmp</artifactId>
-                <version>1.0.0.211014</version>
+                <version>1.1.0.211021</version>
             </dependency>
 
             <!-- Log4j2 AsyncLogger -->
@@ -203,7 +205,7 @@
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-generator</artifactId>
-                <version>${mybatis-plus.version}</version>
+                <version>${mybatis-plus-generator.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.velocity</groupId>

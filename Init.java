@@ -7,8 +7,7 @@ import java.util.Arrays;
  * 运行命令: java Init (项目Code) (运行端口)
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 public class Init {
 
@@ -72,6 +71,8 @@ public class Init {
 
                 // 服务模块资源路径
                 File resourcesDirFile = getChildDir(mainDirFile, "resources");
+                // Mybatis-Xml存放目录
+                File resourcesMapperDirFile = getChildDir(resourcesDirFile, "pro.haichuang.framework.service.main");
 
                 // 服务模块 [pom.xml] 文件
                 File pomFile = new File(PROJECT_SERVICE_MODEL_NAME, "pom.xml");
@@ -95,14 +96,21 @@ public class Init {
                 if (!renameProjectDirResult) {
                     throw new RuntimeException("重命名项目包名失败");
                 }
-                String projecTesttDirNamePath = projectTestDirFile.getAbsolutePath().replaceAll("\\\\", "/");
-                boolean renameProjectTestDirResult = projectTestDirFile.renameTo(new File(projecTesttDirNamePath.replace(projectOriginPackageDirPath, projectNewPackageDirPath)));
+                String projectTestDirNamePath = projectTestDirFile.getAbsolutePath().replaceAll("\\\\", "/");
+                boolean renameProjectTestDirResult = projectTestDirFile.renameTo(new File(projectTestDirNamePath.replace(projectOriginPackageDirPath, projectNewPackageDirPath)));
                 if (!renameProjectTestDirResult) {
                     throw new RuntimeException("重命名项目测试包名失败");
                 }
                 // 重命名资源文件信息
                 replaceCodeAndFlushWrite(resourcesDirFile.isDirectory() || (resourcesDirFile.isFile() && resourcesDirFile.getName().startsWith("application")),
                         resourcesDirFile, originCodeName, port);
+                // 重命名Mybatis-Xml文件存放目录名
+                File newResourcesMapperDirFile = new File(resourcesMapperDirFile.getCanonicalPath()
+                        .replaceAll("\\\\", "/")
+                        .replaceAll("pro/haichuang/framework/service/main", "pro/haichuang/framework/service/" + getProjectCode(originCodeName)));
+                if (!resourcesMapperDirFile.renameTo(newResourcesMapperDirFile)) {
+                    throw new RuntimeException("重命名Mapper存放目录失败");
+                }
                 // 更改 [pom.xml] 文件 [Jar] 名称
                 replaceCodeAndFlushWrite(false, pomFile, originCodeName, port);
             } catch (Exception e) {
@@ -125,6 +133,7 @@ public class Init {
         try {
             String[] dirNames = dirName.contains(".") ? dirName.split("\\.") : new String[]{dirName};
             for (String tempDirName : dirNames) {
+                assert parentFile != null;
                 File[] tempDirFiles = parentFile.listFiles((dir, name) -> tempDirName.equals(name));
                 if (tempDirFiles != null) {
                     for (File file : tempDirFiles) {

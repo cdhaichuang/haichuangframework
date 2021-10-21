@@ -8,9 +8,8 @@ import pro.haichuang.framework.base.exception.ApplicationException;
  * 用户隐私未授权自定义异常
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
  * @see DeviceErrorEnum
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 public class DeviceException extends ApplicationException {
     private static final long serialVersionUID = 6330999937960360108L;

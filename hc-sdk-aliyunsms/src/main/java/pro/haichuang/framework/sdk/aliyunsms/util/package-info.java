@@ -1,5 +1,5 @@
 /**
- * 阿里云短信核心工具包
+ * 阿里云短信核心工具类
  */
 @NonNullApi
 @NonNullFields

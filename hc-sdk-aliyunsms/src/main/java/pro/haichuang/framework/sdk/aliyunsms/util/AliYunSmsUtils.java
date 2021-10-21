@@ -10,9 +10,7 @@ import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pro.haichuang.framework.base.exception.EnumIllegalArgumentException;
-import pro.haichuang.framework.sdk.aliyunsms.enums.error.AliYunSmsSendErrorEnum;
-import pro.haichuang.framework.sdk.aliyunsms.exception.AliYunSmsSendException;
+import pro.haichuang.framework.base.exception.ThirdPartyException;
 
 import java.util.List;
 
@@ -20,10 +18,10 @@ import java.util.List;
  * 阿里云短信工具类
  *
  * <p>该类为 {@code aliyunsms} 相关操作工具类, 提供了对 {@code aliyunsms} 相关操作的封装
+ * <p><a href="https://help.aliyun.com/document_detail/101300.html">点击查看官方文档</a>
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 @SuppressWarnings("SpellCheckingInspection")
 public class AliYunSmsUtils {
@@ -52,7 +50,7 @@ public class AliYunSmsUtils {
     private static final String SYS_ACTION = "SendSms";
 
     /**
-     * 发送短信验证码
+     * 发送短信
      *
      * @param accessKeyId     AccessKeyId
      * @param accessKeySecret AccessKeySecret
@@ -63,13 +61,13 @@ public class AliYunSmsUtils {
      *                        发送国际/港澳台消息时, 接收号码格式为: 国际区号+号码, 如"85200000000"
      * @param templateParam   短信模板变量替换JSON串, 友情提示: 如果JSON中需要带换行符, 请参照标准的JSON协议
      * @return 执行结果
-     * @throws AliYunSmsSendException 阿里云短信发送异常
-     * @since 1.0.0.211014
+     * @throws ThirdPartyException 阿里云短信发送异常
+     * @since 1.1.0.211021
      */
     public static boolean send(String accessKeyId, String accessKeySecret,
                                String signName, String templateCode,
                                String phoneNumbers, JSONObject templateParam)
-            throws AliYunSmsSendException {
+            throws ThirdPartyException {
         CommonRequest request = createRequest();
         request.putQueryParameter("PhoneNumbers", phoneNumbers);
         request.putQueryParameter("SignName", signName);
@@ -79,7 +77,7 @@ public class AliYunSmsUtils {
     }
 
     /**
-     * 批量发送短信验证码
+     * 批量发送短信
      *
      * @param accessKeyId     AccessKeyId
      * @param accessKeySecret AccessKeySecret
@@ -89,13 +87,13 @@ public class AliYunSmsUtils {
      *                        批量调用相对于单条调用及时性稍有延迟, 验证码类型的短信推荐使用单条调用的方式
      * @param templateParam   短信模板变量替换JSON串, 友情提示: 如果JSON中需要带换行符, 请参照标准的JSON协议
      * @return 执行结果
-     * @throws AliYunSmsSendException 阿里云短信发送异常
-     * @since 1.0.0.211014
+     * @throws ThirdPartyException 阿里云短信发送异常
+     * @since 1.1.0.211021
      */
     public static boolean sendBatch(String accessKeyId, String accessKeySecret,
                                     List<String> signNames, String templateCode,
                                     List<String> phones, JSONArray templateParam)
-            throws AliYunSmsSendException {
+            throws ThirdPartyException {
         CommonRequest request = createRequest();
         request.putQueryParameter("PhoneNumberJson", JSONObject.toJSONString(phones));
         request.putQueryParameter("SignNameJson", JSONObject.toJSONString(signNames));
@@ -110,7 +108,7 @@ public class AliYunSmsUtils {
      * @param accessKeyId     AccessKeyId
      * @param accessKeySecret AccessKeySecret
      * @return IAcsClient
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     private static IAcsClient getClient(String accessKeyId, String accessKeySecret) {
         DefaultProfile profile = DefaultProfile.getProfile(REGION_ID, accessKeyId, accessKeySecret);
@@ -121,7 +119,7 @@ public class AliYunSmsUtils {
      * 创建公共请求
      *
      * @return 公共请求
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     private static CommonRequest createRequest() {
         CommonRequest request = new CommonRequest();
@@ -139,22 +137,18 @@ public class AliYunSmsUtils {
      * @param accessKeySecret AccessKeySecret
      * @param request         CommonRequest
      * @return 执行结果
-     * @throws AliYunSmsSendException 阿里云短信发送异常
-     * @since 1.0.0.211014
+     * @throws ThirdPartyException 阿里云短信发送异常
+     * @since 1.1.0.211021
      */
     private static boolean baseSend(String accessKeyId, String accessKeySecret, CommonRequest request)
-            throws AliYunSmsSendException {
+            throws ThirdPartyException {
         try {
             getClient(accessKeyId, accessKeySecret).getCommonResponse(request);
             return true;
         } catch (ClientException e) {
-            try {
-                LOGGER.error("[{}] 发送验证码异常 [requestId: {}, errorCode: {}, errorMessage: {}, errorType: {}, errorDescription: {}]",
-                        LOG_TAG, e.getRequestId(), e.getErrCode(), e.getErrMsg(), e.getErrorType(), e.getErrorDescription());
-                throw new AliYunSmsSendException(AliYunSmsSendErrorEnum.parseCode(e.getErrCode()));
-            } catch (EnumIllegalArgumentException e1) {
-                throw new AliYunSmsSendException(AliYunSmsSendErrorEnum.UNKONE_ERROR);
-            }
+            LOGGER.error("[{}] 发送验证码异常 [requestId: {}, errorCode: {}, errorMessage: {}, errorType: {}, errorDescription: {}]",
+                    LOG_TAG, e.getRequestId(), e.getErrCode(), e.getErrMsg(), e.getErrorType(), e.getErrorDescription());
+            throw new ThirdPartyException(e.getErrCode(), e.getErrMsg());
         }
     }
 }

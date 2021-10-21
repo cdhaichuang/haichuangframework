@@ -13,8 +13,7 @@ import java.util.Set;
  * WxMpDataStore Redis实现
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 public class WxMpRedisDataStore implements WxMpDataStore {
 

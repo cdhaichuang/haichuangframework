@@ -13,9 +13,8 @@ import java.io.Serializable;
  * 需要配合 {@link PageVO}, 并通过 {@link pro.haichuang.framework.base.response.ResultVO} 进行返回
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
  * @see PageVO
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 @ApiModel("PageDetailVO")
 public final class PageDetailVO implements Serializable {

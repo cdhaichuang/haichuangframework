@@ -8,9 +8,8 @@ import pro.haichuang.framework.mybatis.enums.error.MybatisGenerateErrorEnum;
  * Mybatis代码生成自定义异常
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
  * @see MybatisGenerateErrorEnum
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 public class MybatisGenerateErrorApplication extends ApplicationException {
     private static final long serialVersionUID = 8463634516603437883L;

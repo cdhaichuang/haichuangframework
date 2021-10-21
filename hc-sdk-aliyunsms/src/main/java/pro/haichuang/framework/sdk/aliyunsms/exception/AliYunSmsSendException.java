@@ -8,9 +8,8 @@ import pro.haichuang.framework.sdk.aliyunsms.enums.error.AliYunSmsSendErrorEnum;
  * 阿里云SMS发送自定义异常
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
  * @see AliYunSmsConfigErrorEnum
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 public class AliYunSmsSendException extends ApplicationException {
     private static final long serialVersionUID = 375443185449226109L;

@@ -24,16 +24,16 @@ import java.util.Map;
  * 微信公众号工具类
  *
  * <p>该类为 {@code wxmp} 相关操作工具类, 提供了对 {@code wxmp} 相关操作的封装
+ * <p><a href="https://developers.weixin.qq.com/doc/offiaccount/Getting_Started/Overview.html">点击查看官方文档</a>
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 @SuppressWarnings("SpellCheckingInspection")
 public class WxMpUtils {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WxMpUtils.class);
-    private static final String LOG_TAG = "MP工具类";
+    private static final String LOG_TAG = "sdk-wxmp-util";
 
     /**
      * 错误码名称
@@ -60,7 +60,7 @@ public class WxMpUtils {
      * @param timestamp 时间戳
      * @param nonce     随机数
      * @return 验证是否成功 {false: 失败, true: 成功}
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static boolean checkSignature(String token, String signature, String timestamp, String nonce) {
         String[] arr = new String[]{token, timestamp, nonce};
@@ -79,7 +79,7 @@ public class WxMpUtils {
      * @param appId     AppId
      * @param appSecret AppSecret
      * @return 基础AccessToken
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static WxMpBaseAccessTokenDTO getBaseAccessToken(String appId, String appSecret) {
         return getBaseAccessToken(appId, appSecret, HttpGlobalConfig.getTimeout());
@@ -92,7 +92,7 @@ public class WxMpUtils {
      * @param appSecret AppSecret
      * @param timout    超时时间
      * @return 基础AccessToken
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static WxMpBaseAccessTokenDTO getBaseAccessToken(String appId, String appSecret, int timout) {
         String baseUrl = "https://api.weixin.qq.com/cgi-bin/token";
@@ -121,7 +121,7 @@ public class WxMpUtils {
      * @param appSecret AppSecret
      * @param code      Code
      * @return 网页AccessTokenDTO
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static WxMpWebAccessTokenDTO getWebAccessToken(String appId, String appSecret, String code) {
         return getWebAccessToken(appId, appSecret, code, HttpGlobalConfig.getTimeout());
@@ -135,7 +135,7 @@ public class WxMpUtils {
      * @param code      Code
      * @param timout    超时时间
      * @return 网页AccessTokenDTO
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static WxMpWebAccessTokenDTO getWebAccessToken(String appId, String appSecret, String code, int timout) {
         String baseUrl = "https://api.weixin.qq.com/sns/oauth2/access_token";
@@ -167,7 +167,7 @@ public class WxMpUtils {
      * @param appId        AppId
      * @param refreshToken RefreshToken
      * @return 网页AccessTokenDTO
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static WxMpWebAccessTokenDTO refreshWebAccessToken(String appId, String refreshToken) {
         return refreshWebAccessToken(appId, refreshToken, HttpGlobalConfig.getTimeout());
@@ -180,7 +180,7 @@ public class WxMpUtils {
      * @param refreshToken RefreshToken
      * @param timout       超时时间
      * @return 网页AccessTokenDTO
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static WxMpWebAccessTokenDTO refreshWebAccessToken(String appId, String refreshToken, int timout) {
         String baseUrl = "https://api.weixin.qq.com/sns/oauth2/refresh_token";
@@ -210,7 +210,7 @@ public class WxMpUtils {
      *
      * @param accessToken AccessToken
      * @return JsApiTicketDTO
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static WxMpJsApiTicketDTO getJsApiTicket(String accessToken) {
         return getJsApiTicket(accessToken, HttpGlobalConfig.getTimeout());
@@ -222,7 +222,7 @@ public class WxMpUtils {
      * @param accessToken AccessToken
      * @param timout      超时时间
      * @return JsApiTicketDTO
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static WxMpJsApiTicketDTO getJsApiTicket(String accessToken, int timout) {
         String baseUrl = "https://api.weixin.qq.com/cgi-bin/ticket/getticket";
@@ -249,7 +249,7 @@ public class WxMpUtils {
      * @param accessToken AccessToken
      * @param openId      OpenId
      * @return 用户信息
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     @Nullable
     @SuppressWarnings("AlibabaUndefineMagicConstant")
@@ -294,7 +294,7 @@ public class WxMpUtils {
      *
      * @param jsonObject 返回JSON对象
      * @return {false: 验证失败, true: 验证成功}
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static boolean validateFailResult(JSONObject jsonObject) {
         Integer errorCode = jsonObject.getInteger(ERROR_CODE_NAME);

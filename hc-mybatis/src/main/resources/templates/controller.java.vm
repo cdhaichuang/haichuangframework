@@ -22,8 +22,8 @@ import pro.haichuang.framework.base.response.ResultVO;
 import pro.haichuang.framework.base.response.vo.BaseVO;
 import pro.haichuang.framework.base.response.vo.PageVO;
 import pro.haichuang.framework.base.response.vo.SingleVO;
-import java.util.List;
 
+import java.util.List;
 #set($ignoreEnd="(PO$)|(AO$)|(DO$)|(DTO$)")
 #set($serviceEnd="Service")
 #set($entityUpperCaseParseName=${table.entityPath.substring(0, 1).toUpperCase()}+${table.entityPath.substring(1, ${table.entityPath.length()}).replaceFirst($ignoreEnd, "")})
@@ -31,20 +31,18 @@ import java.util.List;
 #set($serviceFullName=$entityParseName+$serviceEnd)
 
 /**
- * $!{table.comment} Controller
+ * $!{table.comment} 前端控制器
  *
  * @author ${author}
- * @version ${cfg.version}
- * @since ${cfg.version}
+ * @since ${since}
  */
-@Api(tags = "[CMS] $!{table.comment}")
+@Api(tags = "[XXX业务] $!{table.comment}")
 #if(${restControllerStyle})
 @RestController
 #else
 @Controller
 #end
-##@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
-@RequestMapping("/cms/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${entityParseName}#end")
+@RequestMapping("/xxx端#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
 #if(${kotlin})
 class ${table.controllerName}#if(${superControllerClass}) : ${superControllerClass}()#end
 
@@ -58,45 +56,45 @@ public class ${table.controllerName} {
     @Autowired
     private ${table.serviceName} $serviceFullName;
 
-    @ApiOperation("单条数据")
+    @ApiOperation("查询单条数据")
     @ApiOperationSupport(order = 1)
     @GetMapping("/{id}")
     public SingleVO<${entity}> get(@PathVariable("id") Long id) {
         return ResultVO.okOfSingle(${serviceFullName}.getByIdAndValidate(id));
     }
 
-    @ApiOperation("分页数据")
+    @ApiOperation("查询分页数据")
     @ApiOperationSupport(order = 2)
     @GetMapping("/listPage")
-    public PageVO<${entity}> listPage(@ModelAttribute PageRequest pageRequest){
+    public PageVO<${entity}> listPage(@ModelAttribute PageRequest pageRequest) {
         return ResultVO.okOfPage(${serviceFullName}.listPageAndValidate(pageRequest));
     }
 
     @ApiOperation("新增单条数据")
     @ApiOperationSupport(order = 3)
     @PostMapping
-    @ApiResponse(code = 500, message = "[A0500: 新增单条数据异常]")
     @RepeatRequestValid
-    public BaseVO add(@RequestBody @Validated(Group.Insert.class) ${entity} $entityParseName){
-        return ResultVO.ok(${serviceFullName}.saveAndValidate($entityParseName));
+    public BaseVO add(@RequestBody @Validated(Group.Insert.class) ${entity} $entityParseName) {
+        ${serviceFullName}.saveAndValidate($entityParseName);
+        return ResultVO.ok();
     }
 
     @ApiOperation("更新单条数据")
     @ApiOperationSupport(order = 4)
     @PutMapping
-    @ApiResponse(code = 500, message = "[A0500: 更新单条数据异常]")
     @RepeatRequestValid
-    public BaseVO edit(@RequestBody @Validated(Group.Update.class) ${entity} $entityParseName){
-        return ResultVO.ok(${serviceFullName}.updateByIdAndValidate($entityParseName));
+    public BaseVO edit(@RequestBody @Validated(Group.Update.class) ${entity} $entityParseName) {
+        ${serviceFullName}.updateByIdAndValidate($entityParseName);
+        return ResultVO.ok();
     }
 
     @ApiOperation("批量删除数据")
     @ApiOperationSupport(order = 5)
     @DeleteMapping
-    @ApiResponse(code = 500, message = "[A0500: 批量删除数据异常]")
     @RepeatRequestValid
-    public BaseVO del(@RequestBody List<Long> ids){
-        return ResultVO.ok(${serviceFullName}.removeByIdAndValidate(ids));
+    public BaseVO del(@RequestBody List<Long> ids) {
+        ${serviceFullName}.removeByIdAndValidate(ids);
+        return ResultVO.ok();
     }
 }
 

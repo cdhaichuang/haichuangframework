@@ -18,8 +18,7 @@ import pro.haichuang.framework.mybatis.generate.MybatisGenerateCodeService;
  * <p>可以在 {@code yaml} 配置文件中指定 {@link MybatisProperties} 中相关的属性
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureAfter(BaseAutoConfiguration.class)

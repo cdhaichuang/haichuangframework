@@ -7,9 +7,8 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * 用户上传文件异常枚举
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
  * @see pro.haichuang.framework.base.exception.client.UploadFileException
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 public enum UploadFileErrorEnum implements BaseEnum {
 
@@ -58,7 +57,7 @@ public enum UploadFileErrorEnum implements BaseEnum {
      *
      * @param value        枚举值
      * @param reasonPhrase 枚举信息
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     UploadFileErrorEnum(String value, String reasonPhrase) {
         this.value = value;

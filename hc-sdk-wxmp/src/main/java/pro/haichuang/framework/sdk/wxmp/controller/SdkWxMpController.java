@@ -14,8 +14,7 @@ import javax.validation.constraints.NotBlank;
  * 该类默认提供微信服务器验证模版接口, 用于自动验证服务器
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 @RequestMapping("/framework/sdk/wxmp")
 @RestController
@@ -33,7 +32,7 @@ public class SdkWxMpController {
      * @param nonce     随机数
      * @param echostr   请求响应值
      * @param response  HttpServletResponse
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     @GetMapping("/authorization")
     @SuppressWarnings("SpellCheckingInspection")

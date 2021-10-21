@@ -18,8 +18,7 @@ import pro.haichuang.framework.sdk.aliyunsms.service.DefaultAliYunSmsServiceImpl
  * <p>使用该模块前须在 {@code yaml} 中配置相关参数, 配置参考 {@link AliYunSmsProperties} 中相关的属性
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureAfter(BaseAutoConfiguration.class)

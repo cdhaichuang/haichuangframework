@@ -35,9 +35,8 @@ import java.time.temporal.Temporal;
  * </ul>
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
  * @see WebMvcConfig
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 @Configuration(proxyBeanMethods = false)
 public class FastJsonConfig {
@@ -74,8 +73,7 @@ public class FastJsonConfig {
      * 时间类型序列化内部类
      *
      * @author JiYinchuan
-     * @version 1.0.0.211014
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static class DateSerializer implements ObjectSerializer {
 
@@ -103,8 +101,7 @@ public class FastJsonConfig {
      * 枚举类型序列化内部类
      *
      * @author JiYinchuan
-     * @version 1.0.0.211014
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static class EnumSerializer implements ObjectSerializer {
 

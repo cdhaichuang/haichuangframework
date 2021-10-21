@@ -12,8 +12,7 @@ import java.time.LocalDateTime;
  * <p>该类为 [MybatisPlus] 核心配置
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 @Configuration(proxyBeanMethods = false)
 public class MybatisPlusConfig implements MetaObjectHandler {

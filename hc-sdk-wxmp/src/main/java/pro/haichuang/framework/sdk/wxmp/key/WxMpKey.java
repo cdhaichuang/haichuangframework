@@ -9,9 +9,8 @@ import javax.annotation.PostConstruct;
  * 微信公众号数据Key
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
  * @see pro.haichuang.framework.sdk.wxmp.service.DefaultWxMpServiceImpl
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 public class WxMpKey {
 
@@ -39,7 +38,7 @@ public class WxMpKey {
      * 项目Code, 在Bean加载完后设置
      *
      * @see #setProjectCode()
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     private static String PROJECT_CODE = "";
 
@@ -59,7 +58,7 @@ public class WxMpKey {
      * 获取BaseAccessTokenKey
      *
      * @return BaseAccessTokenKey
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static String baseAccessToken() {
         return PROJECT_CODE.concat(BASE_ACCESS_TOKEN);
@@ -70,7 +69,7 @@ public class WxMpKey {
      *
      * @param key Key
      * @return WebAccessTokenKey
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static String webAccessToken(String key) {
         return PROJECT_CODE.concat(WEB_ACCESS_TOKEN.concat(key));
@@ -81,7 +80,7 @@ public class WxMpKey {
      *
      * @param key Key
      * @return WebRefreshAccessTokenKey
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static String webRefreshAccessToken(String key) {
         return PROJECT_CODE.concat(WEB_REFRESH_ACCESS_TOKEN.concat(key));
@@ -91,7 +90,7 @@ public class WxMpKey {
      * 获取JsApiTicket
      *
      * @return JsApiTicket
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static String jsApiTicket() {
         return PROJECT_CODE.concat(JS_API_TICKET);

@@ -18,8 +18,7 @@ import org.springframework.stereotype.Component;
  * </pre>
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 @Component
 @ConfigurationProperties(prefix = "haichuang.mybatis")

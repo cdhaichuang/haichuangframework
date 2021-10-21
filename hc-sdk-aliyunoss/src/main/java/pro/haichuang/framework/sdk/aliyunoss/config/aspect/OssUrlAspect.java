@@ -36,7 +36,6 @@ import java.util.List;
  * 加 {@link EnableOssUrlConvert @EnableOssUrlConvert} 是为了减少转换次数, 将转换控制全权交由开发自己灵活控制
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
  * @see EnableOssUrlConvert
  * @see RequestMapping
  * @see GetMapping
@@ -44,7 +43,7 @@ import java.util.List;
  * @see PutMapping
  * @see DeleteMapping
  * @see PatchMapping
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 @Aspect
 public class OssUrlAspect {
@@ -109,7 +108,7 @@ public class OssUrlAspect {
      * @throws InvocationTargetException 调用目标方法异常
      * @throws IllegalAccessException    非法访问异常
      * @throws IntrospectionException    属性描述构造器参数检查异常
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     private void ossUrlConvert(Object obj, boolean isRequestObj)
             throws InvocationTargetException, IllegalAccessException, IntrospectionException {
@@ -135,7 +134,7 @@ public class OssUrlAspect {
      * @param originOssUrl 原始OSS地址
      * @param isRequestObj 是否为请求对象
      * @return 新OSS地址
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     private Object getNewOssUrl(Object originOssUrl, boolean isRequestObj) {
         String bucketDomain = aliYunOssProperties.getBucketDomain();

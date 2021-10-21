@@ -14,10 +14,9 @@ import java.lang.annotation.*;
  * 在自定义类中实现响应持久化逻辑
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
  * @see LogSaveAspect
  * @see pro.haichuang.framework.base.config.interceptor.AbstractLogSave
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})

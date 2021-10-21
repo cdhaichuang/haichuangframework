@@ -1,5 +1,5 @@
 /**
- * 华为云OBS核心工具包
+ * 华为云OBS核心工具类
  */
 @NonNullApi
 @NonNullFields

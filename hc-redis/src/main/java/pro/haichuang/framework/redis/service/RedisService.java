@@ -13,9 +13,8 @@ import java.util.Set;
  * <p>该类已默认注入到 {@code spring} 中, 默认实现为 {@link DefaultRedisServiceImpl}, 如需自定义实现请实现该接口并手动注入该接口
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
  * @see DefaultRedisServiceImpl
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 @SuppressWarnings({"unused", "UnusedReturnValue", "SpellCheckingInspection"})
 public interface RedisService {
@@ -27,7 +26,7 @@ public interface RedisService {
      *
      * @param pattern 正则表达式
      * @return 匹配的Key集合
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     @Nullable
     Set<String> keys(String pattern);
@@ -38,7 +37,7 @@ public interface RedisService {
      * @param key        键
      * @param expireTime 过期时间, 单位 [秒]
      * @return 返回操作结果
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     boolean expire(String key, long expireTime);
 
@@ -47,7 +46,7 @@ public interface RedisService {
      *
      * @param key 键
      * @return 过期时间, 单位 [秒], 不存在则小于 [0]
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     long getExpire(String key);
 
@@ -56,7 +55,7 @@ public interface RedisService {
      *
      * @param key 键
      * @return 是否存在 [true: 存在, false: 不存在]
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     boolean hasKey(String key);
 
@@ -64,7 +63,7 @@ public interface RedisService {
      * 删除缓存
      *
      * @param key 键
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     void del(String... key);
 
@@ -76,7 +75,7 @@ public interface RedisService {
      * @param key 键
      * @param <V> 值类型
      * @return 值
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     @Nullable
     <V> V get(String key);
@@ -86,7 +85,7 @@ public interface RedisService {
      *
      * @param key   键
      * @param value 值
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     void set(String key, Object value);
 
@@ -96,7 +95,7 @@ public interface RedisService {
      * @param key        键
      * @param value      值
      * @param expireTime 过期时间, 单位 [秒], 小于等于 [0] 将永不过期
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     void set(String key, Object value, long expireTime);
 
@@ -106,7 +105,7 @@ public interface RedisService {
      * @param key    键
      * @param factor 递增因子, 必须大于 [0]
      * @return 递增后的值, 不存在则小于 [0]
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     long incr(String key, long factor);
 
@@ -116,7 +115,7 @@ public interface RedisService {
      * @param key    键
      * @param factor 递减因子, 必须大于 [0]
      * @return 递减后的值, 不存在则小于 [0]
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     long decr(String key, long factor);
 
@@ -129,7 +128,7 @@ public interface RedisService {
      * @param item 项
      * @param <V>  值类型
      * @return 值
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     @Nullable
     <V> V hget(String key, String item);
@@ -139,7 +138,7 @@ public interface RedisService {
      *
      * @param key 键
      * @return 对应的多个键值
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     @Nullable
     Map<Object, Object> hmget(String key);
@@ -149,7 +148,7 @@ public interface RedisService {
      *
      * @param key 键
      * @param map 对应多个键值
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     void hmset(String key, Map<String, Object> map);
 
@@ -159,7 +158,7 @@ public interface RedisService {
      * @param key        键
      * @param map        对应多个键与项
      * @param expireTime 过期时间(秒)
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     void hmset(String key, Map<String, Object> map, long expireTime);
 
@@ -169,7 +168,7 @@ public interface RedisService {
      * @param key   键
      * @param item  项
      * @param value 值
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     void hset(String key, String item, Object value);
 
@@ -180,7 +179,7 @@ public interface RedisService {
      * @param item       项
      * @param value      值
      * @param expireTime 过期时间, 单位 [秒]
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     void hset(String key, String item, Object value, long expireTime);
 
@@ -189,7 +188,7 @@ public interface RedisService {
      *
      * @param key  键
      * @param item 项
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     void hdel(String key, Object... item);
 
@@ -199,7 +198,7 @@ public interface RedisService {
      * @param key  键
      * @param item 项
      * @return 是否存在 [true: 存在, false: 不存在]
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     boolean hHasKey(String key, String item);
 
@@ -210,7 +209,7 @@ public interface RedisService {
      * @param item   项
      * @param factor 递增因子
      * @return 递增后的值
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     double hincr(String key, String item, double factor);
 
@@ -221,7 +220,7 @@ public interface RedisService {
      * @param item   项
      * @param factor 递减因子
      * @return 递减后的值
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     double hdecr(String key, String item, double factor);
 
@@ -233,7 +232,7 @@ public interface RedisService {
      * @param key 键
      * @param <V> 值类型
      * @return 值
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     @Nullable
     <V> Set<V> sGet(String key);
@@ -244,7 +243,7 @@ public interface RedisService {
      * @param key    键
      * @param values 值
      * @return 成功放入个数
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     long sSet(String key, Object... values);
 
@@ -255,7 +254,7 @@ public interface RedisService {
      * @param expireTime 过期时间, 单位 [秒]
      * @param values     值
      * @return 成功放入个数
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     long sSet(String key, long expireTime, Object... values);
 
@@ -264,7 +263,7 @@ public interface RedisService {
      *
      * @param key 键
      * @return Set缓存长度获取
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     long sGetSize(String key);
 
@@ -274,7 +273,7 @@ public interface RedisService {
      * @param key   键
      * @param value 值
      * @return 是否存在 [true: 存在, false: 不存在]
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     boolean sHasKey(String key, Object value);
 
@@ -284,7 +283,7 @@ public interface RedisService {
      * @param key    键
      * @param values 值
      * @return 成功删除的个数
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     long sdel(String key, Object... values);
 
@@ -298,7 +297,7 @@ public interface RedisService {
      * @param end   结束
      * @param <V>   值类型
      * @return 值
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     @Nullable
     <V> List<V> lGet(String key, long start, long end);
@@ -308,7 +307,7 @@ public interface RedisService {
      *
      * @param key 键
      * @return List缓存长度
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     long lGetSize(String key);
 
@@ -319,7 +318,7 @@ public interface RedisService {
      * @param index 索引, 小于 [0] 时则表示从末尾开始计算
      * @param <V>   值类型
      * @return 值
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     @Nullable
     <V> V lGetIndex(String key, long index);
@@ -329,7 +328,7 @@ public interface RedisService {
      *
      * @param key   键
      * @param value 值
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     void lSet(String key, Object value);
 
@@ -339,7 +338,7 @@ public interface RedisService {
      * @param key        键
      * @param value      值
      * @param expireTime 过期时间, 单位 [秒]
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     void lSet(String key, Object value, long expireTime);
 
@@ -348,7 +347,7 @@ public interface RedisService {
      *
      * @param key   键
      * @param value 值
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     void lSet(String key, List<Object> value);
 
@@ -358,7 +357,7 @@ public interface RedisService {
      * @param key        键
      * @param value      值
      * @param expireTime 过期时间, 单位 [秒]
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     void lSet(String key, List<Object> value, long expireTime);
 
@@ -368,7 +367,7 @@ public interface RedisService {
      * @param key   键
      * @param index 索引
      * @param value 值
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     void lEditIndex(String key, long index, Object value);
 
@@ -379,7 +378,7 @@ public interface RedisService {
      * @param count 移除多少个
      * @param value 值
      * @return 成功删除个数
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     long lDel(String key, long count, Object value);
 

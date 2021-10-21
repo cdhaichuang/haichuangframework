@@ -16,8 +16,7 @@ import pro.haichuang.framework.base.exception.EnumIllegalArgumentException;
  * </ul>
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 public interface BaseEnum {
 
@@ -25,7 +24,7 @@ public interface BaseEnum {
      * 获取枚举值
      *
      * @return 枚举值
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     @JsonValue
     String value();
@@ -34,7 +33,7 @@ public interface BaseEnum {
      * 获取枚举信息
      *
      * @return 枚举信息
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     String getReasonPhrase();
 
@@ -46,7 +45,7 @@ public interface BaseEnum {
      * @param <E>       继承 {@link BaseEnum} 的枚举类型
      * @return 解析后的枚举对象
      * @throws EnumIllegalArgumentException 解析异常
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     static <E extends BaseEnum> E resolve(String value, Class<E> enumClass) throws EnumIllegalArgumentException {
         if (!enumClass.isEnum()) {

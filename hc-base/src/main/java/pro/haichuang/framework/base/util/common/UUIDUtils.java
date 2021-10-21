@@ -10,8 +10,7 @@ import java.util.UUID;
  * <p>该类用于便捷的生成指定格式的 {@code uuid}
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 public class UUIDUtils {
 
@@ -19,7 +18,7 @@ public class UUIDUtils {
      * UUID
      *
      * @return UUID
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     @NonNull
     public static String random() {
@@ -30,7 +29,7 @@ public class UUIDUtils {
      * UUID
      *
      * @return UUID
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static long randomOfLang() {
         return Long.parseLong(UUID.randomUUID().toString().replaceAll("-", ""));
@@ -41,7 +40,7 @@ public class UUIDUtils {
      *
      * @param length length
      * @return UUID
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     @NonNull
     public static String random(int length) {
@@ -54,7 +53,7 @@ public class UUIDUtils {
      *
      * @param length length
      * @return UUID
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static long randomOfLang(int length) {
         return Long.parseLong(random(length));

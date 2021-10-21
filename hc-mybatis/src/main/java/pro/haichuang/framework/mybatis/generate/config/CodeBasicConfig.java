@@ -2,13 +2,14 @@ package pro.haichuang.framework.mybatis.generate.config;
 
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 /**
  * MyBatisPlus基本配置文件
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
  * @see pro.haichuang.framework.mybatis.generate.MybatisGenerateCodeService
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 @Component
 public class CodeBasicConfig {
@@ -19,9 +20,9 @@ public class CodeBasicConfig {
     private String author = "JiYinchuan";
 
     /**
-     * 版本
+     * 从xxx版本开始
      */
-    private String version = "1.0";
+    private String since;
 
     /**
      * 输出包类型
@@ -33,6 +34,14 @@ public class CodeBasicConfig {
      */
     private Boolean enableSwagger = true;
 
+    public CodeBasicConfig() {
+        LocalDateTime now = LocalDateTime.now();
+        String year = String.valueOf(now.getYear() % 100);
+        String month = now.getMonthValue() < 10 ? "0" + now.getMonthValue() : String.valueOf(now.getMonthValue());
+        String day = now.getDayOfMonth() < 10 ? "0" + now.getDayOfMonth() : String.valueOf(now.getDayOfMonth());
+        since = "1.0.0." + year + month + day;
+    }
+
     public String getAuthor() {
         return author;
     }
@@ -41,12 +50,12 @@ public class CodeBasicConfig {
         this.author = author;
     }
 
-    public String getVersion() {
-        return version;
+    public String getSince() {
+        return since;
     }
 
-    public void setVersion(String version) {
-        this.version = version;
+    public void setSince(String since) {
+        this.since = since;
     }
 
     public OutputType getOutputType() {

@@ -7,9 +7,26 @@ import pro.haichuang.framework.base.exception.client.RequestParamException;
 /**
  * 华为云OBS配置文件
  *
+ * <hr>
+ * Example:
+ * <pre>
+ *     # ========================= Haichuang Setting =========================
+ *     haichuang:
+ *       sdk:
+ *         huaweicloudobs:
+ *           // AccessKeyId
+ *           access-key-id: xxx
+ *           // AccessKeySecret
+ *           access-key-secret: xxx
+ *           // BucketName
+ *           bucket-name: xxx
+ *           // Endpoint地域节点
+ *           endpoint: xxx
+ * </pre>
+ * <hr>
+ *
  * @author JiYinchuan
- * @version 1.0.0.211014
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 @ConfigurationProperties(prefix = "haichuang.sdk.huaweicloudobs")
 public class HuaWeiCloudObsProperties {
@@ -38,7 +55,7 @@ public class HuaWeiCloudObsProperties {
      * 获取BucketDomain访问域名
      *
      * @return BucketDomain访问域名
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public String getBucketDomain() {
         if (endpoint == null || endpoint.isEmpty()) {

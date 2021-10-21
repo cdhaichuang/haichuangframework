@@ -11,8 +11,7 @@ import java.io.IOException;
  * <p>该过滤器主要用于去掉 [druid] 网页中的底部广告内容
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 public class DruidAdvertFilter implements Filter {
 

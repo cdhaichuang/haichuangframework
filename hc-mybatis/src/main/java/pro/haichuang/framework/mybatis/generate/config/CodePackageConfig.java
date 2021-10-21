@@ -6,9 +6,8 @@ import org.springframework.stereotype.Component;
  * MyBatisPlus包配置
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
  * @see pro.haichuang.framework.mybatis.generate.MybatisGenerateCodeService
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 @Component
 public class CodePackageConfig {
@@ -57,6 +56,11 @@ public class CodePackageConfig {
      * 输出根目录绝对路径, 默认当前项目
      */
     private String outputDir = System.getProperty("user.dir").concat("/src/main/java/");
+
+    /**
+     * 输出根目录资源绝对路径, 默认当前项目
+     */
+    private String outputResourcesDir = System.getProperty("user.dir").concat("/src/main/resources/");
 
     public String getOutputPackage() {
         return outputPackage;
@@ -128,5 +132,13 @@ public class CodePackageConfig {
 
     public void setOutputDir(String outputDir) {
         this.outputDir = outputDir;
+    }
+
+    public String getOutputResourcesDir() {
+        return outputResourcesDir;
+    }
+
+    public void setOutputResourcesDir(String outputResourcesDir) {
+        this.outputResourcesDir = outputResourcesDir;
     }
 }

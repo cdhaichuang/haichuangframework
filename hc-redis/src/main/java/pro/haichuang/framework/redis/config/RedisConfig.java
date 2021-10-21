@@ -39,9 +39,8 @@ import java.time.format.DateTimeFormatter;
  * <p>该类为 {@code redis} 核心配置, 对 {@code spring-boot-starter-cache} 组件进行了集成, 同时优化了 {@link RedisTemplate} 的序列化与反序列化规则
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
  * @see pro.haichuang.framework.redis.config.autoconfiguration.RedisAutoConfiguration
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 @Configuration
 @EnableCaching
@@ -92,7 +91,7 @@ public class RedisConfig extends CachingConfigurerSupport {
      * RedisKey序列化规则
      *
      * @return RedisSerializer
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     private RedisSerializer<String> keySerializer() {
         return new StringRedisSerializer();
@@ -102,7 +101,7 @@ public class RedisConfig extends CachingConfigurerSupport {
      * RedisValue序列化规则
      *
      * @return RedisSerializer
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     private RedisSerializer<Object> valueSerializer() {
         return new GenericJackson2JsonRedisSerializer(new ObjectMapper()

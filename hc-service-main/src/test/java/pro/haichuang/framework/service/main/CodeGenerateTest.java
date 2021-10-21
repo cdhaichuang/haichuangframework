@@ -15,7 +15,7 @@ import pro.haichuang.framework.mybatis.generate.config.CodePackageConfig;
  * ps: 如只需要生成部分表请修改 {@link CodeGenerateTest#DATASOURCE_TABLE_INCLUDE} 字段
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
+ * @version 1.0.0.211020
  */
 @SpringBootTest(classes = ServiceApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CodeGenerateTest {
@@ -98,7 +98,7 @@ public class CodeGenerateTest {
         codeBasicConfig.setAuthor(AUTHOR);
         // 版本号
         // 默认为 [1.0]
-        codeBasicConfig.setVersion("1.0");
+        codeBasicConfig.setSince("1.0");
         // 输出包类型
         // 默认为 [CodeBasicConfig.OutputType.ALL]
         codeBasicConfig.setOutputType(CodeBasicConfig.OutputType.ALL);
@@ -107,9 +107,6 @@ public class CodeGenerateTest {
         codeBasicConfig.setEnableSwagger(true);
 
         CodeDataSourceConfig codeDataSourceConfig = new CodeDataSourceConfig();
-        // 驱动名
-        // 默认为 [com.mysql.cj.jdbc.Driver]
-        codeDataSourceConfig.setDriver("com.mysql.cj.jdbc.Driver");
         // 驱动连接的URL, 须指定
         codeDataSourceConfig.setUrl(DATASOURCE_URL);
         // 数据库连接用户名, 须指定

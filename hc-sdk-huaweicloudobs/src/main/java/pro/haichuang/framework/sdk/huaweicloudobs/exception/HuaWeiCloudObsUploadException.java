@@ -7,9 +7,8 @@ import pro.haichuang.framework.sdk.huaweicloudobs.enums.error.HuaWeiCloudObsUplo
  * 华为云OBS上传自定义异常
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
  * @see HuaWeiCloudObsUploadErrorEnum
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 public class HuaWeiCloudObsUploadException extends ApplicationException {
     private static final long serialVersionUID = 8577734487637960381L;

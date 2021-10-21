@@ -9,9 +9,8 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * <p>该类为 [MybatisService] 层异常枚举
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
  * @see pro.haichuang.framework.mybatis.exception.MybatisServiceApplication
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 public enum MybatisServiceErrorEnum implements BaseEnum {
 
@@ -45,7 +44,7 @@ public enum MybatisServiceErrorEnum implements BaseEnum {
      *
      * @param value        枚举值
      * @param reasonPhrase 枚举信息
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     MybatisServiceErrorEnum(String value, String reasonPhrase) {
         this.value = value;

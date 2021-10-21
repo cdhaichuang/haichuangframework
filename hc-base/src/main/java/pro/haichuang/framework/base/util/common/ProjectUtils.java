@@ -10,8 +10,7 @@ import java.io.FileNotFoundException;
  * <p>该类封装了项目中常用的方法
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 public class ProjectUtils {
 
@@ -20,7 +19,7 @@ public class ProjectUtils {
      *
      * @return 项目中Resource目录
      * @throws FileNotFoundException 文件未找到
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static String getResourcePath() throws FileNotFoundException {
         return getResourcePath("");
@@ -32,7 +31,7 @@ public class ProjectUtils {
      * @param filePath 相对于 {@code resource} 目录下的路径
      * @return 项目中Resource目录
      * @throws FileNotFoundException 文件未找到
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static String getResourcePath(String filePath) throws FileNotFoundException {
         return ResourceUtils.getURL(ResourceUtils.CLASSPATH_URL_PREFIX + filePath).getPath();

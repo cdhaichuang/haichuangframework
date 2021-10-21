@@ -16,11 +16,11 @@ import pro.haichuang.framework.base.exception.client.RequestParamException;
  *       sdk:
  *         aliyunoss:
  *           // AccessKeyId
- *           accessKeyId: xxx
+ *           access-key-id: xxx
  *           // AccessKeySecret
- *           accessKeySecret: xxx
+ *           access-key-secret: xxx
  *           // BucketName
- *           bucketName: xxx
+ *           bucket-name: xxx
  *           // Endpoint地域节点
  *           endpoint: xxx
  * </pre>
@@ -28,8 +28,7 @@ import pro.haichuang.framework.base.exception.client.RequestParamException;
  * <p>参数配置完毕后可通过 {@link #getBucketDomain()} 方法获取访问 {@code Bucket域名} 地址
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 @ConfigurationProperties(prefix = "haichuang.sdk.aliyunoss")
 public class AliYunOssProperties {
@@ -58,7 +57,7 @@ public class AliYunOssProperties {
      * 获取BucketDomain访问域名
      *
      * @return BucketDomain访问域名
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public String getBucketDomain() {
         if (endpoint == null || endpoint.isEmpty()) {

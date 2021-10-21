@@ -6,17 +6,11 @@ import org.springframework.stereotype.Component;
  * MyBatisPlus数据源配置文件
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
  * @see pro.haichuang.framework.mybatis.generate.MybatisGenerateCodeService
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 @Component
 public class CodeDataSourceConfig {
-
-    /**
-     * 驱动名
-     */
-    private String driver = "com.mysql.cj.jdbc.Driver";
 
     /**
      * 驱动连接的URL
@@ -42,14 +36,6 @@ public class CodeDataSourceConfig {
      * 输出包含表
      */
     private String[] include;
-
-    public String getDriver() {
-        return driver;
-    }
-
-    public void setDriver(String driver) {
-        this.driver = driver;
-    }
 
     public String getUrl() {
         return url;

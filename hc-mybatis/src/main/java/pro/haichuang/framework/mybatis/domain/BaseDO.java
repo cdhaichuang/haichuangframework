@@ -21,8 +21,7 @@ import java.time.LocalDateTime;
  * <p>该类中指定了映射到数据库中每张表的 {@code id ID} / {@code createTime 创建时间} / {@code modifyTime 最后修改时间}
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 @ApiModel("BaseDO")
 public class BaseDO implements Serializable {
@@ -31,11 +30,13 @@ public class BaseDO implements Serializable {
     public static final String ID = "id";
     public static final String CREATE_TIME = "createTime";
     public static final String MODIFY_TIME = "modifyTime";
-    public static final String LOGIC_DELETE = "logic_delete";
+    public static final String LOGIC_DELETE = "logicDelete";
+    public static final String VERSION = "version";
     public static final Class<Long> ID_CLASS = Long.class;
     public static final Class<LocalDateTime> CREATE_TIME_CLASS = LocalDateTime.class;
     public static final Class<LocalDateTime> MODIFY_TIME_CLASS = LocalDateTime.class;
     public static final Class<Boolean> LOGIC_DELETE_CLASS = Boolean.class;
+    public static final Class<Integer> VERSION_CLASS = Integer.class;
 
     /**
      * 唯一ID

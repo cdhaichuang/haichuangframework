@@ -9,8 +9,7 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * <p>该类为阿里云SMS配置异常枚举
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 public enum AliYunSmsConfigErrorEnum implements BaseEnum {
 
@@ -54,7 +53,7 @@ public enum AliYunSmsConfigErrorEnum implements BaseEnum {
      *
      * @param value        枚举值
      * @param reasonPhrase 枚举信息
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     AliYunSmsConfigErrorEnum(String value, String reasonPhrase) {
         this.value = value;

@@ -5,6 +5,7 @@ server:
 # ========================= Spring Setting =========================
 spring:
   profiles:
+    # This configuration has been in effect since spring-boot 2.4.0
     group:
       dev: log4j2-dev
       prod: log4j2-prod

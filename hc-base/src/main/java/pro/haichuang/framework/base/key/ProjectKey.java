@@ -6,8 +6,7 @@ package pro.haichuang.framework.base.key;
  * <p>该类主要用于存储项目键获取
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 public class ProjectKey {
 
@@ -15,7 +14,7 @@ public class ProjectKey {
      * 获取日志线程TTL-Key
      *
      * @return 日志线程TTL-Key
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static String loggerThreadTtl() {
         return "LoggerKey";

@@ -12,8 +12,7 @@ import java.util.Arrays;
  * 文件资源路径工具类
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 public class FileUriUtils {
 
@@ -25,7 +24,7 @@ public class FileUriUtils {
      * @param fileType    文件类型
      * @param uploadPath  上传路径
      * @return 拼接后的文件名 [上传路径 + 文件类型 + 新文件名]
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static String concatFilename(MultipartFile file, @Nullable String newFileName, String fileType, String... uploadPath) {
         String fileOriginalExtensionName = FilenameUtils.getExtension(file.getOriginalFilename());
@@ -50,7 +49,7 @@ public class FileUriUtils {
      * @param fileType    文件类型
      * @param uploadPath  上传路径
      * @return 拼接后的文件名 [上传路径 + 文件类型 + 新文件名]
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static String concatFilename(File file, @Nullable String newFileName, String fileType, String... uploadPath) {
         String fileExtensionName = FilenameUtils.getExtension(file.getName());
@@ -75,7 +74,7 @@ public class FileUriUtils {
      * @param fileType    文件类型
      * @param uploadPath  上传路径
      * @return 拼接后的文件名 [上传路径 + 文件类型 + 新文件名]
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static String concatFilename(String filePath, @Nullable String newFileName, String fileType, String... uploadPath) {
         String fileExtensionName = FilenameUtils.getExtension(filePath);
@@ -98,7 +97,7 @@ public class FileUriUtils {
      * @param filename                文件名
      * @param isReplaceFirstSeparator 是否替换第一个分隔符
      * @return 格式化后的文件名
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static String formatFilename(String filename, boolean isReplaceFirstSeparator) {
         filename = FilenameUtils.separatorsToUnix(filename);

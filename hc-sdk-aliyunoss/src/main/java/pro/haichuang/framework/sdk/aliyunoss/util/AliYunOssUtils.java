@@ -31,16 +31,16 @@ import java.util.stream.Collectors;
  * 阿里云OSS工具类
  *
  * <p>该类为 {@code aliyunoss} 相关操作工具类, 提供了对 {@code aliyunoss} 相关操作的封装
+ * <p><a href="https://help.aliyun.com/document_detail/31947.html">点击查看官方文档</a>
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 public class AliYunOssUtils {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AliYunOssUtils.class);
-    private static final String LOG_TAG = "[sdk-aliyunoss] AliYunOss工具类";
+    private static final String LOG_TAG = "sdk-aliyunoss-util";
 
     // ========================= SingleUpload =========================
 
@@ -58,7 +58,7 @@ public class AliYunOssUtils {
      * @throws AliYunOssUploadException 阿里云文件上传异常
      * @throws IOException              获取文件流异常
      * @see #uploadByMultipart(MultipartFile, String, String, String, String, String, String, String...)
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static String uploadByMultipart(MultipartFile uploadFile,
                                            String accessKeyId, String accessKeySecret,
@@ -84,7 +84,7 @@ public class AliYunOssUtils {
      * @throws AliYunOssUploadException 阿里云文件上传异常
      * @throws IOException              获取文件流异常
      * @see #baseFileUploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String...)
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static String uploadByMultipart(MultipartFile uploadFile, @Nullable String newFileName,
                                            String accessKeyId, String accessKeySecret,
@@ -113,7 +113,7 @@ public class AliYunOssUtils {
      * @return 上传后的路径 [上传路径 + 文件类型 + 文件名]
      * @throws AliYunOssUploadException 阿里云文件上传异常
      * @see #uploadByPath(String, String, String, String, String, String, String, String...)
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static String uploadByPath(String absoluteFilePath,
                                       String accessKeyId, String accessKeySecret,
@@ -138,7 +138,7 @@ public class AliYunOssUtils {
      * @return 上传后的路径 [上传路径 + 文件类型 + 文件名]
      * @throws AliYunOssUploadException 阿里云文件上传异常
      * @see #uploadByFile(File, String, String, String, String, String, String, String...)
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static String uploadByPath(String absoluteFilePath, @Nullable String newFileName,
                                       String accessKeyId, String accessKeySecret,
@@ -162,7 +162,7 @@ public class AliYunOssUtils {
      * @return 上传后的路径 [上传路径 + 文件类型 + 文件名]
      * @throws AliYunOssUploadException 阿里云文件上传异常
      * @see #uploadByFile(File, String, String, String, String, String, String, String...)
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static String uploadByFile(File uploadFile,
                                       String accessKeyId, String accessKeySecret,
@@ -187,7 +187,7 @@ public class AliYunOssUtils {
      * @return 上传后的路径 [上传路径 + 文件类型 + 文件名]
      * @throws AliYunOssUploadException 阿里云文件上传异常
      * @see #baseFileUploadByFile(LinkedList, LinkedList, String, String, String, String, String, String...)
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static String uploadByFile(File uploadFile, @Nullable String newFileName,
                                       String accessKeyId, String accessKeySecret,
@@ -219,7 +219,7 @@ public class AliYunOssUtils {
      * @throws AliYunOssUploadException 阿里云文件上传异常
      * @throws IOException              获取文件流异常
      * @see #uploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String...)
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static List<String> uploadByMultipart(Collection<MultipartFile> uploadFiles,
                                                  String accessKeyId, String accessKeySecret,
@@ -245,7 +245,7 @@ public class AliYunOssUtils {
      * @throws AliYunOssUploadException 阿里云文件上传异常
      * @throws IOException              获取文件流异常
      * @see #baseFileUploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String...)
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static List<String> uploadByMultipart(LinkedList<MultipartFile> uploadFiles,
                                                  @Nullable LinkedList<String> newFileNames,
@@ -278,7 +278,7 @@ public class AliYunOssUtils {
      * @return 上传后的路径集合 [上传路径 + 文件类型 + 文件名]
      * @throws AliYunOssUploadException 阿里云文件上传异常
      * @see #uploadByPath(LinkedList, LinkedList, String, String, String, String, String, String...)
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static List<String> uploadByPath(Collection<String> absoluteFilePaths,
                                             String accessKeyId, String accessKeySecret,
@@ -302,7 +302,7 @@ public class AliYunOssUtils {
      * @param uploadPath        上传路径
      * @return 上传后的路径集合 [上传路径 + 文件类型 + 文件名]
      * @throws AliYunOssUploadException 阿里云文件上传异常
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static List<String> uploadByPath(LinkedList<String> absoluteFilePaths,
                                             @Nullable LinkedList<String> newFileNames,
@@ -336,7 +336,7 @@ public class AliYunOssUtils {
      * @return 上传后的路径集合 [上传路径 + 文件类型 + 文件名]
      * @throws AliYunOssUploadException 阿里云文件上传异常
      * @see #uploadByFile(LinkedList, LinkedList, String, String, String, String, String, String...)
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static List<String> uploadByFile(Collection<File> uploadFiles,
                                             String accessKeyId, String accessKeySecret,
@@ -361,7 +361,7 @@ public class AliYunOssUtils {
      * @return 上传后的路径集合 [上传路径 + 文件类型 + 文件名]
      * @throws AliYunOssUploadException 阿里云文件上传异常
      * @see #baseFileUploadByFile(LinkedList, LinkedList, String, String, String, String, String, String...)
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static List<String> uploadByFile(LinkedList<File> uploadFiles,
                                             @Nullable LinkedList<String> newFileNames,
@@ -395,7 +395,7 @@ public class AliYunOssUtils {
      * @param response        {@link HttpServletResponse}
      * @throws IOException 文件流转文件失败
      * @see #downloadToResponse(String, String, String, String, String, String, HttpServletRequest, HttpServletResponse)
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static void downloadToResponse(String ossFilePath,
                                           String accessKeyId, String accessKeySecret,
@@ -417,7 +417,7 @@ public class AliYunOssUtils {
      * @param request         {@link HttpServletRequest}
      * @param response        {@link HttpServletResponse}
      * @throws IOException 文件流转文件失败
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static void downloadToResponse(String ossFilePath,
                                           String accessKeyId, String accessKeySecret,
@@ -455,7 +455,7 @@ public class AliYunOssUtils {
      * @param endPoint        Endpoint地域节点
      * @return File对象
      * @see #downloadToFile(String, String, String, String, String, String)
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static File downloadToFile(String ossFilePath,
                                       String accessKeyId, String accessKeySecret,
@@ -473,7 +473,7 @@ public class AliYunOssUtils {
      * @param endPoint        Endpoint地域节点
      * @param fileName        新文件名, 为空时则为OSS文件名
      * @return File对象
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static File downloadToFile(String ossFilePath,
                                       String accessKeyId, String accessKeySecret,
@@ -505,7 +505,7 @@ public class AliYunOssUtils {
      * @param endPoint        Endpoint地域节点
      * @param outFile         新文件对象, 为空时则文件名为OSS文件名
      * @return File对象
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static File downloadToFile(String ossFilePath,
                                       String accessKeyId, String accessKeySecret,
@@ -535,7 +535,7 @@ public class AliYunOssUtils {
      * @param accessKeySecret AccessKeySecret
      * @param bucketName      BucketName
      * @param endPoint        Endpoint地域节点
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static void deleteObject(String ossFilePath,
                                     String accessKeyId, String accessKeySecret,
@@ -562,7 +562,7 @@ public class AliYunOssUtils {
      * @param bucketName      BucketName
      * @return 删除成功的文件路径集合
      * @see #deleteObject(Collection, boolean, String, String, String, String)
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static List<String> deleteObject(Collection<String> ossFilePaths,
                                             String accessKeyId, String accessKeySecret,
@@ -581,7 +581,7 @@ public class AliYunOssUtils {
      * @param bucketName      BucketName
      * @param endPoint        Endpoint地域节点
      * @return 返回结果参考 {@code quiet} 形参注释
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static List<String> deleteObject(Collection<String> ossFilePaths, boolean quiet,
                                             String accessKeyId, String accessKeySecret,
@@ -625,7 +625,7 @@ public class AliYunOssUtils {
      * @throws AliYunOssUploadException 阿里云文件上传异常
      * @throws IOException              获取文件流异常
      * @see #baseFileUploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String...)
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static List<String> baseFileUploadByMultipart(Collection<MultipartFile> files,
                                                          String accessKeyId, String accessKeySecret,
@@ -650,7 +650,7 @@ public class AliYunOssUtils {
      * @return 上传后的路径集合 [上传路径 + 文件类型 + 文件名]
      * @throws AliYunOssUploadException 阿里云文件上传异常
      * @throws IOException              获取文件流异常
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static List<String> baseFileUploadByMultipart(LinkedList<MultipartFile> uploadFiles,
                                                          @Nullable LinkedList<String> newFileNames,
@@ -697,7 +697,7 @@ public class AliYunOssUtils {
      * @return 上传后的路径 [上传路径 + 文件类型 + 文件名]
      * @throws AliYunOssUploadException 阿里云文件上传异常
      * @see #baseFileUploadByFile(LinkedList, LinkedList, String, String, String, String, String, String...)
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     private static List<String> baseFileUploadByFile(Collection<File> uploadFiles,
                                                      String accessKeyId, String accessKeySecret,
@@ -721,7 +721,7 @@ public class AliYunOssUtils {
      * @param uploadPath      上传路径
      * @return 上传后的路径 [上传路径 + 文件类型 + 文件名]
      * @throws AliYunOssUploadException 阿里云文件上传异常
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     private static List<String> baseFileUploadByFile(LinkedList<File> uploadFiles,
                                                      @Nullable LinkedList<String> newFileNames,

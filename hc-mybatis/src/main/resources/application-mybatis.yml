@@ -60,6 +60,10 @@ mybatis-plus:
   type-aliases-package: pro.haichuang.**.domain
   type-aliases-super-type: pro.haichuang.framework.mybatis.domain.BaseDO
   mapper-locations: classpath*:/pro/haichuang/**/mapper/**/*Mapper.xml
+  type-enums-package: pro.haichuang.**.enums
+  # https://mybatis.org/mybatis-3/zh/configuration.html
+  # https://mp.baomidou.com/config/#configuration-2
   configuration:
     map-underscore-to-camel-case: true
-    default-enum-type-handler: com.baomidou.mybatisplus.extension.handlers.MybatisEnumTypeHandler
+    auto-mapping-unknown-column-behavior: failing
+    default-enum-type-handler: com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler

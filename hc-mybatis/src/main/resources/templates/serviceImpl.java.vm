@@ -16,8 +16,7 @@ import org.springframework.stereotype.Service;
  * $!{table.comment} ServiceImpl
  *
  * @author ${author}
- * @version ${cfg.version}
- * @since ${cfg.version}
+ * @since ${since}
  */
 @Service
 #if(${kotlin})

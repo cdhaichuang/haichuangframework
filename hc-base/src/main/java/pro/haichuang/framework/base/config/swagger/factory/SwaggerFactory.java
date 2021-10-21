@@ -27,9 +27,8 @@ import java.util.stream.Collectors;
  * <p>注意: 请求地址中带有 [common] 字段时 {@link SecurityContext} 上下文将不生效
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
  * @see SwaggerInfo
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 public final class SwaggerFactory {
 
@@ -74,7 +73,7 @@ public final class SwaggerFactory {
      *
      * @param infoDTO Swagger信息
      * @return API文档
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static Docket createRestApi(SwaggerInfo infoDTO) {
         Docket docket = new Docket(DocumentationType.SWAGGER_2);
@@ -101,7 +100,7 @@ public final class SwaggerFactory {
      *
      * @param infoDTO Swagger信息
      * @return API信息
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     private static ApiInfo apiInfo(SwaggerInfo infoDTO) {
         return new ApiInfoBuilder()
@@ -117,7 +116,7 @@ public final class SwaggerFactory {
      *
      * @param parameters 授权参数
      * @return 返回权限上下文
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     private static SecurityContext securityContext(List<SecurityScheme> parameters) {
         AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];

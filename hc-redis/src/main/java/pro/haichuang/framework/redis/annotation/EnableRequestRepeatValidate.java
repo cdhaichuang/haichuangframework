@@ -15,10 +15,9 @@ import java.lang.annotation.*;
  * <p>具体实现请参阅 {@link RepeatRequestInterceptor}
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
  * @see RepeatRequestValid
  * @see RepeatRequestInterceptor
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})

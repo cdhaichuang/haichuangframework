@@ -12,8 +12,7 @@ import pro.haichuang.framework.redis.annotation.EnableRequestRepeatValidate;
  * ServiceApplication
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 @SpringBootApplication
 @EnableGlobalCorsConfig

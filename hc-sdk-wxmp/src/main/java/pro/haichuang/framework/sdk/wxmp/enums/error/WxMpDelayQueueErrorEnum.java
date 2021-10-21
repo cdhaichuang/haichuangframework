@@ -9,8 +9,7 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * <p>该类为微信公众号延时队列异常枚举
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 public enum WxMpDelayQueueErrorEnum implements BaseEnum {
 
@@ -44,7 +43,7 @@ public enum WxMpDelayQueueErrorEnum implements BaseEnum {
      *
      * @param value        枚举值
      * @param reasonPhrase 枚举信息
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     WxMpDelayQueueErrorEnum(String value, String reasonPhrase) {
         this.value = value;

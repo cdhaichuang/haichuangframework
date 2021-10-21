@@ -4,8 +4,7 @@ package pro.haichuang.framework.redis.key;
  * 框架内置RedisKey
  *
  * @author JiYinchuan
- * @version 1.0.0.211014
- * @since 1.0.0.211014
+ * @since 1.1.0.211021
  */
 public class RedisKey {
 
@@ -15,7 +14,7 @@ public class RedisKey {
      * @param prefix prefix
      * @param value  value
      * @return 重复请求Key
-     * @since 1.0.0.211014
+     * @since 1.1.0.211021
      */
     public static String repeatRequest(String prefix, String... value) {
         return prefix.concat("#").concat(String.join("#", value));
