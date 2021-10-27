@@ -20,17 +20,15 @@
         <!-- 日志文件根路径 -->
         <Property name="LOG_HOME">logs</Property>
         <!-- DEBUG日志最大大小 -->
-        <property name="MAX_DEBUG_LOG_FILE_SIZE" value="12MB"/>
+        <property name="MAX_DEBUG_LOG_FILE_SIZE" value="64MB"/>
         <!-- INFO日志最大大小 -->
-        <property name="MAX_INFO_LOG_FILE_SIZE" value="2MB"/>
+        <property name="MAX_INFO_LOG_FILE_SIZE" value="32MB"/>
         <!-- WARN日志最大大小 -->
-        <property name="MAX_WARNING_LOG_FILE_SIZE" value="2MB"/>
+        <property name="MAX_WARNING_LOG_FILE_SIZE" value="16MB"/>
         <!-- ERROR日志最大大小 -->
-        <property name="MAX_ERROR_LOG_FILE_SIZE" value="2MB"/>
+        <property name="MAX_ERROR_LOG_FILE_SIZE" value="8MB"/>
         <!-- 日志保留天数 -->
-        <property name="MAX_HISTORY_DAY" value="35d"/>
-        <!-- 日志保留最大大小 -->
-        <property name="MAX_LOG_SIZE" value="100kb"/>
+        <property name="MAX_HISTORY_DAY" value="95d"/>
         <!-- 日志滚动间隔 -->
         <property name="ROLLING_INTERVAL" value="1"/>
         <!-- 日志滚动随机最大延迟秒 -->
