@@ -17,17 +17,17 @@ import java.util.Collection;
  * @since 1.1.0.211021
  */
 public class PageDTO<T> implements Pageable<T>, Serializable {
-    private static final long serialVersionUID = -4773020592878421576L;
+    private static final long serialVersionUID = -6895490553746305660L;
 
     /**
      * 页码
      */
-    private Integer pageNo;
+    private Long pageNo;
 
     /**
      * 每页数量
      */
-    private Integer pageSize;
+    private Long pageSize;
 
     /**
      * 总数
@@ -57,7 +57,7 @@ public class PageDTO<T> implements Pageable<T>, Serializable {
      * @param pageSize 每页数量
      * @since 1.1.0.211021
      */
-    public PageDTO(int pageNo, int pageSize) {
+    public PageDTO(long pageNo, long pageSize) {
         this();
         this.pageNo = pageNo;
         this.pageSize = pageSize;
@@ -73,7 +73,7 @@ public class PageDTO<T> implements Pageable<T>, Serializable {
      * @param content    数据
      * @since 1.1.0.211021
      */
-    public PageDTO(int pageNo, int pageSize, long totalCount, Collection<T> content) {
+    public PageDTO(long pageNo, long pageSize, long totalCount, Collection<T> content) {
         this(pageNo, pageSize);
         this.totalCount = totalCount;
         this.content = content;
@@ -135,18 +135,18 @@ public class PageDTO<T> implements Pageable<T>, Serializable {
     }
 
     @Override
-    public int getPageSize() {
+    public long getPageSize() {
         return pageSize;
     }
 
     @Override
-    public int getPageNo() {
+    public long getPageNo() {
         return pageNo;
     }
 
     @Override
-    public int getTotalPage() {
-        int totalPage = (int) (totalCount / pageSize);
+    public long getTotalPage() {
+        long totalPage = (totalCount / pageSize);
         if (totalPage == 0 || totalCount % pageSize != 0) {
             totalPage++;
         }
@@ -164,7 +164,7 @@ public class PageDTO<T> implements Pageable<T>, Serializable {
     }
 
     @Override
-    public int getNextPage() {
+    public long getNextPage() {
         if (isLastPage()) {
             return pageNo;
         } else {
@@ -173,7 +173,7 @@ public class PageDTO<T> implements Pageable<T>, Serializable {
     }
 
     @Override
-    public int getPrePage() {
+    public long getPrePage() {
         if (isFirstPage()) {
             return pageNo;
         } else {
@@ -186,7 +186,7 @@ public class PageDTO<T> implements Pageable<T>, Serializable {
         return this;
     }
 
-    public PageDTO<T> setPageSize(int pageSize) {
+    public PageDTO<T> setPageSize(long pageSize) {
         if (pageSize < 1) {
             this.pageSize = PageConstant.DEFAULT_MAX_PAGE_SIZE;
         } else {
@@ -195,7 +195,7 @@ public class PageDTO<T> implements Pageable<T>, Serializable {
         return this;
     }
 
-    public PageDTO<T> setPageNo(int pageNo) {
+    public PageDTO<T> setPageNo(long pageNo) {
         this.pageNo = Math.max(pageNo, 1);
         adjustPageNo();
         return this;
@@ -220,7 +220,7 @@ public class PageDTO<T> implements Pageable<T>, Serializable {
         if (pageNo == 1) {
             return;
         }
-        int totalPage = getTotalPage();
+        long totalPage = getTotalPage();
         if (pageNo > totalPage) {
             pageNo = totalPage;
         }

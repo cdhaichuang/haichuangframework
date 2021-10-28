@@ -25,7 +25,7 @@ public interface Pageable<T> {
      * @return 页码
      * @since 1.1.0.211021
      */
-    int getPageNo();
+    long getPageNo();
 
     /**
      * 每页记录数
@@ -33,7 +33,7 @@ public interface Pageable<T> {
      * @return 每页记录数
      * @since 1.1.0.211021
      */
-    int getPageSize();
+    long getPageSize();
 
     /**
      * 总记录数
@@ -51,7 +51,7 @@ public interface Pageable<T> {
      */
     @JsonIgnore
     @JSONField(serialize = false, deserialize = false)
-    int getTotalPage();
+    long getTotalPage();
 
     /**
      * 是否第一页
@@ -81,7 +81,7 @@ public interface Pageable<T> {
      */
     @JsonIgnore
     @JSONField(serialize = false, deserialize = false)
-    int getNextPage();
+    long getNextPage();
 
     /**
      * 返回上页的页号
@@ -91,7 +91,7 @@ public interface Pageable<T> {
      */
     @JsonIgnore
     @JSONField(serialize = false, deserialize = false)
-    int getPrePage();
+    long getPrePage();
 
     /**
      * 获取偏移量
@@ -101,7 +101,7 @@ public interface Pageable<T> {
      */
     @JsonIgnore
     @JSONField(serialize = false, deserialize = false)
-    default int offsetPageNo() {
+    default long offsetPageNo() {
         return getPageNo() > 0 ? (getPageNo() - 1) * getPageSize() : 0;
     }
 

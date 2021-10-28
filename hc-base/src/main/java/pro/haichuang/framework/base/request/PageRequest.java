@@ -26,13 +26,13 @@ public class PageRequest implements Serializable {
      * 页码
      */
     @ApiModelProperty(value = "页码", example = "1")
-    private int pageNo;
+    private long pageNo;
 
     /**
      * 每页展示数量
      */
     @ApiModelProperty(value = "每页展示数量", example = "10")
-    private int pageSize;
+    private long pageSize;
 
     /**
      * 构造器
@@ -51,7 +51,7 @@ public class PageRequest implements Serializable {
      * @param pageSize 每页展示数量
      * @since 1.1.0.211021
      */
-    public PageRequest(int pageNo, int pageSize) {
+    public PageRequest(long pageNo, long pageSize) {
         this.setPageNo(pageNo);
         this.setPageSize(pageSize);
     }
@@ -62,7 +62,7 @@ public class PageRequest implements Serializable {
      * @param pageNo 页码
      * @since 1.1.0.211021
      */
-    public void setPageNo(int pageNo) {
+    public void setPageNo(long pageNo) {
         this.pageNo = Math.max(pageNo, 1);
     }
 
@@ -72,7 +72,7 @@ public class PageRequest implements Serializable {
      * @param pageSize 每页展示数量
      * @since 1.1.0.211021
      */
-    public void setPageSize(int pageSize) {
+    public void setPageSize(long pageSize) {
         this.pageSize = Math.max(pageSize, 0);
     }
 
@@ -85,15 +85,15 @@ public class PageRequest implements Serializable {
     @ApiModelProperty(hidden = true)
     @JsonIgnore
     @JSONField(serialize = false, deserialize = false)
-    public int getDbPageNo() {
+    public long getDbPageNo() {
         return getPageNo() > 0 ? (getPageNo() - 1) * getPageSize() : 0;
     }
 
-    public int getPageNo() {
+    public long getPageNo() {
         return pageNo;
     }
 
-    public int getPageSize() {
+    public long getPageSize() {
         return pageSize;
     }
 

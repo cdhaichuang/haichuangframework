@@ -18,19 +18,19 @@ import java.io.Serializable;
  */
 @ApiModel("PageDetailVO")
 public final class PageDetailVO implements Serializable {
-    private static final long serialVersionUID = -7159067619657396947L;
+    private static final long serialVersionUID = -3679338095395261866L;
 
     /**
      * 页码
      */
     @ApiModelProperty(value = "页码", example = PageConstant.DEFAULT_PAGE_NO_STRING)
-    private Integer pageNo;
+    private Long pageNo;
 
     /**
      * 每页展示数量
      */
     @ApiModelProperty(value = "每页展示数量", example = PageConstant.DEFAULT_PAGE_SIZE_STRING)
-    private Integer pageSize;
+    private Long pageSize;
 
     /**
      * 总数
@@ -38,33 +38,33 @@ public final class PageDetailVO implements Serializable {
     @ApiModelProperty(value = "总数", example = PageConstant.DEFAULT_TOTAL_COUNT_STRING)
     private Long totalCount;
 
-    public PageDetailVO(Integer pageNo, Integer pageSize, Long totalCount) {
+    public PageDetailVO(long pageNo, long pageSize, long totalCount) {
         this.pageNo = pageNo;
         this.pageSize = pageSize;
         this.totalCount = totalCount;
     }
 
-    public Integer getPageNo() {
+    public long getPageNo() {
         return pageNo;
     }
 
-    public void setPageNo(Integer pageNo) {
+    public void setPageNo(long pageNo) {
         this.pageNo = pageNo;
     }
 
-    public Integer getPageSize() {
+    public long getPageSize() {
         return pageSize;
     }
 
-    public void setPageSize(Integer pageSize) {
+    public void setPageSize(long pageSize) {
         this.pageSize = pageSize;
     }
 
-    public Long getTotalCount() {
+    public long getTotalCount() {
         return totalCount;
     }
 
-    public void setTotalCount(Long totalCount) {
+    public void setTotalCount(long totalCount) {
         this.totalCount = totalCount;
     }
 

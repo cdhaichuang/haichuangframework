@@ -31,7 +31,7 @@ public class PageConverter {
      * @since 1.1.0.211021
      */
     public static <T> Pageable<T> converter(IPage<T> iPage) {
-        return new PageDTO<>((int) iPage.getCurrent(), (int) iPage.getSize(), iPage.getTotal(), iPage.getRecords());
+        return new PageDTO<>(iPage.getCurrent(), iPage.getSize(), iPage.getTotal(), iPage.getRecords());
     }
 
     /**
@@ -47,7 +47,7 @@ public class PageConverter {
      * @since 1.1.0.211021
      */
     public static <T, R> Pageable<R> converter(IPage<T> iPage, Class<R> toClass) {
-        return new PageDTO<>((int) iPage.getCurrent(), (int) iPage.getSize(), iPage.getTotal(),
+        return new PageDTO<>(iPage.getCurrent(), iPage.getSize(), iPage.getTotal(),
                 iPage.getRecords().stream().map(record ->
                         ModelMapperUtils.getStrictModelMapper().map(record, toClass)).collect(Collectors.toList()));
     }
@@ -72,7 +72,7 @@ public class PageConverter {
      * @since 1.1.0.211021
      */
     public static <T, R> Pageable<R> converter(IPage<T> iPage, Function<T, R> function) {
-        return new PageDTO<>((int) iPage.getCurrent(), (int) iPage.getSize(), iPage.getTotal(),
+        return new PageDTO<>(iPage.getCurrent(), iPage.getSize(), iPage.getTotal(),
                 iPage.getRecords().stream().map(function).collect(Collectors.toList()));
     }
 
@@ -88,7 +88,7 @@ public class PageConverter {
      * @return Pageable
      * @since 1.1.0.211021
      */
-    public static <T> Pageable<T> converter(PageRequest pageRequest, int totalCount, Collection<T> content) {
+    public static <T> Pageable<T> converter(PageRequest pageRequest, long totalCount, Collection<T> content) {
         return new PageDTO<>(pageRequest, totalCount, content);
     }
 }
