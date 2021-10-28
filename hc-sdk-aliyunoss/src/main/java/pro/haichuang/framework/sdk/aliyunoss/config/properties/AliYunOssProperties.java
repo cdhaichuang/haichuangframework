@@ -15,13 +15,13 @@ import pro.haichuang.framework.base.exception.client.RequestParamException;
  *     haichuang:
  *       sdk:
  *         aliyunoss:
- *           // AccessKeyId
+ *           # AccessKeyId
  *           access-key-id: xxx
- *           // AccessKeySecret
+ *           # AccessKeySecret
  *           access-key-secret: xxx
- *           // BucketName
+ *           # BucketName
  *           bucket-name: xxx
- *           // Endpoint地域节点
+ *           # Endpoint地域节点
  *           endpoint: xxx
  * </pre>
  * <hr>

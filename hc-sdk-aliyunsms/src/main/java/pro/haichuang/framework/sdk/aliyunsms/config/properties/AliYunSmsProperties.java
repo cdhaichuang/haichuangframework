@@ -13,13 +13,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *     haichuang:
  *       sdk:
  *         aliyunsms:
- *           // AccessKeyId
+ *           # AccessKeyId
  *           access-key-id: xxx
- *           // AccessKeySecret
+ *           # AccessKeySecret
  *           access-key-secret: xxx
- *           // 短信签名
+ *           # 短信签名
  *           sign-name: xxx
- *           // 短信模板ID
+ *           # 短信模板ID
  *           template-code: xxx
  * </pre>
  * <hr>

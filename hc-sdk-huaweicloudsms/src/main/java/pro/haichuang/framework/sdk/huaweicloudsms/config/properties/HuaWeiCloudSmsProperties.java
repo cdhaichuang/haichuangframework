@@ -13,17 +13,17 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *     haichuang:
  *       sdk:
  *         huaweicloudsms:
- *           // AppKey
+ *           # AppKey
  *           app-key: xxx
- *           // AppSecret
+ *           # AppSecret
  *           app-secret: xxx
- *           // AppUrl
+ *           # AppUrl
  *           app-url: xxx
- *           // 默认短信签名, 可为空
+ *           # 默认短信签名, 可为空
  *           default-sign-name: xxx
- *           // 默认通道号, 可为空
+ *           # 默认通道号, 可为空
  *           default-channel-number: xxx
- *           // 默认模版ID, 可为空
+ *           # 默认模版ID, 可为空
  *           default-template-id: xxx
  * </pre>
  * <hr>
