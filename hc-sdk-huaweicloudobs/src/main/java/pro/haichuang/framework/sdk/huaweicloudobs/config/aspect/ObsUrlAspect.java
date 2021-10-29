@@ -49,6 +49,7 @@ import java.util.List;
 public class ObsUrlAspect {
 
     @Autowired
+    @SuppressWarnings("SpringJavaAutowiredMembersInspection")
     private HuaWeiCloudObsProperties huaWeiCloudObsProperties;
 
     @Around("@annotation(org.springframework.web.bind.annotation.RequestMapping)" +

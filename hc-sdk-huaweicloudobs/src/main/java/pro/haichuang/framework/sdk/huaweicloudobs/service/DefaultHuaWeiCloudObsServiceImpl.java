@@ -31,6 +31,7 @@ import java.util.List;
 public class DefaultHuaWeiCloudObsServiceImpl implements HuaWeiCloudObsService {
 
     @Autowired
+    @SuppressWarnings("SpringJavaAutowiredMembersInspection")
     private HuaWeiCloudObsProperties huaWeiCloudObsProperties;
 
     @SneakyThrows
@@ -190,7 +191,7 @@ public class DefaultHuaWeiCloudObsServiceImpl implements HuaWeiCloudObsService {
 
     @SneakyThrows
     @Override
-    public void downloadToResponse(String ossFilePath, String fileName,
+    public void downloadToResponse(String ossFilePath, @Nullable String fileName,
                                    HttpServletRequest request, HttpServletResponse response) {
         validateProperties();
         HuaWeiCloudObsUtils.downloadToResponse(ossFilePath,
@@ -210,7 +211,7 @@ public class DefaultHuaWeiCloudObsServiceImpl implements HuaWeiCloudObsService {
 
     @SneakyThrows
     @Override
-    public File downloadToFile(String ossFilePath, String outFileName) {
+    public File downloadToFile(String ossFilePath, @Nullable String outFileName) {
         validateProperties();
         return HuaWeiCloudObsUtils.downloadToFile(ossFilePath,
                 huaWeiCloudObsProperties.getAccessKeyId(), huaWeiCloudObsProperties.getAccessKeySecret(),
@@ -220,7 +221,7 @@ public class DefaultHuaWeiCloudObsServiceImpl implements HuaWeiCloudObsService {
 
     @SneakyThrows
     @Override
-    public File downloadToFile(String ossFilePath, File outFile) {
+    public File downloadToFile(String ossFilePath, @Nullable File outFile) {
         validateProperties();
         return HuaWeiCloudObsUtils.downloadToFile(ossFilePath,
                 huaWeiCloudObsProperties.getAccessKeyId(), huaWeiCloudObsProperties.getAccessKeySecret(),

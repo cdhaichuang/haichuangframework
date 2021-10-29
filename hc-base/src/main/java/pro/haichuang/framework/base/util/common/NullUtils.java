@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 /**
  * 空指针工具类
  *
- * <p>该类用于处理项目开发过程的各类空指针问题, 采用JDK8新特性 {@link Optional} 类进行封装, 更加方便的处理项目中空指针问题
+ * <p>该类用于处理项目开发过程的各类空指针问题, 采用JDK8新特性 {@link Optional} 类进行封装, 更加方便处理项目中空指针的问题
  *
  * @author JiYinchuan
  * @see Optional

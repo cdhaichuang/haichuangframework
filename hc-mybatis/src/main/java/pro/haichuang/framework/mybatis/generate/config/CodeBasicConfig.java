@@ -92,7 +92,7 @@ public class CodeBasicConfig {
         /**
          * 输出除实体外所有包
          */
-        ALL_EXCLUDE_DOMAIN;
+        ALL_EXCLUDE_DOMAIN
 
     }
 }

@@ -3,6 +3,7 @@ package pro.haichuang.framework.sdk.huaweicloudsms.service;
 import cn.hutool.core.util.ReUtil;
 import com.alibaba.fastjson.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import pro.haichuang.framework.base.constant.PatternConstant;
 import pro.haichuang.framework.sdk.huaweicloudsms.config.properties.HuaWeiCloudSmsProperties;
 import pro.haichuang.framework.sdk.huaweicloudsms.enums.error.HuaWeiCloudSmsConfigErrorEnum;
@@ -25,21 +26,22 @@ import java.util.List;
 public class DefaultHuaWeiCloudSmsServiceImpl implements HuaWeiCloudSmsService {
 
     @Autowired
+    @SuppressWarnings("SpringJavaAutowiredMembersInspection")
     private HuaWeiCloudSmsProperties huaWeiCloudSmsProperties;
 
     @Override
-    public List<SendResponse.Result> send(String signName, String channelNumber, String templateId,
-                                          String phoneNumbers, JSONArray templateParams) {
+    public List<SendResponse.Result> send(@NonNull String signName, @NonNull String channelNumber, @NonNull String templateId,
+                                          @NonNull String phoneNumbers, JSONArray templateParams) {
         validateProperties();
         validateParams(phoneNumbers);
 
-        if (signName == null || signName.isEmpty()) {
+        if (signName.isEmpty()) {
             throw new HuaWeiCloudSmsConfigException(HuaWeiCloudSmsConfigErrorEnum.SIGN_NAME_NOT_CONFIGURED);
         }
-        if (channelNumber == null || channelNumber.isEmpty()) {
+        if (channelNumber.isEmpty()) {
             throw new HuaWeiCloudSmsConfigException(HuaWeiCloudSmsConfigErrorEnum.CHANNEL_NUMBER_NOT_CONFIGURED);
         }
-        if (templateId == null || templateId.isEmpty()) {
+        if (templateId.isEmpty()) {
             throw new HuaWeiCloudSmsConfigException(HuaWeiCloudSmsConfigErrorEnum.TEMPLATE_ID_NOT_CONFIGURED);
         }
 
@@ -50,12 +52,12 @@ public class DefaultHuaWeiCloudSmsServiceImpl implements HuaWeiCloudSmsService {
     }
 
     @Override
-    public List<SendResponse.Result> send(String templateId,
-                                          String phoneNumbers, JSONArray templateParams) {
+    public List<SendResponse.Result> send(@NonNull String templateId,
+                                          @NonNull String phoneNumbers, JSONArray templateParams) {
         validateProperties();
         validateParams(phoneNumbers);
 
-        if (templateId == null || templateId.isEmpty()) {
+        if (templateId.isEmpty()) {
             throw new HuaWeiCloudSmsConfigException(HuaWeiCloudSmsConfigErrorEnum.TEMPLATE_ID_NOT_CONFIGURED);
         }
 
@@ -68,7 +70,7 @@ public class DefaultHuaWeiCloudSmsServiceImpl implements HuaWeiCloudSmsService {
     }
 
     @Override
-    public List<SendResponse.Result> send(String phoneNumbers, JSONArray templateParams) {
+    public List<SendResponse.Result> send(@NonNull String phoneNumbers, JSONArray templateParams) {
         validateProperties();
         validateParams(phoneNumbers);
 

@@ -49,6 +49,7 @@ import java.util.List;
 public class OssUrlAspect {
 
     @Autowired
+    @SuppressWarnings("SpringJavaAutowiredMembersInspection")
     private AliYunOssProperties aliYunOssProperties;
 
     @Around("@annotation(org.springframework.web.bind.annotation.RequestMapping)" +

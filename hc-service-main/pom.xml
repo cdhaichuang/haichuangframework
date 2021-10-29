@@ -37,7 +37,9 @@
         <finalName>${jar-file-name}</finalName>
         <plugins>
             <plugin>
+                <!--suppress MavenModelInspection -->
                 <groupId>org.springframework.boot</groupId>
+                <!--suppress MavenModelInspection -->
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <excludes>
@@ -46,20 +48,6 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
                 </configuration>
             </plugin>
         </plugins>

@@ -3,6 +3,7 @@ package pro.haichuang.framework.sdk.aliyunsms.service;
 import cn.hutool.core.util.ReUtil;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import pro.haichuang.framework.base.constant.PatternConstant;
 import pro.haichuang.framework.sdk.aliyunsms.config.properties.AliYunSmsProperties;
 import pro.haichuang.framework.sdk.aliyunsms.enums.error.AliYunSmsConfigErrorEnum;
@@ -22,17 +23,18 @@ import pro.haichuang.framework.sdk.aliyunsms.util.AliYunSmsUtils;
 public class DefaultAliYunSmsServiceImpl implements AliYunSmsService {
 
     @Autowired
+    @SuppressWarnings("SpringJavaAutowiredMembersInspection")
     private AliYunSmsProperties aliYunSmsProperties;
 
     @Override
-    public boolean send(String signName, String templateCode,
-                        String phoneNumbers, JSONObject templateParam) {
+    public boolean send(@NonNull String signName, @NonNull String templateCode,
+                        @NonNull String phoneNumbers, JSONObject templateParam) {
         validateProperties();
         validateParams(phoneNumbers);
-        if (signName == null || signName.isEmpty()) {
+        if (signName.isEmpty()) {
             throw new AliYunSmsConfigException(AliYunSmsConfigErrorEnum.SIGN_NAME_NOT_CONFIGURED);
         }
-        if (templateCode == null || templateCode.isEmpty()) {
+        if (templateCode.isEmpty()) {
             throw new AliYunSmsConfigException(AliYunSmsConfigErrorEnum.TEMPLATE_CODE_NOT_CONFIGURED);
         }
         return AliYunSmsUtils.send(aliYunSmsProperties.getAccessKeyId(),
@@ -40,14 +42,14 @@ public class DefaultAliYunSmsServiceImpl implements AliYunSmsService {
     }
 
     @Override
-    public boolean send(String templateCode, String phoneNumbers, JSONObject templateParam) {
+    public boolean send(@NonNull String templateCode, @NonNull String phoneNumbers, JSONObject templateParam) {
         validateProperties();
         validateParams(phoneNumbers);
         String signName = aliYunSmsProperties.getSignName();
         if (signName == null || signName.isEmpty()) {
             throw new AliYunSmsConfigException(AliYunSmsConfigErrorEnum.SIGN_NAME_NOT_CONFIGURED);
         }
-        if (templateCode == null || templateCode.isEmpty()) {
+        if (templateCode.isEmpty()) {
             throw new AliYunSmsConfigException(AliYunSmsConfigErrorEnum.TEMPLATE_CODE_NOT_CONFIGURED);
         }
         return AliYunSmsUtils.send(aliYunSmsProperties.getAccessKeyId(),
@@ -56,7 +58,7 @@ public class DefaultAliYunSmsServiceImpl implements AliYunSmsService {
     }
 
     @Override
-    public boolean send(String phoneNumbers, JSONObject templateParam) {
+    public boolean send(@NonNull String phoneNumbers, JSONObject templateParam) {
         validateProperties();
         validateParams(phoneNumbers);
         String signName = aliYunSmsProperties.getSignName();

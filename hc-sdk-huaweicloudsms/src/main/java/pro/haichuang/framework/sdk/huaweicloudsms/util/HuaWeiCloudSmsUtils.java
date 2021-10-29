@@ -5,7 +5,6 @@ import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import lombok.SneakyThrows;
-import org.apache.commons.lang3.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -13,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
 import pro.haichuang.framework.base.exception.ThirdPartyException;
 import pro.haichuang.framework.base.util.common.UUIDUtils;
+import pro.haichuang.framework.sdk.huaweicloudsms.enums.success.HuaWeiCloudSmsSendSuccessEnum;
 import pro.haichuang.framework.sdk.huaweicloudsms.response.SendResponse;
 
 import java.nio.charset.StandardCharsets;
@@ -35,37 +35,6 @@ public class HuaWeiCloudSmsUtils {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HuaWeiCloudSmsUtils.class);
     private static final String LOG_TAG = "sdk-huaweicloudsms-util";
-
-    /**
-     * 成功状态码
-     */
-    private static final String SUCCESS_CODE = "000000";
-
-    public static void main(String[] args) {
-        List<SendResponse.Result> data = send("https://rtcsms.cn-north-1.myhuaweicloud.com:10743",
-                "2d60t967IL3c6EU6bm3gTzI4z478",
-                "6j7F1Yx4843LsUXnvcufU1K40Wwn",
-                "中鸿商业保理",
-                "8821081732829",
-                "15181743604",
-                "9f39c42b030e403faabbf30f25fdd1ab",
-                new JSONArray().fluentAdd(String.valueOf(RandomUtils.nextInt(100000, 1000000))));
-        System.out.println(data);
-        // String data = "{\n" +
-        //         "    \"result\": [{\n" +
-        //         "            \"originTo\": \"15181743604\",\n" +
-        //         "            \"createTime\": \"2021-10-19T03:24:22Z\",\n" +
-        //         "            \"from\": \"8821081732829\",\n" +
-        //         "            \"smsMsgId\": \"c0a75b77-c080-45ef-9378-a36d183c006a_5056438028\",\n" +
-        //         "            \"status\": \"000000\"\n" +
-        //         "        }\n" +
-        //         "    ],\n" +
-        //         "    \"code\": \"000000\",\n" +
-        //         "    \"description\": \"Success\"\n" +
-        //         "}";
-        // SendResponse sendResultResponse = JSONObject.parseObject(data, SendResponse.class);
-        // System.out.println(sendResultResponse);
-    }
 
     /**
      * 发送手机短信
@@ -108,13 +77,13 @@ public class HuaWeiCloudSmsUtils {
                 .execute().body();
         SendResponse response = JSONObject.parseObject(responseJson, SendResponse.class);
 
-        if (!SUCCESS_CODE.equals(response.getErrorCode())) {
+        if (!HuaWeiCloudSmsSendSuccessEnum.SEND_SUCCESS.value().equals(response.getErrorCode())) {
             LOGGER.error("[{}] 发送验证码失败 [errorCode: {}, errorMessage: {}, phoneNumbers: {}, templateId: {}, templateParams: {}]",
                     LOG_TAG, response.getErrorCode(), response.getErrorMessage(), phoneNumbers, templateId, templateParams);
             throw new ThirdPartyException(response.getErrorCode(), response.getErrorMessage());
         }
         for (SendResponse.Result result : response.getContent()) {
-            if (!SUCCESS_CODE.equals(result.getStatus())) {
+            if (null != result.getStatus() && !HuaWeiCloudSmsSendSuccessEnum.SEND_SUCCESS.value().equals(result.getStatus())) {
                 LOGGER.error("[{}] 发送验证码状态错误 [errorStatus: {}, phoneNumbers: {}, templateId: {}, templateParams: {}]",
                         LOG_TAG, result.getStatus(), phoneNumbers, templateId, templateParams);
                 throw new ThirdPartyException(result.getStatus(), "发送验证码状态错误");

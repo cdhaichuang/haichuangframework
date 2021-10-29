@@ -14,17 +14,17 @@ public class ThirdPartyException extends RuntimeException {
     /**
      * 错误码
      */
-    protected String errorCode;
+    protected final String errorCode;
 
     /**
      * 错误信息
      */
-    protected String errorMessage;
+    protected final String errorMessage;
 
     /**
      * 错误信息
      */
-    protected String userTip;
+    protected final String userTip;
 
     public ThirdPartyException(BaseEnum baseEnum) {
         super("第三方服务异常: [errorCode: " + baseEnum.value() + ", errorMessage: " + baseEnum.getReasonPhrase() + "]");

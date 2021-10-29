@@ -5,7 +5,6 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.format.annotation.DateTimeFormat;
-import pro.haichuang.framework.sdk.huaweicloudsms.enums.success.HuaWeiCloudSmsSendSuccessEnum;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -49,7 +48,7 @@ public class SendResponse implements Serializable {
      * @since 1.1.0.211021
      */
     public static class Result implements Serializable {
-        private static final long serialVersionUID = -6452712762780474877L;
+        private static final long serialVersionUID = -6745226249339848052L;
 
         /**
          * 短信的唯一标识
@@ -86,7 +85,7 @@ public class SendResponse implements Serializable {
          */
         @JSONField(name = "status")
         @JsonProperty("status")
-        private HuaWeiCloudSmsSendSuccessEnum status;
+        private String status;
 
         public String getSmsMessageId() {
             return smsMessageId;
@@ -120,11 +119,11 @@ public class SendResponse implements Serializable {
             this.phoneNumber = phoneNumber;
         }
 
-        public HuaWeiCloudSmsSendSuccessEnum getStatus() {
+        public String getStatus() {
             return status;
         }
 
-        public void setStatus(HuaWeiCloudSmsSendSuccessEnum status) {
+        public void setStatus(String status) {
             this.status = status;
         }
 

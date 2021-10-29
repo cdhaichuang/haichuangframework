@@ -13,11 +13,8 @@ import java.util.regex.Pattern;
  */
 public class PhoneValidator implements ConstraintValidator<Phone, CharSequence> {
 
-    private Phone annotation;
-
     @Override
     public void initialize(Phone constraintAnnotation) {
-        this.annotation = constraintAnnotation;
     }
 
     @Override

@@ -47,6 +47,7 @@ public class LogSaveAspect {
             new ThreadPoolExecutor.AbortPolicy());
 
     @Autowired
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     private AbstractLogSave abstractLogSave;
 
     @Pointcut("@annotation(pro.haichuang.framework.base.annotation.LogSave)")

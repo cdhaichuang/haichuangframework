@@ -30,6 +30,7 @@ import java.util.List;
 public class DefaultAliYunOssServiceImpl implements AliYunOssService {
 
     @Autowired
+    @SuppressWarnings("SpringJavaAutowiredMembersInspection")
     private AliYunOssProperties aliYunOssProperties;
 
     @SneakyThrows
@@ -187,7 +188,7 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
 
     @SneakyThrows
     @Override
-    public void downloadToResponse(String ossFilePath, String fileName,
+    public void downloadToResponse(String ossFilePath, @Nullable String fileName,
                                    HttpServletRequest request, HttpServletResponse response) {
         validateProperties();
         AliYunOssUtils.downloadToResponse(ossFilePath,
@@ -205,7 +206,7 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
     }
 
     @Override
-    public File downloadToFile(String ossFilePath, String fileName) {
+    public File downloadToFile(String ossFilePath, @Nullable String fileName) {
         validateProperties();
         return AliYunOssUtils.downloadToFile(ossFilePath,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
@@ -214,7 +215,7 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
     }
 
     @Override
-    public File downloadToFile(String ossFilePath, File file) {
+    public File downloadToFile(String ossFilePath, @Nullable File file) {
         validateProperties();
         return AliYunOssUtils.downloadToFile(ossFilePath,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),

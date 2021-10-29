@@ -43,8 +43,8 @@ public class WxMpKey {
     private static String PROJECT_CODE = "";
 
     @Autowired
+    @SuppressWarnings("SpringJavaAutowiredMembersInspection")
     private BaseConfigProperties baseConfigProperties;
-
 
     @PostConstruct
     public void setProjectCode() {

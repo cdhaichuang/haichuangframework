@@ -14,7 +14,7 @@
                      默认值为0, 不等待后台任务, 并非能应用到所有的应用程序, 设置的时间太短, 会增加丢失最后日志记录的风险
                      注意: 只有当 [shutdownHook] 启用时该参数才生效
 -->
-<Configuration status="WARN" name="log4j2" monitorInterval="60" xmlns:xi="http://www.w3.org/2001/XInclude">
+<Configuration status="WARN" name="log4j2" monitorInterval="60">
 
     <Properties>
         <!-- 日志文件根路径 -->

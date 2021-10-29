@@ -16,7 +16,7 @@ public enum HuaWeiCloudSmsSendSuccessEnum implements BaseEnum {
     /**
      * 华为云SMS发送成功
      */
-    HUA_WEI_CLOUD_SMS_SEND_SUCCESS("000000", "华为云SMS发送成功");
+    SEND_SUCCESS("000000", "华为云SMS发送成功");
 
 
     /**

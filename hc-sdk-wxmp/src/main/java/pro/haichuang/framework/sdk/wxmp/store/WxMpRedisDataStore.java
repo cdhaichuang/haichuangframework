@@ -3,6 +3,7 @@ package pro.haichuang.framework.sdk.wxmp.store;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import pro.haichuang.framework.redis.service.RedisService;
 import pro.haichuang.framework.sdk.wxmp.key.WxMpKey;
 
@@ -21,45 +22,46 @@ public class WxMpRedisDataStore implements WxMpDataStore {
     private static final String LOG_TAG = "WxMpDataStoreRedis实现";
 
     @Autowired
+    @SuppressWarnings("SpringJavaAutowiredMembersInspection")
     private RedisService redisService;
 
     @Override
-    public void setBaseAccessToken(String key, String baseAccessToken, Duration expireTime) {
+    public void setBaseAccessToken(@NonNull String key, @NonNull String baseAccessToken, @NonNull Duration expireTime) {
         redisService.set(key, baseAccessToken, expireTime.getSeconds());
     }
 
     @Override
-    public String getBaseAccessToken(String key) {
+    public String getBaseAccessToken(@NonNull String key) {
         return redisService.get(key);
     }
 
     @Override
-    public void setWebAccessToken(String key, String webAccessToken, Duration expireTime) {
+    public void setWebAccessToken(@NonNull String key, @NonNull String webAccessToken, @NonNull Duration expireTime) {
         redisService.set(key, webAccessToken, expireTime.getSeconds());
     }
 
     @Override
-    public String getWebAccessToken(String key) {
+    public String getWebAccessToken(@NonNull String key) {
         return redisService.get(key);
     }
 
     @Override
-    public void setWebRefreshAccessToken(String key, String webRefreshAccessToken, Duration expireTime) {
+    public void setWebRefreshAccessToken(@NonNull String key, @NonNull String webRefreshAccessToken, @NonNull Duration expireTime) {
         redisService.set(key, webRefreshAccessToken, expireTime.getSeconds());
     }
 
     @Override
-    public String getWebRefreshAccessToken(String key) {
+    public String getWebRefreshAccessToken(@NonNull String key) {
         return redisService.get(key);
     }
 
     @Override
-    public void setJsApiTicket(String key, String jsApiTicket, Duration expireTime) {
+    public void setJsApiTicket(@NonNull String key, @NonNull String jsApiTicket, @NonNull Duration expireTime) {
         redisService.set(key, jsApiTicket, expireTime.getSeconds());
     }
 
     @Override
-    public String getJsApiTicket(String key) {
+    public String getJsApiTicket(@NonNull String key) {
         return redisService.get(key);
     }
 

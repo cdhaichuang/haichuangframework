@@ -27,8 +27,11 @@ import javax.servlet.http.HttpServletResponse;
 public class DefaultWxMpServiceImpl implements WxMpService {
 
     @Autowired
+    @SuppressWarnings("SpringJavaAutowiredMembersInspection")
     private WxMpProperties wxMpProperties;
+
     @Autowired
+    @SuppressWarnings("SpringJavaAutowiredMembersInspection")
     private WxMpDataStore wxMpDataStore;
 
     @SneakyThrows
