@@ -10,14 +10,17 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import pro.haichuang.framework.base.annotation.EnableLogSave;
 import pro.haichuang.framework.base.annotation.LogSave;
 import pro.haichuang.framework.base.config.interceptor.AbstractLogSave;
 import pro.haichuang.framework.base.util.common.IpUtils;
 import pro.haichuang.framework.base.util.jwt.SecurityUtils;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.util.concurrent.ExecutorService;
@@ -29,10 +32,10 @@ import java.util.concurrent.TimeUnit;
  * 日志持久化切面
  *
  * <p>该类具体实现了日志持久化相关封装, 具体持久化逻辑需要自定义继承 {@link AbstractLogSave} 抽象类
- * <p>注意: 该类启用的前置条件为标注了 {@link pro.haichuang.framework.base.annotation.EnableLogSave @EnableLogSave} 注解
+ * <p>注意: 该类启用的前置条件为标注了 {@link EnableLogSave @EnableLogSave} 注解
  *
  * @author JiYinchuan
- * @see pro.haichuang.framework.base.annotation.EnableLogSave
+ * @see EnableLogSave
  * @see AbstractLogSave
  * @since 1.1.0.211021
  */
@@ -41,14 +44,25 @@ import java.util.concurrent.TimeUnit;
 @ConditionalOnBean(AbstractLogSave.class)
 public class LogSaveAspect {
 
-    private final ExecutorService executorService = new ThreadPoolExecutor(5, 100, 0L, TimeUnit.MILLISECONDS,
-            new LinkedBlockingDeque<>(1024),
-            new ThreadFactoryBuilder().setNamePrefix("SLogSaveAspect-Thread-%d").build(),
-            new ThreadPoolExecutor.AbortPolicy());
-
+    @Autowired
+    private ServerProperties serverProperties;
     @Autowired
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     private AbstractLogSave abstractLogSave;
+
+    private static ExecutorService executorService;
+
+    @PostConstruct
+    public void init() {
+        // 设置线程池的大小为 [Tomcat] 线程的大小, 队列大小最小为 [Tomcat] 最大线程数, 最大为 [1024]
+        executorService = new ThreadPoolExecutor(
+                serverProperties.getTomcat().getThreads().getMinSpare(),
+                serverProperties.getTomcat().getThreads().getMax(),
+                30, TimeUnit.MINUTES,
+                new LinkedBlockingDeque<>(Math.min(serverProperties.getTomcat().getThreads().getMax(), 1024)),
+                new ThreadFactoryBuilder().setNamePrefix("LogSaveAspect-Thread-%d").build(),
+                new ThreadPoolExecutor.AbortPolicy());
+    }
 
     @Pointcut("@annotation(pro.haichuang.framework.base.annotation.LogSave)")
     public void logPointCut() {
@@ -100,7 +114,9 @@ public class LogSaveAspect {
         String finalClientIp = clientIp;
         String finalFullMethodName = fullMethodName;
         Long finalUserId = userId;
-        executorService.execute(() -> abstractLogSave.saveLog(finalLogSave, finalApi, finalApiOperation, finalClientIp, finalFullMethodName, finalUserId, executionTime));
+
+        executorService.execute(() -> abstractLogSave.saveLog(finalLogSave, finalApi, finalApiOperation, finalClientIp,
+                finalFullMethodName, finalUserId, executionTime));
 
         return result;
     }

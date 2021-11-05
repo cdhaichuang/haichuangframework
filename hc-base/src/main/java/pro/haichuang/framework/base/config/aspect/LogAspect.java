@@ -14,6 +14,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.util.Assert;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import pro.haichuang.framework.base.annotation.EnableControllerLogAspect;
 import pro.haichuang.framework.base.dto.HttpServletRequestDTO;
 import pro.haichuang.framework.base.exception.ApplicationException;
 import pro.haichuang.framework.base.util.common.RequestUtils;
@@ -24,11 +25,11 @@ import java.lang.reflect.Method;
 /**
  * 日志切面
  *
- * <p>该类具体实现了记录请求日志的功能, 切点为标注了 {@link ApiOperation @ApiOperation} 注解的方法, 记录相关请求与响应数据
- * <p>注意: 该类启用的前提条件为标注了
- * {@link pro.haichuang.framework.base.annotation.EnableControllerLogAspect @EnableControllerLogAspect} 注解
+ * <p>该类具体实现了记录请求日志的功能, 切点为标注了 {@link ApiOperation @ApiOperation} 注解的方法记录相关请求与响应数据
+ * <p>注意: 该类启用的前提条件为标注了 {@link EnableControllerLogAspect @EnableControllerLogAspect} 注解
  *
  * @author JiYinchuan
+ * @see EnableControllerLogAspect
  * @since 1.1.0.211021
  */
 @Aspect
@@ -73,6 +74,7 @@ public class LogAspect {
                 clientIp, userId, point.getArgs());
 
         Object result = point.proceed();
+        // 执行时间
         long executionTime = System.currentTimeMillis() - beginTime;
 
         LOGGER.info("[{}] [ End ] 检测到请求 [apiMessage: {}, requestUri: {}, method: {}, " +

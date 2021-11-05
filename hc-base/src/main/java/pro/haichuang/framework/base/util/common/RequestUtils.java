@@ -60,7 +60,6 @@ public class RequestUtils {
                 .setFullMethodName(fullMethodName);
     }
 
-
     /**
      * 判断是否为JSON请求
      *

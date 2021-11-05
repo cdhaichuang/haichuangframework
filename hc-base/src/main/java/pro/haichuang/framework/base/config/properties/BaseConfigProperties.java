@@ -1,6 +1,10 @@
 package pro.haichuang.framework.base.config.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.convert.DurationUnit;
+
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 
 /**
  * 核心配置文件
@@ -13,6 +17,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *     haichuang:
  *       // 是否启用配置
  *       enable: true
+ *       // 项目代号
+ *       projectCode: true
+ *       // 请求超时时间, 可自定义时间单位, 默认时间单位为 [秒], 默认值为 [3s]
+ *       requestTimeoutTime: 3s
  * </pre>
  *
  * @author JiYinchuan
@@ -31,6 +39,12 @@ public class BaseConfigProperties {
      */
     private String projectCode;
 
+    /**
+     * 请求超时时间, 可自定义时间单位, 默认时间单位为 [秒], 默认值为 [3s]
+     */
+    @DurationUnit(ChronoUnit.SECONDS)
+    private Duration requestTimeoutTime = Duration.ofSeconds(3);
+
     public Boolean getEnable() {
         return enable;
     }
@@ -45,5 +59,13 @@ public class BaseConfigProperties {
 
     public void setProjectCode(String projectCode) {
         this.projectCode = projectCode;
+    }
+
+    public Duration getRequestTimeoutTime() {
+        return requestTimeoutTime;
+    }
+
+    public void setRequestTimeoutTime(Duration requestTimeoutTime) {
+        this.requestTimeoutTime = requestTimeoutTime;
     }
 }
