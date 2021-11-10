@@ -370,7 +370,9 @@
             <build>
                 <plugins>
                     <plugin>
+                        <!--suppress MavenModelInspection -->
                         <groupId>org.apache.maven.plugins</groupId>
+                        <!--suppress MavenModelInspection -->
                         <artifactId>maven-gpg-plugin</artifactId>
                         <executions>
                             <execution>
