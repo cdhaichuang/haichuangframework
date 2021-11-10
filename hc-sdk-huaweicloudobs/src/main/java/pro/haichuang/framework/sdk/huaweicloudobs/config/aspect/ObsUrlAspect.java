@@ -32,8 +32,9 @@ import java.util.List;
  * <p>注意: {@link ObsUrl @ObsUrl} 注解只支持加载 {@link String} 类型的字段或请求方法形参中, 否则将不生效
  * <hr>
  * <p> {@link EnableObsUrlConvert @EnableObsUrlConvert} 注解与 {@link ObsUrl @ObsUrl} 注解必须同时使用才会生效,
- * 当请求方法形参为复杂对象时将会采用反射机制进行改变其字段的值,
- * 加 {@link EnableObsUrlConvert @EnableObsUrlConvert} 是为了减少转换次数, 将转换控制全权交由开发自己灵活控制
+ * 当请求方法形参为复杂对象时将会采用反射机制进行改变其字段的值
+ * <hr>
+ * <p>ps: 加 {@link EnableObsUrlConvert @EnableObsUrlConvert} 是为了将转换控制全权交由开发灵活控制, 避免AOP减慢不需要转换方法的处理时间
  *
  * @author JiYinchuan
  * @see EnableObsUrlConvert
@@ -52,49 +53,45 @@ public class ObsUrlAspect {
     @SuppressWarnings("SpringJavaAutowiredMembersInspection")
     private HuaWeiCloudObsProperties huaWeiCloudObsProperties;
 
-    @Around("@annotation(org.springframework.web.bind.annotation.RequestMapping)" +
-            " || @annotation(org.springframework.web.bind.annotation.GetMapping)" +
-            " || @annotation(org.springframework.web.bind.annotation.PostMapping)" +
-            " || @annotation(org.springframework.web.bind.annotation.PutMapping)" +
-            " || @annotation(org.springframework.web.bind.annotation.DeleteMapping)" +
-            " || @annotation(org.springframework.web.bind.annotation.PatchMapping)")
+    @Around("@annotation(pro.haichuang.framework.sdk.huaweicloudobs.annotation.EnableObsUrlConvert)")
     public Object around(ProceedingJoinPoint point) throws Throwable {
         MethodSignature signature = (MethodSignature) point.getSignature();
         Method method = signature.getMethod();
 
-        EnableObsUrlConvert enableObsUrlConvert = method.getAnnotation(EnableObsUrlConvert.class);
-        if (enableObsUrlConvert != null) {
-            Object[] args = point.getArgs();
-            Parameter[] parameters = method.getParameters();
+        String addPrefixUrl = huaWeiCloudObsProperties.getBucketDomain();
+        String delPrefixUrl = huaWeiCloudObsProperties.getBucketDomain();
 
-            for (int i = 0; i < args.length; i++) {
-                if (args[i] != null) {
-                    if (args[i] instanceof String && parameters[i].getAnnotation(ObsUrl.class) != null) {
-                        String tempUrl = (String) args[i];
-                        args[i] = tempUrl.replace(huaWeiCloudObsProperties.getBucketDomain(), "");
-                    } else {
-                        obsUrlConvert(args[i], true);
-                    }
+        // 处理请求参数
+        Object[] args = point.getArgs();
+        Parameter[] parameters = method.getParameters();
+        for (int i = 0; i < args.length; i++) {
+            if (args[i] != null) {
+                if (args[i] instanceof String && parameters[i].getAnnotation(ObsUrl.class) != null) {
+                    String tempUrl = (String) args[i];
+                    args[i] = tempUrl.replace(delPrefixUrl, "");
+                } else {
+                    obsUrlConvert(args[i], true, addPrefixUrl);
                 }
             }
         }
 
         Object proceed = point.proceed();
 
+        // 处理响应结果
         if (proceed instanceof SingleVO) {
-            obsUrlConvert(((SingleVO<?>) proceed).getData(), false);
+            obsUrlConvert(((SingleVO<?>) proceed).getData(), false, addPrefixUrl);
         } else if (proceed instanceof MultiVO) {
             Collection<?> collection = ((MultiVO<?>) proceed).getData();
             if (!Collections.isEmpty(collection)) {
                 for (Object obj : collection) {
-                    obsUrlConvert(obj, false);
+                    obsUrlConvert(obj, false, addPrefixUrl);
                 }
             }
         } else if (proceed instanceof PageVO) {
             Collection<?> collection = ((PageVO<?>) proceed).getData();
             if (!Collections.isEmpty(collection)) {
                 for (Object obj : collection) {
-                    obsUrlConvert(obj, false);
+                    obsUrlConvert(obj, false, addPrefixUrl);
                 }
             }
         }
@@ -106,12 +103,13 @@ public class ObsUrlAspect {
      *
      * @param obj          调用对象
      * @param isRequestObj 是否为请求对象
+     * @param addPrefixUrl 添加的访问前缀
      * @throws InvocationTargetException 调用目标方法异常
      * @throws IllegalAccessException    非法访问异常
      * @throws IntrospectionException    属性描述构造器参数检查异常
      * @since 1.1.0.211021
      */
-    private void obsUrlConvert(Object obj, boolean isRequestObj)
+    private void obsUrlConvert(Object obj, boolean isRequestObj, String addPrefixUrl)
             throws InvocationTargetException, IllegalAccessException, IntrospectionException {
         if (obj != null) {
             Field[] declaredFields = obj.getClass().getDeclaredFields();
@@ -122,7 +120,7 @@ public class ObsUrlAspect {
                     Method writeMethod = propertyDescriptor.getWriteMethod();
                     Object originUrl = readMethod.invoke(obj);
                     if (originUrl != null) {
-                        writeMethod.invoke(obj, getNewObsUrl(originUrl, isRequestObj));
+                        writeMethod.invoke(obj, getNewObsUrl(originUrl, isRequestObj, addPrefixUrl));
                     }
                 }
             }
@@ -134,11 +132,11 @@ public class ObsUrlAspect {
      *
      * @param originObsUrl 原始OBS地址
      * @param isRequestObj 是否为请求对象
+     * @param addPrefixUrl 添加的访问前缀
      * @return 新OBS地址
      * @since 1.1.0.211021
      */
-    private Object getNewObsUrl(Object originObsUrl, boolean isRequestObj) {
-        String bucketDomain = huaWeiCloudObsProperties.getBucketDomain();
+    private Object getNewObsUrl(Object originObsUrl, boolean isRequestObj, String addPrefixUrl) {
         Object newObsUrl = originObsUrl;
         if (originObsUrl instanceof Collection) {
             Collection<?> originObsUrls = (Collection<?>) originObsUrl;
@@ -147,16 +145,16 @@ public class ObsUrlAspect {
                 Object tempObsUrl = tempOriginObsUrl;
                 if (tempOriginObsUrl instanceof String) {
                     tempObsUrl = isRequestObj
-                            ? ((String) tempOriginObsUrl).replace(bucketDomain, "")
-                            : bucketDomain + tempOriginObsUrl;
+                            ? ((String) tempOriginObsUrl).replace(addPrefixUrl, "")
+                            : addPrefixUrl + tempOriginObsUrl;
                 }
                 newObsUrls.add(tempObsUrl);
             }
             newObsUrl = newObsUrls;
         } else if (originObsUrl instanceof String) {
             newObsUrl = isRequestObj
-                    ? ((String) originObsUrl).replace(bucketDomain, "")
-                    : bucketDomain + originObsUrl;
+                    ? ((String) originObsUrl).replace(addPrefixUrl, "")
+                    : addPrefixUrl + originObsUrl;
         }
         return newObsUrl;
     }
