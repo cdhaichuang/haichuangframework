@@ -6,7 +6,6 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import pro.haichuang.framework.base.response.vo.MultiVO;
 import pro.haichuang.framework.base.response.vo.PageVO;
 import pro.haichuang.framework.base.response.vo.SingleVO;
@@ -38,12 +37,6 @@ import java.util.List;
  *
  * @author JiYinchuan
  * @see EnableObsUrlConvert
- * @see RequestMapping
- * @see GetMapping
- * @see PostMapping
- * @see PutMapping
- * @see DeleteMapping
- * @see PatchMapping
  * @since 1.1.0.211021
  */
 @Aspect
