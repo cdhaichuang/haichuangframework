@@ -5,8 +5,10 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Lazy;
 import pro.haichuang.framework.base.config.autoconfiguration.BaseAutoConfiguration;
+import pro.haichuang.framework.sdk.huaweicloudobs.config.aspect.ObsUrlAspect;
 import pro.haichuang.framework.sdk.huaweicloudobs.config.properties.HuaWeiCloudObsProperties;
 import pro.haichuang.framework.sdk.huaweicloudobs.service.DefaultHuaWeiCloudObsServiceImpl;
 import pro.haichuang.framework.sdk.huaweicloudobs.service.HuaWeiCloudObsService;
@@ -24,6 +26,9 @@ import pro.haichuang.framework.sdk.huaweicloudobs.service.HuaWeiCloudObsService;
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureAfter(BaseAutoConfiguration.class)
 @EnableConfigurationProperties(HuaWeiCloudObsProperties.class)
+@Import({
+        ObsUrlAspect.class
+})
 public class HuaWeiCloudObsAutoConfiguration {
 
     @Bean
