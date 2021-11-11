@@ -75,11 +75,12 @@ public class Init {
                 File resourcesMapperDirFile = getChildDir(resourcesDirFile, "pro.haichuang.framework.service.main");
 
                 // 服务模块 [pom.xml] 文件
+                File parentPomFile = new File("pom.xml");
                 File pomFile = new File(PROJECT_SERVICE_MODEL_NAME, "pom.xml");
-                if (!pomFile.exists()) {
+                if (!pomFile.exists() || !parentPomFile.exists()) {
                     throw new RuntimeException("[pom.xml] 不存在");
                 }
-                if (!pomFile.isFile()) {
+                if (!pomFile.isFile() || !parentPomFile.exists()) {
                     throw new RuntimeException("[pom.xml] 必须为文件");
                 }
 
@@ -112,6 +113,7 @@ public class Init {
                     throw new RuntimeException("重命名Mapper存放目录失败");
                 }
                 // 更改 [pom.xml] 文件 [Jar] 名称
+                replaceCodeAndFlushWrite(false, parentPomFile, originCodeName, port);
                 replaceCodeAndFlushWrite(false, pomFile, originCodeName, port);
             } catch (Exception e) {
                 System.out.println("运行异常, 请联系管理员");
@@ -189,6 +191,9 @@ public class Init {
                     }
                     if (line.contains("defaultJarFileName")) {
                         line = line.replaceAll("defaultJarFileName", originCodeName);
+                    }
+                    if (line.contains("projectartifactid")) {
+                        line = line.replaceAll("projectartifactid", originCodeName.toLowerCase());
                     }
                     buffer.append(line.concat(LINE_SEPARATOR));
                 }
