@@ -10,6 +10,8 @@ import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 import pro.haichuang.framework.base.exception.ThirdPartyException;
 
 import java.util.List;
@@ -64,15 +66,18 @@ public class AliYunSmsUtils {
      * @throws ThirdPartyException 阿里云短信发送异常
      * @since 1.1.0.211021
      */
-    public static boolean send(String accessKeyId, String accessKeySecret,
-                               String signName, String templateCode,
-                               String phoneNumbers, JSONObject templateParam)
+    @NonNull
+    public static boolean send(@NonNull String accessKeyId, @NonNull String accessKeySecret,
+                               @NonNull String signName, @NonNull String templateCode,
+                               @NonNull String phoneNumbers, @Nullable JSONObject templateParam)
             throws ThirdPartyException {
         CommonRequest request = createRequest();
         request.putQueryParameter("PhoneNumbers", phoneNumbers);
         request.putQueryParameter("SignName", signName);
         request.putQueryParameter("TemplateCode", templateCode);
-        request.putQueryParameter("TemplateParam", templateParam.toJSONString());
+        if (templateParam != null && templateParam.size() != 0) {
+            request.putQueryParameter("TemplateParam", templateParam.toJSONString());
+        }
         return baseSend(accessKeyId, accessKeySecret, request);
     }
 
@@ -90,15 +95,17 @@ public class AliYunSmsUtils {
      * @throws ThirdPartyException 阿里云短信发送异常
      * @since 1.1.0.211021
      */
-    public static boolean sendBatch(String accessKeyId, String accessKeySecret,
-                                    List<String> signNames, String templateCode,
-                                    List<String> phones, JSONArray templateParam)
+    public static boolean sendBatch(@NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                    @NonNull List<String> signNames, @NonNull String templateCode,
+                                    @NonNull List<String> phones, @Nullable JSONArray templateParam)
             throws ThirdPartyException {
         CommonRequest request = createRequest();
         request.putQueryParameter("PhoneNumberJson", JSONObject.toJSONString(phones));
         request.putQueryParameter("SignNameJson", JSONObject.toJSONString(signNames));
         request.putQueryParameter("TemplateCode", templateCode);
-        request.putQueryParameter("TemplateParamJson", templateParam.toJSONString());
+        if (templateParam != null && templateParam.size() != 0) {
+            request.putQueryParameter("TemplateParamJson", templateParam.toJSONString());
+        }
         return baseSend(accessKeyId, accessKeySecret, request);
     }
 
@@ -110,7 +117,8 @@ public class AliYunSmsUtils {
      * @return IAcsClient
      * @since 1.1.0.211021
      */
-    private static IAcsClient getClient(String accessKeyId, String accessKeySecret) {
+    @NonNull
+    private static IAcsClient getClient(@NonNull String accessKeyId, @NonNull String accessKeySecret) {
         DefaultProfile profile = DefaultProfile.getProfile(REGION_ID, accessKeyId, accessKeySecret);
         return new DefaultAcsClient(profile);
     }
@@ -121,6 +129,7 @@ public class AliYunSmsUtils {
      * @return 公共请求
      * @since 1.1.0.211021
      */
+    @NonNull
     private static CommonRequest createRequest() {
         CommonRequest request = new CommonRequest();
         request.setSysMethod(MethodType.POST);
@@ -140,7 +149,7 @@ public class AliYunSmsUtils {
      * @throws ThirdPartyException 阿里云短信发送异常
      * @since 1.1.0.211021
      */
-    private static boolean baseSend(String accessKeyId, String accessKeySecret, CommonRequest request)
+    private static boolean baseSend(@NonNull String accessKeyId, @NonNull String accessKeySecret, @NonNull CommonRequest request)
             throws ThirdPartyException {
         try {
             getClient(accessKeyId, accessKeySecret).getCommonResponse(request);

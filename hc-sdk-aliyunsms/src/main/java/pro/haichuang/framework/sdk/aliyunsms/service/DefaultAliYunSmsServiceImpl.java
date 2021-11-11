@@ -3,7 +3,7 @@ package pro.haichuang.framework.sdk.aliyunsms.service;
 import cn.hutool.core.util.ReUtil;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 import pro.haichuang.framework.base.constant.PatternConstant;
 import pro.haichuang.framework.sdk.aliyunsms.config.properties.AliYunSmsProperties;
 import pro.haichuang.framework.sdk.aliyunsms.enums.error.AliYunSmsConfigErrorEnum;
@@ -27,8 +27,8 @@ public class DefaultAliYunSmsServiceImpl implements AliYunSmsService {
     private AliYunSmsProperties aliYunSmsProperties;
 
     @Override
-    public boolean send(@NonNull String signName, @NonNull String templateCode,
-                        @NonNull String phoneNumbers, JSONObject templateParam) {
+    public boolean send(String signName, String templateCode,
+                        String phoneNumbers, @Nullable JSONObject templateParam) {
         validateProperties();
         validateParams(phoneNumbers);
         if (signName.isEmpty()) {
@@ -42,7 +42,7 @@ public class DefaultAliYunSmsServiceImpl implements AliYunSmsService {
     }
 
     @Override
-    public boolean send(@NonNull String templateCode, @NonNull String phoneNumbers, JSONObject templateParam) {
+    public boolean send(String templateCode, String phoneNumbers, @Nullable JSONObject templateParam) {
         validateProperties();
         validateParams(phoneNumbers);
         String signName = aliYunSmsProperties.getSignName();
@@ -58,7 +58,7 @@ public class DefaultAliYunSmsServiceImpl implements AliYunSmsService {
     }
 
     @Override
-    public boolean send(@NonNull String phoneNumbers, JSONObject templateParam) {
+    public boolean send(String phoneNumbers, @Nullable JSONObject templateParam) {
         validateProperties();
         validateParams(phoneNumbers);
         String signName = aliYunSmsProperties.getSignName();

@@ -2,6 +2,8 @@ package pro.haichuang.framework.base.util.common;
 
 import cn.hutool.core.util.IdUtil;
 import com.alibaba.ttl.TransmittableThreadLocal;
+import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 import pro.haichuang.framework.base.key.ProjectKey;
 
 import java.util.HashMap;
@@ -35,7 +37,8 @@ public class ThreadLocalUtils {
      * @return Value
      * @since 1.1.0.211021
      */
-    public static <T> T set(String key, T value) {
+    @NonNull
+    public static <T> T set(@NonNull String key, @NonNull T value) {
         Map<String, Object> map = LOCAL.get();
         map = map == null ? new HashMap<>(16) : new HashMap<>(map);
         map.put(key, value);
@@ -52,7 +55,8 @@ public class ThreadLocalUtils {
      * @since 1.1.0.211021
      */
     @SuppressWarnings({"unchecked"})
-    public static <T> T get(final String key) {
+    @Nullable
+    public static <T> T get(@NonNull final String key) {
         final Map<String, Object> map = LOCAL.get();
         return map == null ? null : (T) map.get(key);
     }
@@ -64,6 +68,7 @@ public class ThreadLocalUtils {
      * @return 是否包含Key
      * @since 1.1.0.211021
      */
+    @Nullable
     public boolean containsKey(final String key) {
         final Map<String, Object> map = LOCAL.get();
         return map != null && map.containsKey(key);

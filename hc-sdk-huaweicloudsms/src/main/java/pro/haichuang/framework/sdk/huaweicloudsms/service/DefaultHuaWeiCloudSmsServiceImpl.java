@@ -3,7 +3,7 @@ package pro.haichuang.framework.sdk.huaweicloudsms.service;
 import cn.hutool.core.util.ReUtil;
 import com.alibaba.fastjson.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 import pro.haichuang.framework.base.constant.PatternConstant;
 import pro.haichuang.framework.sdk.huaweicloudsms.config.properties.HuaWeiCloudSmsProperties;
 import pro.haichuang.framework.sdk.huaweicloudsms.enums.error.HuaWeiCloudSmsConfigErrorEnum;
@@ -30,8 +30,8 @@ public class DefaultHuaWeiCloudSmsServiceImpl implements HuaWeiCloudSmsService {
     private HuaWeiCloudSmsProperties huaWeiCloudSmsProperties;
 
     @Override
-    public List<SendResponse.Result> send(@NonNull String signName, @NonNull String channelNumber, @NonNull String templateId,
-                                          @NonNull String phoneNumbers, JSONArray templateParams) {
+    public List<SendResponse.Result> send(String signName, String channelNumber, String templateId,
+                                          String phoneNumbers, @Nullable JSONArray templateParams) {
         validateProperties();
         validateParams(phoneNumbers);
 
@@ -52,8 +52,8 @@ public class DefaultHuaWeiCloudSmsServiceImpl implements HuaWeiCloudSmsService {
     }
 
     @Override
-    public List<SendResponse.Result> send(@NonNull String templateId,
-                                          @NonNull String phoneNumbers, JSONArray templateParams) {
+    public List<SendResponse.Result> send(String templateId,
+                                          String phoneNumbers, @Nullable JSONArray templateParams) {
         validateProperties();
         validateParams(phoneNumbers);
 
@@ -70,7 +70,7 @@ public class DefaultHuaWeiCloudSmsServiceImpl implements HuaWeiCloudSmsService {
     }
 
     @Override
-    public List<SendResponse.Result> send(@NonNull String phoneNumbers, JSONArray templateParams) {
+    public List<SendResponse.Result> send(String phoneNumbers, @Nullable JSONArray templateParams) {
         validateProperties();
         validateParams(phoneNumbers);
 
@@ -109,9 +109,6 @@ public class DefaultHuaWeiCloudSmsServiceImpl implements HuaWeiCloudSmsService {
      * @since 1.1.0.211021
      */
     private void validateParams(String phoneNumbers) {
-        if (phoneNumbers == null || phoneNumbers.isEmpty()) {
-            throw new HuaWeiCloudSmsConfigException(HuaWeiCloudSmsConfigErrorEnum.CHANNEL_NUMBER_NOT_CONFIGURED);
-        }
         //noinspection AlibabaUndefineMagicConstant
         for (String phoneNumber : phoneNumbers.split(",")) {
             if (!ReUtil.isMatch(PatternConstant.PHONE, phoneNumber.replaceFirst("\\+", ""))) {

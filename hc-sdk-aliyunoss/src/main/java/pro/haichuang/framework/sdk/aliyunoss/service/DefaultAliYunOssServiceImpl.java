@@ -29,6 +29,8 @@ import java.util.List;
  */
 public class DefaultAliYunOssServiceImpl implements AliYunOssService {
 
+    private static final String[] DEFAULT_PATH_OF_BIZ_NAME = {"temp"};
+
     @Autowired
     @SuppressWarnings("SpringJavaAutowiredMembersInspection")
     private AliYunOssProperties aliYunOssProperties;
@@ -38,7 +40,8 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
     public String uploadByMultipart(MultipartFile uploadFile,
                                     UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(uploadTypeEnum, pathOfBizName);
+        validateParams(uploadTypeEnum);
+        pathOfBizName = pathOfBizName.length == 0 ? DEFAULT_PATH_OF_BIZ_NAME : pathOfBizName;
         return AliYunOssUtils.uploadByMultipart(uploadFile,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
                 aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
@@ -50,7 +53,8 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
     public String uploadByMultipart(MultipartFile uploadFile, String newFileName,
                                     UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(uploadTypeEnum, pathOfBizName);
+        validateParams(uploadTypeEnum);
+        pathOfBizName = pathOfBizName.length == 0 ? DEFAULT_PATH_OF_BIZ_NAME : pathOfBizName;
         return AliYunOssUtils.uploadByMultipart(uploadFile, newFileName,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
                 aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
@@ -62,7 +66,8 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
     public List<String> uploadByMultipart(List<MultipartFile> uploadFiles,
                                           UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(uploadTypeEnum, pathOfBizName);
+        validateParams(uploadTypeEnum);
+        pathOfBizName = pathOfBizName.length == 0 ? DEFAULT_PATH_OF_BIZ_NAME : pathOfBizName;
         return AliYunOssUtils.uploadByMultipart(uploadFiles,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
                 aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
@@ -74,7 +79,8 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
     public List<String> uploadByMultipart(LinkedList<MultipartFile> uploadFiles,
                                           LinkedList<String> newFileNames, UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(uploadTypeEnum, pathOfBizName);
+        validateParams(uploadTypeEnum);
+        pathOfBizName = pathOfBizName.length == 0 ? DEFAULT_PATH_OF_BIZ_NAME : pathOfBizName;
         return AliYunOssUtils.uploadByMultipart(uploadFiles, newFileNames,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
                 aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
@@ -86,7 +92,8 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
     public String uploadByPath(String absoluteFilePath,
                                UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(uploadTypeEnum, pathOfBizName);
+        validateParams(uploadTypeEnum);
+        pathOfBizName = pathOfBizName.length == 0 ? DEFAULT_PATH_OF_BIZ_NAME : pathOfBizName;
         return AliYunOssUtils.uploadByPath(absoluteFilePath,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
                 aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
@@ -98,7 +105,8 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
     public String uploadByPath(String absoluteFilePath, String newFileName,
                                UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(uploadTypeEnum, pathOfBizName);
+        validateParams(uploadTypeEnum);
+        pathOfBizName = pathOfBizName.length == 0 ? DEFAULT_PATH_OF_BIZ_NAME : pathOfBizName;
         return AliYunOssUtils.uploadByPath(absoluteFilePath, newFileName,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
                 aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
@@ -110,7 +118,8 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
     public List<String> uploadByPath(List<String> absoluteFilePaths,
                                      UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(uploadTypeEnum, pathOfBizName);
+        validateParams(uploadTypeEnum);
+        pathOfBizName = pathOfBizName.length == 0 ? DEFAULT_PATH_OF_BIZ_NAME : pathOfBizName;
         return AliYunOssUtils.uploadByPath(absoluteFilePaths,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
                 aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
@@ -122,7 +131,8 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
     public List<String> uploadByPath(LinkedList<String> absoluteFilePaths, LinkedList<String> newFileNames,
                                      UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(uploadTypeEnum, pathOfBizName);
+        validateParams(uploadTypeEnum);
+        pathOfBizName = pathOfBizName.length == 0 ? DEFAULT_PATH_OF_BIZ_NAME : pathOfBizName;
         return AliYunOssUtils.uploadByPath(absoluteFilePaths, newFileNames,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
                 aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
@@ -134,7 +144,8 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
     public String uploadByFile(File absoluteFilePath,
                                UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(uploadTypeEnum, pathOfBizName);
+        validateParams(uploadTypeEnum);
+        pathOfBizName = pathOfBizName.length == 0 ? DEFAULT_PATH_OF_BIZ_NAME : pathOfBizName;
         return AliYunOssUtils.uploadByFile(absoluteFilePath,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
                 aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
@@ -145,7 +156,8 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
     public String uploadByFile(File absoluteFilePath, String newFileName,
                                UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(uploadTypeEnum, pathOfBizName);
+        validateParams(uploadTypeEnum);
+        pathOfBizName = pathOfBizName.length == 0 ? DEFAULT_PATH_OF_BIZ_NAME : pathOfBizName;
         return AliYunOssUtils.uploadByFile(absoluteFilePath, newFileName,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
                 aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
@@ -157,7 +169,8 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
     public List<String> uploadByFile(List<File> absoluteFilePaths,
                                      UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(uploadTypeEnum, pathOfBizName);
+        validateParams(uploadTypeEnum);
+        pathOfBizName = pathOfBizName.length == 0 ? DEFAULT_PATH_OF_BIZ_NAME : pathOfBizName;
         return AliYunOssUtils.uploadByFile(absoluteFilePaths,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
                 aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
@@ -169,7 +182,8 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
     public List<String> uploadByFile(LinkedList<File> absoluteFilePaths, LinkedList<String> newFileNames,
                                      UploadTypeEnum uploadTypeEnum, String... pathOfBizName) {
         validateProperties();
-        validateParams(uploadTypeEnum, pathOfBizName);
+        validateParams(uploadTypeEnum);
+        pathOfBizName = pathOfBizName.length == 0 ? DEFAULT_PATH_OF_BIZ_NAME : pathOfBizName;
         return AliYunOssUtils.uploadByFile(absoluteFilePaths, newFileNames,
                 aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret(),
                 aliYunOssProperties.getBucketName(), aliYunOssProperties.getEndpoint(),
@@ -275,16 +289,12 @@ public class DefaultAliYunOssServiceImpl implements AliYunOssService {
     /**
      * 验证参数
      *
-     * @param pathOfBizName  上传主路径, 建议填写业务模块相关名称
      * @param uploadTypeEnum 文件类型
      * @since 1.1.0.211021
      */
-    private void validateParams(@Nullable UploadTypeEnum uploadTypeEnum, @Nullable String... pathOfBizName) {
+    private void validateParams(@Nullable UploadTypeEnum uploadTypeEnum) {
         if (uploadTypeEnum == null) {
             throw new AliYunOssUploadException(AliYunOssUploadErrorEnum.UPLOAD_FILE_TYPE_IS_NULL);
-        }
-        if (pathOfBizName == null || pathOfBizName.length == 0) {
-            throw new AliYunOssUploadException(AliYunOssUploadErrorEnum.UPLOAD_PATH_IS_NULL);
         }
     }
 }

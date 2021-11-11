@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import pro.haichuang.framework.base.exception.ThirdPartyException;
 import pro.haichuang.framework.base.util.common.UUIDUtils;
@@ -50,9 +51,10 @@ public class HuaWeiCloudSmsUtils {
      * @return 发送结果
      * @throws ThirdPartyException 发送验证码失败|发送验证码状态错误
      */
-    public static List<SendResponse.Result> send(String url, String appKey, String appSecret,
-                                                 String signName, String channelNumber,
-                                                 String phoneNumbers, String templateId, @Nullable JSONArray templateParams)
+    @NonNull
+    public static List<SendResponse.Result> send(@NonNull String url, @NonNull String appKey, @NonNull String appSecret,
+                                                 @NonNull String signName, @NonNull String channelNumber,
+                                                 @NonNull String phoneNumbers, @NonNull String templateId, @Nullable JSONArray templateParams)
             throws ThirdPartyException {
         String baseUrl = url + "/sms/batchSendSms/v1";
 
@@ -102,7 +104,8 @@ public class HuaWeiCloudSmsUtils {
      * @since 1.1.0.211021
      */
     @SneakyThrows
-    public static String buildWsseHeader(String appKey, String appSecret) {
+    @NonNull
+    public static String buildWsseHeader(@NonNull String appKey, @NonNull String appSecret) {
         String time = DateTimeFormatter.ofPattern(DatePattern.UTC_PATTERN).format(LocalDateTime.now());
         String nonce = UUIDUtils.random();
 

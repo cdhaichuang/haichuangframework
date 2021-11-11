@@ -1,5 +1,6 @@
 package pro.haichuang.framework.base.util.common;
 
+import org.springframework.lang.NonNull;
 import org.springframework.util.ResourceUtils;
 
 import java.io.FileNotFoundException;
@@ -33,7 +34,7 @@ public class ProjectUtils {
      * @throws FileNotFoundException 文件未找到
      * @since 1.1.0.211021
      */
-    public static String getResourcePath(String filePath) throws FileNotFoundException {
+    public static String getResourcePath(@NonNull String filePath) throws FileNotFoundException {
         return ResourceUtils.getURL(ResourceUtils.CLASSPATH_URL_PREFIX + filePath).getPath();
     }
 }

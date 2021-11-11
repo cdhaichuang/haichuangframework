@@ -31,7 +31,7 @@ public class PatternConstant {
 
     /**
      * 账号正则表达式
-     * 
+     *
      * <p>字母开头, 允许 [5-16] 字节, 允许字母数字下划线
      */
     public static final String ACCOUNT = "^[a-zA-Z][a-zA-Z0-9_]{4,15}$";

@@ -9,7 +9,6 @@ import pro.haichuang.framework.base.dto.HttpServletRequestDTO;
 import pro.haichuang.framework.base.util.jwt.SecurityUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.NotNull;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,7 +35,7 @@ public class RequestUtils {
      * @since 1.1.0.211021
      */
     @NonNull
-    public static HttpServletRequestDTO parseInfo(@NonNull HttpServletRequest request, @NotNull Method method) {
+    public static HttpServletRequestDTO parseInfo(@NonNull HttpServletRequest request, @NonNull Method method) {
         String clientIp = IpUtils.getIpv4Address(request);
 
         List<String> parameterFullNameList = Arrays.stream(method.getParameters()).collect(ArrayList::new,

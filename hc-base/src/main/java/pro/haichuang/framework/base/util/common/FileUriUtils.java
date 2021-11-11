@@ -2,7 +2,9 @@ package pro.haichuang.framework.base.util.common;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
+import org.springframework.util.Assert;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -26,7 +28,10 @@ public class FileUriUtils {
      * @return 拼接后的文件名 [上传路径 + 文件类型 + 新文件名]
      * @since 1.1.0.211021
      */
-    public static String concatFilename(MultipartFile file, @Nullable String newFileName, String fileType, String... uploadPath) {
+    @NonNull
+    public static String concatFilename(@NonNull MultipartFile file, @Nullable String newFileName,
+                                        @NonNull String fileType, @NonNull String... uploadPath) {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         String fileOriginalExtensionName = FilenameUtils.getExtension(file.getOriginalFilename());
         String fileNewName;
         if (newFileName != null && !newFileName.isEmpty()) {
@@ -51,7 +56,10 @@ public class FileUriUtils {
      * @return 拼接后的文件名 [上传路径 + 文件类型 + 新文件名]
      * @since 1.1.0.211021
      */
-    public static String concatFilename(File file, @Nullable String newFileName, String fileType, String... uploadPath) {
+    @NonNull
+    public static String concatFilename(@NonNull File file, @Nullable String newFileName,
+                                        @NonNull String fileType, @NonNull String... uploadPath) {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         String fileExtensionName = FilenameUtils.getExtension(file.getName());
         String fileNewName;
         if (newFileName != null && !newFileName.isEmpty()) {
@@ -76,7 +84,10 @@ public class FileUriUtils {
      * @return 拼接后的文件名 [上传路径 + 文件类型 + 新文件名]
      * @since 1.1.0.211021
      */
-    public static String concatFilename(String filePath, @Nullable String newFileName, String fileType, String... uploadPath) {
+    @NonNull
+    public static String concatFilename(@NonNull String filePath, @Nullable String newFileName,
+                                        @NonNull String fileType, @NonNull String... uploadPath) {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         String fileExtensionName = FilenameUtils.getExtension(filePath);
         String fileNewName;
         if (newFileName != null && !newFileName.isEmpty()) {
@@ -99,7 +110,7 @@ public class FileUriUtils {
      * @return 格式化后的文件名
      * @since 1.1.0.211021
      */
-    public static String formatFilename(String filename, boolean isReplaceFirstSeparator) {
+    public static String formatFilename(@NonNull String filename, boolean isReplaceFirstSeparator) {
         filename = FilenameUtils.separatorsToUnix(filename);
         return isReplaceFirstSeparator && (StringUtils.equals(String.valueOf(filename.charAt(0)), "/"))
                 ? filename.substring(1) : filename;

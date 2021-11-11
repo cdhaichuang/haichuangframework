@@ -12,7 +12,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
+import org.springframework.util.Assert;
 import org.springframework.web.multipart.MultipartFile;
 import pro.haichuang.framework.base.util.common.FileUriUtils;
 import pro.haichuang.framework.sdk.huaweicloudobs.enums.error.HuaWeiCloudObsUploadErrorEnum;
@@ -59,11 +61,13 @@ public class HuaWeiCloudObsUtils {
      * @see #uploadByMultipart(MultipartFile, String, String, String, String, String, String, String...)
      * @since 1.1.0.211021
      */
-    public static String uploadByMultipart(MultipartFile uploadFile,
-                                           String accessKeyId, String accessKeySecret,
-                                           String bucketName, String endPoint,
-                                           String fileType, String... uploadPath)
+    @NonNull
+    public static String uploadByMultipart(@NonNull MultipartFile uploadFile,
+                                           @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                           @NonNull String bucketName, @NonNull String endPoint,
+                                           @NonNull String fileType, @NonNull String... uploadPath)
             throws HuaWeiCloudObsUploadException, IOException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         return uploadByMultipart(uploadFile, null, accessKeyId, accessKeySecret,
                 bucketName, endPoint, fileType, uploadPath);
     }
@@ -85,11 +89,13 @@ public class HuaWeiCloudObsUtils {
      * @see #baseFileUploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String...)
      * @since 1.1.0.211021
      */
-    public static String uploadByMultipart(MultipartFile uploadFile, @Nullable String newFileName,
-                                           String accessKeyId, String accessKeySecret,
-                                           String bucketName, String endPoint,
-                                           String fileType, String... uploadPath)
+    @NonNull
+    public static String uploadByMultipart(@NonNull MultipartFile uploadFile, @Nullable String newFileName,
+                                           @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                           @NonNull String bucketName, @NonNull String endPoint,
+                                           @NonNull String fileType, @NonNull String... uploadPath)
             throws HuaWeiCloudObsUploadException, IOException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         String resultFilePath = baseFileUploadByMultipart(new LinkedList<>(Collections.singletonList(uploadFile)),
                 newFileName != null ? new LinkedList<>(Collections.singletonList(newFileName)) : null,
                 accessKeyId, accessKeySecret,
@@ -114,11 +120,13 @@ public class HuaWeiCloudObsUtils {
      * @see #uploadByPath(String, String, String, String, String, String, String, String...)
      * @since 1.1.0.211021
      */
-    public static String uploadByPath(String absoluteFilePath,
-                                      String accessKeyId, String accessKeySecret,
-                                      String bucketName, String endPoint,
-                                      String fileType, String... uploadPath)
+    @NonNull
+    public static String uploadByPath(@NonNull String absoluteFilePath,
+                                      @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                      @NonNull String bucketName, @NonNull String endPoint,
+                                      @NonNull String fileType, @NonNull String... uploadPath)
             throws HuaWeiCloudObsUploadException, IOException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         return uploadByPath(absoluteFilePath, null, accessKeyId, accessKeySecret,
                 bucketName, endPoint, fileType, uploadPath);
     }
@@ -140,11 +148,13 @@ public class HuaWeiCloudObsUtils {
      * @see #uploadByFile(File, String, String, String, String, String, String, String...)
      * @since 1.1.0.211021
      */
-    public static String uploadByPath(String absoluteFilePath, @Nullable String newFileName,
-                                      String accessKeyId, String accessKeySecret,
-                                      String bucketName, String endPoint,
-                                      String fileType, String... uploadPath)
+    @NonNull
+    public static String uploadByPath(@NonNull String absoluteFilePath, @Nullable String newFileName,
+                                      @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                      @NonNull String bucketName, @NonNull String endPoint,
+                                      @NonNull String fileType, @NonNull String... uploadPath)
             throws HuaWeiCloudObsUploadException, IOException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         return uploadByFile(new File(absoluteFilePath), newFileName, accessKeyId, accessKeySecret,
                 bucketName, endPoint, fileType, uploadPath);
     }
@@ -165,11 +175,13 @@ public class HuaWeiCloudObsUtils {
      * @see #uploadByFile(File, String, String, String, String, String, String, String...)
      * @since 1.1.0.211021
      */
-    public static String uploadByFile(File uploadFile,
-                                      String accessKeyId, String accessKeySecret,
-                                      String bucketName, String endPoint,
-                                      String fileType, String... uploadPath)
+    @NonNull
+    public static String uploadByFile(@NonNull File uploadFile,
+                                      @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                      @NonNull String bucketName, @NonNull String endPoint,
+                                      @NonNull String fileType, @NonNull String... uploadPath)
             throws HuaWeiCloudObsUploadException, IOException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         return uploadByFile(uploadFile, null, accessKeyId, accessKeySecret,
                 bucketName, endPoint, fileType, uploadPath);
     }
@@ -191,11 +203,13 @@ public class HuaWeiCloudObsUtils {
      * @see #baseFileUploadByFile(LinkedList, LinkedList, String, String, String, String, String, String...)
      * @since 1.1.0.211021
      */
-    public static String uploadByFile(File uploadFile, @Nullable String newFileName,
-                                      String accessKeyId, String accessKeySecret,
-                                      String bucketName, String endPoint,
-                                      String fileType, String... uploadPath)
+    @NonNull
+    public static String uploadByFile(@NonNull File uploadFile, @Nullable String newFileName,
+                                      @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                      @NonNull String bucketName, @NonNull String endPoint,
+                                      @NonNull String fileType, @NonNull String... uploadPath)
             throws HuaWeiCloudObsUploadException, IOException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         String resultFilePath = baseFileUploadByFile(new LinkedList<>(Collections.singletonList(uploadFile)),
                 newFileName != null ? new LinkedList<>(Collections.singletonList(newFileName)) : null,
                 accessKeyId, accessKeySecret,
@@ -222,11 +236,13 @@ public class HuaWeiCloudObsUtils {
      * @see #uploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String...)
      * @since 1.1.0.211021
      */
-    public static List<String> uploadByMultipart(Collection<MultipartFile> uploadFiles,
-                                                 String accessKeyId, String accessKeySecret,
-                                                 String bucketName, String endPoint,
-                                                 String fileType, String... uploadPath)
+    @NonNull
+    public static List<String> uploadByMultipart(@NonNull Collection<MultipartFile> uploadFiles,
+                                                 @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                                 @NonNull String bucketName, @NonNull String endPoint,
+                                                 @NonNull String fileType, @NonNull String... uploadPath)
             throws HuaWeiCloudObsUploadException, IOException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         return uploadByMultipart(new LinkedList<>(uploadFiles), null, accessKeyId, accessKeySecret,
                 bucketName, endPoint, fileType, uploadPath);
     }
@@ -248,12 +264,14 @@ public class HuaWeiCloudObsUtils {
      * @see #baseFileUploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String...)
      * @since 1.1.0.211021
      */
-    public static List<String> uploadByMultipart(LinkedList<MultipartFile> uploadFiles,
+    @NonNull
+    public static List<String> uploadByMultipart(@NonNull LinkedList<MultipartFile> uploadFiles,
                                                  @Nullable LinkedList<String> newFileNames,
-                                                 String accessKeyId, String accessKeySecret,
-                                                 String bucketName, String endPoint,
-                                                 String fileType, String... uploadPath)
+                                                 @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                                 @NonNull String bucketName, @NonNull String endPoint,
+                                                 @NonNull String fileType, @NonNull String... uploadPath)
             throws HuaWeiCloudObsUploadException, IOException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         if (uploadFiles.isEmpty()) {
             LOGGER.warn("[{}] 批量上传文件为空 [bucketName: {}]", LOG_TAG, bucketName);
             return new ArrayList<>();
@@ -280,11 +298,13 @@ public class HuaWeiCloudObsUtils {
      * @see #uploadByPath(LinkedList, LinkedList, String, String, String, String, String, String...)
      * @since 1.1.0.211021
      */
-    public static List<String> uploadByPath(Collection<String> absoluteFilePaths,
-                                            String accessKeyId, String accessKeySecret,
-                                            String bucketName, String endPoint,
-                                            String fileType, String... uploadPath)
+    @NonNull
+    public static List<String> uploadByPath(@NonNull Collection<String> absoluteFilePaths,
+                                            @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                            @NonNull String bucketName, @NonNull String endPoint,
+                                            @NonNull String fileType, @NonNull String... uploadPath)
             throws HuaWeiCloudObsUploadException, IOException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         return uploadByPath(new LinkedList<>(absoluteFilePaths), null, accessKeyId, accessKeySecret,
                 bucketName, endPoint, fileType, uploadPath);
     }
@@ -306,12 +326,14 @@ public class HuaWeiCloudObsUtils {
      * @see #uploadByFile(LinkedList, LinkedList, String, String, String, String, String, String...)
      * @since 1.1.0.211021
      */
-    public static List<String> uploadByPath(LinkedList<String> absoluteFilePaths,
+    @NonNull
+    public static List<String> uploadByPath(@NonNull LinkedList<String> absoluteFilePaths,
                                             @Nullable LinkedList<String> newFileNames,
-                                            String accessKeyId, String accessKeySecret,
-                                            String bucketName, String endPoint,
-                                            String fileType, String... uploadPath)
+                                            @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                            @NonNull String bucketName, @NonNull String endPoint,
+                                            @NonNull String fileType, @NonNull String... uploadPath)
             throws HuaWeiCloudObsUploadException, IOException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         if (absoluteFilePaths.isEmpty()) {
             LOGGER.warn("[{}] 批量上传文件为空 [bucketName: {}]", LOG_TAG, bucketName);
             return new ArrayList<>();
@@ -339,11 +361,13 @@ public class HuaWeiCloudObsUtils {
      * @see #uploadByFile(LinkedList, LinkedList, String, String, String, String, String, String...)
      * @since 1.1.0.211021
      */
-    public static List<String> uploadByFile(Collection<File> uploadFiles,
-                                            String accessKeyId, String accessKeySecret,
-                                            String bucketName, String endPoint,
-                                            String fileType, String... uploadPath)
+    @NonNull
+    public static List<String> uploadByFile(@NonNull Collection<File> uploadFiles,
+                                            @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                            @NonNull String bucketName, @NonNull String endPoint,
+                                            @NonNull String fileType, @NonNull String... uploadPath)
             throws HuaWeiCloudObsUploadException, IOException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         return uploadByFile(new LinkedList<>(uploadFiles), null, accessKeyId, accessKeySecret,
                 bucketName, endPoint, fileType, uploadPath);
     }
@@ -365,12 +389,14 @@ public class HuaWeiCloudObsUtils {
      * @see #baseFileUploadByFile(LinkedList, LinkedList, String, String, String, String, String, String...)
      * @since 1.1.0.211021
      */
-    public static List<String> uploadByFile(LinkedList<File> uploadFiles,
+    @NonNull
+    public static List<String> uploadByFile(@NonNull LinkedList<File> uploadFiles,
                                             @Nullable LinkedList<String> newFileNames,
-                                            String accessKeyId, String accessKeySecret,
-                                            String bucketName, String endPoint,
-                                            String fileType, String... uploadPath)
+                                            @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                            @NonNull String bucketName, @NonNull String endPoint,
+                                            @NonNull String fileType, @NonNull String... uploadPath)
             throws HuaWeiCloudObsUploadException, IOException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         if (uploadFiles.isEmpty()) {
             LOGGER.warn("[{}] 批量上传文件为空 [bucketName: {}]", LOG_TAG, bucketName);
             return new ArrayList<>();
@@ -397,10 +423,10 @@ public class HuaWeiCloudObsUtils {
      * @see #downloadToResponse(String, String, String, String, String, String, HttpServletRequest, HttpServletResponse)
      * @since 1.1.0.211021
      */
-    public static void downloadToResponse(String obsFilePath,
-                                          String accessKeyId, String accessKeySecret,
-                                          String bucketName, String endPoint,
-                                          HttpServletRequest request, HttpServletResponse response)
+    public static void downloadToResponse(@NonNull String obsFilePath,
+                                          @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                          @NonNull String bucketName, @NonNull String endPoint,
+                                          @NonNull HttpServletRequest request, @NonNull HttpServletResponse response)
             throws IOException {
         downloadToResponse(obsFilePath, accessKeyId, accessKeySecret, bucketName, endPoint, null, request, response);
     }
@@ -419,11 +445,11 @@ public class HuaWeiCloudObsUtils {
      * @throws IOException 文件流转文件失败
      * @since 1.1.0.211021
      */
-    public static void downloadToResponse(String obsFilePath,
-                                          String accessKeyId, String accessKeySecret,
-                                          String bucketName, String endPoint,
+    public static void downloadToResponse(@NonNull String obsFilePath,
+                                          @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                          @NonNull String bucketName, @NonNull String endPoint,
                                           @Nullable String outFileName,
-                                          HttpServletRequest request, HttpServletResponse response)
+                                          @NonNull HttpServletRequest request, @NonNull HttpServletResponse response)
             throws IOException {
         MediaType mediaType;
         String fileBaseName = FilenameUtils.getName(outFileName != null && !outFileName.isEmpty() ? outFileName : obsFilePath);
@@ -458,9 +484,10 @@ public class HuaWeiCloudObsUtils {
      * @see #downloadToFile(String, String, String, String, String, String)
      * @since 1.1.0.211021
      */
-    public static File downloadToFile(String obsFilePath,
-                                      String accessKeyId, String accessKeySecret,
-                                      String bucketName, String endPoint)
+    @NonNull
+    public static File downloadToFile(@NonNull String obsFilePath,
+                                      @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                      @NonNull String bucketName, @NonNull String endPoint)
             throws IOException {
         return downloadToFile(obsFilePath, accessKeyId, accessKeySecret, bucketName, endPoint, "");
     }
@@ -478,9 +505,10 @@ public class HuaWeiCloudObsUtils {
      * @throws IOException 文件流转文件失败|关闭 {@code obs} 连接异常
      * @since 1.1.0.211021
      */
-    public static File downloadToFile(String obsFilePath,
-                                      String accessKeyId, String accessKeySecret,
-                                      String bucketName, String endPoint,
+    @NonNull
+    public static File downloadToFile(@NonNull String obsFilePath,
+                                      @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                      @NonNull String bucketName, @NonNull String endPoint,
                                       @Nullable String outFileName)
             throws IOException {
         File outFile;
@@ -509,9 +537,10 @@ public class HuaWeiCloudObsUtils {
      * @throws IOException 文件流转文件失败|关闭 {@code obs} 连接异常
      * @since 1.1.0.211021
      */
-    public static File downloadToFile(String obsFilePath,
-                                      String accessKeyId, String accessKeySecret,
-                                      String bucketName, String endPoint,
+    @NonNull
+    public static File downloadToFile(@NonNull String obsFilePath,
+                                      @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                      @NonNull String bucketName, @NonNull String endPoint,
                                       @Nullable File outFile)
             throws IOException {
         try (ObsClient obsClient = new ObsClient(accessKeyId, accessKeySecret, endPoint)) {
@@ -538,9 +567,10 @@ public class HuaWeiCloudObsUtils {
      * @throws IOException 文件流转文件失败|关闭 {@code obs} 连接异常
      * @since 1.1.0.211021
      */
-    public static void deleteObject(String obsFilePath,
-                                    String accessKeyId, String accessKeySecret,
-                                    String bucketName, String endPoint)
+    @NonNull
+    public static void deleteObject(@NonNull String obsFilePath,
+                                    @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                    @NonNull String bucketName, @NonNull String endPoint)
             throws IOException {
         try (ObsClient obsClient = new ObsClient(accessKeyId, accessKeySecret, endPoint)) {
             obsClient.deleteObject(bucketName, FileUriUtils.formatFilename(obsFilePath, true));
@@ -560,9 +590,10 @@ public class HuaWeiCloudObsUtils {
      * @throws IOException 关闭 {@code obs} 连接异常
      * @since 1.1.0.211021
      */
-    public static List<DeleteObjectsResult.ErrorResult> deleteObjectResError(Collection<String> obsFilePaths,
-                                                                             String accessKeyId, String accessKeySecret,
-                                                                             String bucketName, String endPoint)
+    @NonNull
+    public static List<DeleteObjectsResult.ErrorResult> deleteObjectResError(@NonNull Collection<String> obsFilePaths,
+                                                                             @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                                                             @NonNull String bucketName, @NonNull String endPoint)
             throws IOException {
         if (obsFilePaths.isEmpty()) {
             LOGGER.warn("[{}] 批量删除文件为空 [bucketName: {}]", LOG_TAG, bucketName);
@@ -592,9 +623,10 @@ public class HuaWeiCloudObsUtils {
      * @throws IOException 关闭 {@code obs} 连接异常
      * @since 1.1.0.211021
      */
-    public static List<DeleteObjectsResult.DeleteObjectResult> deleteObjectResSuccess(Collection<String> obsFilePaths,
-                                                                                      String accessKeyId, String accessKeySecret,
-                                                                                      String bucketName, String endPoint)
+    @NonNull
+    public static List<DeleteObjectsResult.DeleteObjectResult> deleteObjectResSuccess(@NonNull Collection<String> obsFilePaths,
+                                                                                      @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                                                                      @NonNull String bucketName, @NonNull String endPoint)
             throws IOException {
         if (obsFilePaths.isEmpty()) {
             LOGGER.warn("[{}] 批量删除文件为空 [bucketName: {}]", LOG_TAG, bucketName);
@@ -631,11 +663,13 @@ public class HuaWeiCloudObsUtils {
      * @see #baseFileUploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String...)
      * @since 1.1.0.211021
      */
-    public static List<String> baseFileUploadByMultipart(Collection<MultipartFile> files,
-                                                         String accessKeyId, String accessKeySecret,
-                                                         String bucketName, String endPoint,
-                                                         String fileType, String... uploadPath)
+    @NonNull
+    public static List<String> baseFileUploadByMultipart(@NonNull Collection<MultipartFile> files,
+                                                         @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                                         @NonNull String bucketName, @NonNull String endPoint,
+                                                         @NonNull String fileType, @NonNull String... uploadPath)
             throws HuaWeiCloudObsUploadException, IOException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         return baseFileUploadByMultipart(new LinkedList<>(files), null,
                 accessKeyId, accessKeySecret, bucketName, endPoint, fileType, uploadPath);
     }
@@ -656,12 +690,14 @@ public class HuaWeiCloudObsUtils {
      * @throws IOException                   获取文件流异常
      * @since 1.1.0.211021
      */
-    public static List<String> baseFileUploadByMultipart(LinkedList<MultipartFile> uploadFiles,
+    @NonNull
+    public static List<String> baseFileUploadByMultipart(@NonNull LinkedList<MultipartFile> uploadFiles,
                                                          @Nullable LinkedList<String> newFileNames,
-                                                         String accessKeyId, String accessKeySecret,
-                                                         String bucketName, String endPoint,
-                                                         String fileType, String... uploadPath)
+                                                         @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                                         @NonNull String bucketName, @NonNull String endPoint,
+                                                         @NonNull String fileType, @NonNull String... uploadPath)
             throws HuaWeiCloudObsUploadException, IOException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         if (uploadFiles.stream().anyMatch(item -> item == null || item.isEmpty())) {
             throw new HuaWeiCloudObsUploadException(HuaWeiCloudObsUploadErrorEnum.NOT_EXISTS);
         }
@@ -698,11 +734,13 @@ public class HuaWeiCloudObsUtils {
      * @see #baseFileUploadByFile(LinkedList, LinkedList, String, String, String, String, String, String...)
      * @since 1.1.0.211021
      */
-    public static List<String> baseFileUploadByFile(Collection<File> uploadFiles,
-                                                    String accessKeyId, String accessKeySecret,
-                                                    String bucketName, String endPoint,
-                                                    String fileType, String... uploadPath)
+    @NonNull
+    public static List<String> baseFileUploadByFile(@NonNull Collection<File> uploadFiles,
+                                                    @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                                    @NonNull String bucketName, @NonNull String endPoint,
+                                                    @NonNull String fileType, @NonNull String... uploadPath)
             throws HuaWeiCloudObsUploadException, IOException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         return baseFileUploadByFile(new LinkedList<>(uploadFiles), null,
                 accessKeyId, accessKeySecret, bucketName, endPoint, fileType, uploadPath);
     }
@@ -723,12 +761,14 @@ public class HuaWeiCloudObsUtils {
      * @throws IOException                   关闭 {@code obs} 连接异常
      * @since 1.1.0.211021
      */
-    public static List<String> baseFileUploadByFile(LinkedList<File> uploadFiles,
+    @NonNull
+    public static List<String> baseFileUploadByFile(@NonNull LinkedList<File> uploadFiles,
                                                     @Nullable LinkedList<String> newFileNames,
-                                                    String accessKeyId, String accessKeySecret,
-                                                    String bucketName, String endPoint,
-                                                    String fileType, String... uploadPath)
+                                                    @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                                    @NonNull String bucketName, @NonNull String endPoint,
+                                                    @NonNull String fileType, @NonNull String... uploadPath)
             throws HuaWeiCloudObsUploadException, IOException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         if (uploadFiles.stream().anyMatch(item -> item == null || !item.exists())) {
             throw new HuaWeiCloudObsUploadException(HuaWeiCloudObsUploadErrorEnum.NOT_EXISTS);
         }

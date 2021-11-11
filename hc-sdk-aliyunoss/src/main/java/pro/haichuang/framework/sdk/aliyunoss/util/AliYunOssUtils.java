@@ -12,7 +12,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
+import org.springframework.util.Assert;
 import org.springframework.web.multipart.MultipartFile;
 import pro.haichuang.framework.base.util.common.FileUriUtils;
 import pro.haichuang.framework.sdk.aliyunoss.enums.error.AliYunOssUploadErrorEnum;
@@ -60,11 +62,13 @@ public class AliYunOssUtils {
      * @see #uploadByMultipart(MultipartFile, String, String, String, String, String, String, String...)
      * @since 1.1.0.211021
      */
-    public static String uploadByMultipart(MultipartFile uploadFile,
-                                           String accessKeyId, String accessKeySecret,
-                                           String bucketName, String endPoint,
-                                           String fileType, String... uploadPath)
+    @NonNull
+    public static String uploadByMultipart(@NonNull MultipartFile uploadFile,
+                                           @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                           @NonNull String bucketName, @NonNull String endPoint,
+                                           @NonNull String fileType, @NonNull String... uploadPath)
             throws AliYunOssUploadException, IOException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         return uploadByMultipart(uploadFile, null, accessKeyId, accessKeySecret,
                 bucketName, endPoint, fileType, uploadPath);
     }
@@ -86,11 +90,13 @@ public class AliYunOssUtils {
      * @see #baseFileUploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String...)
      * @since 1.1.0.211021
      */
-    public static String uploadByMultipart(MultipartFile uploadFile, @Nullable String newFileName,
-                                           String accessKeyId, String accessKeySecret,
-                                           String bucketName, String endPoint,
-                                           String fileType, String... uploadPath)
+    @NonNull
+    public static String uploadByMultipart(@NonNull MultipartFile uploadFile, @Nullable String newFileName,
+                                           @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                           @NonNull String bucketName, @NonNull String endPoint,
+                                           @NonNull String fileType, @NonNull String... uploadPath)
             throws AliYunOssUploadException, IOException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         String resultFilePath = baseFileUploadByMultipart(new LinkedList<>(Collections.singletonList(uploadFile)),
                 newFileName != null ? new LinkedList<>(Collections.singletonList(newFileName)) : null,
                 accessKeyId, accessKeySecret,
@@ -115,11 +121,13 @@ public class AliYunOssUtils {
      * @see #uploadByPath(String, String, String, String, String, String, String, String...)
      * @since 1.1.0.211021
      */
-    public static String uploadByPath(String absoluteFilePath,
-                                      String accessKeyId, String accessKeySecret,
-                                      String bucketName, String endPoint,
-                                      String fileType, String... uploadPath)
+    @NonNull
+    public static String uploadByPath(@NonNull String absoluteFilePath,
+                                      @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                      @NonNull String bucketName, @NonNull String endPoint,
+                                      @NonNull String fileType, @NonNull String... uploadPath)
             throws AliYunOssUploadException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         return uploadByPath(absoluteFilePath, null, accessKeyId, accessKeySecret,
                 bucketName, endPoint, fileType, uploadPath);
     }
@@ -140,11 +148,13 @@ public class AliYunOssUtils {
      * @see #uploadByFile(File, String, String, String, String, String, String, String...)
      * @since 1.1.0.211021
      */
-    public static String uploadByPath(String absoluteFilePath, @Nullable String newFileName,
-                                      String accessKeyId, String accessKeySecret,
-                                      String bucketName, String endPoint,
-                                      String fileType, String... uploadPath)
+    @NonNull
+    public static String uploadByPath(@NonNull String absoluteFilePath, @Nullable String newFileName,
+                                      @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                      @NonNull String bucketName, @NonNull String endPoint,
+                                      @NonNull String fileType, @NonNull String... uploadPath)
             throws AliYunOssUploadException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         return uploadByFile(new File(absoluteFilePath), newFileName, accessKeyId, accessKeySecret,
                 bucketName, endPoint, fileType, uploadPath);
     }
@@ -164,11 +174,13 @@ public class AliYunOssUtils {
      * @see #uploadByFile(File, String, String, String, String, String, String, String...)
      * @since 1.1.0.211021
      */
-    public static String uploadByFile(File uploadFile,
-                                      String accessKeyId, String accessKeySecret,
-                                      String bucketName, String endPoint,
-                                      String fileType, String... uploadPath)
+    @NonNull
+    public static String uploadByFile(@NonNull File uploadFile,
+                                      @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                      @NonNull String bucketName, @NonNull String endPoint,
+                                      @NonNull String fileType, @NonNull String... uploadPath)
             throws AliYunOssUploadException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         return uploadByFile(uploadFile, null, accessKeyId, accessKeySecret,
                 bucketName, endPoint, fileType, uploadPath);
     }
@@ -189,11 +201,13 @@ public class AliYunOssUtils {
      * @see #baseFileUploadByFile(LinkedList, LinkedList, String, String, String, String, String, String...)
      * @since 1.1.0.211021
      */
-    public static String uploadByFile(File uploadFile, @Nullable String newFileName,
-                                      String accessKeyId, String accessKeySecret,
-                                      String bucketName, String endPoint,
-                                      String fileType, String... uploadPath)
+    @NonNull
+    public static String uploadByFile(@NonNull File uploadFile, @Nullable String newFileName,
+                                      @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                      @NonNull String bucketName, @NonNull String endPoint,
+                                      @NonNull String fileType, @NonNull String... uploadPath)
             throws AliYunOssUploadException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         String resultFilePath = baseFileUploadByFile(new LinkedList<>(Collections.singletonList(uploadFile)),
                 newFileName != null ? new LinkedList<>(Collections.singletonList(newFileName)) : null,
                 accessKeyId, accessKeySecret,
@@ -221,11 +235,13 @@ public class AliYunOssUtils {
      * @see #uploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String...)
      * @since 1.1.0.211021
      */
-    public static List<String> uploadByMultipart(Collection<MultipartFile> uploadFiles,
-                                                 String accessKeyId, String accessKeySecret,
-                                                 String bucketName, String endPoint,
-                                                 String fileType, String... uploadPath)
+    @NonNull
+    public static List<String> uploadByMultipart(@NonNull Collection<MultipartFile> uploadFiles,
+                                                 @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                                 @NonNull String bucketName, @NonNull String endPoint,
+                                                 @NonNull String fileType, @NonNull String... uploadPath)
             throws AliYunOssUploadException, IOException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         return uploadByMultipart(new LinkedList<>(uploadFiles), null, accessKeyId, accessKeySecret,
                 bucketName, endPoint, fileType, uploadPath);
     }
@@ -247,12 +263,14 @@ public class AliYunOssUtils {
      * @see #baseFileUploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String...)
      * @since 1.1.0.211021
      */
-    public static List<String> uploadByMultipart(LinkedList<MultipartFile> uploadFiles,
+    @NonNull
+    public static List<String> uploadByMultipart(@NonNull LinkedList<MultipartFile> uploadFiles,
                                                  @Nullable LinkedList<String> newFileNames,
-                                                 String accessKeyId, String accessKeySecret,
-                                                 String bucketName, String endPoint,
-                                                 String fileType, String... uploadPath)
+                                                 @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                                 @NonNull String bucketName, @NonNull String endPoint,
+                                                 @NonNull String fileType, @NonNull String... uploadPath)
             throws AliYunOssUploadException, IOException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         if (uploadFiles.isEmpty()) {
             LOGGER.warn("[{}] 批量上传文件为空 [bucketName: {}, uploadFiles: {}]", LOG_TAG,
                     bucketName, uploadFiles);
@@ -280,11 +298,13 @@ public class AliYunOssUtils {
      * @see #uploadByPath(LinkedList, LinkedList, String, String, String, String, String, String...)
      * @since 1.1.0.211021
      */
-    public static List<String> uploadByPath(Collection<String> absoluteFilePaths,
-                                            String accessKeyId, String accessKeySecret,
-                                            String bucketName, String endPoint,
-                                            String fileType, String... uploadPath)
+    @NonNull
+    public static List<String> uploadByPath(@NonNull Collection<String> absoluteFilePaths,
+                                            @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                            @NonNull String bucketName, @NonNull String endPoint,
+                                            @NonNull String fileType, @NonNull String... uploadPath)
             throws AliYunOssUploadException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         return uploadByPath(new LinkedList<>(absoluteFilePaths), null, accessKeyId, accessKeySecret,
                 bucketName, endPoint, fileType, uploadPath);
     }
@@ -304,12 +324,14 @@ public class AliYunOssUtils {
      * @throws AliYunOssUploadException 阿里云文件上传异常
      * @since 1.1.0.211021
      */
-    public static List<String> uploadByPath(LinkedList<String> absoluteFilePaths,
+    @NonNull
+    public static List<String> uploadByPath(@NonNull LinkedList<String> absoluteFilePaths,
                                             @Nullable LinkedList<String> newFileNames,
-                                            String accessKeyId, String accessKeySecret,
-                                            String bucketName, String endPoint,
-                                            String fileType, String... uploadPath)
+                                            @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                            @NonNull String bucketName, @NonNull String endPoint,
+                                            @NonNull String fileType, @NonNull String... uploadPath)
             throws AliYunOssUploadException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         if (absoluteFilePaths.isEmpty()) {
             LOGGER.warn("[{}] 批量上传文件为空 [bucketName: {}, absoluteFilePaths: {}]", LOG_TAG,
                     bucketName, absoluteFilePaths);
@@ -338,11 +360,13 @@ public class AliYunOssUtils {
      * @see #uploadByFile(LinkedList, LinkedList, String, String, String, String, String, String...)
      * @since 1.1.0.211021
      */
-    public static List<String> uploadByFile(Collection<File> uploadFiles,
-                                            String accessKeyId, String accessKeySecret,
-                                            String bucketName, String endPoint,
-                                            String fileType, String... uploadPath)
+    @NonNull
+    public static List<String> uploadByFile(@NonNull Collection<File> uploadFiles,
+                                            @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                            @NonNull String bucketName, @NonNull String endPoint,
+                                            @NonNull String fileType, @NonNull String... uploadPath)
             throws AliYunOssUploadException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         return uploadByFile(new LinkedList<>(uploadFiles), null, accessKeyId, accessKeySecret,
                 bucketName, endPoint, fileType, uploadPath);
     }
@@ -363,12 +387,14 @@ public class AliYunOssUtils {
      * @see #baseFileUploadByFile(LinkedList, LinkedList, String, String, String, String, String, String...)
      * @since 1.1.0.211021
      */
-    public static List<String> uploadByFile(LinkedList<File> uploadFiles,
+    @NonNull
+    public static List<String> uploadByFile(@NonNull LinkedList<File> uploadFiles,
                                             @Nullable LinkedList<String> newFileNames,
-                                            String accessKeyId, String accessKeySecret,
-                                            String bucketName, String endPoint,
-                                            String fileType, String... uploadPath)
+                                            @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                            @NonNull String bucketName, @NonNull String endPoint,
+                                            @NonNull String fileType, @NonNull String... uploadPath)
             throws AliYunOssUploadException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         if (uploadFiles.isEmpty()) {
             LOGGER.warn("[{}] 批量上传文件为空 [bucketName: {}, uploadFiles: {}]", LOG_TAG,
                     bucketName, uploadFiles);
@@ -397,10 +423,10 @@ public class AliYunOssUtils {
      * @see #downloadToResponse(String, String, String, String, String, String, HttpServletRequest, HttpServletResponse)
      * @since 1.1.0.211021
      */
-    public static void downloadToResponse(String ossFilePath,
-                                          String accessKeyId, String accessKeySecret,
-                                          String bucketName, String endPoint,
-                                          HttpServletRequest request, HttpServletResponse response)
+    public static void downloadToResponse(@NonNull String ossFilePath,
+                                          @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                          @NonNull String bucketName, @NonNull String endPoint,
+                                          @NonNull HttpServletRequest request, @NonNull HttpServletResponse response)
             throws IOException {
         downloadToResponse(ossFilePath, accessKeyId, accessKeySecret, bucketName, endPoint, null, request, response);
     }
@@ -419,9 +445,9 @@ public class AliYunOssUtils {
      * @throws IOException 文件流转文件失败
      * @since 1.1.0.211021
      */
-    public static void downloadToResponse(String ossFilePath,
-                                          String accessKeyId, String accessKeySecret,
-                                          String bucketName, String endPoint,
+    public static void downloadToResponse(@NonNull String ossFilePath,
+                                          @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                          @NonNull String bucketName, @NonNull String endPoint,
                                           @Nullable String fileName,
                                           HttpServletRequest request, HttpServletResponse response)
             throws IOException {
@@ -457,9 +483,10 @@ public class AliYunOssUtils {
      * @see #downloadToFile(String, String, String, String, String, String)
      * @since 1.1.0.211021
      */
-    public static File downloadToFile(String ossFilePath,
-                                      String accessKeyId, String accessKeySecret,
-                                      String bucketName, String endPoint) {
+    @NonNull
+    public static File downloadToFile(@NonNull String ossFilePath,
+                                      @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                      @NonNull String bucketName, @NonNull String endPoint) {
         return downloadToFile(ossFilePath, accessKeyId, accessKeySecret, bucketName, endPoint, "");
     }
 
@@ -475,9 +502,10 @@ public class AliYunOssUtils {
      * @return File对象
      * @since 1.1.0.211021
      */
-    public static File downloadToFile(String ossFilePath,
-                                      String accessKeyId, String accessKeySecret,
-                                      String bucketName, String endPoint,
+    @NonNull
+    public static File downloadToFile(@NonNull String ossFilePath,
+                                      @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                      @NonNull String bucketName, @NonNull String endPoint,
                                       @Nullable String fileName) {
         File file;
         OSS ossClient = null;
@@ -507,9 +535,10 @@ public class AliYunOssUtils {
      * @return File对象
      * @since 1.1.0.211021
      */
-    public static File downloadToFile(String ossFilePath,
-                                      String accessKeyId, String accessKeySecret,
-                                      String bucketName, String endPoint,
+    @NonNull
+    public static File downloadToFile(@NonNull String ossFilePath,
+                                      @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                      @NonNull String bucketName, @NonNull String endPoint,
                                       @Nullable File outFile) {
         OSS ossClient = null;
         try {
@@ -537,9 +566,9 @@ public class AliYunOssUtils {
      * @param endPoint        Endpoint地域节点
      * @since 1.1.0.211021
      */
-    public static void deleteObject(String ossFilePath,
-                                    String accessKeyId, String accessKeySecret,
-                                    String bucketName, String endPoint) {
+    public static void deleteObject(@NonNull String ossFilePath,
+                                    @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                    @NonNull String bucketName, @NonNull String endPoint) {
         OSS ossClient = null;
         try {
             ossClient = new OSSClientBuilder().build(endPoint, accessKeyId, accessKeySecret);
@@ -564,9 +593,10 @@ public class AliYunOssUtils {
      * @see #deleteObject(Collection, boolean, String, String, String, String)
      * @since 1.1.0.211021
      */
-    public static List<String> deleteObject(Collection<String> ossFilePaths,
-                                            String accessKeyId, String accessKeySecret,
-                                            String bucketName, String endPoint) {
+    @NonNull
+    public static List<String> deleteObject(@NonNull Collection<String> ossFilePaths,
+                                            @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                            @NonNull String bucketName, @NonNull String endPoint) {
         return deleteObject(ossFilePaths, false, accessKeyId, accessKeySecret, bucketName, endPoint);
     }
 
@@ -583,9 +613,10 @@ public class AliYunOssUtils {
      * @return 返回结果参考 {@code quiet} 形参注释
      * @since 1.1.0.211021
      */
-    public static List<String> deleteObject(Collection<String> ossFilePaths, boolean quiet,
-                                            String accessKeyId, String accessKeySecret,
-                                            String bucketName, String endPoint) {
+    @NonNull
+    public static List<String> deleteObject(@NonNull Collection<String> ossFilePaths, boolean quiet,
+                                            @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                            @NonNull String bucketName, @NonNull String endPoint) {
         if (ossFilePaths.isEmpty()) {
             LOGGER.warn("[{}] 批量删除文件为空 [bucketName: {}, resultPath: {}]", LOG_TAG,
                     bucketName, ossFilePaths);
@@ -627,11 +658,13 @@ public class AliYunOssUtils {
      * @see #baseFileUploadByMultipart(LinkedList, LinkedList, String, String, String, String, String, String...)
      * @since 1.1.0.211021
      */
-    public static List<String> baseFileUploadByMultipart(Collection<MultipartFile> files,
-                                                         String accessKeyId, String accessKeySecret,
-                                                         String bucketName, String endPoint,
-                                                         String fileType, String... uploadPath)
+    @NonNull
+    public static List<String> baseFileUploadByMultipart(@NonNull Collection<MultipartFile> files,
+                                                         @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                                         @NonNull String bucketName, @NonNull String endPoint,
+                                                         @NonNull String fileType, @NonNull String... uploadPath)
             throws AliYunOssUploadException, IOException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         return baseFileUploadByMultipart(new LinkedList<>(files), null,
                 accessKeyId, accessKeySecret, bucketName, endPoint, fileType, uploadPath);
     }
@@ -652,12 +685,14 @@ public class AliYunOssUtils {
      * @throws IOException              获取文件流异常
      * @since 1.1.0.211021
      */
-    public static List<String> baseFileUploadByMultipart(LinkedList<MultipartFile> uploadFiles,
+    @NonNull
+    public static List<String> baseFileUploadByMultipart(@NonNull LinkedList<MultipartFile> uploadFiles,
                                                          @Nullable LinkedList<String> newFileNames,
-                                                         String accessKeyId, String accessKeySecret,
-                                                         String bucketName, String endPoint,
-                                                         String fileType, String... uploadPath)
+                                                         @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                                         @NonNull String bucketName, @NonNull String endPoint,
+                                                         @NonNull String fileType, @NonNull String... uploadPath)
             throws AliYunOssUploadException, IOException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         if (uploadFiles.stream().anyMatch(item -> item == null || item.isEmpty())) {
             throw new AliYunOssUploadException(AliYunOssUploadErrorEnum.NOT_EXISTS);
         }
@@ -699,11 +734,13 @@ public class AliYunOssUtils {
      * @see #baseFileUploadByFile(LinkedList, LinkedList, String, String, String, String, String, String...)
      * @since 1.1.0.211021
      */
-    private static List<String> baseFileUploadByFile(Collection<File> uploadFiles,
-                                                     String accessKeyId, String accessKeySecret,
-                                                     String bucketName, String endPoint,
-                                                     String fileType, String... uploadPath)
+    @NonNull
+    private static List<String> baseFileUploadByFile(@NonNull Collection<File> uploadFiles,
+                                                     @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                                     @NonNull String bucketName, @NonNull String endPoint,
+                                                     @NonNull String fileType, @NonNull String... uploadPath)
             throws AliYunOssUploadException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         return baseFileUploadByFile(new LinkedList<>(uploadFiles), null,
                 accessKeyId, accessKeySecret, bucketName, endPoint, fileType, uploadPath);
     }
@@ -723,12 +760,14 @@ public class AliYunOssUtils {
      * @throws AliYunOssUploadException 阿里云文件上传异常
      * @since 1.1.0.211021
      */
-    private static List<String> baseFileUploadByFile(LinkedList<File> uploadFiles,
+    @NonNull
+    private static List<String> baseFileUploadByFile(@NonNull LinkedList<File> uploadFiles,
                                                      @Nullable LinkedList<String> newFileNames,
-                                                     String accessKeyId, String accessKeySecret,
-                                                     String bucketName, String endPoint,
-                                                     String fileType, String... uploadPath)
+                                                     @NonNull String accessKeyId, @NonNull String accessKeySecret,
+                                                     @NonNull String bucketName, @NonNull String endPoint,
+                                                     @NonNull String fileType, @NonNull String... uploadPath)
             throws AliYunOssUploadException {
+        Assert.notEmpty(uploadPath, "上传路径不能为空");
         if (uploadFiles.stream().anyMatch(item -> item == null || !item.exists())) {
             throw new AliYunOssUploadException(AliYunOssUploadErrorEnum.NOT_EXISTS);
         }
