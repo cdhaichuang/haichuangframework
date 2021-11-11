@@ -155,7 +155,7 @@ public class MybatisGenerateCodeService {
                     // 设置 mapperXml 模板路径
                     .mapperXml("/templates/mapper.xml")
                     // 设置 controller 模板路径
-                    .controller("/templates/controller.xml");
+                    .controller("/templates/controller.java");
         };
     }
 
