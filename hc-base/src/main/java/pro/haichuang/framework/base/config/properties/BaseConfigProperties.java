@@ -18,7 +18,7 @@ import java.time.temporal.ChronoUnit;
  *       // 是否启用配置
  *       enable: true
  *       // 项目代号
- *       projectCode: true
+ *       projectCode:
  *       // 请求超时时间, 可自定义时间单位, 默认时间单位为 [秒], 默认值为 [3s]
  *       requestTimeoutTime: 3s
  * </pre>
