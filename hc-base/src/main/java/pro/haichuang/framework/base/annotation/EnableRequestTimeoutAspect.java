@@ -22,5 +22,5 @@ import java.lang.annotation.*;
 @Documented
 @ConditionalOnWebApplication
 @Import({RequestTimeoutAspect.class})
-public @interface EnableControllerTimeoutAspect {
+public @interface EnableRequestTimeoutAspect {
 }

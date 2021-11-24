@@ -9,7 +9,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.core.annotation.Order;
-import pro.haichuang.framework.base.annotation.EnableControllerTimeoutAspect;
+import pro.haichuang.framework.base.annotation.EnableRequestTimeoutAspect;
 import pro.haichuang.framework.base.config.properties.BaseConfigProperties;
 import pro.haichuang.framework.base.enums.error.server.ExecutionErrorEnum;
 import pro.haichuang.framework.base.exception.server.ExecutionException;
@@ -22,10 +22,10 @@ import java.util.concurrent.*;
  * 请求超时切面
  *
  * <p>该类具体实现了记录请求日志的功能, 切点为标注了 {@link ApiOperation @ApiOperation} 注解的方法开启请求超时切面监听
- * <p>注意: 该类启用的前提条件为标注了 {@link EnableControllerTimeoutAspect @EnableControllerTimeoutAspect} 注解
+ * <p>注意: 该类启用的前提条件为标注了 {@link EnableRequestTimeoutAspect @EnableControllerTimeoutAspect} 注解
  *
  * @author JiYinchuan
- * @see EnableControllerTimeoutAspect
+ * @see EnableRequestTimeoutAspect
  * @since 1.1.0.211021
  */
 @Aspect
