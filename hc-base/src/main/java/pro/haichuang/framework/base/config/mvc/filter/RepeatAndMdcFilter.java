@@ -17,7 +17,7 @@ import java.io.IOException;
  * @since 1.1.0.211021
  */
 @WebFilter(urlPatterns = "/**")
-@Order(0)
+@Order
 public class RepeatAndMdcFilter implements Filter {
 
     @Override
