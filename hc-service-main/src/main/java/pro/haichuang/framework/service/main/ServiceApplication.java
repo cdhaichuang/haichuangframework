@@ -2,10 +2,7 @@ package pro.haichuang.framework.service.main;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import pro.haichuang.framework.base.annotation.EnableControllerAdvice;
-import pro.haichuang.framework.base.annotation.EnableControllerLogAspect;
-import pro.haichuang.framework.base.annotation.EnableGlobalCorsConfig;
-import pro.haichuang.framework.base.annotation.EnableLogSave;
+import pro.haichuang.framework.base.annotation.*;
 import pro.haichuang.framework.redis.annotation.EnableRequestRepeatValidate;
 
 /**
@@ -20,6 +17,7 @@ import pro.haichuang.framework.redis.annotation.EnableRequestRepeatValidate;
 @EnableControllerLogAspect
 @EnableLogSave
 @EnableRequestRepeatValidate
+@EnableRequestTimeoutAspect
 public class ServiceApplication {
 
     public static void main(String[] args) {
