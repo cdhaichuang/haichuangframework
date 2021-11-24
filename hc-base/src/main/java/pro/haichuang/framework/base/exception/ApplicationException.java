@@ -17,9 +17,9 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * @since 1.1.0.211021
  */
 public class ApplicationException extends RuntimeException {
-    public static final String DEFAULT_ERROR_USER_TIP = "网络开小差了, 请稍后再试 (╯﹏╰)";
-
     private static final long serialVersionUID = 5592697530081508972L;
+
+    public static final String DEFAULT_ERROR_USER_TIP = "网络开小差了, 请稍后再试 (╯﹏╰)";
 
     /**
      * 错误码
