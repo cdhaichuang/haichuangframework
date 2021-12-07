@@ -9,6 +9,7 @@
         <module>hc-redis</module>
         <module>hc-sdk-aliyunoss</module>
         <module>hc-sdk-aliyunsms</module>
+        <module>hc-sdk-chuanglansms</module>
         <module>hc-sdk-huaweicloudobs</module>
         <module>hc-sdk-huaweicloudsms</module>
         <module>hc-sdk-wxmp</module>
