@@ -1,6 +1,6 @@
 package pro.haichuang.framework.sdk.aliyunoss.exception;
 
-import pro.haichuang.framework.base.exception.ApplicationException;
+import pro.haichuang.framework.base.exception.ThirdPartyException;
 import pro.haichuang.framework.sdk.aliyunoss.enums.error.AliYunOssUploadErrorEnum;
 
 /**
@@ -10,8 +10,8 @@ import pro.haichuang.framework.sdk.aliyunoss.enums.error.AliYunOssUploadErrorEnu
  * @see AliYunOssUploadErrorEnum
  * @since 1.1.0.211021
  */
-public class AliYunOssUploadException extends ApplicationException {
-    private static final long serialVersionUID = 8577734487637960381L;
+public class AliYunOssUploadException extends ThirdPartyException {
+    private static final long serialVersionUID = -8637676388371098135L;
 
     public AliYunOssUploadException(AliYunOssUploadErrorEnum aliYunOssUploadErrorEnum) {
         super(aliYunOssUploadErrorEnum);

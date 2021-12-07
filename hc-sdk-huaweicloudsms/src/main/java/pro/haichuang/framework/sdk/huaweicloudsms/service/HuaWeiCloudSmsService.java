@@ -3,6 +3,7 @@ package pro.haichuang.framework.sdk.huaweicloudsms.service;
 import com.alibaba.fastjson.JSONArray;
 import org.springframework.lang.Nullable;
 import pro.haichuang.framework.sdk.huaweicloudsms.config.properties.HuaWeiCloudSmsProperties;
+import pro.haichuang.framework.sdk.huaweicloudsms.exception.HuaWeiCloudSmsSendException;
 import pro.haichuang.framework.sdk.huaweicloudsms.response.SendResponse;
 
 import java.util.List;
@@ -43,10 +44,11 @@ public interface HuaWeiCloudSmsService {
      *                       例如 {@code templateId} 对应的模板内容有 [2] 个变量且变量长度分别为 [5] 和 [6],
      *                       则此处需要设置 [2] 个变量值且内容长度分别小于等于 [5] 和 [6]
      * @return 执行结果
+     * @throws HuaWeiCloudSmsSendException 华为云短信发送异常
      * @since 1.1.0.211021
      */
     List<SendResponse.Result> send(String signName, String channelNumber, String templateId,
-                                   String phoneNumbers, @Nullable JSONArray templateParams);
+                                   String phoneNumbers, @Nullable JSONArray templateParams) throws HuaWeiCloudSmsSendException;
 
     /**
      * 发送短信
@@ -71,10 +73,11 @@ public interface HuaWeiCloudSmsService {
      *                       例如 {@code templateId} 对应的模板内容有 [2] 个变量且变量长度分别为 [5] 和 [6],
      *                       则此处需要设置 [2] 个变量值且内容长度分别小于等于 [5] 和 [6]
      * @return 执行结果
+     * @throws HuaWeiCloudSmsSendException 华为云短信发送异常
      * @since 1.1.0.211021
      */
     List<SendResponse.Result> send(String templateId,
-                                   String phoneNumbers, @Nullable JSONArray templateParams);
+                                   String phoneNumbers, @Nullable JSONArray templateParams) throws HuaWeiCloudSmsSendException;
 
     /**
      * 发送短信
@@ -98,8 +101,9 @@ public interface HuaWeiCloudSmsService {
      *                       例如 {@code templateId} 对应的模板内容有 [2] 个变量且变量长度分别为 [5] 和 [6],
      *                       则此处需要设置 [2] 个变量值且内容长度分别小于等于 [5] 和 [6]
      * @return 执行结果
+     * @throws HuaWeiCloudSmsSendException 华为云短信发送异常
      * @since 1.1.0.211021
      */
-    List<SendResponse.Result> send(String phoneNumbers, @Nullable JSONArray templateParams);
+    List<SendResponse.Result> send(String phoneNumbers, @Nullable JSONArray templateParams) throws HuaWeiCloudSmsSendException;
 
 }

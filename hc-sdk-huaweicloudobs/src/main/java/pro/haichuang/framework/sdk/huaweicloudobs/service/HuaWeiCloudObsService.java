@@ -4,10 +4,12 @@ import com.obs.services.model.DeleteObjectsResult;
 import org.springframework.lang.Nullable;
 import org.springframework.web.multipart.MultipartFile;
 import pro.haichuang.framework.base.enums.upload.UploadTypeEnum;
+import pro.haichuang.framework.sdk.huaweicloudobs.exception.HuaWeiCloudObsUploadException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -34,10 +36,13 @@ public interface HuaWeiCloudObsService {
      * @param uploadTypeEnum 上传文件类型
      * @param pathOfBizName  上传文件路径|业务模块路径
      * @return 上传后文件路径
+     * @throws HuaWeiCloudObsUploadException 华为云对象存储上传异常
+     * @throws IOException                   获取文件流异常
      * @since 1.1.0.211021
      */
     String uploadByMultipart(MultipartFile uploadFile,
-                             UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
+                             UploadTypeEnum uploadTypeEnum, String... pathOfBizName)
+            throws HuaWeiCloudObsUploadException, IOException;
 
     /**
      * 上传文件
@@ -47,10 +52,13 @@ public interface HuaWeiCloudObsService {
      * @param uploadTypeEnum 上传文件类型
      * @param pathOfBizName  上传文件路径|业务模块路径
      * @return 上传后文件路径
+     * @throws HuaWeiCloudObsUploadException 华为云对象存储上传异常
+     * @throws IOException                   获取文件流异常
      * @since 1.1.0.211021
      */
     String uploadByMultipart(MultipartFile uploadFile, String newFileName,
-                             UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
+                             UploadTypeEnum uploadTypeEnum, String... pathOfBizName)
+            throws HuaWeiCloudObsUploadException, IOException;
 
     /**
      * 上传文件
@@ -59,10 +67,13 @@ public interface HuaWeiCloudObsService {
      * @param uploadTypeEnum 上传主路径, 建议填写业务模块相关名称
      * @param pathOfBizName  上传文件路径|业务模块路径
      * @return 上传后文件路径
+     * @throws HuaWeiCloudObsUploadException 华为云对象存储上传异常
+     * @throws IOException                   获取文件流异常
      * @since 1.1.0.211021
      */
     List<String> uploadByMultipart(List<MultipartFile> uploadFiles,
-                                   UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
+                                   UploadTypeEnum uploadTypeEnum, String... pathOfBizName)
+            throws HuaWeiCloudObsUploadException, IOException;
 
     /**
      * 上传文件
@@ -72,10 +83,13 @@ public interface HuaWeiCloudObsService {
      * @param uploadTypeEnum 上传主路径, 建议填写业务模块相关名称
      * @param pathOfBizName  上传文件路径|业务模块路径
      * @return 上传后文件路径
+     * @throws HuaWeiCloudObsUploadException 华为云对象存储上传异常
+     * @throws IOException                   获取文件流异常
      * @since 1.1.0.211021
      */
     List<String> uploadByMultipart(LinkedList<MultipartFile> uploadFiles, LinkedList<String> newFileNames,
-                                   UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
+                                   UploadTypeEnum uploadTypeEnum, String... pathOfBizName)
+            throws HuaWeiCloudObsUploadException, IOException;
 
     /**
      * 上传文件
@@ -84,10 +98,13 @@ public interface HuaWeiCloudObsService {
      * @param uploadTypeEnum   上传主路径, 建议填写业务模块相关名称
      * @param pathOfBizName    上传文件路径|业务模块路径
      * @return 上传后文件路径
+     * @throws HuaWeiCloudObsUploadException 华为云对象存储上传异常
+     * @throws IOException                   获取文件流异常
      * @since 1.1.0.211021
      */
     String uploadByPath(String absoluteFilePath,
-                        UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
+                        UploadTypeEnum uploadTypeEnum, String... pathOfBizName)
+            throws HuaWeiCloudObsUploadException, IOException;
 
     /**
      * 上传文件
@@ -97,10 +114,13 @@ public interface HuaWeiCloudObsService {
      * @param uploadTypeEnum   上传主路径, 建议填写业务模块相关名称
      * @param pathOfBizName    上传文件路径|业务模块路径
      * @return 上传后文件路径
+     * @throws HuaWeiCloudObsUploadException 华为云对象存储上传异常
+     * @throws IOException                   获取文件流异常
      * @since 1.1.0.211021
      */
     String uploadByPath(String absoluteFilePath, String newFileName,
-                        UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
+                        UploadTypeEnum uploadTypeEnum, String... pathOfBizName)
+            throws HuaWeiCloudObsUploadException, IOException;
 
     /**
      * 上传文件
@@ -109,10 +129,13 @@ public interface HuaWeiCloudObsService {
      * @param uploadTypeEnum    上传主路径, 建议填写业务模块相关名称
      * @param pathOfBizName     上传文件路径|业务模块路径
      * @return 上传后文件路径
+     * @throws HuaWeiCloudObsUploadException 华为云对象存储上传异常
+     * @throws IOException                   获取文件流异常
      * @since 1.1.0.211021
      */
     List<String> uploadByPath(List<String> absoluteFilePaths,
-                              UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
+                              UploadTypeEnum uploadTypeEnum, String... pathOfBizName)
+            throws HuaWeiCloudObsUploadException, IOException;
 
     /**
      * 上传文件
@@ -122,10 +145,13 @@ public interface HuaWeiCloudObsService {
      * @param uploadTypeEnum    上传主路径, 建议填写业务模块相关名称
      * @param pathOfBizName     上传文件路径|业务模块路径
      * @return 上传后文件路径
+     * @throws HuaWeiCloudObsUploadException 华为云对象存储上传异常
+     * @throws IOException                   获取文件流异常
      * @since 1.1.0.211021
      */
     List<String> uploadByPath(LinkedList<String> absoluteFilePaths, LinkedList<String> newFileNames,
-                              UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
+                              UploadTypeEnum uploadTypeEnum, String... pathOfBizName)
+            throws HuaWeiCloudObsUploadException, IOException;
 
     /**
      * 上传文件
@@ -134,10 +160,13 @@ public interface HuaWeiCloudObsService {
      * @param uploadTypeEnum   上传主路径, 建议填写业务模块相关名称
      * @param pathOfBizName    上传文件路径|业务模块路径
      * @return 上传后文件路径
+     * @throws HuaWeiCloudObsUploadException 华为云对象存储上传异常
+     * @throws IOException                   获取文件流异常
      * @since 1.1.0.211021
      */
     String uploadByFile(File absoluteFilePath,
-                        UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
+                        UploadTypeEnum uploadTypeEnum, String... pathOfBizName)
+            throws HuaWeiCloudObsUploadException, IOException;
 
     /**
      * 上传文件
@@ -147,10 +176,13 @@ public interface HuaWeiCloudObsService {
      * @param uploadTypeEnum   上传主路径, 建议填写业务模块相关名称
      * @param pathOfBizName    上传文件路径|业务模块路径
      * @return 上传后文件路径
+     * @throws HuaWeiCloudObsUploadException 华为云对象存储上传异常
+     * @throws IOException                   获取文件流异常
      * @since 1.1.0.211021
      */
     String uploadByFile(File absoluteFilePath, String newFileName,
-                        UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
+                        UploadTypeEnum uploadTypeEnum, String... pathOfBizName)
+            throws HuaWeiCloudObsUploadException, IOException;
 
     /**
      * 上传文件
@@ -159,10 +191,13 @@ public interface HuaWeiCloudObsService {
      * @param uploadTypeEnum    上传主路径, 建议填写业务模块相关名称
      * @param pathOfBizName     上传文件路径|业务模块路径
      * @return 上传后文件路径
+     * @throws HuaWeiCloudObsUploadException 华为云对象存储上传异常
+     * @throws IOException                   获取文件流异常
      * @since 1.1.0.211021
      */
     List<String> uploadByFile(List<File> absoluteFilePaths,
-                              UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
+                              UploadTypeEnum uploadTypeEnum, String... pathOfBizName)
+            throws HuaWeiCloudObsUploadException, IOException;
 
     /**
      * 上传文件
@@ -172,10 +207,13 @@ public interface HuaWeiCloudObsService {
      * @param uploadTypeEnum    上传主路径, 建议填写业务模块相关名称
      * @param pathOfBizName     上传文件路径|业务模块路径
      * @return 上传后文件路径
+     * @throws HuaWeiCloudObsUploadException 华为云对象存储上传异常
+     * @throws IOException                   获取文件流异常
      * @since 1.1.0.211021
      */
     List<String> uploadByFile(LinkedList<File> absoluteFilePaths, LinkedList<String> newFileNames,
-                              UploadTypeEnum uploadTypeEnum, String... pathOfBizName);
+                              UploadTypeEnum uploadTypeEnum, String... pathOfBizName)
+            throws HuaWeiCloudObsUploadException, IOException;
 
     // ========================= Download =========================
 
@@ -185,9 +223,11 @@ public interface HuaWeiCloudObsService {
      * @param obsFilePath OBS文件路径
      * @param request     {@link HttpServletRequest}
      * @param response    {@link HttpServletResponse}
+     * @throws IOException 获取文件流异常
      * @since 1.1.0.211021
      */
-    void downloadToResponse(String obsFilePath, HttpServletRequest request, HttpServletResponse response);
+    void downloadToResponse(String obsFilePath, HttpServletRequest request, HttpServletResponse response)
+            throws IOException;
 
     /**
      * 下载文件至 HttpServletResponse
@@ -196,19 +236,21 @@ public interface HuaWeiCloudObsService {
      * @param fileName    新文件名称, 为空时则为OBS文件名
      * @param request     {@link HttpServletRequest}
      * @param response    {@link HttpServletResponse}
+     * @throws IOException 获取文件流异常
      * @since 1.1.0.211021
      */
     void downloadToResponse(String obsFilePath, @Nullable String fileName,
-                            HttpServletRequest request, HttpServletResponse response);
+                            HttpServletRequest request, HttpServletResponse response) throws IOException;
 
     /**
      * 下载文件至 File 对象
      *
      * @param obsFilePath OBS文件路径
      * @return File对象
+     * @throws IOException 获取文件流异常
      * @since 1.1.0.211021
      */
-    File downloadToFile(String obsFilePath);
+    File downloadToFile(String obsFilePath) throws IOException;
 
     /**
      * 下载文件至 File 对象
@@ -216,9 +258,10 @@ public interface HuaWeiCloudObsService {
      * @param obsFilePath OBS文件路径
      * @param outFileName 新文件名称, 为空时则为OBS文件名
      * @return File对象
+     * @throws IOException 获取文件流异常
      * @since 1.1.0.211021
      */
-    File downloadToFile(String obsFilePath, @Nullable String outFileName);
+    File downloadToFile(String obsFilePath, @Nullable String outFileName) throws IOException;
 
     /**
      * 下载文件至 File 对象
@@ -226,9 +269,10 @@ public interface HuaWeiCloudObsService {
      * @param obsFilePath OBS文件路径
      * @param outFile     新文件对象, 为空时则文件名为OBS文件名
      * @return File对象
+     * @throws IOException 获取文件流异常
      * @since 1.1.0.211021
      */
-    File downloadToFile(String obsFilePath, @Nullable File outFile);
+    File downloadToFile(String obsFilePath, @Nullable File outFile) throws IOException;
 
     // ========================= Delete =========================
 
@@ -236,26 +280,30 @@ public interface HuaWeiCloudObsService {
      * 删除文件
      *
      * @param obsFilePath OBS文件路径
+     * @throws IOException 获取文件流异常
      * @since 1.1.0.211021
      */
-    void deleteObjectResSuccess(String obsFilePath);
+    void deleteObjectResSuccess(String obsFilePath) throws IOException;
 
     /**
      * 删除文件
      *
      * @param obsFilePaths OBS文件路径
      * @return 删除成功的文件路径集合
+     * @throws IOException 获取文件流异常
      * @since 1.1.0.211021
      */
-    List<DeleteObjectsResult.DeleteObjectResult> deleteObjectResSuccess(Collection<String> obsFilePaths);
+    List<DeleteObjectsResult.DeleteObjectResult> deleteObjectResSuccess(Collection<String> obsFilePaths)
+            throws IOException;
 
     /**
      * 删除文件
      *
      * @param obsFilePaths OBS文件路径
      * @return 删除失败的文件路径集合
+     * @throws IOException 获取文件流异常
      * @since 1.1.0.211021
      */
-    List<DeleteObjectsResult.ErrorResult> deleteObjectResError(Collection<String> obsFilePaths);
+    List<DeleteObjectsResult.ErrorResult> deleteObjectResError(Collection<String> obsFilePaths) throws IOException;
 
 }

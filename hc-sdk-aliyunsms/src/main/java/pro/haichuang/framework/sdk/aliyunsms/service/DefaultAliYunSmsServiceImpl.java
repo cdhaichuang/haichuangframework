@@ -28,7 +28,8 @@ public class DefaultAliYunSmsServiceImpl implements AliYunSmsService {
 
     @Override
     public boolean send(String signName, String templateCode,
-                        String phoneNumbers, @Nullable JSONObject templateParam) {
+                        String phoneNumbers, @Nullable JSONObject templateParam)
+            throws AliYunSmsSendException {
         validateProperties();
         validateParams(phoneNumbers);
         if (signName.isEmpty()) {
@@ -42,7 +43,8 @@ public class DefaultAliYunSmsServiceImpl implements AliYunSmsService {
     }
 
     @Override
-    public boolean send(String templateCode, String phoneNumbers, @Nullable JSONObject templateParam) {
+    public boolean send(String templateCode, String phoneNumbers, @Nullable JSONObject templateParam)
+            throws AliYunSmsSendException {
         validateProperties();
         validateParams(phoneNumbers);
         String signName = aliYunSmsProperties.getDefaultSignName();
@@ -58,7 +60,8 @@ public class DefaultAliYunSmsServiceImpl implements AliYunSmsService {
     }
 
     @Override
-    public boolean send(String phoneNumbers, @Nullable JSONObject templateParam) {
+    public boolean send(String phoneNumbers, @Nullable JSONObject templateParam)
+            throws AliYunSmsSendException {
         validateProperties();
         validateParams(phoneNumbers);
         String signName = aliYunSmsProperties.getDefaultSignName();
@@ -77,9 +80,10 @@ public class DefaultAliYunSmsServiceImpl implements AliYunSmsService {
     /**
      * 验证配置文件
      *
+     * @throws AliYunSmsConfigException 阿里云短信配置异常
      * @since 1.1.0.211021
      */
-    private void validateProperties() {
+    private void validateProperties() throws AliYunSmsConfigException {
         String accessKeyId = aliYunSmsProperties.getAccessKeyId();
         String accessKeySecret = aliYunSmsProperties.getAccessKeySecret();
 
@@ -94,10 +98,10 @@ public class DefaultAliYunSmsServiceImpl implements AliYunSmsService {
     /**
      * 验证参数
      *
+     * @throws AliYunSmsSendException 阿里云短信发送异常
      * @since 1.1.0.211021
      */
-
-    private void validateParams(String phoneNumbers) {
+    private void validateParams(String phoneNumbers) throws AliYunSmsSendException {
         //noinspection AlibabaUndefineMagicConstant
         for (String phoneNumber : phoneNumbers.split(",")) {
             if (!ReUtil.isMatch(PatternConstant.PHONE, phoneNumber.replaceFirst("\\+", ""))) {

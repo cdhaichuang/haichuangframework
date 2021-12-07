@@ -3,6 +3,7 @@ package pro.haichuang.framework.sdk.aliyunsms.service;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
+import pro.haichuang.framework.sdk.aliyunsms.exception.AliYunSmsSendException;
 
 /**
  * AliYunSmsService
@@ -26,10 +27,12 @@ public interface AliYunSmsService {
      *                      发送国际/港澳台消息时, 接收号码格式为: 国际区号+号码, 如"85200000000"。
      * @param templateParam 短信模板变量替换JSON串, 友情提示: 如果JSON中需要带换行符, 请参照标准的JSON协议
      * @return 执行结果
+     * @throws AliYunSmsSendException 阿里云短信发送异常
      * @since 1.1.0.211021
      */
     boolean send(@NonNull String signName, @NonNull String templateCode,
-                 @NonNull String phoneNumbers, @Nullable JSONObject templateParam);
+                 @NonNull String phoneNumbers, @Nullable JSONObject templateParam)
+            throws AliYunSmsSendException;
 
     /**
      * 发送短信验证码
@@ -40,10 +43,12 @@ public interface AliYunSmsService {
      *                      发送国际/港澳台消息时, 接收号码格式为: 国际区号+号码, 如"85200000000"。
      * @param templateParam 短信模板变量替换JSON串, 友情提示: 如果JSON中需要带换行符, 请参照标准的JSON协议
      * @return 执行结果
+     * @throws AliYunSmsSendException 阿里云短信发送异常
      * @since 1.1.0.211021
      */
     boolean send(@NonNull String templateCode,
-                 @NonNull String phoneNumbers, @Nullable JSONObject templateParam);
+                 @NonNull String phoneNumbers, @Nullable JSONObject templateParam)
+            throws AliYunSmsSendException;
 
     /**
      * 发送短信验证码
@@ -53,8 +58,10 @@ public interface AliYunSmsService {
      *                      发送国际/港澳台消息时, 接收号码格式为: 国际区号+号码, 如"85200000000"。
      * @param templateParam 短信模板变量替换JSON串, 友情提示: 如果JSON中需要带换行符, 请参照标准的JSON协议
      * @return 执行结果
+     * @throws AliYunSmsSendException 阿里云短信发送异常
      * @since 1.1.0.211021
      */
-    boolean send(@NonNull String phoneNumbers, @Nullable JSONObject templateParam);
+    boolean send(@NonNull String phoneNumbers, @Nullable JSONObject templateParam)
+            throws AliYunSmsSendException;
 
 }

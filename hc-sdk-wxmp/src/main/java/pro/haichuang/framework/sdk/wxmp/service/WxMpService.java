@@ -3,6 +3,7 @@ package pro.haichuang.framework.sdk.wxmp.service;
 import org.springframework.lang.Nullable;
 import pro.haichuang.framework.sdk.wxmp.dto.WxMpUserInfoDTO;
 import pro.haichuang.framework.sdk.wxmp.dto.WxMpWebAccessTokenDTO;
+import pro.haichuang.framework.sdk.wxmp.exception.WxMpExecuteException;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -33,20 +34,22 @@ public interface WxMpService {
      * 获取基础AccessToken
      *
      * @return 基础AccessToken
+     * @throws WxMpExecuteException 微信公众号执行异常
      * @since 1.1.0.211021
      */
-    String getBaseAccessToken();
+    String getBaseAccessToken() throws WxMpExecuteException;
 
     /**
      * 获取网页AccessToken
      *
      * @param openId OpenId
      * @return 网页AccessTokenDTO, 值为 {@code null} 时则视为未登录, 需要重新进行授权
+     * @throws WxMpExecuteException 微信公众号执行异常
      * @see pro.haichuang.framework.sdk.wxmp.service.WxMpService#getWebAccessTokenByCode(String)
      * @since 1.1.0.211021
      */
     @Nullable
-    WxMpWebAccessTokenDTO getWebAccessTokenByOpenId(String openId);
+    WxMpWebAccessTokenDTO getWebAccessTokenByOpenId(String openId) throws WxMpExecuteException;
 
     /**
      * 获取网页AccessToken
@@ -54,26 +57,29 @@ public interface WxMpService {
      *
      * @param code Code
      * @return 网页AccessTokenDTO
+     * @throws WxMpExecuteException 微信公众号执行异常
      * @since 1.1.0.211021
      */
-    WxMpWebAccessTokenDTO getWebAccessTokenByCode(String code);
+    WxMpWebAccessTokenDTO getWebAccessTokenByCode(String code) throws WxMpExecuteException;
 
     /**
      * 获取JsApiTicket
      *
      * @return JsApiTicket
+     * @throws WxMpExecuteException 微信公众号执行异常
      * @since 1.1.0.211021
      */
-    String getJsApiTicket();
+    String getJsApiTicket() throws WxMpExecuteException;
 
     /**
      * 获取用户信息
      *
      * @param openId OpenId
      * @return 用户信息DTO, 当用户未关注当前公众号时值为 {@code null}
+     * @throws WxMpExecuteException 微信公众号执行异常
      * @since 1.1.0.211021
      */
     @Nullable
-    WxMpUserInfoDTO getUserInfo(String openId);
+    WxMpUserInfoDTO getUserInfo(String openId) throws WxMpExecuteException;
 
 }

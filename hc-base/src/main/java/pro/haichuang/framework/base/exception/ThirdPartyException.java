@@ -8,7 +8,7 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * @author JiYinchuan
  * @since 1.1.0.211021
  */
-public class ThirdPartyException extends RuntimeException {
+public class ThirdPartyException extends Exception {
     private static final long serialVersionUID = -2738349034577951728L;
 
     /**

@@ -10,11 +10,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import pro.haichuang.framework.base.enums.base.SexEnum;
-import pro.haichuang.framework.base.exception.ThirdPartyException;
 import pro.haichuang.framework.sdk.wxmp.dto.WxMpBaseAccessTokenDTO;
 import pro.haichuang.framework.sdk.wxmp.dto.WxMpJsApiTicketDTO;
 import pro.haichuang.framework.sdk.wxmp.dto.WxMpUserInfoDTO;
 import pro.haichuang.framework.sdk.wxmp.dto.WxMpWebAccessTokenDTO;
+import pro.haichuang.framework.sdk.wxmp.exception.WxMpExecuteException;
 
 import java.time.Duration;
 import java.util.Arrays;
@@ -63,7 +63,8 @@ public class WxMpUtils {
      * @return 验证是否成功 {false: 失败, true: 成功}
      * @since 1.1.0.211021
      */
-    public static boolean checkSignature(@NonNull String token, @NonNull String signature, @NonNull String timestamp, @NonNull String nonce) {
+    public static boolean checkSignature(@NonNull String token, @NonNull String signature,
+                                         @NonNull String timestamp, @NonNull String nonce) {
         String[] arr = new String[]{token, timestamp, nonce};
         Arrays.sort(arr);
         StringBuilder content = new StringBuilder();
@@ -80,10 +81,12 @@ public class WxMpUtils {
      * @param appId     AppId
      * @param appSecret AppSecret
      * @return 基础AccessToken
+     * @throws WxMpExecuteException 微信公众号获取基础AccessToken异常
      * @since 1.1.0.211021
      */
     @NonNull
-    public static WxMpBaseAccessTokenDTO getBaseAccessToken(@NonNull String appId, @NonNull String appSecret) {
+    public static WxMpBaseAccessTokenDTO getBaseAccessToken(@NonNull String appId, @NonNull String appSecret)
+            throws WxMpExecuteException {
         return getBaseAccessToken(appId, appSecret, HttpGlobalConfig.getTimeout());
     }
 
@@ -94,10 +97,13 @@ public class WxMpUtils {
      * @param appSecret AppSecret
      * @param timout    超时时间
      * @return 基础AccessToken
+     * @throws WxMpExecuteException 微信公众号获取基础AccessToken异常
      * @since 1.1.0.211021
      */
     @NonNull
-    public static WxMpBaseAccessTokenDTO getBaseAccessToken(@NonNull String appId, @NonNull String appSecret, int timout) {
+    public static WxMpBaseAccessTokenDTO getBaseAccessToken(@NonNull String appId, @NonNull String appSecret,
+                                                            int timout)
+            throws WxMpExecuteException {
         String baseUrl = "https://api.weixin.qq.com/cgi-bin/token";
         Map<String, Object> params = new HashMap<>(3);
         params.put("appid", appId);
@@ -106,7 +112,7 @@ public class WxMpUtils {
         JSONObject resultJson = JSONObject.parseObject(HttpUtil.get(baseUrl, params, timout));
         if (validateFailResult(resultJson)) {
             LOGGER.error("[{}] 获取基础AccessToken异常 [response: {}]", LOG_TAG, resultJson.toJSONString());
-            throw new ThirdPartyException(resultJson.getString(ERROR_CODE_NAME), resultJson.getString(ERROR_MESSAGE_NAME));
+            throw new WxMpExecuteException(resultJson.getString(ERROR_CODE_NAME), resultJson.getString(ERROR_MESSAGE_NAME));
         }
         LOGGER.info("[{}] 成功获取基础AccessToken [response: {}]", LOG_TAG, resultJson.toJSONString());
         Duration expiresIn = Duration.ofSeconds(resultJson.getLongValue("expires_in"));
@@ -124,10 +130,13 @@ public class WxMpUtils {
      * @param appSecret AppSecret
      * @param code      Code
      * @return 网页AccessTokenDTO
+     * @throws WxMpExecuteException 微信公众号获取网页AccessToken异常
      * @since 1.1.0.211021
      */
     @NonNull
-    public static WxMpWebAccessTokenDTO getWebAccessToken(@NonNull String appId, @NonNull String appSecret, @NonNull String code) {
+    public static WxMpWebAccessTokenDTO getWebAccessToken(@NonNull String appId, @NonNull String appSecret,
+                                                          @NonNull String code)
+            throws WxMpExecuteException {
         return getWebAccessToken(appId, appSecret, code, HttpGlobalConfig.getTimeout());
     }
 
@@ -139,10 +148,13 @@ public class WxMpUtils {
      * @param code      Code
      * @param timout    超时时间
      * @return 网页AccessTokenDTO
+     * @throws WxMpExecuteException 微信公众号获取网页AccessToken异常
      * @since 1.1.0.211021
      */
     @NonNull
-    public static WxMpWebAccessTokenDTO getWebAccessToken(@NonNull String appId, @NonNull String appSecret, @NonNull String code, int timout) {
+    public static WxMpWebAccessTokenDTO getWebAccessToken(@NonNull String appId, @NonNull String appSecret,
+                                                          @NonNull String code, int timout)
+            throws WxMpExecuteException {
         String baseUrl = "https://api.weixin.qq.com/sns/oauth2/access_token";
         Map<String, Object> params = new HashMap<>(4);
         params.put("appid", appId);
@@ -152,7 +164,7 @@ public class WxMpUtils {
         JSONObject resultJson = JSONObject.parseObject(HttpUtil.get(baseUrl, params, timout));
         if (validateFailResult(resultJson)) {
             LOGGER.error("[{}] 获取网页AccessToken异常 [response: {}]", LOG_TAG, resultJson.toJSONString());
-            throw new ThirdPartyException(resultJson.getString(ERROR_CODE_NAME), resultJson.getString(ERROR_MESSAGE_NAME));
+            throw new WxMpExecuteException(resultJson.getString(ERROR_CODE_NAME), resultJson.getString(ERROR_MESSAGE_NAME));
         }
         LOGGER.info("[{}] 成功获取网页AccessToken [response: {}]", LOG_TAG, resultJson.toJSONString());
         Duration expiresIn = Duration.ofSeconds(resultJson.getLongValue("expires_in"));
@@ -172,10 +184,12 @@ public class WxMpUtils {
      * @param appId        AppId
      * @param refreshToken RefreshToken
      * @return 网页AccessTokenDTO
+     * @throws WxMpExecuteException 微信公众号刷新网页AccessToken异常
      * @since 1.1.0.211021
      */
     @NonNull
-    public static WxMpWebAccessTokenDTO refreshWebAccessToken(@NonNull String appId, @NonNull String refreshToken) {
+    public static WxMpWebAccessTokenDTO refreshWebAccessToken(@NonNull String appId, @NonNull String refreshToken)
+            throws WxMpExecuteException {
         return refreshWebAccessToken(appId, refreshToken, HttpGlobalConfig.getTimeout());
     }
 
@@ -186,10 +200,13 @@ public class WxMpUtils {
      * @param refreshToken RefreshToken
      * @param timout       超时时间
      * @return 网页AccessTokenDTO
+     * @throws WxMpExecuteException 微信公众号刷新网页AccessToken异常
      * @since 1.1.0.211021
      */
     @NonNull
-    public static WxMpWebAccessTokenDTO refreshWebAccessToken(@NonNull String appId, @NonNull String refreshToken, int timout) {
+    public static WxMpWebAccessTokenDTO refreshWebAccessToken(@NonNull String appId,
+                                                              @NonNull String refreshToken, int timout)
+            throws WxMpExecuteException {
         String baseUrl = "https://api.weixin.qq.com/sns/oauth2/refresh_token";
         Map<String, Object> params = new HashMap<>(3);
         params.put("appid", appId);
@@ -198,7 +215,7 @@ public class WxMpUtils {
         JSONObject resultJson = JSONObject.parseObject(HttpUtil.get(baseUrl, params, timout));
         if (validateFailResult(resultJson)) {
             LOGGER.error("[{}] 刷新网页AccessToken异常 [response: {}]", LOG_TAG, resultJson.toJSONString());
-            throw new ThirdPartyException(resultJson.getString(ERROR_CODE_NAME), resultJson.getString(ERROR_MESSAGE_NAME));
+            throw new WxMpExecuteException(resultJson.getString(ERROR_CODE_NAME), resultJson.getString(ERROR_MESSAGE_NAME));
         }
         LOGGER.info("[{}] 成功刷新网页AccessToken [response: {}]", LOG_TAG, resultJson.toJSONString());
         Duration expiresIn = Duration.ofSeconds(resultJson.getLongValue("expires_in"));
@@ -217,10 +234,11 @@ public class WxMpUtils {
      *
      * @param accessToken AccessToken
      * @return JsApiTicketDTO
+     * @throws WxMpExecuteException 微信公众号获取jsApi_ticket异常
      * @since 1.1.0.211021
      */
     @NonNull
-    public static WxMpJsApiTicketDTO getJsApiTicket(@NonNull String accessToken) {
+    public static WxMpJsApiTicketDTO getJsApiTicket(@NonNull String accessToken) throws WxMpExecuteException {
         return getJsApiTicket(accessToken, HttpGlobalConfig.getTimeout());
     }
 
@@ -230,10 +248,12 @@ public class WxMpUtils {
      * @param accessToken AccessToken
      * @param timout      超时时间
      * @return JsApiTicketDTO
+     * @throws WxMpExecuteException 微信公众号获取jsApi_ticket异常
      * @since 1.1.0.211021
      */
     @NonNull
-    public static WxMpJsApiTicketDTO getJsApiTicket(@NonNull String accessToken, int timout) {
+    public static WxMpJsApiTicketDTO getJsApiTicket(@NonNull String accessToken, int timout)
+            throws WxMpExecuteException {
         String baseUrl = "https://api.weixin.qq.com/cgi-bin/ticket/getticket";
         Map<String, Object> params = new HashMap<>(2);
         params.put("access_token", accessToken);
@@ -241,7 +261,7 @@ public class WxMpUtils {
         JSONObject resultJson = JSONObject.parseObject(HttpUtil.get(baseUrl, params, timout));
         if (validateFailResult(resultJson)) {
             LOGGER.error("[{}] 获取jsApi_ticket异常 [response: {}]", LOG_TAG, resultJson.toJSONString());
-            throw new ThirdPartyException(resultJson.getString(ERROR_CODE_NAME), resultJson.getString(ERROR_MESSAGE_NAME));
+            throw new WxMpExecuteException(resultJson.getString(ERROR_CODE_NAME), resultJson.getString(ERROR_MESSAGE_NAME));
         }
         LOGGER.info("[{}] 成功获取jsApi_ticket [response: {}]", LOG_TAG, resultJson.toJSONString());
         Duration expiresIn = Duration.ofSeconds(resultJson.getLongValue("expires_in"));
@@ -258,11 +278,13 @@ public class WxMpUtils {
      * @param accessToken AccessToken
      * @param openId      OpenId
      * @return 用户信息
+     * @throws WxMpExecuteException 微信公众号获取用户信息异常
      * @since 1.1.0.211021
      */
     @Nullable
     @SuppressWarnings("AlibabaUndefineMagicConstant")
-    public static WxMpUserInfoDTO getUserInfo(@NonNull String accessToken, @NonNull String openId) {
+    public static WxMpUserInfoDTO getUserInfo(@NonNull String accessToken, @NonNull String openId)
+            throws WxMpExecuteException {
         String baseUrl = "https://api.weixin.qq.com/cgi-bin/user/info";
         Map<String, Object> params = new HashMap<>(3);
         params.put("access_token", accessToken);
@@ -271,7 +293,7 @@ public class WxMpUtils {
         JSONObject resultJson = JSONObject.parseObject(HttpUtil.get(baseUrl, params));
         if (validateFailResult(resultJson)) {
             LOGGER.error("[{}] 获取用户信息异常 [response: {}]", LOG_TAG, resultJson.toJSONString());
-            throw new ThirdPartyException(resultJson.getString(ERROR_CODE_NAME), resultJson.getString(ERROR_MESSAGE_NAME));
+            throw new WxMpExecuteException(resultJson.getString(ERROR_CODE_NAME), resultJson.getString(ERROR_MESSAGE_NAME));
         }
         LOGGER.info("[{}] 成功获取获取用户信息 [response: {}]", LOG_TAG, resultJson.toJSONString());
         if (resultJson.getIntValue("subscribe") == 0) {

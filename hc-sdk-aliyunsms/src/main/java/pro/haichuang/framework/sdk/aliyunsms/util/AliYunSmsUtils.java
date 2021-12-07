@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
-import pro.haichuang.framework.base.exception.ThirdPartyException;
+import pro.haichuang.framework.sdk.aliyunsms.exception.AliYunSmsSendException;
 
 import java.util.List;
 
@@ -63,14 +63,14 @@ public class AliYunSmsUtils {
      *                        发送国际/港澳台消息时, 接收号码格式为: 国际区号+号码, 如"85200000000"
      * @param templateParam   短信模板变量替换JSON串, 友情提示: 如果JSON中需要带换行符, 请参照标准的JSON协议
      * @return 执行结果
-     * @throws ThirdPartyException 阿里云短信发送异常
+     * @throws AliYunSmsSendException 阿里云短信发送异常
      * @since 1.1.0.211021
      */
     @NonNull
     public static boolean send(@NonNull String accessKeyId, @NonNull String accessKeySecret,
                                @NonNull String signName, @NonNull String templateCode,
                                @NonNull String phoneNumbers, @Nullable JSONObject templateParam)
-            throws ThirdPartyException {
+            throws AliYunSmsSendException {
         CommonRequest request = createRequest();
         request.putQueryParameter("PhoneNumbers", phoneNumbers);
         request.putQueryParameter("SignName", signName);
@@ -92,13 +92,13 @@ public class AliYunSmsUtils {
      *                        批量调用相对于单条调用及时性稍有延迟, 验证码类型的短信推荐使用单条调用的方式
      * @param templateParam   短信模板变量替换JSON串, 友情提示: 如果JSON中需要带换行符, 请参照标准的JSON协议
      * @return 执行结果
-     * @throws ThirdPartyException 阿里云短信发送异常
+     * @throws AliYunSmsSendException 阿里云短信发送异常
      * @since 1.1.0.211021
      */
     public static boolean sendBatch(@NonNull String accessKeyId, @NonNull String accessKeySecret,
                                     @NonNull List<String> signNames, @NonNull String templateCode,
                                     @NonNull List<String> phones, @Nullable JSONArray templateParam)
-            throws ThirdPartyException {
+            throws AliYunSmsSendException {
         CommonRequest request = createRequest();
         request.putQueryParameter("PhoneNumberJson", JSONObject.toJSONString(phones));
         request.putQueryParameter("SignNameJson", JSONObject.toJSONString(signNames));
@@ -146,18 +146,18 @@ public class AliYunSmsUtils {
      * @param accessKeySecret AccessKeySecret
      * @param request         CommonRequest
      * @return 执行结果
-     * @throws ThirdPartyException 阿里云短信发送异常
+     * @throws AliYunSmsSendException 阿里云短信发送异常
      * @since 1.1.0.211021
      */
     private static boolean baseSend(@NonNull String accessKeyId, @NonNull String accessKeySecret, @NonNull CommonRequest request)
-            throws ThirdPartyException {
+            throws AliYunSmsSendException {
         try {
             getClient(accessKeyId, accessKeySecret).getCommonResponse(request);
             return true;
         } catch (ClientException e) {
             LOGGER.error("[{}] 发送验证码异常 [requestId: {}, errorCode: {}, errorMessage: {}, errorType: {}, errorDescription: {}]",
                     LOG_TAG, e.getRequestId(), e.getErrCode(), e.getErrMsg(), e.getErrorType(), e.getErrorDescription());
-            throw new ThirdPartyException(e.getErrCode(), e.getErrMsg());
+            throw new AliYunSmsSendException(e.getErrCode(), e.getErrMsg());
         }
     }
 }

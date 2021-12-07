@@ -31,7 +31,8 @@ public class DefaultHuaWeiCloudSmsServiceImpl implements HuaWeiCloudSmsService {
 
     @Override
     public List<SendResponse.Result> send(String signName, String channelNumber, String templateId,
-                                          String phoneNumbers, @Nullable JSONArray templateParams) {
+                                          String phoneNumbers, @Nullable JSONArray templateParams)
+            throws HuaWeiCloudSmsSendException {
         validateProperties();
         validateParams(phoneNumbers);
 
@@ -53,7 +54,8 @@ public class DefaultHuaWeiCloudSmsServiceImpl implements HuaWeiCloudSmsService {
 
     @Override
     public List<SendResponse.Result> send(String templateId,
-                                          String phoneNumbers, @Nullable JSONArray templateParams) {
+                                          String phoneNumbers, @Nullable JSONArray templateParams)
+            throws HuaWeiCloudSmsSendException {
         validateProperties();
         validateParams(phoneNumbers);
 
@@ -70,7 +72,8 @@ public class DefaultHuaWeiCloudSmsServiceImpl implements HuaWeiCloudSmsService {
     }
 
     @Override
-    public List<SendResponse.Result> send(String phoneNumbers, @Nullable JSONArray templateParams) {
+    public List<SendResponse.Result> send(String phoneNumbers, @Nullable JSONArray templateParams)
+            throws HuaWeiCloudSmsSendException {
         validateProperties();
         validateParams(phoneNumbers);
 
@@ -107,8 +110,9 @@ public class DefaultHuaWeiCloudSmsServiceImpl implements HuaWeiCloudSmsService {
      * 验证参数
      *
      * @since 1.1.0.211021
+     * @throws HuaWeiCloudSmsSendException 华为云短信发送异常
      */
-    private void validateParams(String phoneNumbers) {
+    private void validateParams(String phoneNumbers) throws HuaWeiCloudSmsSendException {
         //noinspection AlibabaUndefineMagicConstant
         for (String phoneNumber : phoneNumbers.split(",")) {
             if (!ReUtil.isMatch(PatternConstant.PHONE, phoneNumber.replaceFirst("\\+", ""))) {

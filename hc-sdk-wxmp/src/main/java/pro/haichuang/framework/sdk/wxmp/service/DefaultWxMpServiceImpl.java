@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pro.haichuang.framework.base.enums.error.client.AuthorityErrorEnum;
 import pro.haichuang.framework.base.response.ResultVO;
 import pro.haichuang.framework.base.util.common.ResponseUtils;
-import pro.haichuang.framework.sdk.wxmp.key.WxMpKey;
 import pro.haichuang.framework.sdk.wxmp.config.properties.WxMpProperties;
 import pro.haichuang.framework.sdk.wxmp.dto.WxMpBaseAccessTokenDTO;
 import pro.haichuang.framework.sdk.wxmp.dto.WxMpJsApiTicketDTO;
@@ -13,6 +12,8 @@ import pro.haichuang.framework.sdk.wxmp.dto.WxMpUserInfoDTO;
 import pro.haichuang.framework.sdk.wxmp.dto.WxMpWebAccessTokenDTO;
 import pro.haichuang.framework.sdk.wxmp.enums.error.WxMpConfigErrorEnum;
 import pro.haichuang.framework.sdk.wxmp.exception.WxMpConfigException;
+import pro.haichuang.framework.sdk.wxmp.exception.WxMpExecuteException;
+import pro.haichuang.framework.sdk.wxmp.key.WxMpKey;
 import pro.haichuang.framework.sdk.wxmp.store.WxMpDataStore;
 import pro.haichuang.framework.sdk.wxmp.util.WxMpUtils;
 
@@ -51,7 +52,7 @@ public class DefaultWxMpServiceImpl implements WxMpService {
     }
 
     @Override
-    public String getBaseAccessToken() {
+    public String getBaseAccessToken() throws WxMpExecuteException {
         validateProperties();
         String baseAccessToken = wxMpDataStore.getBaseAccessToken(WxMpKey.baseAccessToken());
         // 当缓存中 [WxMpBaseAccessTokenDTO] 为空时则向微信发起请求获取 [WxMpBaseAccessTokenDTO] 并存入缓存中
@@ -66,7 +67,7 @@ public class DefaultWxMpServiceImpl implements WxMpService {
     }
 
     @Override
-    public WxMpWebAccessTokenDTO getWebAccessTokenByOpenId(String openId) {
+    public WxMpWebAccessTokenDTO getWebAccessTokenByOpenId(String openId) throws WxMpExecuteException {
         validateProperties();
         WxMpWebAccessTokenDTO wxMpWebAccessTokenDTO = null;
         String webAccessToken = wxMpDataStore.getWebAccessToken(WxMpKey.webAccessToken(openId));
@@ -88,7 +89,7 @@ public class DefaultWxMpServiceImpl implements WxMpService {
     }
 
     @Override
-    public WxMpWebAccessTokenDTO getWebAccessTokenByCode(String code) {
+    public WxMpWebAccessTokenDTO getWebAccessTokenByCode(String code) throws WxMpExecuteException {
         validateProperties();
         WxMpWebAccessTokenDTO wxMpWebAccessTokenDTO = WxMpUtils.getWebAccessToken(wxMpProperties.getAppId(),
                 wxMpProperties.getAppSecret(), code);
@@ -100,7 +101,7 @@ public class DefaultWxMpServiceImpl implements WxMpService {
     }
 
     @Override
-    public String getJsApiTicket() {
+    public String getJsApiTicket() throws WxMpExecuteException {
         validateProperties();
         String wxMpJsApiTicket = wxMpDataStore.getJsApiTicket(WxMpKey.jsApiTicket());
         if (wxMpJsApiTicket == null || !wxMpJsApiTicket.isEmpty()) {
@@ -113,7 +114,7 @@ public class DefaultWxMpServiceImpl implements WxMpService {
     }
 
     @Override
-    public WxMpUserInfoDTO getUserInfo(String openId) {
+    public WxMpUserInfoDTO getUserInfo(String openId) throws WxMpExecuteException {
         return WxMpUtils.getUserInfo(getBaseAccessToken(), openId);
     }
 

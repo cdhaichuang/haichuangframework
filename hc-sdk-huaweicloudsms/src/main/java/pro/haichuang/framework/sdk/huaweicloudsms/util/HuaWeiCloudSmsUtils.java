@@ -11,9 +11,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
-import pro.haichuang.framework.base.exception.ThirdPartyException;
 import pro.haichuang.framework.base.util.common.UUIDUtils;
 import pro.haichuang.framework.sdk.huaweicloudsms.enums.success.HuaWeiCloudSmsSendSuccessEnum;
+import pro.haichuang.framework.sdk.huaweicloudsms.exception.HuaWeiCloudSmsSendException;
 import pro.haichuang.framework.sdk.huaweicloudsms.response.SendResponse;
 
 import java.nio.charset.StandardCharsets;
@@ -49,14 +49,14 @@ public class HuaWeiCloudSmsUtils {
      * @param templateId     模版ID
      * @param templateParams 模版参数
      * @return 发送结果
-     * @throws ThirdPartyException 发送验证码失败|发送验证码状态错误
+     * @throws HuaWeiCloudSmsSendException 华为云短信发送验证码异常|发送验证码状态异常
      * @since 1.1.0.211021
      */
     @NonNull
     public static List<SendResponse.Result> send(@NonNull String url, @NonNull String appKey, @NonNull String appSecret,
                                                  @NonNull String signName, @NonNull String channelNumber,
                                                  @NonNull String phoneNumbers, @NonNull String templateId, @Nullable JSONArray templateParams)
-            throws ThirdPartyException {
+            throws HuaWeiCloudSmsSendException {
         String baseUrl = url + "/sms/batchSendSms/v1";
 
         String contentTypeHeader = MediaType.APPLICATION_FORM_URLENCODED_VALUE;
@@ -81,15 +81,15 @@ public class HuaWeiCloudSmsUtils {
         SendResponse response = JSONObject.parseObject(responseJson, SendResponse.class);
 
         if (!HuaWeiCloudSmsSendSuccessEnum.SEND_SUCCESS.value().equals(response.getErrorCode())) {
-            LOGGER.error("[{}] 发送验证码失败 [errorCode: {}, errorMessage: {}, phoneNumbers: {}, templateId: {}, templateParams: {}]",
+            LOGGER.error("[{}] 发送验证码异常 [errorCode: {}, errorMessage: {}, phoneNumbers: {}, templateId: {}, templateParams: {}]",
                     LOG_TAG, response.getErrorCode(), response.getErrorMessage(), phoneNumbers, templateId, templateParams);
-            throw new ThirdPartyException(response.getErrorCode(), response.getErrorMessage());
+            throw new HuaWeiCloudSmsSendException(response.getErrorCode(), response.getErrorMessage());
         }
         for (SendResponse.Result result : response.getContent()) {
             if (null != result.getStatus() && !HuaWeiCloudSmsSendSuccessEnum.SEND_SUCCESS.value().equals(result.getStatus())) {
-                LOGGER.error("[{}] 发送验证码状态错误 [errorStatus: {}, phoneNumbers: {}, templateId: {}, templateParams: {}]",
+                LOGGER.error("[{}] 发送验证码状态异常 [errorStatus: {}, phoneNumbers: {}, templateId: {}, templateParams: {}]",
                         LOG_TAG, result.getStatus(), phoneNumbers, templateId, templateParams);
-                throw new ThirdPartyException(result.getStatus(), "发送验证码状态错误");
+                throw new HuaWeiCloudSmsSendException(result.getStatus(), "发送验证码状态异常");
             }
         }
 
