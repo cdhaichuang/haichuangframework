@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import pro.haichuang.framework.base.enums.BaseEnum;
 
 /**
- * 华为云OBS配置异常枚举
+ * 华为云对象存储配置异常枚举
  *
- * <p>该类为华为云OBS配置异常枚举
+ * <p>该类为华为云对象存储配置异常枚举
  *
  * @author JiYinchuan
  * @since 1.1.0.211021
@@ -14,9 +14,9 @@ import pro.haichuang.framework.base.enums.BaseEnum;
 public enum HuaWeiCloudObsConfigErrorEnum implements BaseEnum {
 
     /**
-     * 华为云OBS配置异常
+     * 华为云对象存储配置异常
      */
-    HUA_WEI_CLOUD_OBS_CONFIG_ERROR("SB10100", "华为云OBS配置异常"),
+    CONFIG_ERROR("SB10100", "华为云对象存储配置异常"),
 
     /**
      * AccessKeyId未配置

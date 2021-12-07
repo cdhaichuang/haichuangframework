@@ -30,7 +30,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * 阿里云OSS工具类
+ * 阿里云对象存储工具类
  *
  * <p>该类为 {@code aliyunoss} 相关操作工具类, 提供了对 {@code aliyunoss} 相关操作的封装
  * <p><a href="https://help.aliyun.com/document_detail/31947.html">点击查看官方文档</a>

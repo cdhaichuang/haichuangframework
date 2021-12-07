@@ -24,7 +24,7 @@ import java.util.Base64;
 import java.util.List;
 
 /**
- * 华为云SMS工具类
+ * 华为云短信工具类
  *
  * <p>该类为 {@code huaweicloudsms} 相关操作工具类, 提供了对 {@code huaweicloudsms} 相关操作的封装
  * <p><a href="https://support.huaweicloud.com/api-msgsms/sms_05_0005.html">点击查看官方文档</a>
@@ -50,6 +50,7 @@ public class HuaWeiCloudSmsUtils {
      * @param templateParams 模版参数
      * @return 发送结果
      * @throws ThirdPartyException 发送验证码失败|发送验证码状态错误
+     * @since 1.1.0.211021
      */
     @NonNull
     public static List<SendResponse.Result> send(@NonNull String url, @NonNull String appKey, @NonNull String appSecret,

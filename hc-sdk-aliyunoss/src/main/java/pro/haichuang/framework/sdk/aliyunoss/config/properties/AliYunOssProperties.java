@@ -5,7 +5,7 @@ import pro.haichuang.framework.base.enums.error.client.RequestParamErrorEnum;
 import pro.haichuang.framework.base.exception.client.RequestParamException;
 
 /**
- * 阿里云OSS配置文件
+ * 阿里云对象存储配置文件
  *
  * <p>该类为 {@code hc-sdk-aliyunoss} SDK模块配置文件类
  * <hr>

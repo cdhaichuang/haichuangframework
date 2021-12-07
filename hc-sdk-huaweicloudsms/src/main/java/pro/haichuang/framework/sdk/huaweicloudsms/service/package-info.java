@@ -1,5 +1,5 @@
 /**
- * 华为云SMS核心Service
+ * 华为云短信核心Service
  */
 @NonNullApi
 @NonNullFields

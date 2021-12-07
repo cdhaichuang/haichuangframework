@@ -5,7 +5,7 @@ import pro.haichuang.framework.sdk.aliyunsms.enums.error.AliYunSmsConfigErrorEnu
 import pro.haichuang.framework.sdk.aliyunsms.enums.error.AliYunSmsSendErrorEnum;
 
 /**
- * 阿里云SMS发送自定义异常
+ * 阿里云短信发送自定义异常
  *
  * @author JiYinchuan
  * @see AliYunSmsConfigErrorEnum

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import pro.haichuang.framework.base.enums.BaseEnum;
 
 /**
- * 华为云SMS发送异常枚举
+ * 华为云短信发送异常枚举
  *
  * <p>该类为SMS发送异常枚举
  *
@@ -14,9 +14,9 @@ import pro.haichuang.framework.base.enums.BaseEnum;
 public enum HuaWeiCloudSmsSendErrorEnum implements BaseEnum {
 
     /**
-     * 华为云SMS发送异常
+     * 华为云短信发送异常
      */
-    HUA_WEI_CLOUD_SMS_SEND_ERROR("SB20200", "华为云SMS发送异常"),
+    SEND_ERROR("SB20200", "华为云短信发送异常"),
 
     /**
      * 手机号格式错误

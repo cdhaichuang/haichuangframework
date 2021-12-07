@@ -12,7 +12,7 @@ import pro.haichuang.framework.sdk.aliyunsms.service.AliYunSmsService;
 import pro.haichuang.framework.sdk.aliyunsms.service.DefaultAliYunSmsServiceImpl;
 
 /**
- * 阿里云SMS自动配置
+ * 阿里云短信自动配置
  *
  * <p>该类为 {@code hc-sdk-aliyunsms} SDK模块自动配置
  * <p>使用该模块前须在 {@code yaml} 中配置相关参数, 配置参考 {@link AliYunSmsProperties} 中相关的属性

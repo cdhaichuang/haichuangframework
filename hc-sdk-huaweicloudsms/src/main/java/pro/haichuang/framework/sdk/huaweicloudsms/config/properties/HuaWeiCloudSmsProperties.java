@@ -3,7 +3,7 @@ package pro.haichuang.framework.sdk.huaweicloudsms.config.properties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * 华为云SMS配置文件
+ * 华为云短信配置文件
  *
  * <p>该类为 {@code hc-sdk-huaweicloudsms} SDK模块配置文件类
  * <hr>

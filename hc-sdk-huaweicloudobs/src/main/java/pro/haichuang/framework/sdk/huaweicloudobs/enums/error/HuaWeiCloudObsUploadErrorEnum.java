@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import pro.haichuang.framework.base.enums.BaseEnum;
 
 /**
- * 华为云OBS上传异常枚举
+ * 华为云对象存储上传异常枚举
  *
- * <p>该类为华为云OBS上传异常枚举
+ * <p>该类为华为云对象存储上传异常枚举
  *
  * @author JiYinchuan
  * @since 1.1.0.211021
@@ -14,9 +14,9 @@ import pro.haichuang.framework.base.enums.BaseEnum;
 public enum HuaWeiCloudObsUploadErrorEnum implements BaseEnum {
 
     /**
-     * 华为云OBS上传异常
+     * 华为云对象存储上传异常
      */
-    UPLOAD_FILE_ERROR("SB10200", "华为云OBS上传异常"),
+    UPLOAD_FILE_ERROR("SB10200", "华为云对象存储上传异常"),
 
     /**
      * 上传文件路径为空

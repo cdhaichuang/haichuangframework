@@ -1,4 +1,4 @@
 /**
- * 华为云OBS核心异常
+ * 华为云对象存储核心异常
  */
 package pro.haichuang.framework.sdk.huaweicloudobs.exception;

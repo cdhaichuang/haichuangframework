@@ -6,7 +6,7 @@ import pro.haichuang.framework.sdk.aliyunoss.config.aspect.OssUrlAspect;
 import java.lang.annotation.*;
 
 /**
- * 解析阿里云Oss资源
+ * 解析阿里云对象存储资源
  *
  * <p>将该类标注在实体字段上或 {@code Controller} 层方法形参上, 将在请求时自动去掉OSS请求前缀, 在响应时自动加上OSS请求前缀
  * <hr>

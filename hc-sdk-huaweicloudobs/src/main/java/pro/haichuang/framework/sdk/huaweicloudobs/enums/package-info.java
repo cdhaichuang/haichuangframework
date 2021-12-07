@@ -1,5 +1,5 @@
 /**
- * 华为云OBS核心枚举
+ * 华为云对象存储核心枚举
  */
 @NonNullApi
 @NonNullFields

@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import pro.haichuang.framework.base.enums.BaseEnum;
 
 /**
- * 阿里云SMS发送异常枚举
+ * 阿里云短信发送异常枚举
  *
- * <p>该类为阿里云SMS发送异常枚举
+ * <p>该类为阿里云短信发送异常枚举
  *
  * @author JiYinchuan
  * @since 1.1.0.211021
@@ -14,9 +14,9 @@ import pro.haichuang.framework.base.enums.BaseEnum;
 public enum AliYunSmsSendErrorEnum implements BaseEnum {
 
     /**
-     * 阿里云SMS发送异常
+     * 阿里云短信发送异常
      */
-    ALI_YUN_SMS_SEND_ERROR("SA20200", "阿里云SMS发送异常"),
+    SEND_ERROR("SA20200", "阿里云短信发送异常"),
 
     /**
      * 手机号格式错误

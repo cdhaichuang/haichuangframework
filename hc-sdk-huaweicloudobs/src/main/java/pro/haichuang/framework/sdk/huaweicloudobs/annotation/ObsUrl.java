@@ -6,7 +6,7 @@ import pro.haichuang.framework.sdk.huaweicloudobs.config.aspect.ObsUrlAspect;
 import java.lang.annotation.*;
 
 /**
- * 解析华为云Obs资源
+ * 解析华为云对象存储资源
  *
  * <p>将该类标注在实体字段上或 {@code Controller} 层方法形参上, 将在请求时自动去掉OBS请求前缀, 在响应时自动加上OBS请求前缀
  * <hr>

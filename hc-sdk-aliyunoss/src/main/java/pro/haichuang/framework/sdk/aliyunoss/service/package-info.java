@@ -1,5 +1,5 @@
 /**
- * 阿里云OSS核心Service
+ * 阿里云对象存储核心Service
  */
 @NonNullApi
 @NonNullFields

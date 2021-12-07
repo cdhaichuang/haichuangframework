@@ -4,7 +4,7 @@ import pro.haichuang.framework.base.exception.ApplicationException;
 import pro.haichuang.framework.sdk.aliyunoss.enums.error.AliYunOssUploadErrorEnum;
 
 /**
- * 阿里云OSS上传自定义异常
+ * 阿里云对象存储上传自定义异常
  *
  * @author JiYinchuan
  * @see AliYunOssUploadErrorEnum

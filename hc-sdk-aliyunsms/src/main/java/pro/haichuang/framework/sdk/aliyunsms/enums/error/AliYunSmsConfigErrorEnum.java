@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import pro.haichuang.framework.base.enums.BaseEnum;
 
 /**
- * 阿里云SMS配置异常枚举
+ * 阿里云短信配置异常枚举
  *
- * <p>该类为阿里云SMS配置异常枚举
+ * <p>该类为阿里云短信配置异常枚举
  *
  * @author JiYinchuan
  * @since 1.1.0.211021
@@ -14,9 +14,9 @@ import pro.haichuang.framework.base.enums.BaseEnum;
 public enum AliYunSmsConfigErrorEnum implements BaseEnum {
 
     /**
-     * 阿里云SMS配置异常
+     * 阿里云短信配置异常
      */
-    CONFIG_ERROR("SA20100", "阿里云SMS配置异常"),
+    CONFIG_ERROR("SA20100", "阿里云短信配置异常"),
 
     /**
      * AccessKeyId未配置

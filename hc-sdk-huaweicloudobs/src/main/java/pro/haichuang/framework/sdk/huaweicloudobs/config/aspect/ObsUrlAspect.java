@@ -24,7 +24,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * 华为云OBS地址解析切面
+ * 华为云对象存储地址解析切面
  *
  * <p>该类会将带有 {@link EnableObsUrlConvert @EnableObsUrlConvert} 的请求方法中带有 {@link ObsUrl @ObsUrl}参数进行解析,
  * 入参时去掉其访问前缀, 出参时加上其访问前缀, 避免过多人工干预

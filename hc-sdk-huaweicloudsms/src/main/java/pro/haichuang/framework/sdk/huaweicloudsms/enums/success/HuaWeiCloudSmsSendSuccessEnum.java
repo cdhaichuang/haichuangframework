@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import pro.haichuang.framework.base.enums.BaseEnum;
 
 /**
- * 华为云SMS发送成功枚举
+ * 华为云短信发送成功枚举
  *
  * <p>该类为SMS发送成功枚举
  *
@@ -14,9 +14,9 @@ import pro.haichuang.framework.base.enums.BaseEnum;
 public enum HuaWeiCloudSmsSendSuccessEnum implements BaseEnum {
 
     /**
-     * 华为云SMS发送成功
+     * 华为云短信发送成功
      */
-    SEND_SUCCESS("000000", "华为云SMS发送成功");
+    SEND_SUCCESS("000000", "华为云短信发送成功");
 
 
     /**

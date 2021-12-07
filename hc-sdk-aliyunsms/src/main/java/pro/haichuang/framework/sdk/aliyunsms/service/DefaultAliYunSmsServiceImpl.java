@@ -45,7 +45,7 @@ public class DefaultAliYunSmsServiceImpl implements AliYunSmsService {
     public boolean send(String templateCode, String phoneNumbers, @Nullable JSONObject templateParam) {
         validateProperties();
         validateParams(phoneNumbers);
-        String signName = aliYunSmsProperties.getSignName();
+        String signName = aliYunSmsProperties.getDefaultSignName();
         if (signName == null || signName.isEmpty()) {
             throw new AliYunSmsConfigException(AliYunSmsConfigErrorEnum.SIGN_NAME_NOT_CONFIGURED);
         }
@@ -53,7 +53,7 @@ public class DefaultAliYunSmsServiceImpl implements AliYunSmsService {
             throw new AliYunSmsConfigException(AliYunSmsConfigErrorEnum.TEMPLATE_CODE_NOT_CONFIGURED);
         }
         return AliYunSmsUtils.send(aliYunSmsProperties.getAccessKeyId(),
-                aliYunSmsProperties.getAccessKeySecret(), aliYunSmsProperties.getSignName(),
+                aliYunSmsProperties.getAccessKeySecret(), aliYunSmsProperties.getDefaultSignName(),
                 templateCode, phoneNumbers, templateParam);
     }
 
@@ -61,7 +61,7 @@ public class DefaultAliYunSmsServiceImpl implements AliYunSmsService {
     public boolean send(String phoneNumbers, @Nullable JSONObject templateParam) {
         validateProperties();
         validateParams(phoneNumbers);
-        String signName = aliYunSmsProperties.getSignName();
+        String signName = aliYunSmsProperties.getDefaultSignName();
         String defaultTemplateCode = aliYunSmsProperties.getDefaultTemplateCode();
         if (signName == null || signName.isEmpty()) {
             throw new AliYunSmsConfigException(AliYunSmsConfigErrorEnum.SIGN_NAME_NOT_CONFIGURED);
@@ -70,7 +70,7 @@ public class DefaultAliYunSmsServiceImpl implements AliYunSmsService {
             throw new AliYunSmsConfigException(AliYunSmsConfigErrorEnum.TEMPLATE_CODE_NOT_CONFIGURED);
         }
         return AliYunSmsUtils.send(aliYunSmsProperties.getAccessKeyId(),
-                aliYunSmsProperties.getAccessKeySecret(), aliYunSmsProperties.getSignName(),
+                aliYunSmsProperties.getAccessKeySecret(), aliYunSmsProperties.getDefaultSignName(),
                 aliYunSmsProperties.getDefaultTemplateCode(), phoneNumbers, templateParam);
     }
 

@@ -14,7 +14,7 @@ import pro.haichuang.framework.sdk.huaweicloudobs.service.DefaultHuaWeiCloudObsS
 import pro.haichuang.framework.sdk.huaweicloudobs.service.HuaWeiCloudObsService;
 
 /**
- * 华为云OBS自动配置
+ * 华为云对象存储自动配置
  *
  * <p>该类为 {@code hc-sdk-huaweicloudobs} SDK模块自动配置
  * <p>使用该模块前须在 {@code yaml} 中配置相关参数, 配置参考 {@link HuaWeiCloudObsProperties} 中相关的属性

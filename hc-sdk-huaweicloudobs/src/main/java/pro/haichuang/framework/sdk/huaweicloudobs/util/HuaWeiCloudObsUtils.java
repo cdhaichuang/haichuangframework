@@ -31,7 +31,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * 华为云OBS工具类
+ * 华为云对象存储工具类
  *
  * <p>该类为 {@code huaweicloudobs} 相关操作工具类, 提供了对 {@code huaweicloudobs} 相关操作的封装
  * <p><a href="https://support.huaweicloud.com/api-obs/zh-cn_topic_0031051947.html">点击查看官方文档</a>

@@ -3,7 +3,7 @@ package pro.haichuang.framework.sdk.aliyunsms.config.properties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * 阿里云SMS配置文件
+ * 阿里云短信配置文件
  *
  * <p>该类为 {@code hc-sdk-aliyunsms} SDK模块配置文件类
  * <hr>
@@ -18,9 +18,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *           # AccessKeySecret
  *           access-key-secret: xxx
  *           # 短信签名
- *           sign-name: xxx
- *           # 短信模板ID
- *           template-code: xxx
+ *           default-sign-name: xxx
+ *           # 默认短信模板ID, 可为空
+ *           default-template-code: xxx
  * </pre>
  * <hr>
  *
@@ -41,9 +41,9 @@ public class AliYunSmsProperties {
     private String accessKeySecret;
 
     /**
-     * 短信签名
+     * 默认短信签名
      */
-    private String signName;
+    private String defaultSignName;
 
     /**
      * 默认短信模板ID, 发送国际/港澳台消息时, 请使用国际/港澳台短信模版
@@ -66,12 +66,12 @@ public class AliYunSmsProperties {
         this.accessKeySecret = accessKeySecret;
     }
 
-    public String getSignName() {
-        return signName;
+    public String getDefaultSignName() {
+        return defaultSignName;
     }
 
-    public void setSignName(String signName) {
-        this.signName = signName;
+    public void setDefaultSignName(String defaultSignName) {
+        this.defaultSignName = defaultSignName;
     }
 
     public String getDefaultTemplateCode() {

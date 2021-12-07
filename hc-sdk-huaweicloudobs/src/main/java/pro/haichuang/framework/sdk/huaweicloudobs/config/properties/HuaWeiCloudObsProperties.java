@@ -5,7 +5,7 @@ import pro.haichuang.framework.base.enums.error.client.RequestParamErrorEnum;
 import pro.haichuang.framework.base.exception.client.RequestParamException;
 
 /**
- * 华为云OBS配置文件
+ * 华为云对象存储配置文件
  *
  * <hr>
  * Example:

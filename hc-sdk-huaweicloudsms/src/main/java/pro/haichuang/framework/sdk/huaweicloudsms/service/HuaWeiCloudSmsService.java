@@ -8,7 +8,7 @@ import pro.haichuang.framework.sdk.huaweicloudsms.response.SendResponse;
 import java.util.List;
 
 /**
- * 华为云SMS Service
+ * 华为云短信 Service
  *
  * <p>该类为 {@code huaweicloudsms} 第三方操作核心接口, 项目中所有 {@code huaweicloudsms} 的操作均使用此接口
  * <p>该类已默认注入到 {@code spring} 中, 默认实现为 {@link DefaultHuaWeiCloudSmsServiceImpl}, 如需自定义实现请实现该接口并手动注入该接口

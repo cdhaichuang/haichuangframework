@@ -4,7 +4,7 @@ import pro.haichuang.framework.base.exception.ThirdPartyException;
 import pro.haichuang.framework.sdk.aliyunoss.enums.error.AliYunOssConfigErrorEnum;
 
 /**
- * 阿里云OSS配置自定义异常
+ * 阿里云对象存储配置自定义异常
  *
  * @author JiYinchuan
  * @see AliYunOssConfigErrorEnum

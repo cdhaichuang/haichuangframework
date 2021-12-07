@@ -1,4 +1,4 @@
 /**
- * 华为云SMS发送响应类
+ * 华为云短信发送响应类
  */
 package pro.haichuang.framework.sdk.huaweicloudsms.response;

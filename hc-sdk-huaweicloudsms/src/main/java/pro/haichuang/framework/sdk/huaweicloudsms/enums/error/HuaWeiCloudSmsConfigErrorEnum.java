@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import pro.haichuang.framework.base.enums.BaseEnum;
 
 /**
- * 华为云SMS发送配置枚举
+ * 华为云短信发送配置枚举
  *
  * <p>该类为SMS发送配置枚举
  *
@@ -14,9 +14,9 @@ import pro.haichuang.framework.base.enums.BaseEnum;
 public enum HuaWeiCloudSmsConfigErrorEnum implements BaseEnum {
 
     /**
-     * 华为云SMS配置异常
+     * 华为云短信配置异常
      */
-    HUA_WEI_CLOUD_SMS_CONFIG_ERROR("SB20100", "华为云SMS配置异常"),
+    CONFIG_ERROR("SB20100", "华为云短信配置异常"),
 
     /**
      * AccessKeyId未配置

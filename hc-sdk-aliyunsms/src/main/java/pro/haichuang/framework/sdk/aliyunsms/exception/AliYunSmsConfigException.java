@@ -4,7 +4,7 @@ import pro.haichuang.framework.base.exception.ApplicationException;
 import pro.haichuang.framework.sdk.aliyunsms.enums.error.AliYunSmsConfigErrorEnum;
 
 /**
- * 阿里云SMS配置自定义异常
+ * 阿里云短信配置自定义异常
  *
  * @author JiYinchuan
  * @see AliYunSmsConfigErrorEnum

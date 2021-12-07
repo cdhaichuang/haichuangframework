@@ -1,5 +1,5 @@
 /**
- * 阿里云SMS核心枚举
+ * 阿里云短信核心枚举
  */
 @NonNullApi
 @NonNullFields

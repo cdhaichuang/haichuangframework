@@ -4,7 +4,7 @@ import pro.haichuang.framework.base.exception.ApplicationException;
 import pro.haichuang.framework.sdk.huaweicloudsms.enums.error.HuaWeiCloudSmsConfigErrorEnum;
 
 /**
- * 华为云SMS配置自定义异常
+ * 华为云短信配置自定义异常
  *
  * @author JiYinchuan
  * @see HuaWeiCloudSmsConfigErrorEnum
