@@ -8,7 +8,7 @@ import pro.haichuang.framework.sdk.chuanglansms.enums.error.ChuangLanSmsConfigEr
  *
  * @author JiYinchuan
  * @see ChuangLanSmsConfigErrorEnum
- * @since 1.1.0.211021
+ * @since 1.2.0.211209
  */
 public class ChuangLanSmsConfigException extends ApplicationException {
     private static final long serialVersionUID = 7062871499294033399L;

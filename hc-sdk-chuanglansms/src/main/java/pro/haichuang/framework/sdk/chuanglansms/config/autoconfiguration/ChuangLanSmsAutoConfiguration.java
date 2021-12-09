@@ -18,7 +18,7 @@ import pro.haichuang.framework.sdk.chuanglansms.service.DefaultChuangLanSmsServi
  * <p>使用该模块前须在 {@code yaml} 中配置相关参数, 配置参考 {@link ChuangLanSmsProperties} 中相关的属性
  *
  * @author JiYinchuan
- * @since 1.1.0.211021
+ * @since 1.2.0.211209
  */
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureAfter(BaseAutoConfiguration.class)

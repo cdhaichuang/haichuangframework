@@ -9,7 +9,7 @@ import pro.haichuang.framework.base.enums.BaseEnum;
  * <p>该类为SMS发送异常枚举
  *
  * @author JiYinchuan
- * @since 1.1.0.211021
+ * @since 1.2.0.211209
  */
 public enum ChuangLanSmsSendErrorEnum implements BaseEnum {
 
@@ -38,7 +38,7 @@ public enum ChuangLanSmsSendErrorEnum implements BaseEnum {
      *
      * @param value        枚举值
      * @param reasonPhrase 枚举信息
-     * @since 1.1.0.211021
+     * @since 1.2.0.211209
      */
     ChuangLanSmsSendErrorEnum(String value, String reasonPhrase) {
         this.value = value;

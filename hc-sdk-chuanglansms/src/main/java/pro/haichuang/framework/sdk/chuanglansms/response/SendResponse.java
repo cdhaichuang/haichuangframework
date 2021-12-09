@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
  * 创蓝短信基础响应
  *
  * @author JiYinchuan
- * @since 1.1.0.211021
+ * @since 1.2.0.211209
  */
 public class SendResponse implements Serializable {
     private static final long serialVersionUID = -8417816479642697185L;

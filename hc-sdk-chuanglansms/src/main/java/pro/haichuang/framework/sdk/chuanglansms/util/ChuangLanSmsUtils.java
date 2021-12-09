@@ -19,7 +19,7 @@ import java.util.StringJoiner;
  * <p><a href="https://www.chuanglan.com/document/6110e57909fd9600010209de/617264ea40ec34000109bcb2">点击查看官方文档</a>
  *
  * @author JiYinchuan
- * @since 1.1.0.211021
+ * @since 1.2.0.211209
  */
 public class ChuangLanSmsUtils {
 
@@ -37,7 +37,7 @@ public class ChuangLanSmsUtils {
      * @param phoneNumbers 接收的手机号; 多个手机号使用英文逗号间隔, 一次不要超过 [1000] 个
      * @return 发送结果
      * @throws ChuangLanSmsSendException 创蓝短信发送异常
-     * @since 1.1.0.211021
+     * @since 1.2.0.211209
      */
     public static SendResponse send(@NonNull String apiAccount, @NonNull String apiPassword, @NonNull String host,
                                     @NonNull String signName, @NonNull String message,

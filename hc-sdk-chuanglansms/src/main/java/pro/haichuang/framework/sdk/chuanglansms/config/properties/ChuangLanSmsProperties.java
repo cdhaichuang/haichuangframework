@@ -25,7 +25,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * <hr>
  *
  * @author JiYinchuan
- * @since 1.1.0.211021
+ * @since 1.2.0.211209
  */
 @ConfigurationProperties(prefix = "haichuang.sdk.chuanglansms")
 public class ChuangLanSmsProperties {

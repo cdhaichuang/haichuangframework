@@ -8,7 +8,7 @@ import pro.haichuang.framework.sdk.chuanglansms.enums.error.ChuangLanSmsSendErro
  *
  * @author JiYinchuan
  * @see ChuangLanSmsSendErrorEnum
- * @since 1.1.0.211021
+ * @since 1.2.0.211209
  */
 public class ChuangLanSmsSendException extends ThirdPartyException {
     private static final long serialVersionUID = -4072127480321453750L;

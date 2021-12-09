@@ -11,7 +11,7 @@ import pro.haichuang.framework.sdk.chuanglansms.response.SendResponse;
  * <p>该类已默认注入到 {@code spring} 中, 默认实现为 {@link DefaultChuangLanSmsServiceImpl}, 如需自定义实现请实现该接口并手动注入该接口
  *
  * @author JiYinchuan
- * @since 1.1.0.211021
+ * @since 1.2.0.211209
  */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 public interface ChuangLanSmsService {
@@ -24,7 +24,7 @@ public interface ChuangLanSmsService {
      * @param phoneNumbers 接收的手机号; 多个手机号使用英文逗号间隔, 一次不要超过 [1000] 个
      * @return 执行结果
      * @throws ChuangLanSmsSendException 创蓝短信发送异常
-     * @since 1.1.0.211021
+     * @since 1.2.0.211209
      */
     SendResponse send(@NonNull String signName, @NonNull String message, @NonNull String phoneNumbers)
             throws ChuangLanSmsSendException
@@ -37,7 +37,7 @@ public interface ChuangLanSmsService {
      * @param phoneNumbers 接收的手机号; 多个手机号使用英文逗号间隔, 一次不要超过 [1000] 个
      * @return 执行结果
      * @throws ChuangLanSmsSendException 创蓝短信发送异常
-     * @since 1.1.0.211021
+     * @since 1.2.0.211209
      */
     SendResponse send(@NonNull String message, @NonNull String phoneNumbers) throws ChuangLanSmsSendException;
 
@@ -47,7 +47,7 @@ public interface ChuangLanSmsService {
      * @param phoneNumbers 接收的手机号; 多个手机号使用英文逗号间隔, 一次不要超过 [1000] 个
      * @return 执行结果
      * @throws ChuangLanSmsSendException 创蓝短信发送异常
-     * @since 1.1.0.211021
+     * @since 1.2.0.211209
      */
     SendResponse send(@NonNull String phoneNumbers) throws ChuangLanSmsSendException;
 

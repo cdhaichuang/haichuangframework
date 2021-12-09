@@ -17,7 +17,7 @@ import pro.haichuang.framework.sdk.chuanglansms.util.ChuangLanSmsUtils;
  * <p>该类为 {@link ChuangLanSmsService} 默认实现
  *
  * @author JiYinchuan
- * @since 1.1.0.211021
+ * @since 1.2.0.211209
  */
 public class DefaultChuangLanSmsServiceImpl implements ChuangLanSmsService {
 
@@ -62,7 +62,7 @@ public class DefaultChuangLanSmsServiceImpl implements ChuangLanSmsService {
     /**
      * 验证配置文件
      *
-     * @since 1.1.0.211021
+     * @since 1.2.0.211209
      */
     private void validateProperties() throws ChuangLanSmsConfigException {
         String apiAccount = chuangLanSmsProperties.getApiAccount();
@@ -83,7 +83,7 @@ public class DefaultChuangLanSmsServiceImpl implements ChuangLanSmsService {
     /**
      * 验证参数
      *
-     * @since 1.1.0.211021
+     * @since 1.2.0.211209
      */
     private void validateParams(String phoneNumbers) throws ChuangLanSmsSendException {
         //noinspection AlibabaUndefineMagicConstant
