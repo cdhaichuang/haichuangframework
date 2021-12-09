@@ -109,8 +109,8 @@ public class DefaultHuaWeiCloudSmsServiceImpl implements HuaWeiCloudSmsService {
     /**
      * 验证参数
      *
-     * @since 1.1.0.211021
      * @throws HuaWeiCloudSmsSendException 华为云短信发送异常
+     * @since 1.1.0.211021
      */
     private void validateParams(String phoneNumbers) throws HuaWeiCloudSmsSendException {
         //noinspection AlibabaUndefineMagicConstant
