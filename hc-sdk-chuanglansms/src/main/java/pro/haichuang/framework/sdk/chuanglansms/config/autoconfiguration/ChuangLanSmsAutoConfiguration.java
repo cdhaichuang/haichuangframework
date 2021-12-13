@@ -28,7 +28,7 @@ public class ChuangLanSmsAutoConfiguration {
     @Bean
     @Lazy
     @ConditionalOnMissingBean(ChuangLanSmsService.class)
-    public ChuangLanSmsService aliYunSmsService() {
+    public ChuangLanSmsService chuangLanSmsService() {
         return new DefaultChuangLanSmsServiceImpl();
     }
 }
