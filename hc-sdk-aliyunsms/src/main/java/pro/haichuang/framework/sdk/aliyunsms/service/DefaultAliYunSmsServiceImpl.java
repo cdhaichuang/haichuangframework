@@ -98,6 +98,7 @@ public class DefaultAliYunSmsServiceImpl implements AliYunSmsService {
     /**
      * 验证参数
      *
+     * @param phoneNumbers 手机号, 多个逗号分割
      * @throws AliYunSmsSendException 阿里云短信发送异常
      * @since 1.1.0.211021
      */

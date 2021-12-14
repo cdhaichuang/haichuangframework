@@ -109,6 +109,7 @@ public class DefaultHuaWeiCloudSmsServiceImpl implements HuaWeiCloudSmsService {
     /**
      * 验证参数
      *
+     * @param phoneNumbers 手机号, 多个逗号分割
      * @throws HuaWeiCloudSmsSendException 华为云短信发送异常
      * @since 1.1.0.211021
      */

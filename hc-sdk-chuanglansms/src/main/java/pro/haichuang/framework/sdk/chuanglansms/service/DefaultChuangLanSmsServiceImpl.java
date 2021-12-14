@@ -83,6 +83,8 @@ public class DefaultChuangLanSmsServiceImpl implements ChuangLanSmsService {
     /**
      * 验证参数
      *
+     * @param phoneNumbers 手机号, 多个逗号分割
+     * @throws ChuangLanSmsSendException 创蓝短信发送异常
      * @since 1.2.0.211209
      */
     private void validateParams(String phoneNumbers) throws ChuangLanSmsSendException {
